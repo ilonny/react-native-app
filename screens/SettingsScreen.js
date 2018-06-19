@@ -5,9 +5,9 @@ import {
   Text,
   View,
   SectionList,
+  AsyncStorage
 } from 'react-native';
 import { RkChoice, RkTheme } from 'react-native-ui-kitten';
-import AsyncStorage from 'react-native'
 
 RkTheme.setType('RkChoice', 'redCheckMarkSelected', {
     backgroundColor: 'transparent',
@@ -17,10 +17,29 @@ RkTheme.setType('RkChoice', 'redCheckMarkSelected', {
 });
 
 export default class SettingsScreen extends Component {
+    constructor(){
+        super();
+        this.state = {
+            settings: [],
+            test: 0,
+        }
+    }
+    componentWillMount(){
+        AsyncStorage.setItem('Settings', '123');
+        AsyncStorage.getItem('Settings').then(value => {
+            this.setState(state => {
+                return {
+                    ...state,
+                    test: value
+                }
+            })
+        })
+    }
     render() {
         this.componentWillMount
         return (
             <View style={styles.container}>
+                <Text>{ this.state.test }</Text>
                 <SectionList
                     renderItem={({item, index, section}) => (
                         <View key={index} style={styles.row}>

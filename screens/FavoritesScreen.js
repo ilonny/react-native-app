@@ -6,11 +6,11 @@ import {
   View
 } from 'react-native';
 
-export default class SettingsScreen extends Component {
+export default class FavoritesScreen extends Component {
     render() {
       return (
         <View>
-          <Text>Settings screen</Text>
+          <Text>Favorites screen</Text>
         </View>
       );
     }

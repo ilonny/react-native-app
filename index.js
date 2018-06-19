@@ -1,5 +1,9 @@
 import { AppRegistry } from 'react-native';
 import { YellowBox } from 'react-native';
-YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
+YellowBox.ignoreWarnings([
+    'Warning: isMounted(...) is deprecated',
+    'Module RCTImageLoader',
+    'Class RCTCxxModule',
+]);
 import App from './App';
 AppRegistry.registerComponent('quotesApp', () => App);

@@ -1,4 +1,4 @@
-rootProject.name = 'quotesApp'
+rootProject.name = 'GuruOnline'
 
 include ':app'
 include ':react-native-vector-icons'

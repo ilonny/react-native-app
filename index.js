@@ -6,4 +6,4 @@ YellowBox.ignoreWarnings([
     'Class RCTCxxModule',
 ]);
 import App from './App';
-AppRegistry.registerComponent('quotesApp', () => App);
+AppRegistry.registerComponent('GuruOnline', () => App);

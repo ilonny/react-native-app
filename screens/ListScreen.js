@@ -4,7 +4,10 @@ import {
   StyleSheet,
   Text,
   View,
-  AsyncStorage
+  AsyncStorage,
+  SafeAreaView,
+  ScrollView,
+  FlatList
 } from 'react-native';
 import { API_URL } from '../constants/api';
 
@@ -14,7 +17,7 @@ export default class ListScreen extends Component {
     this.state = {
       items: [],
       storage: [],
-      quotes: [],
+      quotes: "",
       test: '',
       k: 0,
       test2: '',
@@ -37,12 +40,20 @@ export default class ListScreen extends Component {
           this.setState(state => {
             return {
               ...state,
-              quotes: JSON.parse(request.responseText) ? JSON.parse(request.responseText) : 'error network'
+              quotes: request.responseText ? JSON.parse(request.responseText) : 'error network'
+              // quotes: 'error network 200'
+            }
+          })
+        } else {
+          this.setState(state => {
+            return {
+              ...state,
+              quotes: API_URL + `/quotes?items=[${this.state.items}]`
             }
           })
         }
     };
-    request.open('GET', API_URL + `/quotes?items=${this.state.items}`);
+    request.open('GET', API_URL + `/quotes?items=[${this.state.items}]`);
     request.send();
   }
   getSettings(){
@@ -57,7 +68,7 @@ export default class ListScreen extends Component {
             date: Date.now()
           }
         });
-        // this.getQuotes();
+        this.getQuotes();
       }
     });
   }
@@ -81,21 +92,38 @@ export default class ListScreen extends Component {
   //     })
   //   }, 2000);
   // }
+  _keyExtractor = (item) => +item.id;
   render() {
     let comp;
+    // let { quotes } = this.state;
+    console.log('CONSOLLLLEEEE', this.state.quotes)
+    let quotes = Array.from(this.state.quotes);
+    console.log(quotes)
     if (this.state.items != '[]'){
       comp = (
+        <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF'}}>
         <View style={styles.container}>
-          {/* <Text>Items here</Text>
-          <Text>Items: {(this.state.items)}</Text>
-          <Text>Item1: {(this.state.items[0])}</Text>
-          <Text>Storage: {(this.state.storage)}</Text>
-          <Text>Test: {(this.state.test)}</Text>
-          <Text>Test2: {(this.state.test2)}</Text>
-          <Text>Date: {Date.now()}</Text> */}
-          
+          <ScrollView>
+            {/* <Text>Items here</Text>
+            <Text>Items: {(this.state.items)}</Text>
+            <Text>Item1: {(this.state.items[0])}</Text>
+            <Text>Storage: {(this.state.storage)}</Text>
+            <Text>Test: {(this.state.test)}</Text>
+            <Text>Test2: {(this.state.test2)}</Text>
+            <Text>Date: {Date.now()}</Text> */}
+            {/* <Text>{ typeof quotes }</Text> */}
+            <FlatList
+              data={quotes}
+              renderItem={({item}) => (
+                <Text>{item.title}</Text>
+              )}
+              keyExtractor={this._keyExtractor}
+            >
+            </FlatList>
+          </ScrollView>
         </View>
-      )
+        </SafeAreaView>
+      );
     } else {
       comp = (
         <View style={styles.container}>

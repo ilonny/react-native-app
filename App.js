@@ -20,9 +20,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default createBottomTabNavigator(
   {
-    Настройки: SettingsScreen,
     Цитаты: ListScreen,
     Избранное: FavoritesScreen,
+    Настройки: SettingsScreen,
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -30,7 +30,7 @@ export default createBottomTabNavigator(
         const { routeName } = navigation.state;
         let iconName;
         if (routeName === 'Цитаты') {
-          iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+          iconName = `ios-list${focused ? '' : '-outline'}`;
         } else if (routeName === 'Настройки') {
           iconName = `ios-options${focused ? '' : '-outline'}`;
         } else if (routeName === 'Избранное') {
@@ -40,6 +40,9 @@ export default createBottomTabNavigator(
         // icon component from react-native-vector-icons
         return <Ionicons name={iconName} size={25} color={tintColor} />;
       },
+      // tabBarOnPress: ({navigation}) => {
+      //   // jumpToIndex(scene);
+      // },
     }),
     tabBarOptions: {
       activeTintColor: 'tomato',

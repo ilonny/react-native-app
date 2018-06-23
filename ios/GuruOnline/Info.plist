@@ -48,6 +48,17 @@
         <dict>
           <key>NSExceptionAllowsInsecureHTTPLoads</key>
           <true/>
+          <key>NSExceptionRequiresForwardSecrecy</key>
+          <false/>
+        </dict>
+        <key>mobile-app.flamesclient.ru</key>
+        <dict>
+            <key>NSIncludesSubdomains</key>
+            <true/>
+            <key>NSExceptionAllowsInsecureHTTPLoads</key>
+            <true/>
+            <key>NSExceptionRequiresForwardSecrecy</key>
+            <false/>
         </dict>
       </dict>
     </dict>

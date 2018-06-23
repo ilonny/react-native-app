@@ -33,6 +33,7 @@ export default class SettingsScreen extends Component {
             selectedItems: [],
             testString: '',
             asyncSettings: null,
+            apiText: '',
         };
         // this.switchToggle(id) = this.switchToggle(id).bind(this)
     }
@@ -51,10 +52,10 @@ export default class SettingsScreen extends Component {
                         items: JSON.parse(request.responseText).all_items,
                         authors: JSON.parse(request.responseText).authors,
                         books: JSON.parse(request.responseText).books,
+                        apiText: JSON.stringify(request.responseText)
                     }
                 });
                 //проверим если до этого ничего не было выбрано то выберем все и сохраним и в стейт, и в сторедж
-                //TODO добавить проверку чтобы хотя бы один был подключен.
                 AsyncStorage.getItem('Settings', (err,value) => {
                     if (!value){
                         this.setState(state => {
@@ -69,7 +70,7 @@ export default class SettingsScreen extends Component {
                             return {
                                 ...state,
                                 selectedItems: JSON.parse(value),
-                                testString: 'test2',
+                                testString: value,
                             }
                         })
                         AsyncStorage.removeItem('Settings');
@@ -88,7 +89,7 @@ export default class SettingsScreen extends Component {
                 this.setState(state => {
                     return {
                         ...state,
-                        test: request.responseText
+                        apiText: request.responseText
                     }
                 });
             }
@@ -105,26 +106,36 @@ export default class SettingsScreen extends Component {
             this.setState(state => {
                 return {
                     ...state,
-                    selectedItems: arr
+                    selectedItems: arr,
+                    testString: 'delete1',
+                    asyncSettings: arr,
                 }
             })
+            AsyncStorage.removeItem('Settings');
+            AsyncStorage.setItem('Settings', JSON.stringify(arr));
         } else {
             this.setState(state => {
                 return {
                     ...state,
                     selectedItems: state.selectedItems.concat(id),
-                    testString: JSON.stringify(state.selectedItems)
+                    asyncSettings: state.selectedItems.concat(id),
+                    testString: JSON.stringify(state.selectedItems),
+                    testString: 'delete2',
                 }
             })
+            AsyncStorage.removeItem('Settings');
+            AsyncStorage.setItem('Settings', JSON.stringify(this.state.selectedItems.concat(id)));
         }
-        AsyncStorage.removeItem('Settings');
-        AsyncStorage.setItem('Settings', JSON.stringify(this.state.selectedItems));
-        this.setState(state => {
-            return {
-                ...state,
-                asyncSettings: this.state.selectedItems,
-            }
-        })
+        setTimeout(() => {
+            AsyncStorage.getItem('Settings', (err, value) => {
+                this.setState(state => {
+                    return {
+                        ...state,
+                        asyncSettings: value
+                    }
+                })
+            })
+        }, 3000);
     }
     render() {
         return (
@@ -132,12 +143,16 @@ export default class SettingsScreen extends Component {
                 <View style={styles.container}>
                     <ScrollView>
                     <Text>{ JSON.stringify(this.state.selectedItems) }</Text>
-                    <Text>{ this.state.testString } {/* Date.now() */ } </Text>
+                    <Text>{ this.state.testString }</Text>
                     <Text>{ JSON.stringify(this.state.asyncSettings) }</Text>
+                    {/* <Text>{ (this.state.apiText) }</Text> */}
                     <SectionList
                         renderItem={({item, index, section}) => (
                             <View key={item.id} style={styles.row}>
-                                <Text>{item.name ? item.name : item.title}</Text>
+                                <View style={{maxWidth: '80%'}}>
+                                    <Text style={{fontWeight: 'bold'}}>{item.name ? item.name : item.title}</Text>
+                                    <Text>{item.description} {/*item.description.length > 20 ? '...' : '' */}</Text>
+                                </View>
                                 <Switch value={this.state.selectedItems.includes(item.id) ? true : false}  onValueChange={() => this.switchToggle(item.id)} />
                             </View>
                         )}
@@ -168,11 +183,15 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',  
     },
     row: {
+        paddingTop: 10,
+        paddingBottom: 10,
         marginBottom: 5,
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         backgroundColor: '#fafafa',
+        borderBottomWidth: 1,
+        borderBottomColor: 'tomato'
     }
 })

@@ -10,6 +10,7 @@ import {
   FlatList
 } from 'react-native';
 import { API_URL } from '../constants/api';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default class ListScreen extends Component {
   constructor(props){
@@ -24,6 +25,16 @@ export default class ListScreen extends Component {
       date: Date.now()
     }
   }
+  static navigationOptions = {
+    title: 'Home',
+    headerStyle: {
+      backgroundColor: '#f4511e',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+  };
   willFocusSubscription = this.props.navigation.addListener(
     'willFocus',
     payload => {
@@ -68,7 +79,9 @@ export default class ListScreen extends Component {
             date: Date.now()
           }
         });
-        this.getQuotes();
+        if (value != '[]'){
+          this.getQuotes();
+        }
       }
     });
   }
@@ -92,18 +105,19 @@ export default class ListScreen extends Component {
   //     })
   //   }, 2000);
   // }
-  _keyExtractor = (item) => +item.id;
+  _keyExtractor = (item) => item.text_short;
+  static navigationOptions = {
+    title: 'My Bookmarks'
+  }; 
   render() {
-    let comp;
-    // let { quotes } = this.state;
-    console.log('CONSOLLLLEEEE', this.state.quotes)
+    console.log(this.state)
+    let comp;    
     let quotes = Array.from(this.state.quotes);
-    console.log(quotes)
-    if (this.state.items != '[]'){
+    quotes = [...new Set(quotes)];
+    if (this.state.storage != '[]'){
       comp = (
-        <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF'}}>
-        <View style={styles.container}>
-          <ScrollView>
+        <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF', paddingBottom: 10, paddingTop: 10}}>
+        {/* <View style={styles.container}> */}
             {/* <Text>Items here</Text>
             <Text>Items: {(this.state.items)}</Text>
             <Text>Item1: {(this.state.items[0])}</Text>
@@ -115,13 +129,20 @@ export default class ListScreen extends Component {
             <FlatList
               data={quotes}
               renderItem={({item}) => (
-                <Text>{item.title}</Text>
+                <View style={styles.row}>
+                  <View style={{maxWidth: '80%'}}>
+                    <Text style={{color: 'tomato', fontWeight: 'bold'}}>{item.title}</Text>
+                    <Text style={{marginTop: 10}}>{item.text_short}</Text>
+                  </View>
+                  <View>
+                    <Ionicons name="ios-arrow-forward" size={25} color="tomato"/>
+                  </View>
+                </View>
               )}
               keyExtractor={this._keyExtractor}
             >
             </FlatList>
-          </ScrollView>
-        </View>
+        {/* </View> */}
         </SafeAreaView>
       );
     } else {
@@ -141,4 +162,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
+  row: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 10,
+    paddingTop: 25,
+    paddingBottom: 25,
+    borderBottomWidth: 1, 
+    borderBottomColor: '#eaeaea'
+  }
 })

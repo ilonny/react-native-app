@@ -25,16 +25,6 @@ export default class ListScreen extends Component {
       date: Date.now()
     }
   }
-  static navigationOptions = {
-    title: 'Home',
-    headerStyle: {
-      backgroundColor: '#f4511e',
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontWeight: 'bold',
-    },
-  };
   willFocusSubscription = this.props.navigation.addListener(
     'willFocus',
     payload => {
@@ -106,9 +96,6 @@ export default class ListScreen extends Component {
   //   }, 2000);
   // }
   _keyExtractor = (item) => item.text_short;
-  static navigationOptions = {
-    title: 'My Bookmarks'
-  }; 
   render() {
     console.log(this.state)
     let comp;    

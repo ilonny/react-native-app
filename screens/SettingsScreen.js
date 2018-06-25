@@ -11,7 +11,6 @@ import {
   AsyncStorage
 } from 'react-native';
 import { RkChoice, RkTheme } from 'react-native-ui-kitten';
-import { getItemsFromApiAsync } from './actions/getAsyncItems'
 import { API_URL } from '../constants/api';
 // import { API_URL } from '../constants/api'
 

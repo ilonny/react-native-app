@@ -5,10 +5,11 @@ import {
   Text,
   View
 } from 'react-native';
-import { createBottomTabNavigator } from 'react-navigation';
+import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 import ListScreen from './screens/ListScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import FavoritesScreen from './screens/FavoritesScreen';
+import DetailsScreen from './screens/DetailsScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 // const instructions = Platform.select({
@@ -17,10 +18,14 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 //   android: 'Double tap R on your keyboard to reload,\n' +
 //     'Shake or press menu button for dev menu',
 // });
+const ListStack = createStackNavigator({
+  Цитаты: ListScreen,
+  Details: DetailsScreen,
+});
 
 export default createBottomTabNavigator(
   {
-    Цитаты: ListScreen,
+    Цитаты: ListStack,
     Избранное: FavoritesScreen,
     Настройки: SettingsScreen,
   },

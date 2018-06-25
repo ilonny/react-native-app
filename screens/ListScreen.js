@@ -7,7 +7,8 @@ import {
   AsyncStorage,
   SafeAreaView,
   ScrollView,
-  FlatList
+  FlatList,
+  TouchableOpacity
 } from 'react-native';
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -24,6 +25,9 @@ export default class ListScreen extends Component {
       test2: '',
       date: Date.now()
     }
+  }
+  static navigationOptions = {
+    title: 'Список цитат'
   }
   willFocusSubscription = this.props.navigation.addListener(
     'willFocus',
@@ -116,15 +120,18 @@ export default class ListScreen extends Component {
             <FlatList
               data={quotes}
               renderItem={({item}) => (
-                <View style={styles.row}>
-                  <View style={{maxWidth: '80%'}}>
-                    <Text style={{color: 'tomato', fontWeight: 'bold'}}>{item.title}</Text>
-                    <Text style={{marginTop: 10}}>{item.text_short}</Text>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Details')}>
+                  <View style={styles.row}>
+                    <View style={{maxWidth: '80%'}}>
+                      <Text style={{color: 'tomato', fontWeight: 'bold'}}>{item.title}</Text>
+                      <Text style={{marginTop: 10}}>{item.text_short}</Text>
+                      <Text style={{marginTop: 10, color: '#c5c5c5', fontStyle: 'italic'}}>{item.author_name}</Text>
+                    </View>
+                    <View>
+                      <Ionicons name="ios-arrow-forward" size={25} color="tomato"/>
+                    </View>
                   </View>
-                  <View>
-                    <Ionicons name="ios-arrow-forward" size={25} color="tomato"/>
-                  </View>
-                </View>
+                </TouchableOpacity>
               )}
               keyExtractor={this._keyExtractor}
             >

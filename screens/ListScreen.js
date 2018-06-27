@@ -101,7 +101,6 @@ export default class ListScreen extends Component {
   // }
   _keyExtractor = (item) => item.text_short;
   render() {
-    console.log(this.state)
     let comp;    
     let quotes = Array.from(this.state.quotes);
     quotes = [...new Set(quotes)];
@@ -120,7 +119,7 @@ export default class ListScreen extends Component {
             <FlatList
               data={quotes}
               renderItem={({item}) => (
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Details')}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Details', {quote_id: item.id} )}>
                   <View style={styles.row}>
                     <View style={{maxWidth: '80%'}}>
                       <Text style={{color: 'tomato', fontWeight: 'bold'}}>{item.title}</Text>

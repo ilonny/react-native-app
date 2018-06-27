@@ -8,20 +8,36 @@ import {
   SafeAreaView,
   ScrollView,
   FlatList,
+  WebView,
+  TouchableHighlight
 } from 'react-native';
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-export default class DeatilsScreen extends Component {
+export default class DetailsScreen extends Component {
     constructor(props){
       super(props);
       this.state = {
       }
     }
+    static navigationOptions = {
+        headerRight: (
+            <TouchableHighlight>
+                <Ionicons name="ios-heart-outline" size={25} color="tomato" style={{marginTop: 5}}/>
+            </TouchableHighlight>
+        ),
+        title: 'test',
+        headerStyle: {
+            paddingRight: 10,
+        }
+    }
     render(){
+        console.log('detailsscreen props', this.props)
+        const quote_id = this.props.navigation.getParam('quote_id', 'null');
         return (
             <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF', paddingBottom: 10, paddingTop: 10}}>
-                
+                <WebView source={{uri: API_URL + `/quote?id=${quote_id}`}}
+                />
             </SafeAreaView>
         )
     }

@@ -7,7 +7,7 @@ import {
   AsyncStorage,
   SafeAreaView,
   ScrollView,
-  FlatList
+  FlatList,
 } from 'react-native';
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -20,9 +20,9 @@ export default class DeatilsScreen extends Component {
     }
     render(){
         return (
-            <View style={styles.container}>
-                <Text>Details Container</Text>
-            </View>
+            <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF', paddingBottom: 10, paddingTop: 10}}>
+                
+            </SafeAreaView>
         )
     }
 }

@@ -22,12 +22,19 @@ const ListStack = createStackNavigator({
   Цитаты: ListScreen,
   Details: DetailsScreen,
 });
+const FavoritesStack = createStackNavigator({
+  Избранное: FavoritesScreen,
+  Details: DetailsScreen,
+});
+const SettingsStack = createStackNavigator({
+  Настройки: SettingsScreen,
+});
 
 export default createBottomTabNavigator(
   {
     Цитаты: ListStack,
-    Избранное: FavoritesScreen,
-    Настройки: SettingsScreen,
+    Избранное: FavoritesStack,
+    Настройки: SettingsStack,
   },
   {
     navigationOptions: ({ navigation }) => ({

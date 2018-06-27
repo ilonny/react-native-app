@@ -36,6 +36,9 @@ export default class SettingsScreen extends Component {
         };
         // this.switchToggle(id) = this.switchToggle(id).bind(this)
     }
+    static navigationOptions = {
+        title: 'Настройки подписок'
+    }
     componentWillMount(){
         // AsyncStorage.removeItem('Settings');
         let request = new XMLHttpRequest();
@@ -141,9 +144,9 @@ export default class SettingsScreen extends Component {
             <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF'}}>
                 <View style={styles.container}>
                     <ScrollView>
-                    <Text>{ JSON.stringify(this.state.selectedItems) }</Text>
+                    {/* <Text>{ JSON.stringify(this.state.selectedItems) }</Text>
                     <Text>{ this.state.testString }</Text>
-                    <Text>{ JSON.stringify(this.state.asyncSettings) }</Text>
+                    <Text>{ JSON.stringify(this.state.asyncSettings) }</Text> */}
                     {/* <Text>{ (this.state.apiText) }</Text> */}
                     <SectionList
                         renderItem={({item, index, section}) => (

@@ -7,6 +7,15 @@ import {
 } from 'react-native';
 
 export default class FavoritesScreen extends Component {
+  constructor(){
+    super();
+    this.state = {
+
+    }
+  }
+  static navigationOptions = {
+    title: 'Избранные цитаты'
+  }
     render() {
       return (
         <View>

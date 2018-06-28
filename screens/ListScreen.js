@@ -63,7 +63,7 @@ export default class ListScreen extends Component {
   }
   getSettings(){
     AsyncStorage.getItem('Settings', (err,value) => {
-      if (value.length){
+      if (value && value.length){
         this.setState(state => {
           return {
             ...state,
@@ -76,6 +76,15 @@ export default class ListScreen extends Component {
         if (value != '[]'){
           this.getQuotes();
         }
+      } else {
+        this.setState(state => {
+          return {
+            ...state,
+            // storage: '[]',
+            items: 'all'
+          }
+        });
+        this.getQuotes();
       }
     });
   }
@@ -99,8 +108,9 @@ export default class ListScreen extends Component {
   //     })
   //   }, 2000);
   // }
-  _keyExtractor = (item) => item.text_short;
+  _keyExtractor = (item) => item.text_short + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   render() {
+    console.log('renderrrr', this.state)
     let comp;    
     let quotes = Array.from(this.state.quotes);
     quotes = [...new Set(quotes)];
@@ -119,7 +129,7 @@ export default class ListScreen extends Component {
             <FlatList
               data={quotes}
               renderItem={({item}) => (
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Details', {quote_id: item.id} )}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Details', {quote_id: item.id, text_short: item.text_short, title: item.title} )}>
                   <View style={styles.row}>
                     <View style={{maxWidth: '80%'}}>
                       <Text style={{color: 'tomato', fontWeight: 'bold'}}>{item.title}</Text>

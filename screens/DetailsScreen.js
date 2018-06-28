@@ -9,7 +9,8 @@ import {
   ScrollView,
   FlatList,
   WebView,
-  TouchableHighlight,
+  TouchableOpacity,
+  Share
 } from 'react-native';
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -21,14 +22,25 @@ export default class DetailsScreen extends Component {
           isFavorite: false,
           favorites: [],
           quote_id: this.props.navigation.getParam('quote_id', 'null'),
+          title: this.props.navigation.getParam('title', 'null'),
+          text_short: this.props.navigation.getParam('text_short', 'null'),
       }
     }
     static navigationOptions = ({navigation}) => {
+        const toggleFav = navigation.getParam('toggleFav');
+        const consoleState = navigation.getParam('consoleState');
+        const shareClick = navigation.getParam('shareClick');
         return {
             headerRight: (
-                <TouchableHighlight onPress={() => console.log('pressed '+ navigation.state.params.quote_id)}>
-                    <Ionicons name={navigation.state.params.isFavorite ? "ios-heart" : "ios-heart-outline"}  size={25} color="tomato" style={{marginTop: 5}}/>
-                </TouchableHighlight>
+                // <TouchableOpacity onPress={navigation.getParam('consoleState')}>
+                <View style={{alignItems: 'center', flex: 1, flexDirection: 'row'}}>
+                    <TouchableOpacity onPress={() => toggleFav(navigation.state.params.quote_id)}>
+                        <Ionicons name={navigation.state.params.isFavorite ? "ios-heart" : "ios-heart-outline"}  size={25} color="tomato" style={{marginTop: 5}}/>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => shareClick()}>
+                        <Ionicons name="ios-share-outline" size={25} color="tomato" style={{marginTop: 4, marginLeft: 10}}/>
+                    </TouchableOpacity>
+                </View>
             ),
             // title: 'test',
             headerStyle: {
@@ -62,15 +74,81 @@ export default class DetailsScreen extends Component {
             }
         })
     }
-    toggleFav(id){
+    shareClick = () => {
+        console.log('share state', this.state)
+        Share.share({
+            message: this.state.text_short,
+            url: API_URL + `/quote?id=${this.state.quote_id}`,
+            title: this.state.title
+          }, {
+            // Android only:
+            dialogTitle: 'Поделиться цитатой',
+            // iOS only:
+            excludedActivityTypes: [
+              'com.apple.UIKit.activity.PostToTwitter'
+            ]
+          })
+    }
+    componentDidMount() {
+        console.log("component did mount state", this.state)
+        // this.props.navigation.setParams({ increaseCount: this._increaseCount });
+        this.props.navigation.setParams({toggleFav: this.toggleFav})
+        this.props.navigation.setParams({consoleState: this.consoleState})
+        this.props.navigation.setParams({shareClick: this.shareClick})
+    }
+    consoleState = () => {
+        console.log(this.state);
+    }
+    toggleFav = (id) =>{
+        console.log('toggle fav start', id)
         if (this.state.favorites.includes(id)){
-            let arr = [...this.state.selectedItems];
+            //delete from favs
+            console.log('need to delete');
+            let arr = [...this.state.favorites];
+            console.log('arr', arr)
             let index = arr.indexOf(id);
             arr.splice(index, 1);
+            console.log('arr2', arr)
+            this.setState(state => {
+                return {
+                    ...state,
+                    isFavorite: false,
+                    favorites: arr,
+                }
+            })
+            setTimeout(() => {
+                console.log('state after tap', this.state)
+                AsyncStorage.removeItem('Favorites');
+                AsyncStorage.setItem('Favorites', JSON.stringify(this.state.favorites));
+                this.props.navigation.setParams({isFavorite: this.state.isFavorite});
+                this.forceUpdate();    
+            }, 10);
+        } else {
+            //add to favs
+            console.log('need to add');
+            let arr = [...this.state.favorites];
+            console.log('arr', arr)
+            this.setState(state => {
+                return {
+                    ...state,
+                    isFavorite: true,
+                    favorites: state.favorites.concat(id),
+                }
+            })
+            setTimeout(() => {
+                console.log('state after tap', this.state)
+                AsyncStorage.removeItem('Favorites');
+                AsyncStorage.setItem('Favorites', JSON.stringify(this.state.favorites));
+                this.props.navigation.setParams({isFavorite: this.state.isFavorite});
+                this.forceUpdate();    
+            }, 10);
         }
     }
     render(){
+        console.log('render start');
         console.log('detailsscreen props', this.props)
+        console.log('detailsscreen state', this.state)
+        console.log('render end');
         const quote_id = this.state.quote_id;
         return (
             <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF', paddingBottom: 10, paddingTop: 10}}>

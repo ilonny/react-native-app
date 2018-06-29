@@ -102,6 +102,7 @@ export default class SettingsScreen extends Component {
     }
     switchToggle(id){
         if (this.state.selectedItems.includes(id)){
+            console.log('need delete item', id)
             let arr = [...this.state.selectedItems];
             let index = arr.indexOf(id);
             arr.splice(index, 1);
@@ -116,6 +117,7 @@ export default class SettingsScreen extends Component {
             AsyncStorage.removeItem('Settings');
             AsyncStorage.setItem('Settings', JSON.stringify(arr));
         } else {
+            console.log('need add item', id)
             this.setState(state => {
                 return {
                     ...state,
@@ -139,7 +141,14 @@ export default class SettingsScreen extends Component {
             })
         }, 3000);
     }
+    shouldComponentUpdate(nextProps, nextState){
+        if (this.state.selectedItems == nextState.selectedItems){
+            return false;
+        }
+        return true;
+    }
     render() {
+        console.log('settings render', this.state)
         return (
             <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF'}}>
                 <View style={styles.container}>

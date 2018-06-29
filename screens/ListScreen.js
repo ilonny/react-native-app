@@ -112,7 +112,7 @@ export default class ListScreen extends Component {
   render() {
     console.log('renderrrr', this.state)
     let comp;    
-    let quotes = Array.from(this.state.quotes);
+    let quotes = this.state.quotes;
     quotes = [...new Set(quotes)];
     if (this.state.storage != '[]'){
       comp = (

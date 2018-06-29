@@ -144,6 +144,12 @@ export default class DetailsScreen extends Component {
             }, 10);
         }
     }
+    shouldComponentUpdate(nextProps, nextState){
+        if (this.state.isFavorite == nextState.isFavorite){
+            return false;
+        }
+        return true;
+    }
     render(){
         console.log('render start');
         console.log('detailsscreen props', this.props)

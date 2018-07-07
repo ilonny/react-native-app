@@ -33,6 +33,7 @@ export default class SettingsScreen extends Component {
             testString: '',
             asyncSettings: null,
             apiText: '',
+            token: '',
         };
         // this.switchToggle(id) = this.switchToggle(id).bind(this)
     }
@@ -98,7 +99,15 @@ export default class SettingsScreen extends Component {
         };
         request.open('GET', API_URL + '/items');
         request.send();
-
+        AsyncStorage.getItem('Token', (err, value) => {
+            this.setState(state => {
+                return {
+                    ...state,
+                    token: value,
+                }
+            })
+        })
+        console.log('token state?', this.state)
     }
     switchToggle(id){
         if (this.state.selectedItems.includes(id)){
@@ -147,8 +156,22 @@ export default class SettingsScreen extends Component {
         }
         return true;
     }
+    updateTokenSetting(){
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = (e) => {
+            if (request.readyState !== 4) {
+              return;
+            }
+            if (request.status === 200) {
+            }
+        };
+        request.open('GET', API_URL + `set-token?token=${this.state.token}&settings=${JSON.stringify(this.state.selectedItems)}`);
+        request.send();
+        console.log('updateTokenSetting', API_URL + `/set-token?token=${this.state.token}&settings=${JSON.stringify(this.state.selectedItems)}`);
+    }
     render() {
-        console.log('settings render', this.state)
+        console.log('settings render', this.state);
+        this.updateTokenSetting();
         return (
             <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF'}}>
                 <View style={styles.container}>

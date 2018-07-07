@@ -92,22 +92,6 @@ export default class ListScreen extends Component {
     this.getSettings();
   }
 
-  // componentDidUpdate(prevProps){
-  //   setTimeout(() => {
-  //     AsyncStorage.getItem('Settings', (err,value) => {
-  //       if (JSON.stringify(this.state.items) != value){
-  //         this.setState(state => {
-  //           return {
-  //             ...state,
-  //             test: 'didUpdate',
-  //             // test2: this.state.items != JSON.parse(value) ? 'true' : 'false'
-  //             test2: JSON.stringify(this.state.items) == value ? 'true' : 'false'
-  //           }
-  //         });
-  //       }
-  //     })
-  //   }, 2000);
-  // }
   _keyExtractor = (item) => item.text_short + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   render() {
     console.log('renderrrr', this.state)

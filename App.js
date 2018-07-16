@@ -5,6 +5,7 @@ import {
   Text,
   View,
   AsyncStorage,
+  PushNotificationIOS
 } from 'react-native';
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 import ListScreen from './screens/ListScreen';
@@ -12,6 +13,7 @@ import SettingsScreen from './screens/SettingsScreen';
 import FavoritesScreen from './screens/FavoritesScreen';
 import DetailsScreen from './screens/DetailsScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { API_URL } from './constants/api';
 
 var PushNotification = require('react-native-push-notification');
 PushNotification.configure({
@@ -20,6 +22,18 @@ PushNotification.configure({
   onRegister: function(token) {
       console.log( 'TOKEN:', token );
       AsyncStorage.setItem('Token', JSON.stringify(token));
+      let request = new XMLHttpRequest();
+        request.onreadystatechange = (e) => {
+            if (request.readyState !== 4) {
+              return;
+            }
+            if (request.status === 200) {
+                
+            }
+        };
+        request.open('GET', API_URL + `/set-token?token=${JSON.stringify(token)}&settings=all`);
+        request.send();
+        console.log(API_URL + `/set-token?token=${JSON.stringify(token)}&settings=all`);
   },
 
   // (required) Called when a remote or local notification is opened or received

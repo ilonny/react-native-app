@@ -163,9 +163,10 @@ export default class SettingsScreen extends Component {
               return;
             }
             if (request.status === 200) {
+                
             }
         };
-        request.open('GET', API_URL + `set-token?token=${this.state.token}&settings=${JSON.stringify(this.state.selectedItems)}`);
+        request.open('GET', API_URL + `/set-token?token=${this.state.token}&settings=${JSON.stringify(this.state.selectedItems)}`);
         request.send();
         console.log('updateTokenSetting', API_URL + `/set-token?token=${this.state.token}&settings=${JSON.stringify(this.state.selectedItems)}`);
     }

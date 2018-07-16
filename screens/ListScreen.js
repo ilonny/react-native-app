@@ -23,7 +23,8 @@ export default class ListScreen extends Component {
       test: '',
       k: 0,
       test2: '',
-      date: Date.now()
+      date: Date.now(),
+      refreshnig: false,
     }
   }
   static navigationOptions = {
@@ -93,6 +94,39 @@ export default class ListScreen extends Component {
   }
 
   _keyExtractor = (item) => item.text_short + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+  refresh(){
+    this.setState(state => {
+      return {
+        ...state,
+        refreshing: true,
+      }
+    })
+    let request = new XMLHttpRequest();
+    request.onreadystatechange = (e) => {
+        if (request.readyState !== 4) {
+          return;
+        }
+        if (request.status === 200) {
+          this.setState(state => {
+            return {
+              ...state,
+              quotes: request.responseText ? JSON.parse(request.responseText) : 'error network',
+              refreshing: false
+              // quotes: 'error network 200'
+            }
+          })
+        } else {
+          this.setState(state => {
+            return {
+              ...state,
+              quotes: API_URL + `/quotes?items=[${this.state.items}]`
+            }
+          })
+        }
+    };
+    request.open('GET', API_URL + `/quotes?items=[${this.state.items}]`);
+    request.send();
+  }
   render() {
     console.log('renderrrr', this.state)
     let comp;    
@@ -127,6 +161,8 @@ export default class ListScreen extends Component {
                 </TouchableOpacity>
               )}
               keyExtractor={this._keyExtractor}
+              onRefresh={() => this.refresh()}
+              refreshing={false}
             >
             </FlatList>
         {/* </View> */}

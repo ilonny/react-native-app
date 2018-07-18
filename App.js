@@ -45,7 +45,7 @@ PushNotification.configure({
   },
 
   // ANDROID ONLY: GCM Sender ID (optional - not required for local notifications, but is need to receive remote push notifications)
-  senderID: "YOUR GCM SENDER ID",
+  senderID: "604004509059",
 
   // IOS ONLY (optional): default: all - Permissions to register.
   permissions: {

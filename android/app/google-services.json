@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "604004509059",
+    "firebase_url": "https://guru-online-3b377.firebaseio.com",
+    "project_id": "guru-online-3b377",
+    "storage_bucket": "guru-online-3b377.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:604004509059:android:e37d857eed5296e6",
+        "android_client_info": {
+          "package_name": "com.guruonline"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "604004509059-jjs95kea4ltgemj0avm581tl9f00ne8l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPMSof7raefEVg58yX43pN5QpCgv8M_VM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

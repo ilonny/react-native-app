@@ -36,16 +36,16 @@
         "source": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_popup_menu_item_layout.xml"
     },
     {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/layout/notification_template_part_chronometer.xml",
+        "source": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/notification_template_part_chronometer.xml"
+    },
+    {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/layout/abc_screen_content_include.xml",
         "source": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_screen_content_include.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/layout/abc_action_bar_view_list_nav_layout.xml",
         "source": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_action_bar_view_list_nav_layout.xml"
-    },
-    {
-        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/layout/notification_template_part_chronometer.xml",
-        "source": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/notification_template_part_chronometer.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/layout/abc_search_dropdown_item_icons_2line.xml",
@@ -60,12 +60,12 @@
         "source": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_list_menu_item_radio.xml"
     },
     {
-        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/layout/notification_media_action.xml",
-        "source": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/notification_media_action.xml"
-    },
-    {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/layout/abc_alert_dialog_button_bar_material.xml",
         "source": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/layout/notification_media_action.xml",
+        "source": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/notification_media_action.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/layout/dev_loading_view.xml",
@@ -144,12 +144,12 @@
         "source": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_list_menu_item_layout.xml"
     },
     {
-        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/layout/redbox_view.xml",
-        "source": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.4/res/layout/redbox_view.xml"
-    },
-    {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/layout/notification_template_lines.xml",
         "source": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/notification_template_lines.xml"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/layout/redbox_view.xml",
+        "source": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.4/res/layout/redbox_view.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/layout/abc_search_view.xml",

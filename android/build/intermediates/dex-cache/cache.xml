@@ -48,21 +48,21 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/libs/internal_impl-23.1.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
-        <dex dex="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.1_4ea03c8e56cc78372d7c6f5b7968327d8dd66eba.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.1.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="82825756edeeb3b56b15e73b2edd56e93da5a444">
         <dex dex="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-base-8.1.0_1fbad64a1447cbdde2e9921818685d2c96c8e8a7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/libs/internal_impl-23.1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.1_4ea03c8e56cc78372d7c6f5b7968327d8dd66eba.jar" />
     </item>
     <item
         is-multidex="false"
@@ -115,7 +115,7 @@
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="279750fed3c920d06351dbf32889c1b48203c7ad">
+        sha1="f2cf527de8d0bd35d72088fafea02395ba4a9eec">
         <dex dex="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/pre-dexed/debug/GuruOnline-react-native-vector-icons-unspecified_7802beeab692cc82c6ffbc20fe87cf941efc9d74.jar" />
     </item>
     <item

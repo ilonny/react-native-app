@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "604004509059",
-    "firebase_url": "https://guru-online-3b377.firebaseio.com",
-    "project_id": "guru-online-3b377",
-    "storage_bucket": "guru-online-3b377.appspot.com"
+    "project_number": "655925451031",
+    "firebase_url": "https://guru-online-5f9c3.firebaseio.com",
+    "project_id": "guru-online-5f9c3",
+    "storage_bucket": "guru-online-5f9c3.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:604004509059:android:e37d857eed5296e6",
+        "mobilesdk_app_id": "1:655925451031:android:e37d857eed5296e6",
         "android_client_info": {
           "package_name": "com.guruonline"
         }
       },
       "oauth_client": [
         {
-          "client_id": "604004509059-jjs95kea4ltgemj0avm581tl9f00ne8l.apps.googleusercontent.com",
+          "client_id": "655925451031-7jt56ivepg45lafk6h2qsc22ik1io4he.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAPMSof7raefEVg58yX43pN5QpCgv8M_VM"
+          "current_key": "AIzaSyBESXGftlkZ3-QrQdJrxwXnBbtsbUhoc90"
         }
       ],
       "services": {

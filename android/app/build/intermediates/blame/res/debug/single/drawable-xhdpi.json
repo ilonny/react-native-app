@@ -40,16 +40,16 @@
         "source": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.1.0/res/drawable-xhdpi/common_signin_btn_icon_disabled_focus_dark.9.png"
     },
     {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable-xhdpi/abc_textfield_default_mtrl_alpha.9.png",
+        "source": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-xhdpi/abc_textfield_default_mtrl_alpha.9.png"
+    },
+    {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable-xhdpi/abc_scrubber_primary_mtrl_alpha.9.png",
         "source": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-xhdpi/abc_scrubber_primary_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable-xhdpi/abc_list_pressed_holo_dark.9.png",
         "source": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-xhdpi/abc_list_pressed_holo_dark.9.png"
-    },
-    {
-        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable-xhdpi/abc_textfield_default_mtrl_alpha.9.png",
-        "source": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-xhdpi/abc_textfield_default_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable-xhdpi/abc_textfield_search_activated_mtrl_alpha.9.png",
@@ -112,12 +112,12 @@
         "source": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.1.0/res/drawable-xhdpi/common_signin_btn_text_focus_dark.9.png"
     },
     {
-        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable-xhdpi/abc_list_pressed_holo_light.9.png",
-        "source": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-xhdpi/abc_list_pressed_holo_light.9.png"
-    },
-    {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable-xhdpi/node_modules_reactnativeuikitten_src_assets_img_choice_checkmark.png",
         "source": "/Users/dmitry/projects/react-native-app/android/app/src/main/res/drawable-xhdpi/node_modules_reactnativeuikitten_src_assets_img_choice_checkmark.png"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable-xhdpi/abc_list_pressed_holo_light.9.png",
+        "source": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-xhdpi/abc_list_pressed_holo_light.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable-xhdpi/abc_cab_background_top_mtrl_alpha.9.png",

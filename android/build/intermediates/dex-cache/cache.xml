@@ -21,21 +21,21 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
-        <dex dex="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-basement-8.1.0_f534810591f638bcc7b583d6cdd245b3213b0f55.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.4/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="e31331bdf6b5952badadbfc171f04b95c55d3b16">
         <dex dex="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/pre-dexed/debug/com.facebook.react-react-native-0.55.4_0e6999442fb4696793fb0a42a45fd098fc6ac54b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.0.1_931b648cfc83457adbce7e81a47e7c9365b27fcf.jar" />
     </item>
     <item
         is-multidex="false"
@@ -48,39 +48,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.1.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="82825756edeeb3b56b15e73b2edd56e93da5a444">
-        <dex dex="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-base-8.1.0_1fbad64a1447cbdde2e9921818685d2c96c8e8a7.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/libs/internal_impl-23.1.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
-        <dex dex="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.1_4ea03c8e56cc78372d7c6f5b7968327d8dd66eba.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/dmitry/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp-urlconnection/3.6.0/3f9b16b774f2c36cfd86dd2053d0b3059531dacc/okhttp-urlconnection-3.6.0.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="3f9b16b774f2c36cfd86dd2053d0b3059531dacc">
         <dex dex="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-3.6.0_bc3a2d83cd5157c660b1a89828a672b52aa828ae.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/dmitry/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
-        <dex dex="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.1_421419f7fb00aec48cc4a690aed53a81837c845c.jar" />
     </item>
     <item
         is-multidex="false"
@@ -102,15 +75,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/me.leolin/ShortcutBadger/1.1.8/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="531c33d3697000a05e9493a2d0f09ba41fa114d3">
-        <dex dex="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/pre-dexed/debug/me.leolin-ShortcutBadger-1.1.8_cc2d255c56d8f14d092a34ee5170bde2ced9fd70.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/GuruOnline/react-native-vector-icons/unspecified/jars/classes.jar"
         jumboMode="false"
         optimize="true"
@@ -120,12 +84,21 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/GuruOnline/react-native-push-notification/unspecified/jars/classes.jar"
+        jar="/Users/dmitry/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="2cde319087db2efb5405930849f9c861fca0197b">
-        <dex dex="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/pre-dexed/debug/GuruOnline-react-native-push-notification-unspecified_5c263396bbb6dcb14673f5c7c47b958989140be5.jar" />
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1_1b8609f34b04d03229ceaaae4b0c1e86a0fd3251.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1_773f3bd48a6be040ec478e6cb0e76364589873df.jar" />
     </item>
     <item
         is-multidex="false"
@@ -138,12 +111,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/8.1.0/jars/classes.jar"
+        jar="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="dcb5b75baf05d92e61d5706737200ee55949f97b">
-        <dex dex="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-gcm-8.1.0_ba808535f62dd5b3ce74bac14b5e390c7b013a0a.jar" />
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.0.1_5c96c681f97c1681590128526d874df138c9ca1e.jar" />
     </item>
     <item
         is-multidex="false"
@@ -225,24 +198,6 @@
         revision="23.0.1"
         sha1="c65a2e39d54023bac3aef64a2f0cff89289c7ff6">
         <dex dex="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-drawee-1.3.0_e71ec75558ee204cf50267245ae1c5a5996c0c72.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
-        <dex dex="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.1.1_8e4046c93441fc8f34d196de0d03dfda6e336f73.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
-        <dex dex="/Users/dmitry/projects/react-native-app/android/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.1.1_a244dc1f6a697e2c3468b68ebf7689a485cbd569.jar" />
     </item>
 
 </items>

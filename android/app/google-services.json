@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "655925451031-m8urdvc7ja558prua5m1k049eakqmkge.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.guruonline",
+            "certificate_hash": "378755f269c4e49b745c247041981e9b13b9597e"
+          }
+        },
+        {
           "client_id": "655925451031-7jt56ivepg45lafk6h2qsc22ik1io4he.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "655925451031-7jt56ivepg45lafk6h2qsc22ik1io4he.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

@@ -1,5 +1,6 @@
 import { AppRegistry } from 'react-native';
 import { YellowBox } from 'react-native';
+import bgMessaging from './bgMessaging';
 YellowBox.ignoreWarnings([
     'Warning: isMounted(...) is deprecated',
     'Module RCTImageLoader',
@@ -9,3 +10,4 @@ YellowBox.ignoreWarnings([
 ]);
 import App from './App';
 AppRegistry.registerComponent('GuruOnline', () => App);
+AppRegistry.registerHeadlessTask('RNFirebaseBackgroundMessage', () => bgMessaging);

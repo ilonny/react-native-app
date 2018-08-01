@@ -5,7 +5,6 @@ import {
   Text,
   View,
   AsyncStorage,
-  PushNotificationIOS
 } from 'react-native';
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 import ListScreen from './screens/ListScreen';
@@ -13,9 +12,8 @@ import SettingsScreen from './screens/SettingsScreen';
 import FavoritesScreen from './screens/FavoritesScreen';
 import DetailsScreen from './screens/DetailsScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { API_URL } from './constants/api';
 Platform.select({
-  ios: () => require('./pushIOS'),
+  // ios: () => require('./pushIOS'),
   android: require('./pushAndroid'),
 });
 

@@ -1,13 +1,9 @@
 import {
-    Platform,
-    StyleSheet,
-    Text,
-    View,
     AsyncStorage,
-    PushNotificationIOS
   } from 'react-native';
 import { API_URL } from './constants/api';
 import firebase from 'react-native-firebase';
+console.log('push-android is required')
 firebase.messaging().getToken()
   .then(fcmToken => {
     if (fcmToken) {

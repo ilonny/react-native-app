@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Mon Jul 23 23:17:35 YEKT 2018
+#Thu Jul 26 19:36:03 YEKT 2018
 5.base=/Users/dmitry/projects/react-native-app/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
 22.path=lib/x86/libfolly_json.so
 32.set=NATIVE_RESOURCE
@@ -37,7 +37,7 @@
 38.baseType=DIRECTORY
 29.baseType=DIRECTORY
 10.baseType=DIRECTORY
-13.set=ASSET
+13.set=NATIVE_RESOURCE
 2.base=/Users/dmitry/projects/react-native-app/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
 8.baseType=DIRECTORY
 6.base=/Users/dmitry/projects/react-native-app/android/app/build/intermediates/assets/debug
@@ -55,7 +55,7 @@
 23.base=/Users/dmitry/projects/react-native-app/android/app/build/intermediates/assets/debug
 9.baseType=DIRECTORY
 33.base=/Users/dmitry/projects/react-native-app/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
-13.path=index.android.bundle
+13.path=lib/x86/libjsc.so
 17.base=/Users/dmitry/projects/react-native-app/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
 27.set=ASSET
 count=40
@@ -66,7 +66,7 @@ count=40
 21.baseType=DIRECTORY
 30.baseType=DIRECTORY
 0.set=NATIVE_RESOURCE
-13.base=/Users/dmitry/projects/react-native-app/android/app/build/intermediates/assets/debug
+13.base=/Users/dmitry/projects/react-native-app/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
 0.baseType=DIRECTORY
 7.set=ASSET
 3.path=lib/x86/libglog.so
@@ -97,7 +97,7 @@ count=40
 24.base=/Users/dmitry/projects/react-native-app/android/app/build/intermediates/assets/debug
 34.base=/Users/dmitry/projects/react-native-app/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
 1.baseType=DIRECTORY
-14.path=lib/x86/libjsc.so
+14.path=index.android.bundle
 37.set=NATIVE_RESOURCE
 18.base=/Users/dmitry/projects/react-native-app/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
 28.base=/Users/dmitry/projects/react-native-app/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
@@ -106,7 +106,7 @@ count=40
 38.base=/Users/dmitry/projects/react-native-app/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
 0.path=lib/armeabi-v7a/libyoga.so
 15.set=ASSET
-14.base=/Users/dmitry/projects/react-native-app/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
+14.base=/Users/dmitry/projects/react-native-app/android/app/build/intermediates/assets/debug
 14.baseType=DIRECTORY
 23.baseType=DIRECTORY
 33.baseType=DIRECTORY
@@ -152,7 +152,7 @@ count=40
 1.path=lib/x86/libprivatedata.so
 25.set=NATIVE_RESOURCE
 15.base=/Users/dmitry/projects/react-native-app/android/app/build/intermediates/assets/debug
-14.set=NATIVE_RESOURCE
+14.set=ASSET
 35.baseType=DIRECTORY
 26.baseType=DIRECTORY
 17.baseType=DIRECTORY

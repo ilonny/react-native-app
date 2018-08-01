@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-v21/notification_action_background.xml",
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-compat-27.0.2.aar/f6cc2924b1cead633d21fca554c84c58/res/drawable-v21/notification_action_background.xml"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-v21/abc_action_bar_item_background_material.xml",
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/d723d393e7127ecd0c9f44bc8b1fad5e/res/drawable-v21/abc_action_bar_item_background_material.xml"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-v21/abc_btn_colored_material.xml",
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/d723d393e7127ecd0c9f44bc8b1fad5e/res/drawable-v21/abc_btn_colored_material.xml"
+    }
+]

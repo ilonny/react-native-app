@@ -27,7 +27,28 @@ firebase.messaging().getToken()
       // user doesn't have a device token yet
     } 
 });
-
+firebase.messaging().onTokenRefresh(fcmToken => {
+  if (fcmToken) {
+    // user has a device token
+    console.log('yesssss token is' + fcmToken)
+    AsyncStorage.setItem('Token', JSON.stringify(fcmToken));
+    let request = new XMLHttpRequest();
+      request.onreadystatechange = (e) => {
+          if (request.readyState !== 4) {
+            return;
+          }
+          if (request.status === 200) {
+              
+          }
+      };
+      request.open('GET', API_URL + `/set-token?token=${JSON.stringify(fcmToken)}&settings=all`);
+      request.send();
+      console.log(API_URL + `/set-token?token=${JSON.stringify(fcmToken)}&settings=all`);
+  } else {
+    console.log('nooo((((((( token is' + fcmToken)
+    // user doesn't have a device token yet
+  } 
+});
 firebase.messaging().hasPermission()
   .then(enabled => {
     if (enabled) {

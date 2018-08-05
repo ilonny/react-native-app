@@ -12,11 +12,13 @@ import SettingsScreen from './screens/SettingsScreen';
 import FavoritesScreen from './screens/FavoritesScreen';
 import DetailsScreen from './screens/DetailsScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-Platform.select({
-  // ios: () => require('./pushIOS'),
-  android: require('./pushAndroid'),
-});
-
+setTimeout(() => {
+  console.log('SETTIMEOUT')
+  Platform.select({
+    // ios: () => require('./pushIOS'),
+    android: require('./pushAndroid'),
+  });
+}, 300);
 // const instructions = Platform.select({
 //   ios: 'Press Cmd+R to reload,\n' +
 //     'Cmd+D or shake for dev menu',

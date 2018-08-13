@@ -12,6 +12,7 @@ import ListScreen from './screens/ListScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import FavoritesScreen from './screens/FavoritesScreen';
 import DetailsScreen from './screens/DetailsScreen';
+import ReaderScreen from './screens/ReaderScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { API_URL } from './constants/api';
 
@@ -83,11 +84,14 @@ const FavoritesStack = createStackNavigator({
 const SettingsStack = createStackNavigator({
   Настройки: SettingsScreen,
 });
-
+const ReaderStack = createStackNavigator({
+  Книги: ReaderScreen,
+});
 export default createBottomTabNavigator(
   {
     Цитаты: ListStack,
     Избранное: FavoritesStack,
+    Книги: ReaderStack,
     Настройки: SettingsStack,
   },
   {
@@ -101,6 +105,8 @@ export default createBottomTabNavigator(
           iconName = `ios-options${focused ? '' : '-outline'}`;
         } else if (routeName === 'Избранное') {
           iconName = `ios-star${focused ? '' : '-outline'}`;
+        } else if (routeName === 'Книги') {
+          iconName = `ios-book${focused ? '' : '-outline'}`;
         }
         // You can return any component that you like here! We usually use an
         // icon component from react-native-vector-icons

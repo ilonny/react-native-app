@@ -1,4 +1,6 @@
 rootProject.name = 'GuruOnline'
+include ':react-native-push-notification-ce'
+project(':react-native-push-notification-ce').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-push-notification-ce/android')
 
 include ':app'
 include ':react-native-vector-icons'

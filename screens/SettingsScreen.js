@@ -10,16 +10,8 @@ import {
   ScrollView,
   AsyncStorage
 } from 'react-native';
-import { RkChoice, RkTheme } from 'react-native-ui-kitten';
-import { API_URL } from '../constants/api';
-// import { API_URL } from '../constants/api'
 
-RkTheme.setType('RkChoice', 'redCheckMarkSelected', {
-    backgroundColor: 'transparent',
-    inner: {
-      tintColor: 'red',
-    }
-});
+import { API_URL } from '../constants/api';
 
 export default class SettingsScreen extends Component {
     constructor(){

@@ -55,6 +55,7 @@ class EpubReader extends Component {
                 this.setState({
                     reader_locations: JSON.parse(value)
                 })
+                this.getInitialLocation()
             } else {
                 console.log('async storage reader_locations value is empty', value);
             }
@@ -72,9 +73,49 @@ class EpubReader extends Component {
 
     saveBookLocation(location, book_id){
         console.log('saveBookLocation', location, book_id)
+        let { reader_locations } = this.state
+        console.log('reader_locations', reader_locations)
+        let changed = false;
+        reader_locations.forEach(el => {
+            if (el.id == book_id) {
+                changed = true;
+                el.location = location
+                this.setState({
+                    reader_locations: [].concat(reader_locations)
+                })    
+            }
+        });
+        if (!changed){
+            console.log('not changed')
+            let new_location = {
+                id: book_id,
+                location: location
+            }
+            console.log('new location', new_location)
+            this.setState({
+                reader_locations: this.state.reader_locations.concat(new_location)
+            })
+        }
+        console.log('saveBookLocation end', JSON.stringify(reader_locations))
+        AsyncStorage.setItem('reader_locations', JSON.stringify(reader_locations))   
+    }
+
+    getInitialLocation(){
+        let { book_id, reader_locations } = this.state
+        if (reader_locations instanceof Array) {
+            reader_locations.forEach(element => {
+                if (element.id == book_id){
+                    this.setState({
+                        location: element.location
+                    })
+                    // this.forceUpdate();
+                }
+            });
+        }
     }
 
     render() {
+        console.log("render state", this.state)
         return (
             <View style={styles.container}>
                 <Epub style={styles.reader}
@@ -85,12 +126,16 @@ class EpubReader extends Component {
                     gap={10}
                     onLocationChange={(visibleLocation)=> {
                         console.log("locationChanged", visibleLocation)
-                        if (visibleLocation.start.location){
-                            if (visibleLocation.start.location != this.state.visibleLocation.start.location){
-                                this.saveBookLocation(visibleLocation.start.location, this.state.book_id);
-                            }
+                        try {
+                            // if (visibleLocation.start){
+                                // if (visibleLocation.start.location != this.state.visibleLocation.start.location){
+                            this.saveBookLocation(visibleLocation.start.cfi, this.state.book_id);
+                                // }
+                            // }
+                            this.setState({visibleLocation});
+                        } catch (e) {
+                            console.log('locationChanged failed', e)
                         }
-                        this.setState({visibleLocation});
                     }}
                     onLocationsReady={(locations)=> {
                         // console.log("location total", locations.total);

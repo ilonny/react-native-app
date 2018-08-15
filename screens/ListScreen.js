@@ -128,7 +128,6 @@ export default class ListScreen extends Component {
     request.send();
   }
   render() {
-    console.log('renderrrr', this.state)
     let comp;    
     let quotes = this.state.quotes;
     quotes = [...new Set(quotes)];

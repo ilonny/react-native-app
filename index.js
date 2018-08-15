@@ -5,7 +5,8 @@ YellowBox.ignoreWarnings([
     'Module RCTImageLoader',
     'Class RCTCxxModule',
     'Remote debugger',
-    'RCTBridge required dispatch_sycn to load'
+    'RCTBridge required dispatch_sycn to load',
+    'Module RNFetchBlob requires main queue'
 ]);
 import App from './App';
 AppRegistry.registerComponent('GuruOnline', () => App);

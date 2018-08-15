@@ -137,6 +137,11 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-zip-archive')
+    compile project(':react-native-static-server')
+    compile project(':react-native-orientation')
+    compile project(':react-native-fs')
+    compile project(':react-native-fetch-blob')
     compile project(':react-native-push-notification-ce')
     // compile 'com.google.firebase:firebase-core:16.0.0'
     compile ('com.google.android.gms:play-services-gcm:8.1.0') {

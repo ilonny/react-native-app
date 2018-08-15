@@ -13,6 +13,7 @@ import SettingsScreen from './screens/SettingsScreen';
 import FavoritesScreen from './screens/FavoritesScreen';
 import DetailsScreen from './screens/DetailsScreen';
 import ReaderScreen from './screens/ReaderScreen';
+import ReaderScreenDetail from './screens/ReaderScreenDetail';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { API_URL } from './constants/api';
 
@@ -86,12 +87,13 @@ const SettingsStack = createStackNavigator({
 });
 const ReaderStack = createStackNavigator({
   Книги: ReaderScreen,
+  Reader: ReaderScreenDetail,
 });
 export default createBottomTabNavigator(
   {
+    Книги: ReaderStack,
     Цитаты: ListStack,
     Избранное: FavoritesStack,
-    Книги: ReaderStack,
     Настройки: SettingsStack,
   },
   {

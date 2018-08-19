@@ -17,7 +17,7 @@ class EpubReader extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            flow: "scrolled-continuous", // paginated || scrolled-continuous
+            flow: "paginated", // paginated || scrolled-continuous
             location: 0,
             url: "https://s3.amazonaws.com/epubjs/books/moby-dick.epub",
             src: "",

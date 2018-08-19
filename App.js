@@ -16,7 +16,7 @@ import ReaderScreen from './screens/ReaderScreen';
 import ReaderScreenDetail from './screens/ReaderScreenDetail';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { API_URL } from './constants/api';
-
+import NavigationService from './NavigationService';
 var PushNotification = require('react-native-push-notification');
 PushNotification.configure({
 
@@ -40,10 +40,14 @@ PushNotification.configure({
 
   // (required) Called when a remote or local notification is opened or received
   onNotification: function(notification) {
-      console.log( 'NOTIFICATION:', notification );
+      // console.log( 'NOTIFICATION:', JSON.stringify(notification) );
       // process the notification
       // required on iOS only (see fetchCompletionHandler docs: https://facebook.github.io/react-native/docs/pushnotificationios.html)
       notification.finish(PushNotificationIOS.FetchResult.NoData);
+      if (notification.data.quote_id){
+        let q_id = notification.data.quote_id;
+        NavigationService.navigate('Details', {quote_id: q_id});
+      }
   },
 
   // ANDROID ONLY: GCM Sender ID (optional - not required for local notifications, but is need to receive remote push notifications)
@@ -89,7 +93,7 @@ const ReaderStack = createStackNavigator({
   Книги: ReaderScreen,
   Reader: ReaderScreenDetail,
 });
-export default createBottomTabNavigator(
+const TopLevelNavigator = createBottomTabNavigator(
   {
     Книги: ReaderStack,
     Цитаты: ListStack,
@@ -122,3 +126,15 @@ export default createBottomTabNavigator(
     },
   }
 );
+
+export default class App extends Component {
+  render(){
+    return (
+      <TopLevelNavigator
+        ref={navigatorRef => {
+          NavigationService.setTopLevelNavigator(navigatorRef);
+        }}
+      />
+    )
+  }
+}

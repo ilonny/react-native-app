@@ -95,9 +95,9 @@ const ReaderStack = createStackNavigator({
 });
 const TopLevelNavigator = createBottomTabNavigator(
   {
-    Книги: ReaderStack,
     Цитаты: ListStack,
     Избранное: FavoritesStack,
+    Книги: ReaderStack,
     Настройки: SettingsStack,
   },
   {

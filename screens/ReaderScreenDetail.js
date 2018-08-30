@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 
 import { Epub, Streamer } from "epubjs-rn";
+import { API_URL } from '../constants/api';
 
 
 class EpubReader extends Component {
@@ -19,7 +20,7 @@ class EpubReader extends Component {
         this.state = {
             flow: "paginated", // paginated || scrolled-continuous
             location: 0,
-            url: "https://s3.amazonaws.com/epubjs/books/moby-dick.epub",
+            url: `https://mobile-app.flamesclient.ru/api/get-reader-book?id=${this.props.navigation.getParam("book_id")}`,
             src: "",
             origin: "",
             title: "",

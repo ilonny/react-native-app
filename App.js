@@ -91,9 +91,9 @@ const ReaderStack = createStackNavigator({
 });
 export default createBottomTabNavigator(
   {
-    Книги: ReaderStack,
     Цитаты: ListStack,
     Избранное: FavoritesStack,
+    Книги: ReaderStack,
     Настройки: SettingsStack,
   },
   {

@@ -13,8 +13,10 @@ export default async (RemoteMessage) => {
     .setTitle(RemoteMessage.data.title)
     .setBody(messageText)
     .setData({
-        q_id: JSON.parse(RemoteMessage.data.body).q_id
+            q_id: JSON.parse(RemoteMessage.data.body).q_id
     })
+    .android
+        .setBigText(messageText);
     firebase.notifications().displayNotification(notification)
     console.log(notification);
     return Promise.resolve();

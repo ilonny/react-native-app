@@ -3,6 +3,9 @@ import {
   } from 'react-native';
 import { API_URL } from './constants/api';
 import firebase from 'react-native-firebase';
+
+import NavigationService from './NavigationService'
+
 console.log('push-android is required')
 firebase.messaging().getToken()
   .then(fcmToken => {
@@ -72,6 +75,11 @@ firebase.messaging().onMessage((message) => {
     console.log('MESSAGE IS', message);
 });
 
+firebase.notifications().onNotificationOpened((notificationOpen) => {
+  console.log('ONNOTIFICATION OPENED', notificationOpen.notification._data.q_id)
+  let q_id = notificationOpen.notification._data.q_id;
+  NavigationService.navigate('Details', {quote_id: q_id});
+});
 // setTimeout(() => {
 //     console.log('showed??');
 //     let notification = new firebase.notifications.Notification()

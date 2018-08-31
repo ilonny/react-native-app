@@ -3,8 +3,14 @@ package com.guruonline;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.rnziparchive.RNZipArchivePackage;
 import com.oblador.vectoricons.VectorIconsPackage;
+import com.futurepress.staticserver.FPStaticServerPackage;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
+import com.github.yamill.orientation.OrientationPackage;
+import com.rnfs.RNFSPackage;
 import io.invertase.firebase.RNFirebasePackage;
+import com.RNFetchBlob.RNFetchBlobPackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -27,6 +33,12 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNZipArchivePackage(),
+            new FPStaticServerPackage(),
+            new ReactNativePushNotificationPackage(),
+            new OrientationPackage(),
+            new RNFSPackage(),
+            new RNFetchBlobPackage(),
             new VectorIconsPackage(),
             new RNFirebasePackage(),
             new RNFirebaseMessagingPackage(),

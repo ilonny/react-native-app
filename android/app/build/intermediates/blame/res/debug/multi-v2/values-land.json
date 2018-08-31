@@ -4,13 +4,13 @@
             "outputFile": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-land/values-land.xml",
             "map": [
                 {
-                    "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/d723d393e7127ecd0c9f44bc8b1fad5e/res/values-land/values-land.xml",
+                    "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/values-land/values-land.xml",
                     "from": {
                         "startLines": "4,7,10,13,16,17",
                         "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "280,568,875,1171,1470,1541",
+                        "startOffsets": "229,466,722,967,1215,1286",
                         "endColumns": "61,71,69,63,70,67",
-                        "endOffsets": "337,635,940,1230,1536,1604"
+                        "endOffsets": "286,533,787,1026,1281,1349"
                     },
                     "to": {
                         "startLines": "2,3,4,5,6,7",
@@ -26,13 +26,13 @@
             "outputFile": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/values-land/values-land.xml",
             "map": [
                 {
-                    "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/d723d393e7127ecd0c9f44bc8b1fad5e/res/values-land/values-land.xml",
+                    "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/values-land/values-land.xml",
                     "from": {
                         "startLines": "4,7,10,13,16,17",
                         "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "280,568,875,1171,1470,1541",
+                        "startOffsets": "229,466,722,967,1215,1286",
                         "endColumns": "61,71,69,63,70,67",
-                        "endOffsets": "337,635,940,1230,1536,1604"
+                        "endOffsets": "286,533,787,1026,1281,1349"
                     },
                     "to": {
                         "startLines": "2,3,4,5,6,7",

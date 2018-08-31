@@ -1,31 +1,31 @@
 [
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/color/abc_primary_text_disable_only_material_dark.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/d723d393e7127ecd0c9f44bc8b1fad5e/res/color/abc_primary_text_disable_only_material_dark.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/color/abc_primary_text_disable_only_material_dark.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/color/abc_secondary_text_material_dark.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/d723d393e7127ecd0c9f44bc8b1fad5e/res/color/abc_secondary_text_material_dark.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/color/abc_secondary_text_material_dark.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/color/switch_thumb_material_dark.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/d723d393e7127ecd0c9f44bc8b1fad5e/res/color/switch_thumb_material_dark.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/color/switch_thumb_material_dark.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/color/abc_secondary_text_material_light.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/d723d393e7127ecd0c9f44bc8b1fad5e/res/color/abc_secondary_text_material_light.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/color/abc_secondary_text_material_light.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/color/abc_search_url_text.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/d723d393e7127ecd0c9f44bc8b1fad5e/res/color/abc_search_url_text.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/color/abc_search_url_text.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/color/switch_thumb_material_light.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/d723d393e7127ecd0c9f44bc8b1fad5e/res/color/switch_thumb_material_light.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/color/switch_thumb_material_light.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/color/abc_primary_text_material_light.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/d723d393e7127ecd0c9f44bc8b1fad5e/res/color/abc_primary_text_material_light.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/color/abc_primary_text_material_light.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/color/common_google_signin_btn_text_light.xml",
@@ -33,11 +33,11 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/color/abc_primary_text_material_dark.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/d723d393e7127ecd0c9f44bc8b1fad5e/res/color/abc_primary_text_material_dark.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/color/abc_primary_text_material_dark.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/color/abc_primary_text_disable_only_material_light.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/d723d393e7127ecd0c9f44bc8b1fad5e/res/color/abc_primary_text_disable_only_material_light.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/color/abc_primary_text_disable_only_material_light.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/color/common_google_signin_btn_text_dark.xml",

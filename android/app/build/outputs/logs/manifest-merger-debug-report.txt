@@ -4,7 +4,16 @@ ADDED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidM
 INJECTED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml:1:1-50:12
 INJECTED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml:1:1-50:12
 INJECTED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml:1:1-50:12
+MERGED from [:react-native-vector-icons] /Users/dmitry/projects/react-native-app/node_modules/react-native-vector-icons/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-zip-archive] /Users/dmitry/projects/react-native-app/node_modules/react-native-zip-archive/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-static-server] /Users/dmitry/projects/react-native-app/node_modules/react-native-static-server/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-push-notification] /Users/dmitry/projects/react-native-app/node_modules/react-native-push-notification/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-orientation] /Users/dmitry/projects/react-native-app/node_modules/react-native-orientation/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-fs] /Users/dmitry/projects/react-native-app/node_modules/react-native-fs/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-13:12
+MERGED from [:react-native-fetch-blob] /Users/dmitry/projects/react-native-app/node_modules/react-native-fetch-blob/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-14:12
 MERGED from [:react-native-firebase] /Users/dmitry/projects/react-native-app/node_modules/react-native-firebase/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-15:12
+MERGED from [com.google.android.gms:play-services-gcm:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-15.0.1.aar/f223f736b8043d368f5bdb9f80c38f73/AndroidManifest.xml:17:1-28:12
+MERGED from [com.google.android.gms:play-services-iid:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-15.0.1.aar/5915a34f3e817bccf07bcb1a6a596594/AndroidManifest.xml:17:1-28:12
 MERGED from [com.google.firebase:firebase-messaging:17.1.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.1.0.aar/bdafe4829f12b49e6079f1ddda5f4304/AndroidManifest.xml:17:1-37:12
 MERGED from [com.google.firebase:firebase-core:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-core-16.0.1.aar/32f92b6cd5ee3ea3805f11c6bafa1fed/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-16.0.1.aar/4fb8d7f3ca63f119d2687135932e905c/AndroidManifest.xml:17:1-34:12
@@ -14,9 +23,8 @@ MERGED from [com.google.firebase:firebase-iid:16.2.0] /Users/dmitry/.gradle/cach
 MERGED from [com.google.firebase:firebase-iid-interop:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-iid-interop-16.0.0.aar/fe4ab2039425f2a7a9087b2883fdebb4/AndroidManifest.xml:2:1-10:12
 MERGED from [com.google.android.gms:play-services-base:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/34f012208a9e61cd2e28199b0a10486c/AndroidManifest.xml:17:1-29:12
 MERGED from [me.leolin:ShortcutBadger:1.1.21] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.21.aar/c19a9d4a07063157e3be00399e486b2c/AndroidManifest.xml:2:1-52:12
-MERGED from [:react-native-vector-icons] /Users/dmitry/projects/react-native-app/node_modules/react-native-vector-icons/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [com.facebook.react:react-native:0.55.4] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/react-native-0.55.4.aar/96620dd658df25bb41c33dc999cacaed/AndroidManifest.xml:2:1-15:12
-MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/d723d393e7127ecd0c9f44bc8b1fad5e/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:appcompat-v7:23.1.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.firebase:firebase-common:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.0.aar/40b42bbbd2e1244caeefce96795c5191/AndroidManifest.xml:2:1-16:12
 MERGED from [com.google.android.gms:play-services-tasks:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-tasks-15.0.1.aar/26234e78403422609381145136a01bb3/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.firebase:firebase-measurement-connector:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-16.0.0.aar/880946646a5032c11d0f7bf890787761/AndroidManifest.xml:17:1-25:12
@@ -30,16 +38,16 @@ MERGED from [com.facebook.fresco:fresco:1.3.0] /Users/dmitry/.gradle/caches/tran
 MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/imagepipeline-okhttp3-1.3.0.aar/47cfd9dbd110cd8134bc83181e9d2920/AndroidManifest.xml:2:1-9:12
 MERGED from [com.facebook.soloader:soloader:0.1.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/soloader-0.1.0.aar/ca4db762ccc9bd345851ed20e629584b/AndroidManifest.xml:1:1-4:12
 MERGED from [org.webkit:android-jsc:r174650] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/android-jsc-r174650.aar/3f797b0e7bdafc756039436c565571fc/AndroidManifest.xml:1:1-3:12
-MERGED from [com.google.android.gms:play-services-measurement-base:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-measurement-base-16.0.0.aar/b66a31ed7b776e084d4b654fd8c55a9b/AndroidManifest.xml:17:1-24:12
-MERGED from [com.facebook.fresco:drawee:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/drawee-1.3.0.aar/35e68d3354f0c7948f893a7248f229ed/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.3.0.aar/353067214a8838cf8b8ebfaed71ab8c4/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline-base:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.3.0.aar/3554b8e3c5b501e929d09f9d02e0f73c/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:fbcore:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/fbcore-1.3.0.aar/45594debfe94fa01a3ab1c69e6bd5f9e/AndroidManifest.xml:2:1-9:12
 MERGED from [com.android.support:support-media-compat:27.0.2] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.0.2.aar/c518f0e5dafeaf2014951e1fcd19d17d/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-fragment:27.0.2] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-fragment-27.0.2.aar/dd7e584e1eacabf87596fcf2cdfbdcb6/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-core-utils:27.0.2] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.0.2.aar/f7cb37eccad4e2e91b875203aa969a1c/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-core-ui:27.0.2] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.0.2.aar/f67139761ad4091036498e4a41b3e747/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-compat:27.0.2] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-compat-27.0.2.aar/f6cc2924b1cead633d21fca554c84c58/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.gms:play-services-measurement-base:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-measurement-base-16.0.0.aar/b66a31ed7b776e084d4b654fd8c55a9b/AndroidManifest.xml:17:1-24:12
+MERGED from [com.facebook.fresco:drawee:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/drawee-1.3.0.aar/35e68d3354f0c7948f893a7248f229ed/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.3.0.aar/353067214a8838cf8b8ebfaed71ab8c4/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-base:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.3.0.aar/3554b8e3c5b501e929d09f9d02e0f73c/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:fbcore:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/fbcore-1.3.0.aar/45594debfe94fa01a3ab1c69e6bd5f9e/AndroidManifest.xml:2:1-9:12
 MERGED from [android.arch.lifecycle:runtime:1.0.3] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/runtime-1.0.3.aar/c1bc8a97380059f78bea1bc5b991525d/AndroidManifest.xml:17:1-24:12
 INJECTED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml:1:1-50:12
 INJECTED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml:1:1-50:12
@@ -62,6 +70,10 @@ uses-permission#android.permission.INTERNET
 ADDED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml:4:5-67
 MERGED from [:react-native-firebase] /Users/dmitry/projects/react-native-app/node_modules/react-native-firebase/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:11:5-67
 MERGED from [:react-native-firebase] /Users/dmitry/projects/react-native-app/node_modules/react-native-firebase/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:11:5-67
+MERGED from [com.google.android.gms:play-services-gcm:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-15.0.1.aar/f223f736b8043d368f5bdb9f80c38f73/AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-gcm:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-15.0.1.aar/f223f736b8043d368f5bdb9f80c38f73/AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-iid:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-15.0.1.aar/5915a34f3e817bccf07bcb1a6a596594/AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-iid:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-15.0.1.aar/5915a34f3e817bccf07bcb1a6a596594/AndroidManifest.xml:24:5-67
 MERGED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-16.0.1.aar/4fb8d7f3ca63f119d2687135932e905c/AndroidManifest.xml:22:5-67
 MERGED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-16.0.1.aar/4fb8d7f3ca63f119d2687135932e905c/AndroidManifest.xml:22:5-67
 MERGED from [com.google.firebase:firebase-analytics:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.1.aar/9180cb57c1b35a121a6ce5d398278727/AndroidManifest.xml:23:5-67
@@ -88,6 +100,12 @@ ADDED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidM
 		ADDED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml:8:22-78
 application
 ADDED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml:10:5-48:19
+MERGED from [:react-native-fetch-blob] /Users/dmitry/projects/react-native-app/node_modules/react-native-fetch-blob/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:11:5-12:19
+MERGED from [:react-native-fetch-blob] /Users/dmitry/projects/react-native-app/node_modules/react-native-fetch-blob/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:11:5-12:19
+MERGED from [com.google.android.gms:play-services-gcm:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-15.0.1.aar/f223f736b8043d368f5bdb9f80c38f73/AndroidManifest.xml:26:5-20
+MERGED from [com.google.android.gms:play-services-gcm:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-15.0.1.aar/f223f736b8043d368f5bdb9f80c38f73/AndroidManifest.xml:26:5-20
+MERGED from [com.google.android.gms:play-services-iid:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-15.0.1.aar/5915a34f3e817bccf07bcb1a6a596594/AndroidManifest.xml:26:5-20
+MERGED from [com.google.android.gms:play-services-iid:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-15.0.1.aar/5915a34f3e817bccf07bcb1a6a596594/AndroidManifest.xml:26:5-20
 MERGED from [com.google.firebase:firebase-messaging:17.1.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.1.0.aar/bdafe4829f12b49e6079f1ddda5f4304/AndroidManifest.xml:22:5-35:19
 MERGED from [com.google.firebase:firebase-messaging:17.1.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.1.0.aar/bdafe4829f12b49e6079f1ddda5f4304/AndroidManifest.xml:22:5-35:19
 MERGED from [com.google.firebase:firebase-core:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-core-16.0.1.aar/32f92b6cd5ee3ea3805f11c6bafa1fed/AndroidManifest.xml:7:5-20
@@ -106,8 +124,8 @@ MERGED from [com.google.android.gms:play-services-base:15.0.1] /Users/dmitry/.gr
 MERGED from [com.google.android.gms:play-services-base:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/34f012208a9e61cd2e28199b0a10486c/AndroidManifest.xml:22:5-27:19
 MERGED from [com.facebook.react:react-native:0.55.4] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/react-native-0.55.4.aar/96620dd658df25bb41c33dc999cacaed/AndroidManifest.xml:13:5-20
 MERGED from [com.facebook.react:react-native:0.55.4] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/react-native-0.55.4.aar/96620dd658df25bb41c33dc999cacaed/AndroidManifest.xml:13:5-20
-MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/d723d393e7127ecd0c9f44bc8b1fad5e/AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/d723d393e7127ecd0c9f44bc8b1fad5e/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:appcompat-v7:23.1.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:appcompat-v7:23.1.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/AndroidManifest.xml:22:5-20
 MERGED from [com.google.firebase:firebase-common:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.0.aar/40b42bbbd2e1244caeefce96795c5191/AndroidManifest.xml:8:5-14:19
 MERGED from [com.google.firebase:firebase-common:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.0.aar/40b42bbbd2e1244caeefce96795c5191/AndroidManifest.xml:8:5-14:19
 MERGED from [com.google.android.gms:play-services-tasks:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-tasks-15.0.1.aar/26234e78403422609381145136a01bb3/AndroidManifest.xml:7:5-20
@@ -220,8 +238,26 @@ uses-sdk
 INJECTED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml
 INJECTED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml
+MERGED from [:react-native-vector-icons] /Users/dmitry/projects/react-native-app/node_modules/react-native-vector-icons/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-vector-icons] /Users/dmitry/projects/react-native-app/node_modules/react-native-vector-icons/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-zip-archive] /Users/dmitry/projects/react-native-app/node_modules/react-native-zip-archive/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-zip-archive] /Users/dmitry/projects/react-native-app/node_modules/react-native-zip-archive/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-static-server] /Users/dmitry/projects/react-native-app/node_modules/react-native-static-server/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-static-server] /Users/dmitry/projects/react-native-app/node_modules/react-native-static-server/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-push-notification] /Users/dmitry/projects/react-native-app/node_modules/react-native-push-notification/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-push-notification] /Users/dmitry/projects/react-native-app/node_modules/react-native-push-notification/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-orientation] /Users/dmitry/projects/react-native-app/node_modules/react-native-orientation/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-orientation] /Users/dmitry/projects/react-native-app/node_modules/react-native-orientation/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-fs] /Users/dmitry/projects/react-native-app/node_modules/react-native-fs/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-fs] /Users/dmitry/projects/react-native-app/node_modules/react-native-fs/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-fetch-blob] /Users/dmitry/projects/react-native-app/node_modules/react-native-fetch-blob/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-fetch-blob] /Users/dmitry/projects/react-native-app/node_modules/react-native-fetch-blob/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-firebase] /Users/dmitry/projects/react-native-app/node_modules/react-native-firebase/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-firebase] /Users/dmitry/projects/react-native-app/node_modules/react-native-firebase/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [com.google.android.gms:play-services-gcm:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-15.0.1.aar/f223f736b8043d368f5bdb9f80c38f73/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-gcm:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-15.0.1.aar/f223f736b8043d368f5bdb9f80c38f73/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-iid:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-15.0.1.aar/5915a34f3e817bccf07bcb1a6a596594/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-iid:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-15.0.1.aar/5915a34f3e817bccf07bcb1a6a596594/AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-messaging:17.1.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.1.0.aar/bdafe4829f12b49e6079f1ddda5f4304/AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-messaging:17.1.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.1.0.aar/bdafe4829f12b49e6079f1ddda5f4304/AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-core:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-core-16.0.1.aar/32f92b6cd5ee3ea3805f11c6bafa1fed/AndroidManifest.xml:5:5-44
@@ -240,12 +276,10 @@ MERGED from [com.google.android.gms:play-services-base:15.0.1] /Users/dmitry/.gr
 MERGED from [com.google.android.gms:play-services-base:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/34f012208a9e61cd2e28199b0a10486c/AndroidManifest.xml:20:5-44
 MERGED from [me.leolin:ShortcutBadger:1.1.21] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.21.aar/c19a9d4a07063157e3be00399e486b2c/AndroidManifest.xml:7:5-9:41
 MERGED from [me.leolin:ShortcutBadger:1.1.21] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.21.aar/c19a9d4a07063157e3be00399e486b2c/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-vector-icons] /Users/dmitry/projects/react-native-app/node_modules/react-native-vector-icons/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-vector-icons] /Users/dmitry/projects/react-native-app/node_modules/react-native-vector-icons/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.55.4] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/react-native-0.55.4.aar/96620dd658df25bb41c33dc999cacaed/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.55.4] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/react-native-0.55.4.aar/96620dd658df25bb41c33dc999cacaed/AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/d723d393e7127ecd0c9f44bc8b1fad5e/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/d723d393e7127ecd0c9f44bc8b1fad5e/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:appcompat-v7:23.1.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:appcompat-v7:23.1.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/AndroidManifest.xml:20:5-43
 MERGED from [com.google.firebase:firebase-common:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.0.aar/40b42bbbd2e1244caeefce96795c5191/AndroidManifest.xml:5:5-6:37
 MERGED from [com.google.firebase:firebase-common:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.0.aar/40b42bbbd2e1244caeefce96795c5191/AndroidManifest.xml:5:5-6:37
 MERGED from [com.google.android.gms:play-services-tasks:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-tasks-15.0.1.aar/26234e78403422609381145136a01bb3/AndroidManifest.xml:5:5-44
@@ -270,16 +304,6 @@ MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.3.0] /Users/dmitry/.gra
 MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/imagepipeline-okhttp3-1.3.0.aar/47cfd9dbd110cd8134bc83181e9d2920/AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.soloader:soloader:0.1.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/soloader-0.1.0.aar/ca4db762ccc9bd345851ed20e629584b/AndroidManifest.xml:2:3-70
 MERGED from [com.facebook.soloader:soloader:0.1.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/soloader-0.1.0.aar/ca4db762ccc9bd345851ed20e629584b/AndroidManifest.xml:2:3-70
-MERGED from [com.google.android.gms:play-services-measurement-base:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-measurement-base-16.0.0.aar/b66a31ed7b776e084d4b654fd8c55a9b/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-measurement-base:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-measurement-base-16.0.0.aar/b66a31ed7b776e084d4b654fd8c55a9b/AndroidManifest.xml:20:5-44
-MERGED from [com.facebook.fresco:drawee:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/drawee-1.3.0.aar/35e68d3354f0c7948f893a7248f229ed/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:drawee:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/drawee-1.3.0.aar/35e68d3354f0c7948f893a7248f229ed/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.3.0.aar/353067214a8838cf8b8ebfaed71ab8c4/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.3.0.aar/353067214a8838cf8b8ebfaed71ab8c4/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-base:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.3.0.aar/3554b8e3c5b501e929d09f9d02e0f73c/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-base:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.3.0.aar/3554b8e3c5b501e929d09f9d02e0f73c/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fbcore:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/fbcore-1.3.0.aar/45594debfe94fa01a3ab1c69e6bd5f9e/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fbcore:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/fbcore-1.3.0.aar/45594debfe94fa01a3ab1c69e6bd5f9e/AndroidManifest.xml:5:5-7:41
 MERGED from [com.android.support:support-media-compat:27.0.2] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.0.2.aar/c518f0e5dafeaf2014951e1fcd19d17d/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-media-compat:27.0.2] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.0.2.aar/c518f0e5dafeaf2014951e1fcd19d17d/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-fragment:27.0.2] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-fragment-27.0.2.aar/dd7e584e1eacabf87596fcf2cdfbdcb6/AndroidManifest.xml:20:5-44
@@ -290,6 +314,16 @@ MERGED from [com.android.support:support-core-ui:27.0.2] /Users/dmitry/.gradle/c
 MERGED from [com.android.support:support-core-ui:27.0.2] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.0.2.aar/f67139761ad4091036498e4a41b3e747/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-compat:27.0.2] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-compat-27.0.2.aar/f6cc2924b1cead633d21fca554c84c58/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-compat:27.0.2] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-compat-27.0.2.aar/f6cc2924b1cead633d21fca554c84c58/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-base:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-measurement-base-16.0.0.aar/b66a31ed7b776e084d4b654fd8c55a9b/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-base:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-measurement-base-16.0.0.aar/b66a31ed7b776e084d4b654fd8c55a9b/AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.fresco:drawee:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/drawee-1.3.0.aar/35e68d3354f0c7948f893a7248f229ed/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/drawee-1.3.0.aar/35e68d3354f0c7948f893a7248f229ed/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.3.0.aar/353067214a8838cf8b8ebfaed71ab8c4/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/imagepipeline-1.3.0.aar/353067214a8838cf8b8ebfaed71ab8c4/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.3.0.aar/3554b8e3c5b501e929d09f9d02e0f73c/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-1.3.0.aar/3554b8e3c5b501e929d09f9d02e0f73c/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/fbcore-1.3.0.aar/45594debfe94fa01a3ab1c69e6bd5f9e/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:1.3.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/fbcore-1.3.0.aar/45594debfe94fa01a3ab1c69e6bd5f9e/AndroidManifest.xml:5:5-7:41
 MERGED from [android.arch.lifecycle:runtime:1.0.3] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/runtime-1.0.3.aar/c1bc8a97380059f78bea1bc5b991525d/AndroidManifest.xml:20:5-22:41
 MERGED from [android.arch.lifecycle:runtime:1.0.3] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/runtime-1.0.3.aar/c1bc8a97380059f78bea1bc5b991525d/AndroidManifest.xml:20:5-22:41
 INJECTED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml
@@ -302,6 +336,12 @@ INJECTED from /Users/dmitry/projects/react-native-app/android/app/src/main/Andro
 		INJECTED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml
 		ADDED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from [:react-native-fs] /Users/dmitry/projects/react-native-app/node_modules/react-native-fs/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:11:5-81
+	android:name
+		ADDED from [:react-native-fs] /Users/dmitry/projects/react-native-app/node_modules/react-native-fs/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:11:22-78
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+IMPLIED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml:1:1-50:12 reason: com.rnfs requested WRITE_EXTERNAL_STORAGE
 uses-permission#android.permission.WAKE_LOCK
 ADDED from [:react-native-firebase] /Users/dmitry/projects/react-native-app/node_modules/react-native-firebase/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:12:5-68
 MERGED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-16.0.1.aar/4fb8d7f3ca63f119d2687135932e905c/AndroidManifest.xml:24:5-68
@@ -326,6 +366,14 @@ MERGED from [com.google.firebase:firebase-iid:16.2.0] /Users/dmitry/.gradle/cach
 MERGED from [com.google.firebase:firebase-iid:16.2.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-iid-16.2.0.aar/36385e5c3bf4c05f668eda68ba62791e/AndroidManifest.xml:22:5-79
 	android:name
 		ADDED from [:react-native-firebase] /Users/dmitry/projects/react-native-app/node_modules/react-native-firebase/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:13:22-76
+uses-permission#com.google.android.c2dm.permission.RECEIVE
+ADDED from [com.google.android.gms:play-services-gcm:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-15.0.1.aar/f223f736b8043d368f5bdb9f80c38f73/AndroidManifest.xml:23:5-82
+MERGED from [com.google.android.gms:play-services-iid:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-15.0.1.aar/5915a34f3e817bccf07bcb1a6a596594/AndroidManifest.xml:23:5-82
+MERGED from [com.google.android.gms:play-services-iid:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-15.0.1.aar/5915a34f3e817bccf07bcb1a6a596594/AndroidManifest.xml:23:5-82
+MERGED from [com.google.firebase:firebase-iid:16.2.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-iid-16.2.0.aar/36385e5c3bf4c05f668eda68ba62791e/AndroidManifest.xml:26:5-82
+MERGED from [com.google.firebase:firebase-iid:16.2.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-iid-16.2.0.aar/36385e5c3bf4c05f668eda68ba62791e/AndroidManifest.xml:26:5-82
+	android:name
+		ADDED from [com.google.android.gms:play-services-gcm:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-15.0.1.aar/f223f736b8043d368f5bdb9f80c38f73/AndroidManifest.xml:23:22-79
 service#com.google.firebase.messaging.FirebaseMessagingService
 ADDED from [com.google.firebase:firebase-messaging:17.1.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.1.0.aar/bdafe4829f12b49e6079f1ddda5f4304/AndroidManifest.xml:28:9-34:19
 	android:exported
@@ -394,10 +442,6 @@ ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/dmitry/.gradle
 		ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.1.aar/9180cb57c1b35a121a6ce5d398278727/AndroidManifest.xml:52:13-69
 	android:name
 		ADDED from [com.google.firebase:firebase-analytics:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.1.aar/9180cb57c1b35a121a6ce5d398278727/AndroidManifest.xml:49:13-87
-uses-permission#com.google.android.c2dm.permission.RECEIVE
-ADDED from [com.google.firebase:firebase-iid:16.2.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-iid-16.2.0.aar/36385e5c3bf4c05f668eda68ba62791e/AndroidManifest.xml:26:5-82
-	android:name
-		ADDED from [com.google.firebase:firebase-iid:16.2.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-iid-16.2.0.aar/36385e5c3bf4c05f668eda68ba62791e/AndroidManifest.xml:26:22-79
 permission#${applicationId}.permission.C2D_MESSAGE
 ADDED from [com.google.firebase:firebase-iid:16.2.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-iid-16.2.0.aar/36385e5c3bf4c05f668eda68ba62791e/AndroidManifest.xml:28:5-30:47
 	android:protectionLevel
@@ -542,9 +586,5 @@ ADDED from [com.google.android.gms:play-services-basement:15.0.1] /Users/dmitry/
 		ADDED from [com.google.android.gms:play-services-basement:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-basement-15.0.1.aar/ba33b376ce68a953398561831212d263/AndroidManifest.xml:25:13-66
 	android:name
 		ADDED from [com.google.android.gms:play-services-basement:15.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-basement-15.0.1.aar/ba33b376ce68a953398561831212d263/AndroidManifest.xml:24:13-58
-uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-IMPLIED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml:1:1-50:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
 uses-permission#android.permission.READ_PHONE_STATE
 IMPLIED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml:1:1-50:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
-uses-permission#android.permission.READ_EXTERNAL_STORAGE
-IMPLIED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml:1:1-50:12 reason: org.webkit.android_jsc requested WRITE_EXTERNAL_STORAGE

@@ -148,12 +148,18 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-vector-icons')
+    implementation project(':react-native-zip-archive')
+    implementation project(':react-native-static-server')
+    implementation project(':react-native-push-notification')
+    implementation project(':react-native-orientation')
+    implementation project(':react-native-fs')
+    implementation project(':react-native-fetch-blob')
     implementation project(':react-native-firebase')
     implementation "com.google.android.gms:play-services-base:15.0.1"
     implementation "com.google.firebase:firebase-core:16.0.1"
     implementation "com.google.firebase:firebase-messaging:17.1.0"
     implementation 'me.leolin:ShortcutBadger:1.1.21@aar'
-    implementation project(':react-native-vector-icons')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:23.0.1"
     implementation "com.facebook.react:react-native:+"  // From node_modules

@@ -7,6 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "base-64": "^0.1.0",
     "epubjs-rn": "0.0.126",
     "react": "16.3.1",

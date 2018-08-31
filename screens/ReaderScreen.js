@@ -68,7 +68,7 @@ export default class ReaderScreen extends Component {
             <FlatList
               data={this.state.books}
               renderItem={({item}) => (
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Reader', {book_id: item.id, book_name: item.name} )}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Reader', {book_id: item.id, book_name: item.name, book_src: item.file_src} )}>
                   <View style={styles.row}>
                     <View style={{maxWidth: '80%'}}>
                       <Text style={{color: 'tomato', fontWeight: 'bold'}}>{item.name}</Text>

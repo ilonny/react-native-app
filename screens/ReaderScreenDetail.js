@@ -20,7 +20,8 @@ class EpubReader extends Component {
         this.state = {
             flow: "paginated", // paginated || scrolled-continuous
             location: 0,
-            url: `https://mobile-app.flamesclient.ru/api/get-reader-book?id=${this.props.navigation.getParam("book_id")}`,
+            // url: `https://mobile-app.flamesclient.ru/api/get-reader-book?id=${this.props.navigation.getParam("book_id")}`,
+            url: `https://mobile-app.flamesclient.ru/${this.props.navigation.getParam("book_src")}`,
             src: "",
             origin: "",
             title: "",

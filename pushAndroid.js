@@ -78,6 +78,7 @@ firebase.messaging().onMessage((message) => {
 firebase.notifications().onNotificationOpened((notificationOpen) => {
   console.log('ONNOTIFICATION OPENED', notificationOpen.notification._data.q_id)
   let q_id = notificationOpen.notification._data.q_id;
+  // AsyncStorage.setItem('notification_id', q_id);
   NavigationService.navigate('Details', {quote_id: q_id});
 });
 // setTimeout(() => {

@@ -13,6 +13,8 @@ import {
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
+
+
 export default class ReaderScreen extends Component {
   constructor(props){
     super(props);
@@ -39,9 +41,16 @@ export default class ReaderScreen extends Component {
         if (request.status === 200) {
             this.setState(state => {
                 if (request.responseText){
+                    let parsedText;
+                    try {
+                      parsedText = JSON.parse(request.responseText);
+                    } catch (e){
+                      console.log('catched parse json', request)
+                      parsedText = [];
+                    }
                     return {
                         ...state,
-                        books: JSON.parse(request.responseText)
+                        books: parsedText
                     }
                 }
             })
@@ -88,6 +97,11 @@ export default class ReaderScreen extends Component {
             </FlatList>
         </SafeAreaView>
       );
+      // comp = (
+      //   <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF', paddingBottom: 10, paddingTop: 10}}>
+      //     <Text> test13 </Text>
+      //   </SafeAreaView>
+      // )
     }
     return comp;
   }

@@ -1,4 +1,4 @@
-#Fri Aug 31 16:49:09 YEKT 2018
+#Wed Sep 05 16:47:33 MSK 2018
 base.0=/Users/dmitry/projects/react-native-app/android/app/build/intermediates/transforms/dexMerger/debug/0
 path.0=classes.dex
 renamed.0=classes.dex

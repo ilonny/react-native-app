@@ -12,6 +12,8 @@ import {
 } from 'react-native';
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import NavigationService from '../NavigationService'
+import firebase from 'react-native-firebase';
 
 export default class ListScreen extends Component {
   constructor(props){
@@ -91,8 +93,30 @@ export default class ListScreen extends Component {
   }
   componentWillMount(){
     this.getSettings();
+    AsyncStorage.getItem('notification_id', (err, value) => {
+      console.log('notification_id', value)
+      if (value){
+        q_id = value;
+        console.log('q_id', q_id)
+        NavigationService.navigate('Details', {quote_id: q_id});
+        // AsyncStorage.setItem('notification_id', null);
+      }
+    }) 
   }
-
+  async componentDidMount(){
+    console.log('componentDidMount')
+    const notificationOpen = await firebase.notifications().getInitialNotification();
+    console.log('notificationOpen ', notificationOpen)
+    if (notificationOpen) {
+      // App was opened by a notification
+      // Get the action triggered by the notification being opened
+      // const action = notificationOpen.action;
+      // Get information about the notification that was opened
+      // const Notification = notificationOpen.notification;
+      let q_id = notificationOpen.notification._data.q_id;
+      NavigationService.navigate('Details', {quote_id: q_id});
+    }
+  }
   _keyExtractor = (item) => item.text_short + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   refresh(){
     this.setState(state => {

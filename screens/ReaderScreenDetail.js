@@ -66,7 +66,7 @@ class EpubReader extends Component {
 
     componentWillUnmount() {
         console.log('epub reader unmount')
-        this.streamer.kill();
+        // this.streamer.kill();
     }
 
     toggleBars() {

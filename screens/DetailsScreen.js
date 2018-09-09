@@ -90,7 +90,7 @@ export default class DetailsScreen extends Component {
           })
     }
     componentDidMount() {
-        console.log("component did mount state", this.state)
+        console.log("details screen component did mount state", this.state)
         // this.props.navigation.setParams({ increaseCount: this._increaseCount });
         this.props.navigation.setParams({toggleFav: this.toggleFav})
         this.props.navigation.setParams({consoleState: this.consoleState})
@@ -144,18 +144,28 @@ export default class DetailsScreen extends Component {
             }, 10);
         }
     }
-    shouldComponentUpdate(nextProps, nextState){
-        if (this.state.isFavorite == nextState.isFavorite){
-            return false;
+    // shouldComponentUpdate(nextProps, nextState){
+        // if (this.state.isFavorite == nextState.isFavorite){
+        //     return false;
+        // }
+        // return true;
+    // }
+    componentDidUpdate(prevProps){
+        console.log('prevProps', JSON.stringify(prevProps))
+        console.log('nextProps', JSON.stringify(this.props))
+        console.log('state_q_id? ', this.state.quote_id)
+        console.log('props_q_id? ', this.props.navigation.state.params.quote_id)
+        if (this.state.quote_id != this.props.navigation.state.params.quote_id){
+            this.setState({quote_id: this.props.navigation.state.params.quote_id})
         }
-        return true;
     }
     render(){
         console.log('render start');
-        console.log('detailsscreen props', this.props)
-        console.log('detailsscreen state', this.state)
-        console.log('render end');
+        console.log('detailsscreen props', JSON.stringify(this.props))
+        console.log('detailsscreen state', JSON.stringify(this.state))
         const quote_id = this.state.quote_id;
+        console.log('quote_id = ', quote_id);
+        console.log('render end');
         return (
             <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF', paddingBottom: 10, paddingTop: 10}}>
                 <WebView source={{uri: API_URL + `/quote?id=${quote_id}`}}

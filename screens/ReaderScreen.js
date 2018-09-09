@@ -38,12 +38,19 @@ export default class ReaderScreen extends Component {
     request.onreadystatechange = (e) => {
         if (request.status === 200) {
             this.setState(state => {
-                if (request.responseText){
-                    return {
-                        ...state,
-                        books: JSON.parse(request.responseText)
-                    }
+              if (request.responseText){
+                let parsedText;
+                try {
+                  parsedText = JSON.parse(request.responseText);
+                } catch (e){
+                  console.log('catched parse json', request)
+                  parsedText = [];
                 }
+                return {
+                    ...state,
+                    books: parsedText
+                }
+            }
             })
         }
     };

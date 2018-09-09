@@ -144,11 +144,20 @@ export default class DetailsScreen extends Component {
             }, 10);
         }
     }
-    shouldComponentUpdate(nextProps, nextState){
-        if (this.state.isFavorite == nextState.isFavorite){
-            return false;
+    // shouldComponentUpdate(nextProps, nextState){
+    //     if (this.state.isFavorite == nextState.isFavorite){
+    //         return false;
+    //     }
+    //     return true;
+    // }
+    componentDidUpdate(prevProps){
+        console.log('prevProps', JSON.stringify(prevProps))
+        console.log('nextProps', JSON.stringify(this.props))
+        console.log('state_q_id? ', this.state.quote_id)
+        console.log('props_q_id? ', this.props.navigation.state.params.quote_id)
+        if (this.state.quote_id != this.props.navigation.state.params.quote_id){
+            this.setState({quote_id: this.props.navigation.state.params.quote_id})
         }
-        return true;
     }
     render(){
         console.log('render start');

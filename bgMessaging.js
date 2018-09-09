@@ -16,7 +16,7 @@ export default async (RemoteMessage) => {
             q_id: JSON.parse(RemoteMessage.data.body).q_id
     })
     .android
-        .setBigText(messageText+' '+JSON.parse(RemoteMessage.data.body).q_id, RemoteMessage.data.title);
+        .setBigText(messageText, RemoteMessage.data.title);
     // AsyncStorage.setItem('notification_id', JSON.parse(RemoteMessage.data.body).q_id);
     
     // let request = new XMLHttpRequest();

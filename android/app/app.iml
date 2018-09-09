@@ -161,13 +161,5 @@
     <orderEntry type="module" module-name="react-native-orientation" />
     <orderEntry type="module" module-name="react-native-static-server" />
     <orderEntry type="module" module-name="react-native-fs" />
-    <orderEntry type="module" module-name="react-native-firebase" />
-    <orderEntry type="module" module-name="react-native-push-notification" />
-    <orderEntry type="module" module-name="react-native-fetch-blob" />
-    <orderEntry type="module" module-name="react-native-vector-icons" />
-    <orderEntry type="module" module-name="react-native-zip-archive" />
-    <orderEntry type="module" module-name="react-native-orientation" />
-    <orderEntry type="module" module-name="react-native-static-server" />
-    <orderEntry type="module" module-name="react-native-fs" />
   </component>
 </module>

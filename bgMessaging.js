@@ -9,6 +9,8 @@ export default async (RemoteMessage) => {
     let messageText = JSON.parse(RemoteMessage.data.body).text;
     let notification = new firebase.notifications.Notification()
     .android.setChannelId('123')
+    .setSound('default')
+    .android.setVibrate([1000])
     .setNotificationId(RemoteMessage.messageId)
     .setTitle(RemoteMessage.data.title)
     .setBody(messageText)

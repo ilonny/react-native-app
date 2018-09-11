@@ -7,12 +7,14 @@ import {
   Animated,
   Modal,
   StatusBar,
-  AsyncStorage
+  AsyncStorage,
+  TouchableOpacity,
+  FlatList
 } from 'react-native';
 
 import { Epub, Streamer } from "epubjs-rn";
 import { API_URL } from '../constants/api';
-import 'babel-polyfill';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 class EpubReader extends Component {
     constructor(props) {
@@ -32,6 +34,8 @@ class EpubReader extends Component {
             successLoaded: false,
             reader_locations: [],
             book_id: this.props.navigation.getParam("book_id"),
+            nav_opened: false,
+            book_locations: [],
         };
         this.streamer = new Streamer();
         console.log('constructor props: ', this.props)
@@ -64,9 +68,16 @@ class EpubReader extends Component {
         })
     }
 
+    defineBookLocations(book){
+        console.log('defineBookLocations', book);
+        this.setState({
+            book_locations: book.navigation.toc
+        })
+    }
+
     componentWillUnmount() {
         console.log('epub reader unmount')
-        // this.streamer.kill();
+        this.streamer.kill();
     }
 
     toggleBars() {
@@ -148,11 +159,14 @@ class EpubReader extends Component {
                         this.setState({
                             successLoaded: true
                         });
+                        this.defineBookLocations(book);
                         // clearInterval(interval);
                     }}
                     onPress={(cfi, position, rendition)=> {
-                        this.toggleBars();
                         console.log("press", cfi);
+                        this.setState({
+                            nav_opened: !this.state.nav_opened
+                        })
                     }}
                     onLongPress={(cfi, rendition)=> {
                         console.log("longpress", cfi);
@@ -176,6 +190,30 @@ class EpubReader extends Component {
                         console.log("EPUBJS-Webview", message);
                     }}
                     />
+                {this.state.nav_opened && (
+                    <View style={styles.navigation}>
+                        <View style={styles.navigation_header}>
+                            <Text style={{padding: 15}}>Содержание книги</Text>
+                            <TouchableOpacity onPress={() => this.setState({nav_opened: false})}>
+                                <Ionicons style={{padding: 15}} name="ios-close-circle-outline" size={25} color="tomato" />
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.navigation_list}>
+                            <FlatList
+                                data={this.state.book_locations}
+                                keyExtractor={item => item.id}
+                                renderItem={({item}) => (
+                                    <TouchableOpacity onPress={() => this.setState({location: item.href, nav_opened: false})}>
+                                        <View style={styles.navigation_list_row}>
+                                            <Text>{item.label.trim()}</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                )}
+                            >
+                            </FlatList>
+                        </View>
+                    </View>
+                )}
             </View>
         );
     }
@@ -188,14 +226,40 @@ const styles = StyleSheet.create({
     reader: {
         flex: 1,
         alignSelf: 'stretch',
-        backgroundColor: '#3F3F3C',
-        paddingBottom: 100
+        backgroundColor: '#3F3F3C'
     },
     bar: {
         position:"absolute",
         left:0,
         right:0,
         height:55
+    },
+    navigation: {
+        position: "absolute",
+        left: 0,
+        top: 0,
+        right: 0,
+        flex: 1,
+        backgroundColor: "#fff",
+        height: "100%"
+    },
+    navigation_header: {
+        // flex: 1,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        borderBottomWidth: 1,
+        borderBottomColor: "#eaeaea"
+        // padding: 15,
+    },
+    navigation_list: {
+        paddingBottom: 34
+    },
+    navigation_list_row: {
+        padding: 10,
+        paddingLeft: 15,
+        borderBottomWidth: 1,
+        borderBottomColor: "#eaeaea"
     }
 });
 

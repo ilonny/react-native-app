@@ -15,6 +15,7 @@ import DetailsScreen from './screens/DetailsScreen';
 import ReaderScreen from './screens/ReaderScreen';
 import ReaderScreenDetail from './screens/ReaderScreenDetail';
 import AudioScreen from './screens/AudioScreen';
+import AudioDetail from './screens/AudioDetail';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { API_URL } from './constants/api';
 import NavigationService from './NavigationService';
@@ -96,6 +97,7 @@ const ReaderStack = createStackNavigator({
 });
 const AudioStack = createStackNavigator({
   Аудиокниги: AudioScreen,
+  Audio: AudioDetail
 });
 const TopLevelNavigator = createBottomTabNavigator(
   {

@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import {
-  Platform,
+  AppRegistry,
   StyleSheet,
   Text,
   View,
+  Animated,
+  Modal,
+  StatusBar,
   AsyncStorage,
-  SafeAreaView,
-  ScrollView,
+  TouchableOpacity,
   FlatList,
-  TouchableOpacity
+  SafeAreaView
 } from 'react-native';
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -20,18 +22,16 @@ export default class AudioScreen extends Component {
         books: [],
         date: Date.now(),
         refreshnig: false,
+        book_id: this.props.navigation.getParam("book_id"),
+        downloaded_books: [],
       }
     }
-    static navigationOptions = {
-      title: 'Аудиокниги'
+    static navigationOptions = ({navigation}) => {
+        const bookName = navigation.getParam('book_name')
+        return {
+            headerTitle: bookName
+        }
     }
-    willFocusSubscription = this.props.navigation.addListener(
-      'willFocus',
-      payload => {
-          this.getBooks();
-      }
-    );
-    _keyExtractor = (item) => item.text_short + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     getBooks(){
         console.log('getBooks starts')
         let request = new XMLHttpRequest();
@@ -54,51 +54,46 @@ export default class AudioScreen extends Component {
                 })
             }
         };
-        request.open('GET', API_URL + `/get-audio-books`);
+        request.open('GET', API_URL + `/get-audio-files?book_id=${this.state.book_id}`);
         request.send();
     }
     componentWillMount(){
         this.getBooks();
     }
-    shouldComponentUpdate(nextProps, nextState){
-        if (this.state.books.length == nextState.books.length){
-            return false;
-        }
-        return true;
+    // shouldComponentUpdate(nextProps, nextState){
+    //     if (this.state.books.length == nextState.books.length){
+    //         return false;
+    //     }
+    //     return true;
+    // }
+    _keyExtractor = (item) => item.name + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    checkDownloaded(){
+        
     }
-    render() {
-        console.log('render', this.state)
-        let comp;
-        if (true) {
-          comp = (
+    render(){
+        console.log('audio details render', this.state);
+        return (
             <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF', paddingBottom: 10, paddingTop: 10}}>
                 <FlatList
-                  data={this.state.books}
-                  renderItem={({item}) => (
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Audio', {book_id: item.id, book_name: item.name, book_src: item.file_src} )}>
-                      <View style={styles.row}>
-                        <View style={{maxWidth: '80%'}}>
-                          <Text style={{color: 'tomato', fontWeight: 'bold'}}>{item.name}</Text>
-                          <Text style={{marginTop: 10}}>{item.description}</Text>
-                          <Text style={{marginTop: 10, color: '#c5c5c5', fontStyle: 'italic'}}>{item.author}</Text>
+                    data={this.state.books}
+                    renderItem={({item}) => (
+                        <View style={styles.row}>
+                            <View>
+                                <Text style={{color: 'tomato', fontWeight: 'bold'}}>{item.name}</Text>
+                                {item.description && <Text style={{marginTop: 10}}>{item.description}</Text>}
+                            </View>
                         </View>
-                        <View>
-                          <Ionicons name="ios-arrow-forward" size={25} color="tomato"/>
-                        </View>
-                      </View>
-                    </TouchableOpacity>
-                  )}
-                  keyExtractor={this._keyExtractor}
-                  onRefresh={() => this.getBooks()}
-                  refreshing={false}
+                    )}
+                    keyExtractor={this._keyExtractor}
+                    onRefresh={() => this.getBooks()}
+                    refreshing={false}
                 >
                 </FlatList>
             </SafeAreaView>
-          );
-        }
-        return comp;
+        )
     }
 }
+
 const styles = StyleSheet.create({
     container: {
       flex: 1,

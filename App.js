@@ -14,6 +14,7 @@ import FavoritesScreen from './screens/FavoritesScreen';
 import DetailsScreen from './screens/DetailsScreen';
 import ReaderScreen from './screens/ReaderScreen';
 import ReaderScreenDetail from './screens/ReaderScreenDetail';
+import AudioScreen from './screens/AudioScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { API_URL } from './constants/api';
 import NavigationService from './NavigationService';
@@ -93,11 +94,15 @@ const ReaderStack = createStackNavigator({
   Книги: ReaderScreen,
   Reader: ReaderScreenDetail,
 });
+const AudioStack = createStackNavigator({
+  Аудиокниги: AudioScreen,
+});
 const TopLevelNavigator = createBottomTabNavigator(
   {
     Цитаты: ListStack,
     Избранное: FavoritesStack,
     Книги: ReaderStack,
+    Аудиокниги: AudioStack,
     Настройки: SettingsStack,
   },
   {
@@ -113,6 +118,8 @@ const TopLevelNavigator = createBottomTabNavigator(
           iconName = `ios-star${focused ? '' : '-outline'}`;
         } else if (routeName === 'Книги') {
           iconName = `ios-book${focused ? '' : '-outline'}`;
+        } else if (routeName === 'Аудиокниги') {
+          iconName = `ios-headset${focused ? '' : '-outline'}`;
         }
         // You can return any component that you like here! We usually use an
         // icon component from react-native-vector-icons

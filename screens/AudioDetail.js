@@ -25,6 +25,7 @@ export default class AudioScreen extends Component {
         refreshnig: false,
         book_id: this.props.navigation.getParam("book_id"),
         downloaded_books: [],
+        downloading_books: [],
       }
     }
     static navigationOptions = ({navigation}) => {
@@ -68,11 +69,13 @@ export default class AudioScreen extends Component {
     //     return true;
     // }
     _keyExtractor = (item) => item.name + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-    checkDownloaded(){
-
-    }
     downloadBook(file_id){
         console.log('start downloading', file_id)
+        let { downloading_books } = this.state;
+        downloading_books.push({
+            id: file_id,
+        });
+        let index = downloading_books.length - 1;
         RNFetchBlob
             .config({
                 // add this option that makes response data to be stored as a file,
@@ -86,6 +89,13 @@ export default class AudioScreen extends Component {
             // listen to download progress event
             .progress((received, total) => {
                 console.log('progress', received / total)
+                downloading_books[index] = {
+                    id: file_id,
+                    progress: parseInt((received / total) * 100),
+                }
+                this.setState({
+                    downloading_books: downloading_books
+                })
             })
             .then((res) => {
                 // the temp file path
@@ -95,8 +105,10 @@ export default class AudioScreen extends Component {
                     id: file_id,
                     file_path:  res.path(),
                 });
+                downloading_books.splice(index, 1);
                 this.setState({
-                    downloaded_books: new_downloaded_books
+                    downloaded_books: new_downloaded_books,
+                    downloading_books: downloading_books,
                 });
                 AsyncStorage.setItem('downloaded_audio', JSON.stringify(this.state.downloaded_books));
             })
@@ -110,7 +122,7 @@ export default class AudioScreen extends Component {
                     downloaded_books: JSON.parse(value)
                 })
             }
-        })
+        });
         // AsyncStorage.clear();
     }
     render(){
@@ -122,15 +134,27 @@ export default class AudioScreen extends Component {
                     renderItem={({item}) => {
                         let audioAction;
                         let flag = false;
-                        this.state.downloaded_books.forEach(el => {
-                            if (el.id == item.id){
-                                flag = true;
+                        let fl = false;
+                        let progress;
+                        this.state.downloading_books.forEach(e => {
+                            if (e.id == item.id){
+                                fl = true;
+                                progress = e.progress;
                             }
-                        })
-                        if (flag){
-                            audioAction = <TouchableOpacity onPress={() => console.log('play action')}><Text>Play</Text></TouchableOpacity>
+                        });
+                        if (fl){
+                            audioAction = <TouchableOpacity><Text>Downloading... {progress}</Text></TouchableOpacity>
                         } else {
-                            audioAction = <TouchableOpacity onPress={() => this.downloadBook(item.id)}><Text>Download</Text></TouchableOpacity>
+                            this.state.downloaded_books.forEach(el => {
+                                if (el.id == item.id){
+                                    flag = true;
+                                }
+                            })
+                            if (flag){
+                                audioAction = <TouchableOpacity onPress={() => console.log('play action')}><Text>Play</Text></TouchableOpacity>
+                            } else {
+                                audioAction = <TouchableOpacity onPress={() => this.downloadBook(item.id)}><Text>Download</Text></TouchableOpacity>
+                            }
                         }
                         return (
                             <View style={styles.row}>

@@ -18,6 +18,10 @@ import {
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import RNFetchBlob from 'rn-fetch-blob'
+// import { ServerRequest } from 'http';
+let dirs = RNFetchBlob.fs.dirs
+var Sound = require('react-native-sound');
+Sound.setCategory('Playback');
 
 export default class AudioScreen extends Component {
     constructor(props){
@@ -86,8 +90,9 @@ export default class AudioScreen extends Component {
             .config({
                 // add this option that makes response data to be stored as a file,
                 // this is much more performant.
+                // path : dirs.DocumentDir + '/audios/' + file_id + '_' + Date.now() + '.mp3',
                 fileCache : true,
-                appendExt : 'mp3'
+                appendExt : 'mp3',
             })
             .fetch('GET', API_URL + `/get-audio-file?id=${file_id}`, {
                 //some headers ..
@@ -149,7 +154,37 @@ export default class AudioScreen extends Component {
             isOpenModal: true,
             playing: true,
             playingAudio: playingAudio,
-        })
+        });
+        let whoosh;
+        setTimeout(() => {
+            console.log ('path', this.state.playingAudio.path);
+            whoosh = new Sound(this.state.playingAudio.path, '', (error) => {
+                if (error) {
+                    console.log('failed to load the sound', error);
+                    return;
+                }
+                // loaded successfully
+                console.log('duration in seconds: ' + whoosh.getDuration() + 'number of channels: ' + whoosh.getNumberOfChannels());
+            });
+            whoosh.setVolume(0.5);
+            console.log('volume: ' + whoosh.getVolume());
+            console.log('pan: ' + whoosh.getPan());
+            console.log('loops: ' + whoosh.getNumberOfLoops());
+        }, 300);
+        // Play the sound with an onEnd callback
+        setTimeout(() => {
+            whoosh.play((success) => {
+                console.log("starting play?")
+                if (success) {
+                console.log('successfully finished playing');
+                } else {
+                console.log('playback failed due to audio decoding errors');
+                // reset the player to its uninitialized state (android only)
+                // this is the only option to recover after an error occured and use the player again
+                whoosh.reset();
+                }
+            });
+        }, 600);
     }
     render(){
         console.log('audio details render', this.state);
@@ -226,7 +261,7 @@ export default class AudioScreen extends Component {
                     }}
                 >
                     <TouchableWithoutFeedback
-                        onPress={() => this.setState({isOpenModal: false})}
+                        onPress={() => this.setState({isOpenModal: false, playing: false})}
                     >
                         <View style={{
                                 flex: 1,

@@ -143,7 +143,7 @@ export default class AudioScreen extends Component {
                             }
                         });
                         if (fl){
-                            audioAction = <TouchableOpacity><Text>Downloading... {progress}</Text></TouchableOpacity>
+                            audioAction = <TouchableOpacity><Text>Загрузка {progress}%</Text></TouchableOpacity>
                         } else {
                             this.state.downloaded_books.forEach(el => {
                                 if (el.id == item.id){
@@ -151,9 +151,27 @@ export default class AudioScreen extends Component {
                                 }
                             })
                             if (flag){
-                                audioAction = <TouchableOpacity onPress={() => console.log('play action')}><Text>Play</Text></TouchableOpacity>
+                                audioAction = (
+                                    <TouchableOpacity onPress={() => console.log('play action')}>
+                                        <View style={{flex: 1, justifyContent: "center", flexDirection: 'column', alignItems: 'center'}}>
+                                            <View>
+                                                <Ionicons name="ios-play" size={23} color="tomato" style={{margin: 'auto'}} />
+                                            </View>
+                                            <Text>Слушать</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                )
                             } else {
-                                audioAction = <TouchableOpacity onPress={() => this.downloadBook(item.id)}><Text>Download</Text></TouchableOpacity>
+                                audioAction = (
+                                    <TouchableOpacity onPress={() => this.downloadBook(item.id)}>
+                                        <View style={{flex: 1, justifyContent: "center", flexDirection: 'column', alignItems: 'center'}}>
+                                            <View>
+                                                <Ionicons name="ios-cloud-download" size={23} color="tomato" style={{margin: 'auto'}} />
+                                            </View>
+                                            <Text>Скачать</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                )
                             }
                         }
                         return (

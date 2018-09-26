@@ -10,7 +10,10 @@ import {
   AsyncStorage,
   TouchableOpacity,
   FlatList,
-  SafeAreaView
+  SafeAreaView,
+  Alert,
+  TouchableWithoutFeedback,
+  Slider
 } from 'react-native';
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -26,6 +29,9 @@ export default class AudioScreen extends Component {
         book_id: this.props.navigation.getParam("book_id"),
         downloaded_books: [],
         downloading_books: [],
+        isOpenModal: false,
+        playingAudio: {},
+        playing: false,
       }
     }
     static navigationOptions = ({navigation}) => {
@@ -125,6 +131,26 @@ export default class AudioScreen extends Component {
         });
         // AsyncStorage.clear();
     }
+    playAudio(id){
+        console.log('play audio fired', id);
+        let playingAudio = {};
+        this.state.downloaded_books.forEach(el => {
+            if (el.id == id){
+                playingAudio.path = el.file_path;
+            }
+        })
+        this.state.books.forEach(el => {
+            if (el.id == id){
+                playingAudio.name = el.name;
+                playingAudio.description = el.description;
+            }
+        })
+        this.setState({
+            isOpenModal: true,
+            playing: true,
+            playingAudio: playingAudio,
+        })
+    }
     render(){
         console.log('audio details render', this.state);
         return (
@@ -152,7 +178,7 @@ export default class AudioScreen extends Component {
                             })
                             if (flag){
                                 audioAction = (
-                                    <TouchableOpacity onPress={() => console.log('play action')}>
+                                    <TouchableOpacity onPress={() => this.playAudio(item.id)}>
                                         <View style={{flex: 1, justifyContent: "center", flexDirection: 'column', alignItems: 'center'}}>
                                             <View>
                                                 <Ionicons name="ios-play" size={23} color="tomato" style={{margin: 'auto'}} />
@@ -191,6 +217,66 @@ export default class AudioScreen extends Component {
                     refreshing={false}
                 >
                 </FlatList>
+                <Modal
+                    animationType="fade"
+                    transparent={true}
+                    visible={this.state.isOpenModal}
+                    onRequestClose={() => {
+                    Alert.alert('Modal has been closed.');
+                    }}
+                >
+                    <TouchableWithoutFeedback
+                        onPress={() => this.setState({isOpenModal: false})}
+                    >
+                        <View style={{
+                                flex: 1,
+                                flexDirection: 'column',
+                                justifyContent: 'flex-end',
+                                alignItems: 'center',
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)'
+                            }}>
+                        </View>
+                    </TouchableWithoutFeedback>
+                    <View style={{
+                        height: 350,
+                        backgroundColor: '#fafafa',
+                        flex: 0,
+                        width: '100%',
+                        padding: 10
+                    }}>
+                        <Text style={{textAlign: 'center'}}>{this.state.playingAudio.name}</Text>
+                        <Text style={{textAlign: 'center'}}>{this.state.playingAudio.description}</Text>
+                        <View>
+                            <Slider
+                                style={{
+                                    marginTop: 20,
+                                    marginBottom: 20,
+                                }}
+                            />
+                        </View>
+                        <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center', alignItems:'center'}}>
+                            <TouchableOpacity>
+                                <View style={{flex: 0, alignItems: 'center'}}>
+                                    <View style={{transform: [{rotateY: '180deg'}]}}>
+                                        <Ionicons name="ios-refresh" size={30} color="tomato" />
+                                    </View>
+                                    <Text style={{fontSize: 10}}>-15 сек.</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => this.setState({playing: !this.state.playing})}>
+                                <View style={{marginRight: 20, marginLeft: 20}}>
+                                    {this.state.playing ? <Ionicons name="ios-pause" size={35} color="tomato" /> : <Ionicons name="ios-play" size={35} color="tomato" />}
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity>
+                                <View style={{flex: 0, alignItems: 'center'}}>
+                                    <Ionicons name="ios-refresh" size={30} color="tomato" />
+                                    <Text style={{fontSize: 10}}>+15 сек.</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </Modal>
             </SafeAreaView>
         )
     }

@@ -36,6 +36,8 @@ export default class AudioScreen extends Component {
         isOpenModal: false,
         playingAudio: {},
         playing: false,
+        whoosh: {},
+        duration: 0,
       }
     }
     static navigationOptions = ({navigation}) => {
@@ -44,6 +46,7 @@ export default class AudioScreen extends Component {
             headerTitle: bookName
         }
     }
+    whoosh = {};
     getBooks(){
         console.log('getBooks starts')
         let request = new XMLHttpRequest();
@@ -155,25 +158,29 @@ export default class AudioScreen extends Component {
             playing: true,
             playingAudio: playingAudio,
         });
-        let whoosh;
         setTimeout(() => {
             console.log ('path', this.state.playingAudio.path);
-            whoosh = new Sound(this.state.playingAudio.path, '', (error) => {
+            this.whoosh = new Sound(this.state.playingAudio.path, '', (error) => {
                 if (error) {
                     console.log('failed to load the sound', error);
                     return;
                 }
                 // loaded successfully
-                console.log('duration in seconds: ' + whoosh.getDuration() + 'number of channels: ' + whoosh.getNumberOfChannels());
+                console.log('duration in seconds: ' + this.whoosh.getDuration() + 'number of channels: ' + this.whoosh.getNumberOfChannels());
+                this.setState({
+                    whoosh: this.whoosh,
+                    duration: parseInt(this.whoosh.getDuration())
+                })
             });
-            whoosh.setVolume(0.5);
-            console.log('volume: ' + whoosh.getVolume());
-            console.log('pan: ' + whoosh.getPan());
-            console.log('loops: ' + whoosh.getNumberOfLoops());
+            // whoosh.setVolume(0.5);
+            console.log('volume: ' + this.whoosh.getVolume());
+            console.log('pan: ' + this.whoosh.getPan());
+            console.log('loops: ' + this.whoosh.getNumberOfLoops());
         }, 300);
         // Play the sound with an onEnd callback
         setTimeout(() => {
-            whoosh.play((success) => {
+            this.whoosh.play((success) => {
+                
                 console.log("starting play?")
                 if (success) {
                 console.log('successfully finished playing');
@@ -181,10 +188,28 @@ export default class AudioScreen extends Component {
                 console.log('playback failed due to audio decoding errors');
                 // reset the player to its uninitialized state (android only)
                 // this is the only option to recover after an error occured and use the player again
-                whoosh.reset();
+                this.whoosh.reset();
                 }
             });
         }, 600);
+    }
+    togglePlaying(){
+        // let { whoosh } = this.state;
+        if (this.state.playing){
+            this.setState({
+                playing: !this.state.playing
+            });
+            this.whoosh.pause()
+        } else {
+            this.setState({
+                playing: !this.state.playing
+            });
+            this.whoosh.play()
+        }
+    }
+    changePlyingPos(val){
+        console.log('changePlyingPos', val)
+        this.whoosh.setCurrentTime(parseInt(val));
     }
     render(){
         console.log('audio details render', this.state);
@@ -257,11 +282,11 @@ export default class AudioScreen extends Component {
                     transparent={true}
                     visible={this.state.isOpenModal}
                     onRequestClose={() => {
-                    Alert.alert('Modal has been closed.');
+                        Alert.alert('Modal has been closed.');
                     }}
                 >
                     <TouchableWithoutFeedback
-                        onPress={() => this.setState({isOpenModal: false, playing: false})}
+                        onPress={() => {this.setState({isOpenModal: false}); this.togglePlaying();}}
                     >
                         <View style={{
                                 flex: 1,
@@ -287,6 +312,9 @@ export default class AudioScreen extends Component {
                                     marginTop: 20,
                                     marginBottom: 20,
                                 }}
+                                minimumValue={0}
+                                maximumValue={this.state.duration}
+                                onValueChange={val => this.changePlyingPos(val)}
                             />
                         </View>
                         <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center', alignItems:'center'}}>
@@ -298,7 +326,7 @@ export default class AudioScreen extends Component {
                                     <Text style={{fontSize: 10}}>-15 сек.</Text>
                                 </View>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => this.setState({playing: !this.state.playing})}>
+                            <TouchableOpacity onPress={() => this.togglePlaying()}>
                                 <View style={{marginRight: 20, marginLeft: 20}}>
                                     {this.state.playing ? <Ionicons name="ios-pause" size={35} color="tomato" /> : <Ionicons name="ios-play" size={35} color="tomato" />}
                                 </View>

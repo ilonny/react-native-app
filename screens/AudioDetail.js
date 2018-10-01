@@ -38,6 +38,7 @@ export default class AudioScreen extends Component {
         playing: false,
         whoosh: {},
         duration: 0,
+        currentTime: 0,
       }
     }
     static navigationOptions = ({navigation}) => {
@@ -139,6 +140,9 @@ export default class AudioScreen extends Component {
         });
         // AsyncStorage.clear();
     }
+    componentWillUnmount(){
+        clearInterval(this.timerID);
+    }
     playAudio(id){
         console.log('play audio fired', id);
         let playingAudio = {};
@@ -171,6 +175,10 @@ export default class AudioScreen extends Component {
                     whoosh: this.whoosh,
                     duration: parseInt(this.whoosh.getDuration())
                 })
+                this.timerID = setInterval(
+                    () => this.tick(),
+                    1000
+                );
             });
             // whoosh.setVolume(0.5);
             console.log('volume: ' + this.whoosh.getVolume());
@@ -180,10 +188,14 @@ export default class AudioScreen extends Component {
         // Play the sound with an onEnd callback
         setTimeout(() => {
             this.whoosh.play((success) => {
-                
                 console.log("starting play?")
                 if (success) {
                 console.log('successfully finished playing');
+                this.setState({
+                    playing: false,
+                    isOpenModal: false
+                })
+                clearInterval(this.timerID);
                 } else {
                 console.log('playback failed due to audio decoding errors');
                 // reset the player to its uninitialized state (android only)
@@ -207,9 +219,35 @@ export default class AudioScreen extends Component {
             this.whoosh.play()
         }
     }
+    stopPlaying(){
+        this.setState({
+            playing: !this.state.playing
+        });
+        this.whoosh.pause()
+    }
     changePlyingPos(val){
         console.log('changePlyingPos', val)
         this.whoosh.setCurrentTime(parseInt(val));
+    }
+    plus15(){
+        this.whoosh.getCurrentTime((seconds) => this.whoosh.setCurrentTime(seconds + 15));
+    }
+    minus15(){
+        this.whoosh.getCurrentTime((seconds) => this.whoosh.setCurrentTime(seconds - 15));
+    }
+    tick(){
+        this.whoosh.getCurrentTime((seconds) => this.setState({
+            currentTime: parseInt(seconds)
+        }))
+    }
+    toMMSS(secs){
+        var sec_num = parseInt(secs, 10)    
+        var minutes = Math.floor(sec_num / 60) % 60
+        var seconds = sec_num % 60    
+        return [minutes,seconds]
+            .map(v => v < 10 ? "0" + v : v)
+            // .filter((v,i) => v !== "00" || i > 0)
+            .join(":")
     }
     render(){
         console.log('audio details render', this.state);
@@ -286,7 +324,7 @@ export default class AudioScreen extends Component {
                     }}
                 >
                     <TouchableWithoutFeedback
-                        onPress={() => {this.setState({isOpenModal: false}); this.togglePlaying();}}
+                        onPress={() => {this.setState({isOpenModal: false, currentTime: 0}); this.stopPlaying(); clearInterval(this.timerID);}}
                     >
                         <View style={{
                                 flex: 1,
@@ -298,11 +336,11 @@ export default class AudioScreen extends Component {
                         </View>
                     </TouchableWithoutFeedback>
                     <View style={{
-                        height: 350,
+                        height: 250,
                         backgroundColor: '#fafafa',
                         flex: 0,
                         width: '100%',
-                        padding: 10
+                        padding: 20
                     }}>
                         <Text style={{textAlign: 'center'}}>{this.state.playingAudio.name}</Text>
                         <Text style={{textAlign: 'center'}}>{this.state.playingAudio.description}</Text>
@@ -310,15 +348,24 @@ export default class AudioScreen extends Component {
                             <Slider
                                 style={{
                                     marginTop: 20,
-                                    marginBottom: 20,
+                                    marginBottom: 5,
                                 }}
                                 minimumValue={0}
                                 maximumValue={this.state.duration}
                                 onValueChange={val => this.changePlyingPos(val)}
+                                value={this.state.currentTime}
                             />
+                            <View style={{flex: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                                <View>
+                                    <Text>{this.toMMSS(this.state.currentTime)}</Text>
+                                </View>
+                                <View>
+                                    <Text>{this.toMMSS(this.state.duration)}</Text>
+                                </View>
+                            </View>
                         </View>
                         <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center', alignItems:'center'}}>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => this.minus15()}>
                                 <View style={{flex: 0, alignItems: 'center'}}>
                                     <View style={{transform: [{rotateY: '180deg'}]}}>
                                         <Ionicons name="ios-refresh" size={30} color="tomato" />
@@ -331,7 +378,7 @@ export default class AudioScreen extends Component {
                                     {this.state.playing ? <Ionicons name="ios-pause" size={35} color="tomato" /> : <Ionicons name="ios-play" size={35} color="tomato" />}
                                 </View>
                             </TouchableOpacity>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => this.plus15()}>
                                 <View style={{flex: 0, alignItems: 'center'}}>
                                     <Ionicons name="ios-refresh" size={30} color="tomato" />
                                     <Text style={{fontSize: 10}}>+15 сек.</Text>

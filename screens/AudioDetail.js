@@ -42,9 +42,18 @@ export default class AudioScreen extends Component {
       }
     }
     static navigationOptions = ({navigation}) => {
-        const bookName = navigation.getParam('book_name')
+        const bookName = navigation.getParam('book_name');
+        const downloadAll = navigation.getParam('downloadAll');
         return {
-            headerTitle: bookName
+            headerTitle: bookName,
+            headerRight: (
+                <TouchableOpacity onPress={() => downloadAll()}>
+                <View style={{alignItems: 'center', flex: 1, flexDirection: 'column', marginRight: 10}}>
+                        <Ionicons name={"ios-cloud-download"} size={25} color="tomato" style={{marginTop: 5}}/>
+                        <Text style={{fontSize: 10, marginTop: -7}}>Скачать все</Text>
+                </View>
+                </TouchableOpacity>
+            )
         }
     }
     whoosh = {};
@@ -83,7 +92,7 @@ export default class AudioScreen extends Component {
     //     return true;
     // }
     _keyExtractor = (item) => item.name + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-    downloadBook(file_id){
+    downloadBook(file_id, need_play = true){
         console.log('start downloading', file_id)
         let { downloading_books } = this.state;
         downloading_books.push({
@@ -126,7 +135,25 @@ export default class AudioScreen extends Component {
                     downloading_books: downloading_books,
                 });
                 AsyncStorage.setItem('downloaded_audio', JSON.stringify(this.state.downloaded_books));
+                    //play after download automatically
+                    if (need_play){
+                        this.playAudio(file_id);
+                    }
             })
+    }
+    downloadAll = () => {
+        this.state.books.forEach(book => {
+            let downloaded = false;
+            this.state.downloaded_books.forEach(d_book => {
+                if (book.id == d_book.id) {
+                    downloaded = true;
+                }
+            })
+            if (!downloaded){
+                this.downloadBook(book.id, false);
+            }
+        })
+        console.log('download all')
     }
     componentDidMount(){
         // this.downloadBook(2)
@@ -139,7 +166,32 @@ export default class AudioScreen extends Component {
             }
         });
         // AsyncStorage.clear();
+        this.props.navigation.setParams({downloadAll: this.downloadAll})
     }
+    playFromReader(){
+        //проверим пришел ли в пропсы айди аудиофайла, если да, то проиграем его (или скачаем и проиграем)
+        this.audiofile_id = this.props.navigation.getParam('audiofile_id');
+        if (this.audiofile_id){
+            let isDownloaded = false;
+            this.state.downloaded_books.forEach(el => {
+                if (el.id == this.audiofile_id){
+                    isDownloaded = true;
+                }
+            });
+            if (isDownloaded){
+                this.playAudio(this.audiofile_id);
+            } else {
+                this.downloadBook(this.audiofile_id);
+            }
+            console.log('play audio here', this.audiofile_id)
+        }
+    }
+    willFocusSubscription = this.props.navigation.addListener(
+        'willFocus',
+        payload => {
+          this.playFromReader();
+        }
+    );
     componentWillUnmount(){
         clearInterval(this.timerID);
     }
@@ -249,6 +301,9 @@ export default class AudioScreen extends Component {
             // .filter((v,i) => v !== "00" || i > 0)
             .join(":")
     }
+    redirectToReader(book_id, book_name, book_src, toc_href){
+        this.props.navigation.navigate('Reader', {book_id: book_id, book_name: book_name, book_src: book_src, toc: toc_href});
+    }
     render(){
         console.log('audio details render', this.state);
         return (
@@ -304,8 +359,18 @@ export default class AudioScreen extends Component {
                                     <Text style={{color: 'tomato', fontWeight: 'bold'}}>{item.name}</Text>
                                     {item.description && <Text style={{marginTop: 10}}>{item.description}</Text>}
                                 </View>
-                                <View>
+                                <View style={{flex: 1, flexDirection: 'row', maxWidth: '40%', justifyContent: 'flex-end', alignItems: 'center'}}>
                                     {audioAction}
+                                    {item.toc_id && (
+                                        <TouchableOpacity onPress={() => this.redirectToReader(item.reader_book_id, item.reader_book_name, item.reader_book_src, item.toc_href)}>
+                                            <View style={{flex: 0, justifyContent: "center", flexDirection: 'column', alignItems: 'center', marginLeft: 10}}>
+                                                 <View>
+                                                    <Ionicons name="ios-book" size={23} color="tomato" style={{margin: 'auto'}} />
+                                                </View>
+                                                <Text>Читать</Text>
+                                            </View>
+                                        </TouchableOpacity>
+                                    )}
                                 </View>
                             </View>
                         )

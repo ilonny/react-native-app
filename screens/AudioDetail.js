@@ -13,7 +13,8 @@ import {
   SafeAreaView,
   Alert,
   TouchableWithoutFeedback,
-  Slider
+  Slider,
+  ActivityIndicator
 } from 'react-native';
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -39,6 +40,7 @@ export default class AudioScreen extends Component {
         whoosh: {},
         duration: 0,
         currentTime: 0,
+        prerender: false,
       }
     }
     static navigationOptions = ({navigation}) => {
@@ -141,6 +143,32 @@ export default class AudioScreen extends Component {
                     }
             })
     }
+    deleteBook(id){
+        // let path = null;
+        // let index = null;
+        let arr = this.state.downloaded_books;
+        console.log('arr', arr)
+        console.log('arg id', id)
+        this.state.downloaded_books.forEach((el, index) => {
+            console.log(el)
+            if (el.id == id){
+                console.log('id is here', id)
+                console.log('path is here', el.file_path)
+                arr.splice(index, 1);
+                RNFetchBlob.fs.unlink(el.file_path)
+                .then(() => {
+                    this.setState({
+                        downloaded_books: arr
+                    })
+                    AsyncStorage.setItem('downloaded_audio', JSON.stringify(this.state.downloaded_books));
+                })
+                .catch((err) => {
+                    console.log('error while delete file', err)
+                })
+            }
+        });
+        console.log('delete new arr',arr);
+    }
     downloadAll = () => {
         this.state.books.forEach(book => {
             let downloaded = false;
@@ -181,7 +209,15 @@ export default class AudioScreen extends Component {
             if (isDownloaded){
                 this.playAudio(this.audiofile_id);
             } else {
-                this.downloadBook(this.audiofile_id);
+                //если не скачана, то проиграть онлайн, для этого нужно определиться с урлом
+                let path;
+                this.state.books.forEach(el => {
+                    if (el.id == this.audiofile_id){
+                        path = el.file_src
+                    }
+                });
+                this.playAudio(this.audiofile_id, path);
+                // this.downloadBook(this.audiofile_id);
             }
             console.log('play audio here', this.audiofile_id)
         }
@@ -195,14 +231,20 @@ export default class AudioScreen extends Component {
     componentWillUnmount(){
         clearInterval(this.timerID);
     }
-    playAudio(id){
+    playAudio(id, path = null){
         console.log('play audio fired', id);
         let playingAudio = {};
-        this.state.downloaded_books.forEach(el => {
-            if (el.id == id){
-                playingAudio.path = el.file_path;
-            }
-        })
+        if (path){
+            //проиграть онлайн
+            playingAudio.path = `https://mobile-app.flamesclient.ru/${path}`;
+        } else {
+            //брать с оффлайна
+            this.state.downloaded_books.forEach(el => {
+                if (el.id == id){
+                    playingAudio.path = el.file_path;
+                }
+            })
+        }
         this.state.books.forEach(el => {
             if (el.id == id){
                 playingAudio.name = el.name;
@@ -224,6 +266,9 @@ export default class AudioScreen extends Component {
                 // loaded successfully
                 console.log('duration in seconds: ' + this.whoosh.getDuration() + 'number of channels: ' + this.whoosh.getNumberOfChannels());
                 this.setState({
+                    prerender: false
+                })
+                this.setState({
                     whoosh: this.whoosh,
                     duration: parseInt(this.whoosh.getDuration())
                 })
@@ -238,24 +283,49 @@ export default class AudioScreen extends Component {
             console.log('loops: ' + this.whoosh.getNumberOfLoops());
         }, 300);
         // Play the sound with an onEnd callback
-        setTimeout(() => {
-            this.whoosh.play((success) => {
-                console.log("starting play?")
-                if (success) {
-                console.log('successfully finished playing');
-                this.setState({
-                    playing: false,
-                    isOpenModal: false
-                })
-                clearInterval(this.timerID);
-                } else {
-                console.log('playback failed due to audio decoding errors');
-                // reset the player to its uninitialized state (android only)
-                // this is the only option to recover after an error occured and use the player again
-                this.whoosh.reset();
+        //if offline
+        if (!path){
+            console.log("its offline")
+            setTimeout(() => {
+                this.whoosh.play((success) => {
+                    console.log("starting play?")
+                    if (success) {
+                        console.log('successfully finished playing');
+                        this.setState({
+                            playing: false,
+                            isOpenModal: false
+                        })
+                        clearInterval(this.timerID);
+                    } else {
+                        console.log('playback failed due to audio decoding errors');
+                        // reset the player to its uninitialized state (android only)
+                        // this is the only option to recover after an error occured and use the player again
+                        this.whoosh.reset();
+                    }
+                });
+            }, 600);
+        } else {
+            //if online
+            console.log("its online", playingAudio.path)
+            this.setState({
+                prerender: true
+            })
+            const sound = new Sound(
+                playingAudio.path,
+                undefined,
+                (error) => {
+                    console.log('starting...')
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log('Playing sound');
+                        sound.play(() => {
+                            sound.release();
+                        });
+                    }
                 }
-            });
-        }, 600);
+            );
+        }
     }
     togglePlaying(){
         // let { whoosh } = this.state;
@@ -331,35 +401,55 @@ export default class AudioScreen extends Component {
                             })
                             if (flag){
                                 audioAction = (
-                                    <TouchableOpacity onPress={() => this.playAudio(item.id)}>
-                                        <View style={{flex: 1, justifyContent: "center", flexDirection: 'column', alignItems: 'center'}}>
-                                            <View>
-                                                <Ionicons name="ios-play" size={23} color="tomato" style={{margin: 'auto'}} />
+                                    <View style={{flex: 0, flexDirection: 'row', alignItems: 'center'}}>
+                                        <TouchableOpacity onPress={() => this.deleteBook(item.id)}>
+                                            <View style={{flex: 1, justifyContent: "center", flexDirection: 'column', alignItems: 'center'}}>
+                                                <View>
+                                                    <Ionicons name="ios-trash" size={23} color="tomato" style={{margin: 'auto'}} />
+                                                </View>
+                                                <Text>Удалить</Text>
                                             </View>
-                                            <Text>Слушать</Text>
-                                        </View>
-                                    </TouchableOpacity>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity onPress={() => this.playAudio(item.id)}>
+                                            <View style={{flex: 1, justifyContent: "center", flexDirection: 'column', alignItems: 'center', marginLeft: 10}}>
+                                                <View>
+                                                    <Ionicons name="ios-play" size={23} color="tomato" style={{margin: 'auto'}} />
+                                                </View>
+                                                <Text>Слушать</Text>
+                                            </View>
+                                        </TouchableOpacity>
+                                    </View>
                                 )
                             } else {
                                 audioAction = (
-                                    <TouchableOpacity onPress={() => this.downloadBook(item.id)}>
-                                        <View style={{flex: 1, justifyContent: "center", flexDirection: 'column', alignItems: 'center'}}>
-                                            <View>
-                                                <Ionicons name="ios-cloud-download" size={23} color="tomato" style={{margin: 'auto'}} />
+                                    <View style={{flex: 0, flexDirection: 'row', alignItems: 'center'}}>
+                                        <TouchableOpacity onPress={() => this.downloadBook(item.id)}>
+                                            <View style={{flex: 1, justifyContent: "center", flexDirection: 'column', alignItems: 'center'}}>
+                                                <View>
+                                                    <Ionicons name="ios-cloud-download" size={23} color="tomato" style={{margin: 'auto'}} />
+                                                </View>
+                                                <Text>Скачать</Text>
                                             </View>
-                                            <Text>Скачать</Text>
-                                        </View>
-                                    </TouchableOpacity>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity onPress={() => this.playAudio(item.id, item.file_src)}>
+                                            <View style={{flex: 1, justifyContent: "center", flexDirection: 'column', alignItems: 'center', marginLeft: 10}}>
+                                                <View>
+                                                    <Ionicons name="ios-play" size={23} color="tomato" style={{margin: 'auto'}} />
+                                                </View>
+                                                <Text>Слушать онлайн</Text>
+                                            </View>
+                                        </TouchableOpacity>
+                                    </View>
                                 )
                             }
                         }
                         return (
-                            <View style={styles.row}>
-                                <View>
-                                    <Text style={{color: 'tomato', fontWeight: 'bold'}}>{item.name}</Text>
-                                    {item.description && <Text style={{marginTop: 10}}>{item.description}</Text>}
+                            <View style={styles.audio_row}>
+                                <View style={{flex: 1}}>
+                                    <Text style={{color: 'tomato', fontWeight: 'bold', textAlign: 'center'}}>{item.name}</Text>
+                                    {item.description && <Text style={{marginTop: 10, textAlign: 'center'}}>{item.description}</Text>}
                                 </View>
-                                <View style={{flex: 1, flexDirection: 'row', maxWidth: '40%', justifyContent: 'flex-end', alignItems: 'center'}}>
+                                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 5}}>
                                     {audioAction}
                                     {item.toc_id && (
                                         <TouchableOpacity onPress={() => this.redirectToReader(item.reader_book_id, item.reader_book_name, item.reader_book_src, item.toc_href)}>
@@ -409,26 +499,33 @@ export default class AudioScreen extends Component {
                     }}>
                         <Text style={{textAlign: 'center'}}>{this.state.playingAudio.name}</Text>
                         <Text style={{textAlign: 'center'}}>{this.state.playingAudio.description}</Text>
-                        <View>
-                            <Slider
-                                style={{
-                                    marginTop: 20,
-                                    marginBottom: 5,
-                                }}
-                                minimumValue={0}
-                                maximumValue={this.state.duration}
-                                onValueChange={val => this.changePlyingPos(val)}
-                                value={this.state.currentTime}
-                            />
-                            <View style={{flex: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-                                <View>
-                                    <Text>{this.toMMSS(this.state.currentTime)}</Text>
+                            {this.state.prerender ? (
+                                <View style={{flex: 1, flexDirection: 'column', marginTop: -15, marginBottom: 5, justifyContent: 'center', alignItems: 'center'}}>
+                                    <ActivityIndicator size="large" color="tomato" />
+                                    <Text>Загрузка...</Text>
                                 </View>
+                            ) : (
                                 <View>
-                                    <Text>{this.toMMSS(this.state.duration)}</Text>
+                                    <Slider
+                                    style={{
+                                        marginTop: 20,
+                                        marginBottom: 5,
+                                    }}
+                                    minimumValue={0}
+                                    maximumValue={this.state.duration}
+                                    onValueChange={val => this.changePlyingPos(val)}
+                                    value={this.state.currentTime}
+                                    />
+                                    <View style={{flex: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                                        <View>
+                                            <Text>{this.toMMSS(this.state.currentTime)}</Text>
+                                        </View>
+                                        <View>
+                                            <Text>{this.toMMSS(this.state.duration)}</Text>
+                                        </View>
+                                    </View>
                                 </View>
-                            </View>
-                        </View>
+                            )}
                         <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center', alignItems:'center'}}>
                             <TouchableOpacity onPress={() => this.minus15()}>
                                 <View style={{flex: 0, alignItems: 'center'}}>
@@ -459,19 +556,29 @@ export default class AudioScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#F5FCFF',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
     },
     row: {
-      flex: 1,
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      padding: 10,
-      paddingTop: 25,
-      paddingBottom: 25,
-      borderBottomWidth: 1,
-      borderBottomColor: '#eaeaea'
-    }
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        padding: 10,
+        paddingTop: 25,
+        paddingBottom: 25,
+        borderBottomWidth: 1,
+        borderBottomColor: '#eaeaea'
+    },
+    audio_row: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        padding: 10,
+        paddingTop: 25,
+        paddingBottom: 25,
+        borderBottomWidth: 1,
+        borderBottomColor: '#eaeaea'
+    },
   })

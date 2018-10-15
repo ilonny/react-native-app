@@ -199,28 +199,30 @@ export default class AudioScreen extends Component {
     playFromReader(){
         //проверим пришел ли в пропсы айди аудиофайла, если да, то проиграем его (или скачаем и проиграем)
         this.audiofile_id = this.props.navigation.getParam('audiofile_id');
-        if (this.audiofile_id){
-            let isDownloaded = false;
-            this.state.downloaded_books.forEach(el => {
-                if (el.id == this.audiofile_id){
-                    isDownloaded = true;
-                }
-            });
-            if (isDownloaded){
-                this.playAudio(this.audiofile_id);
-            } else {
-                //если не скачана, то проиграть онлайн, для этого нужно определиться с урлом
-                let path;
-                this.state.books.forEach(el => {
+        setTimeout(() => {
+            if (this.audiofile_id){
+                let isDownloaded = false;
+                this.state.downloaded_books.forEach(el => {
                     if (el.id == this.audiofile_id){
-                        path = el.file_src
+                        isDownloaded = true;
                     }
                 });
-                this.playAudio(this.audiofile_id, path);
-                // this.downloadBook(this.audiofile_id);
+                if (isDownloaded){
+                    this.playAudio(this.audiofile_id);
+                } else {
+                    //если не скачана, то проиграть онлайн, для этого нужно определиться с урлом
+                    let path;
+                    this.state.books.forEach(el => {
+                        if (el.id == this.audiofile_id){
+                            path = el.file_src
+                        }
+                    });
+                    this.playAudio(this.audiofile_id, path);
+                    // this.downloadBook(this.audiofile_id);
+                }
+                console.log('play audio here', this.audiofile_id)
             }
-            console.log('play audio here', this.audiofile_id)
-        }
+        }, 300);
     }
     willFocusSubscription = this.props.navigation.addListener(
         'willFocus',
@@ -262,20 +264,30 @@ export default class AudioScreen extends Component {
                 if (error) {
                     console.log('failed to load the sound', error);
                     return;
+                } else {
+                    if (this.state.playing){
+                        console.log('Playing sound');
+                        this.whoosh.play(() => {
+                            this.whoosh.release();
+                        });
+                        // loaded successfully
+                        console.log('duration in seconds: ' + this.whoosh.getDuration() + 'number of channels: ' + this.whoosh.getNumberOfChannels());
+                        this.setState({
+                            prerender: false
+                        })
+                        this.setState({
+                            whoosh: this.whoosh,
+                            duration: parseInt(this.whoosh.getDuration())
+                        })
+                        this.timerID = setInterval(
+                            () => this.tick(),
+                            1000
+                        );
+                    } else {
+                        console.log('it not to should playing');
+                        this.whoosh.release();
+                    }
                 }
-                // loaded successfully
-                console.log('duration in seconds: ' + this.whoosh.getDuration() + 'number of channels: ' + this.whoosh.getNumberOfChannels());
-                this.setState({
-                    prerender: false
-                })
-                this.setState({
-                    whoosh: this.whoosh,
-                    duration: parseInt(this.whoosh.getDuration())
-                })
-                this.timerID = setInterval(
-                    () => this.tick(),
-                    1000
-                );
             });
             // whoosh.setVolume(0.5);
             console.log('volume: ' + this.whoosh.getVolume());
@@ -304,27 +316,29 @@ export default class AudioScreen extends Component {
                     }
                 });
             }, 600);
-        } else {
-            //if online
+        }
+        else {
+        //     //if online
             console.log("its online", playingAudio.path)
             this.setState({
                 prerender: true
             })
-            const sound = new Sound(
-                playingAudio.path,
-                undefined,
-                (error) => {
-                    console.log('starting...')
-                    if (error) {
-                        console.log(error);
-                    } else {
-                        console.log('Playing sound');
-                        sound.play(() => {
-                            sound.release();
-                        });
-                    }
-                }
-            );
+        //     this.whoosh = new Sound(
+        //     // const sound = new Sound(
+        //         playingAudio.path,
+        //         undefined,
+        //         (error) => {
+        //             console.log('starting...')
+        //             if (error) {
+        //                 console.log(error);
+        //             } else {
+        //                 console.log('Playing sound');
+        //                 this.whoosh.play(() => {
+        //                     this.whoosh.release();
+        //                 });
+        //             }
+        //         }
+        //     );
         }
     }
     togglePlaying(){
@@ -346,6 +360,7 @@ export default class AudioScreen extends Component {
             playing: !this.state.playing
         });
         this.whoosh.pause()
+        this.whoosh.reset();
     }
     changePlyingPos(val){
         console.log('changePlyingPos', val)

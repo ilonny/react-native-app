@@ -57,7 +57,7 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/34f012208a9e61cd2e28199b0a10486c/res/drawable-hdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/res/drawable-hdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_ic_menu_selectall_mtrl_alpha.png",
@@ -77,7 +77,7 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/googleg_standard_color_18.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/34f012208a9e61cd2e28199b0a10486c/res/drawable-hdpi-v4/googleg_standard_color_18.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/res/drawable-hdpi-v4/googleg_standard_color_18.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_textfield_activated_mtrl_alpha.9.png",
@@ -105,7 +105,7 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/common_google_signin_btn_text_light_normal_background.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/34f012208a9e61cd2e28199b0a10486c/res/drawable-hdpi-v4/common_google_signin_btn_text_light_normal_background.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/res/drawable-hdpi-v4/common_google_signin_btn_text_light_normal_background.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/notify_panel_notification_icon_bg.png",
@@ -113,11 +113,11 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/common_google_signin_btn_icon_dark_normal_background.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/34f012208a9e61cd2e28199b0a10486c/res/drawable-hdpi-v4/common_google_signin_btn_icon_dark_normal_background.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/res/drawable-hdpi-v4/common_google_signin_btn_icon_dark_normal_background.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/googleg_disabled_color_18.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/34f012208a9e61cd2e28199b0a10486c/res/drawable-hdpi-v4/googleg_disabled_color_18.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/res/drawable-hdpi-v4/googleg_disabled_color_18.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_list_pressed_holo_dark.9.png",
@@ -177,7 +177,7 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/34f012208a9e61cd2e28199b0a10486c/res/drawable-hdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/res/drawable-hdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_btn_check_to_on_mtrl_000.png",
@@ -185,7 +185,7 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/common_full_open_on_phone.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/34f012208a9e61cd2e28199b0a10486c/res/drawable-hdpi-v4/common_full_open_on_phone.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/res/drawable-hdpi-v4/common_full_open_on_phone.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png",

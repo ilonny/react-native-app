@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sun Sep 09 12:29:03 MSK 2018
+#Tue Oct 16 21:16:11 YEKT 2018
 5.base=/Users/dmitry/projects/react-native-app/android/app/build/intermediates/transforms/mergeJniLibs/release/0
 22.path=lib/x86_64/libimagepipeline.so
 32.set=NATIVE_RESOURCE

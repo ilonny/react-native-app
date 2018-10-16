@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/../node_modules/react-native-fs/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-orientation/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-push-notification/android" />
+            <option value="$PROJECT_DIR$/../node_modules/react-native-sound/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-static-server/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-vector-icons/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-zip-archive/android" />

@@ -1,7 +1,7 @@
 [
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_light.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/34f012208a9e61cd2e28199b0a10486c/res/drawable/common_google_signin_btn_icon_light.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/res/drawable/common_google_signin_btn_icon_light.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable/abc_textfield_search_material.xml",
@@ -21,11 +21,11 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_light_focused.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/34f012208a9e61cd2e28199b0a10486c/res/drawable/common_google_signin_btn_icon_light_focused.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/res/drawable/common_google_signin_btn_icon_light_focused.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_dark_focused.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/34f012208a9e61cd2e28199b0a10486c/res/drawable/common_google_signin_btn_text_dark_focused.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/res/drawable/common_google_signin_btn_text_dark_focused.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_light.xml",
@@ -33,7 +33,7 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_dark.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/34f012208a9e61cd2e28199b0a10486c/res/drawable/common_google_signin_btn_text_dark.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/res/drawable/common_google_signin_btn_text_dark.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable/abc_seekbar_track_material.xml",
@@ -41,7 +41,7 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_light_normal.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/34f012208a9e61cd2e28199b0a10486c/res/drawable/common_google_signin_btn_text_light_normal.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/res/drawable/common_google_signin_btn_text_light_normal.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_dark.xml",
@@ -77,11 +77,11 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_light.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/34f012208a9e61cd2e28199b0a10486c/res/drawable/common_google_signin_btn_text_light.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/res/drawable/common_google_signin_btn_text_light.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_disabled.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/34f012208a9e61cd2e28199b0a10486c/res/drawable/common_google_signin_btn_icon_disabled.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/res/drawable/common_google_signin_btn_icon_disabled.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_light.xml",
@@ -97,7 +97,7 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_dark_normal.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/34f012208a9e61cd2e28199b0a10486c/res/drawable/common_google_signin_btn_text_dark_normal.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/res/drawable/common_google_signin_btn_text_dark_normal.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable/notification_bg.xml",
@@ -121,11 +121,11 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_disabled.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/34f012208a9e61cd2e28199b0a10486c/res/drawable/common_google_signin_btn_text_disabled.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/res/drawable/common_google_signin_btn_text_disabled.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_light_focused.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/34f012208a9e61cd2e28199b0a10486c/res/drawable/common_google_signin_btn_text_light_focused.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/res/drawable/common_google_signin_btn_text_light_focused.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable/abc_cab_background_internal_bg.xml",
@@ -137,7 +137,7 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_dark.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/34f012208a9e61cd2e28199b0a10486c/res/drawable/common_google_signin_btn_icon_dark.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/res/drawable/common_google_signin_btn_icon_dark.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable/abc_btn_colored_material.xml",
@@ -153,7 +153,7 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_dark_focused.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/34f012208a9e61cd2e28199b0a10486c/res/drawable/common_google_signin_btn_icon_dark_focused.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/res/drawable/common_google_signin_btn_icon_dark_focused.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_light.xml",
@@ -161,10 +161,10 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_dark_normal.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/34f012208a9e61cd2e28199b0a10486c/res/drawable/common_google_signin_btn_icon_dark_normal.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/res/drawable/common_google_signin_btn_icon_dark_normal.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_light_normal.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/34f012208a9e61cd2e28199b0a10486c/res/drawable/common_google_signin_btn_icon_light_normal.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/res/drawable/common_google_signin_btn_icon_light_normal.xml"
     }
 ]

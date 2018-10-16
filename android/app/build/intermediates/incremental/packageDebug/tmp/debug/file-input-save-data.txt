@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Tue Sep 04 10:20:57 MSK 2018
+#Mon Oct 15 22:28:01 YEKT 2018
 5.base=/Users/dmitry/projects/react-native-app/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
 22.path=lib/x86/libfolly_json.so
 32.set=NATIVE_RESOURCE

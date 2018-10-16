@@ -3,6 +3,16 @@ package com.guruonline;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.zmxv.RNSound.RNSoundPackage;
+import com.RNFetchBlob.RNFetchBlobPackage;
+import com.rnziparchive.RNZipArchivePackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.futurepress.staticserver.FPStaticServerPackage;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
+import com.github.yamill.orientation.OrientationPackage;
+import com.rnfs.RNFSPackage;
+import io.invertase.firebase.RNFirebasePackage;
+import com.RNFetchBlob.RNFetchBlobPackage;
 import com.rnziparchive.RNZipArchivePackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.futurepress.staticserver.FPStaticServerPackage;
@@ -33,6 +43,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNSoundPackage(),
+//            new RNFetchBlobPackage(),
             new RNZipArchivePackage(),
             new FPStaticServerPackage(),
             new ReactNativePushNotificationPackage(),

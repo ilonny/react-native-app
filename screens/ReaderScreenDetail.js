@@ -40,10 +40,36 @@ class EpubReader extends Component {
         this.streamer = new Streamer();
         console.log('constructor props: ', this.props)
     }
+    // static navigationOptions = ({navigation}) => {
+    //     return {
+    //         headerTitle: 'test',
+    //         headerRight: (
+    //             <View style={{alignItems: 'center', flex: 1, flexDirection: 'row'}}>
+    //                 <TouchableOpacity onPress={() => toggleFav(navigation.state.params.quote_id)}>
+    //                     <Ionicons name={navigation.state.params.isFavorite ? "ios-heart" : "ios-heart-outline"}  size={25} color="tomato" style={{marginTop: 5}}/>
+    //                 </TouchableOpacity>
+    //             </View>
+    //         ),
+    //     }
+    // }
+
     static navigationOptions = ({navigation}) => {
+        const toggleNavigation = navigation.getParam('toggleNavigation');
         const bookName = navigation.getParam('book_name')
         return {
-            headerTitle: bookName
+            headerTitle: bookName,
+            headerRight: (
+                // <TouchableOpacity onPress={navigation.getParam('consoleState')}>
+                <View style={{alignItems: 'center', flex: 1, flexDirection: 'row'}}>
+                    <TouchableOpacity onPress={() => toggleNavigation()}>
+                        <Ionicons name={"ios-list"} size={35} color="tomato" style={{marginTop: 5}}/>
+                    </TouchableOpacity>
+                </View>
+            ),
+            // title: 'test',
+            headerStyle: {
+                paddingRight: 10,
+            },
         }
     }
     componentDidMount() {
@@ -66,15 +92,57 @@ class EpubReader extends Component {
                 console.log('async storage reader_locations value is empty', value);
             }
         })
+        //get tocs from server
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = (e) => {
+            if (request.status === 200) {
+                console.log('response: ', request.responseText)
+                this.setState(state => {
+                  if (request.responseText){
+                    let parsedText;
+                    try {
+                      parsedText = JSON.parse(request.responseText);
+                    } catch (e){
+                      console.log('catched parse json', request)
+                      parsedText = [];
+                    }
+                    return {
+                        ...state,
+                        book_locations: parsedText
+                    }
+                }
+                })
+            } else {
+                console.log('failed reques', request)
+            }
+        };
+        request.open('GET', API_URL + `/get-tocs?book_id=${this.state.book_id}`);
+        request.send();
+
+        this.props.navigation.setParams({toggleNavigation: this.toggleNavigation})
     }
 
-    defineBookLocations(book){
+    defineBookLocations(){
         console.log('defineBookLocations', book);
-        this.setState({
-            book_locations: book.navigation.toc
-        })
+        // this.setState({
+        //     book_locations: book.navigation.toc
+        // })
     }
-
+    checkInitialLocation(){
+        this.toc_from_nav = this.props.navigation.getParam('toc');
+        if (this.toc_from_nav && this.state.successLoaded){
+            this.setState({
+                location: this.toc_from_nav,
+                nav_opened: false
+            });
+        }
+    }
+    willFocusSubscription = this.props.navigation.addListener(
+        'willFocus',
+        payload => {
+          this.checkInitialLocation();
+        }
+    );
     componentWillUnmount() {
         console.log('epub reader unmount')
         this.streamer.kill();
@@ -127,6 +195,16 @@ class EpubReader extends Component {
         }
     }
 
+    toggleNavigation = () => {
+        this.setState({
+            nav_opened: !this.state.nav_opened
+        })
+    }
+
+    redirectToAudio(audio_book_id, audiofile_id, audio_book_name){
+        console.log('redirectToAudio', audio_book_id, audiofile_id);
+        this.props.navigation.navigate('Audio', {book_id: audio_book_id, audiofile_id: audiofile_id, book_name: audio_book_name/*, book_src: item.file_src,*/});
+    }
     render() {
         console.log("render state", this.state)
         return (
@@ -159,14 +237,13 @@ class EpubReader extends Component {
                         this.setState({
                             successLoaded: true
                         });
-                        this.defineBookLocations(book);
+                        this.checkInitialLocation();
+                        // this.defineBookLocations(book);
                         // clearInterval(interval);
                     }}
                     onPress={(cfi, position, rendition)=> {
                         console.log("press", cfi);
-                        this.setState({
-                            nav_opened: !this.state.nav_opened
-                        })
+                        
                     }}
                     onLongPress={(cfi, rendition)=> {
                         console.log("longpress", cfi);
@@ -201,13 +278,25 @@ class EpubReader extends Component {
                         <View style={styles.navigation_list}>
                             <FlatList
                                 data={this.state.book_locations}
-                                keyExtractor={item => item.id}
+                                keyExtractor={item => String(item.id)}
                                 renderItem={({item}) => (
-                                    <TouchableOpacity onPress={() => this.setState({location: item.href, nav_opened: false})}>
-                                        <View style={styles.navigation_list_row}>
-                                            <Text>{item.label.trim()}</Text>
+                                    <View style={styles.navigation_list_row}>
+                                        <View style={{maxWidth: '97%'}}>
+                                        <TouchableOpacity onPress={() => this.setState({location: item.app_href, nav_opened: false})}>
+                                            <View style={{flex: 1, height: "100%"}}>
+                                                <Text>{item.title.trim()}</Text>
+                                            </View>
+                                        </TouchableOpacity>
                                         </View>
-                                    </TouchableOpacity>
+                                        {item.audiofile_id && (
+                                            <TouchableOpacity onPress={() => this.redirectToAudio(item.audio_book_id, item.audiofile_id, item.audio_book_name)}>
+                                                <View style={{flex: 0, alignItems: 'center', marginTop: -10}}>
+                                                    <Ionicons name={"ios-volume-mute"} size={35} color="tomato" style={{marginTop: 5}}/>
+                                                    <Text style={{fontSize: 10, marginTop: -10,}}>Слушать</Text>
+                                                </View>
+                                            </TouchableOpacity>
+                                        )}
+                                    </View>
                                 )}
                             >
                             </FlatList>
@@ -253,13 +342,17 @@ const styles = StyleSheet.create({
         // padding: 15,
     },
     navigation_list: {
-        paddingBottom: 34
+        paddingBottom: 58
     },
     navigation_list_row: {
         padding: 10,
         paddingLeft: 15,
         borderBottomWidth: 1,
-        borderBottomColor: "#eaeaea"
+        borderBottomColor: "#eaeaea",
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     }
 });
 

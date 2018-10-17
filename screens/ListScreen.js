@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import { listStyles } from '../constants/list_styles';
 export default class ListScreen extends Component {
   constructor(props){
     super(props);
@@ -28,7 +28,7 @@ export default class ListScreen extends Component {
     }
   }
   static navigationOptions = {
-    title: 'Список цитат'
+    title: 'Цитаты'
   }
   willFocusSubscription = this.props.navigation.addListener(
     'willFocus',
@@ -133,28 +133,24 @@ export default class ListScreen extends Component {
     quotes = [...new Set(quotes)];
     if (this.state.storage != '[]'){
       comp = (
-        <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF', paddingBottom: 10, paddingTop: 10}}>
-        {/* <View style={styles.container}> */}
-            {/* <Text>Items here</Text>
-            <Text>Items: {(this.state.items)}</Text>
-            <Text>Item1: {(this.state.items[0])}</Text>
-            <Text>Storage: {(this.state.storage)}</Text>
-            <Text>Test: {(this.state.test)}</Text>
-            <Text>Test2: {(this.state.test2)}</Text>
-            <Text>Date: {Date.now()}</Text> */}
-            {/* <Text>{ typeof quotes }</Text> */}
+        <SafeAreaView style={{flex: 1, backgroundColor: '#efefef'}}>
             <FlatList
+              style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5}}
               data={quotes}
               renderItem={({item}) => (
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Details', {quote_id: item.id, text_short: item.text_short, title: item.title} )}>
-                  <View style={styles.row}>
-                    <View style={{maxWidth: '80%'}}>
-                      <Text style={{color: 'tomato', fontWeight: 'bold'}}>{item.title}</Text>
-                      <Text style={{marginTop: 10}}>{item.text_short}</Text>
-                      <Text style={{marginTop: 10, color: '#c5c5c5', fontStyle: 'italic'}}>{item.author_name}</Text>
-                    </View>
-                    <View>
-                      <Ionicons name="ios-arrow-forward" size={25} color="tomato"/>
+                  <View style={listStyles.quoteItem}>
+                    <Text style={listStyles.quoteTitle}>{item.title}</Text>
+                    <View style={listStyles.quoteBottom}>
+                      <View style={listStyles.quoteBottomText}>
+                        {item.text_short && (<Text style={{color: "#808080"}}>{item.text_short}</Text>)}
+                        <Text style={{marginTop: 10, color: '#c5c5c5', fontStyle: 'italic'}}>{item.author_name}</Text>
+                      </View>
+                      <View style={listStyles.arrowCircle}>
+                        <View style={listStyles.arrowCircleInside}>
+                          <Ionicons name="ios-arrow-forward" size={40} color="#fff"/>
+                        </View>
+                      </View>
                     </View>
                   </View>
                 </TouchableOpacity>

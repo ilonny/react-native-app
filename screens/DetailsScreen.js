@@ -167,8 +167,9 @@ export default class DetailsScreen extends Component {
         console.log('quote_id = ', quote_id);
         console.log('render end');
         return (
-            <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF', paddingBottom: 10, paddingTop: 10}}>
+            <SafeAreaView style={{flex: 1, backgroundColor: '#efefef', paddingBottom: 10, paddingTop: 10}}>
                 <WebView source={{uri: API_URL + `/quote?id=${quote_id}`}}
+                style={{backgroundColor: '#efefef'}}
                 />
             </SafeAreaView>
         )

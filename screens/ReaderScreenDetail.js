@@ -9,7 +9,8 @@ import {
   StatusBar,
   AsyncStorage,
   TouchableOpacity,
-  FlatList
+  FlatList,
+  Slider
 } from 'react-native';
 
 import { Epub, Streamer } from "epubjs-rn";
@@ -36,6 +37,33 @@ class EpubReader extends Component {
             book_id: this.props.navigation.getParam("book_id"),
             nav_opened: false,
             book_locations: [],
+            total_locations: 0,
+            current_location_index: 0,
+            progress_width: 0,
+            theme: 'light',
+            themes: {
+                light: {
+                    body: {
+                        "-webkit-user-select": "none",
+                        "user-select": "none",
+                        "background-color": "#fff",
+                        "color": "#000"
+                    },
+                },
+                dark: {
+                    body: {
+                        "-webkit-user-select": "none",
+                        "user-select": "none",
+                        "background-color": "#171717",
+                        "color": "#bebebe"
+                    },
+                    a: {
+                        "color": "#75644f"
+                    }
+                }
+            },
+            fontSize: 16,
+            settingsOpened: false,
         };
         this.streamer = new Streamer();
         console.log('constructor props: ', this.props)
@@ -55,12 +83,16 @@ class EpubReader extends Component {
 
     static navigationOptions = ({navigation}) => {
         const toggleNavigation = navigation.getParam('toggleNavigation');
+        const toggleSettings = navigation.getParam('toggleSettings');
         const bookName = navigation.getParam('book_name')
         return {
             headerTitle: bookName,
             headerRight: (
                 // <TouchableOpacity onPress={navigation.getParam('consoleState')}>
                 <View style={{alignItems: 'center', flex: 1, flexDirection: 'row'}}>
+                    <TouchableOpacity onPress={() => toggleSettings()}>
+                        <Ionicons name={"ios-settings"} size={25} color="tomato" style={{marginTop: 5, marginRight: 15}}/>
+                    </TouchableOpacity>
                     <TouchableOpacity onPress={() => toggleNavigation()}>
                         <Ionicons name={"ios-list"} size={35} color="tomato" style={{marginTop: 5}}/>
                     </TouchableOpacity>
@@ -120,8 +152,13 @@ class EpubReader extends Component {
         request.send();
 
         this.props.navigation.setParams({toggleNavigation: this.toggleNavigation})
+        this.props.navigation.setParams({toggleSettings: this.toggleSettings})
     }
-
+    setTheme(theme){
+        this.setState({
+            theme: theme
+        })
+    }
     defineBookLocations(){
         console.log('defineBookLocations', book);
         // this.setState({
@@ -200,6 +237,11 @@ class EpubReader extends Component {
             nav_opened: !this.state.nav_opened
         })
     }
+    toggleSettings = () => {
+        this.setState({
+            settingsOpened: !this.state.settingsOpened
+        })
+    }
 
     redirectToAudio(audio_book_id, audiofile_id, audio_book_name){
         console.log('redirectToAudio', audio_book_id, audiofile_id);
@@ -215,6 +257,9 @@ class EpubReader extends Component {
                     flow={this.state.flow}
                     location={this.state.location}
                     gap={10}
+                    themes={this.state.themes}
+                    theme={this.state.theme}
+                    fontSize={this.state.fontSize+'px'}
                     onLocationChange={(visibleLocation)=> {
                         console.log("locationChanged", visibleLocation)
                         try {
@@ -224,6 +269,12 @@ class EpubReader extends Component {
                                 // }
                             // }
                             this.setState({visibleLocation});
+                            this.setState({
+                                current_location_index: visibleLocation.end.location,
+                            })
+                            this.setState({
+                                progress_width: (this.state.current_location_index / this.state.total_locations) * 100
+                            })
                         } catch (e) {
                             console.log('locationChanged failed', e)
                         }
@@ -235,11 +286,16 @@ class EpubReader extends Component {
                     onReady={(book)=> {
                         console.log('onReady fired', book)
                         this.setState({
-                            successLoaded: true
+                            successLoaded: true,
                         });
                         this.checkInitialLocation();
                         // this.defineBookLocations(book);
                         // clearInterval(interval);
+                        setTimeout(() => {
+                            this.setState({
+                                total_locations: book.locations.total
+                            });
+                        }, 500);
                     }}
                     onPress={(cfi, position, rendition)=> {
                         console.log("press", cfi);
@@ -267,6 +323,14 @@ class EpubReader extends Component {
                         console.log("EPUBJS-Webview", message);
                     }}
                     />
+                {this.state.total_locations && (
+                    <View style={{flex: 0, flexDirection: 'row', alignItems: 'center', padding: 3, backgroundColor: this.state.theme == 'light' ? '#fff' : '#171717', position: 'absolute', bottom: 0}}>
+                        <View style={{flex: 1, height: 5}}>
+                            <View style={{backgroundColor: '#c1ae97', width: this.state.progress_width+'%', height: 5, borderRadius: 5}}></View>
+                        </View>
+                        <Text style={{fontSize: 10, color: this.state.theme == 'light' ? '#000' : '#bebebe'}}>{this.state.current_location_index} из {this.state.total_locations}</Text>
+                    </View>
+                )}
                 {this.state.nav_opened && (
                     <View style={styles.navigation}>
                         <View style={styles.navigation_header}>
@@ -301,6 +365,42 @@ class EpubReader extends Component {
                             >
                             </FlatList>
                         </View>
+                    </View>
+                )}
+                {this.state.settingsOpened && (
+                    <View style={styles.navigation}>
+                        <View style={styles.navigation_header}>
+                            <Text style={{padding: 15}}>Настройки</Text>
+                            <TouchableOpacity onPress={() => this.setState({settingsOpened: false})}>
+                                <Ionicons style={{padding: 15}} name="ios-close-circle-outline" size={25} color="tomato" />
+                            </TouchableOpacity>
+                        </View>
+                        <Text style={{padding: 15}}>Режим чтения</Text>
+                        <View style={styles.setting_themes}>
+                            <TouchableOpacity onPress={() => this.setTheme('light')} style={{marginRight: 15}}>
+                                <View style={this.state.theme == 'light' ? styles.active_theme : styles.non_active_theme}>
+                                    <Ionicons color="#75644f" name={"ios-sunny"} size={30}/>
+                                    <Text>День</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => this.setTheme('dark')} >
+                                <View style={this.state.theme == 'dark' ? styles.active_theme : styles.non_active_theme}>
+                                    <Ionicons color="#75644f" name={"ios-moon"} size={30}/>
+                                    <Text>Ночь</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                        <Text style={{padding: 15}}>Размер текста</Text>
+                        <View style={{paddingLeft: 15, paddingRight: 15}}>
+                            <Slider
+                                step={1}
+                                maximumValue={25}
+                                minimumValue={10}
+                                value={this.state.fontSize}
+                                onValueChange={val => this.setState({fontSize: val})}
+                            />
+                        </View>
+                        <Text style={{padding: 15, textAlign: 'center', fontSize: this.state.fontSize}}>Пример текста ({this.state.fontSize} px)</Text>
                     </View>
                 )}
             </View>
@@ -353,6 +453,36 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
+    },
+    setting_themes: {
+        flex: 0,
+        flexDirection: 'row',
+        paddingLeft: 15,
+        paddingRight: 15,
+    },
+    active_theme: {
+        width: 90,
+        height: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 1,
+        borderColor: "#c1ae97",
+        borderRadius: 5,
+        shadowColor: "#000",
+        shadowRadius: 5,
+        shadowOpacity: 0.1,
+    },
+    non_active_theme: {
+        width: 90,
+        height: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 1,
+        borderColor: "#bebebe",
+        borderRadius: 5,
+        shadowColor: "#000",
+        shadowRadius: 5,
+        shadowOpacity: 0.1,
     }
 });
 

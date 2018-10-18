@@ -41,5 +41,12 @@ export const listStyles = StyleSheet.create({
     arrowCircleInside: {
         marginRight: 0,
         // marginTop:
+    },
+    bookTop:{
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+        marginTop: 10,
     }
 })

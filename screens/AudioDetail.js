@@ -20,6 +20,7 @@ import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import RNFetchBlob from 'rn-fetch-blob'
 // import { ServerRequest } from 'http';
+import { listStyles } from '../constants/list_styles';
 let dirs = RNFetchBlob.fs.dirs
 var Sound = require('react-native-sound');
 Sound.setCategory('Playback');
@@ -394,6 +395,7 @@ export default class AudioScreen extends Component {
         return (
             <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF', paddingBottom: 10, paddingTop: 10}}>
                 <FlatList
+                    style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5}}
                     data={this.state.books}
                     renderItem={({item}) => {
                         let audioAction;
@@ -459,9 +461,9 @@ export default class AudioScreen extends Component {
                             }
                         }
                         return (
-                            <View style={styles.audio_row}>
+                            <View style={listStyles.quoteItem}>
                                 <View style={{flex: 1}}>
-                                    <Text style={{color: 'tomato', fontWeight: 'bold', textAlign: 'center'}}>{item.name}</Text>
+                                    <Text style={[listStyles.quoteTitle, {textAlign: 'center'}]}>{item.name}</Text>
                                     {item.description && <Text style={{marginTop: 10, textAlign: 'center'}}>{item.description}</Text>}
                                 </View>
                                 <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 5}}>

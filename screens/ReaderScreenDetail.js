@@ -68,39 +68,32 @@ class EpubReader extends Component {
         this.streamer = new Streamer();
         console.log('constructor props: ', this.props)
     }
-    // static navigationOptions = ({navigation}) => {
-    //     return {
-    //         headerTitle: 'test',
-    //         headerRight: (
-    //             <View style={{alignItems: 'center', flex: 1, flexDirection: 'row'}}>
-    //                 <TouchableOpacity onPress={() => toggleFav(navigation.state.params.quote_id)}>
-    //                     <Ionicons name={navigation.state.params.isFavorite ? "ios-heart" : "ios-heart-outline"}  size={25} color="tomato" style={{marginTop: 5}}/>
-    //                 </TouchableOpacity>
-    //             </View>
-    //         ),
-    //     }
-    // }
 
     static navigationOptions = ({navigation}) => {
         const toggleNavigation = navigation.getParam('toggleNavigation');
         const toggleSettings = navigation.getParam('toggleSettings');
-        const bookName = navigation.getParam('book_name')
+        const bookName = navigation.getParam('book_name');
+        const theme = navigation.getParam('theme');
         return {
             headerTitle: bookName,
             headerRight: (
                 // <TouchableOpacity onPress={navigation.getParam('consoleState')}>
                 <View style={{alignItems: 'center', flex: 1, flexDirection: 'row'}}>
                     <TouchableOpacity onPress={() => toggleSettings()}>
-                        <Ionicons name={"ios-settings"} size={25} color="tomato" style={{marginTop: 5, marginRight: 15}}/>
+                        <Ionicons name={"ios-settings"} size={25} color={theme == 'light' ? 'tomato' : '#c1ae97'} style={{marginTop: 5, marginRight: 15}}/>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => toggleNavigation()}>
-                        <Ionicons name={"ios-list"} size={35} color="tomato" style={{marginTop: 5}}/>
+                        <Ionicons name={"ios-list"} size={35} color={theme == 'light' ? 'tomato' : '#c1ae97'} style={{marginTop: 5}}/>
                     </TouchableOpacity>
                 </View>
             ),
             // title: 'test',
+            headerTitleStyle: {
+                color: theme == 'light' ? '#000' : '#bebebe',
+            },
             headerStyle: {
                 paddingRight: 10,
+                backgroundColor: theme == 'light' ? '#fff' : '#171717',
             },
         }
     }
@@ -153,8 +146,10 @@ class EpubReader extends Component {
 
         this.props.navigation.setParams({toggleNavigation: this.toggleNavigation})
         this.props.navigation.setParams({toggleSettings: this.toggleSettings})
+        this.props.navigation.setParams({theme: this.state.theme})
     }
     setTheme(theme){
+        this.props.navigation.setParams({theme: theme})
         this.setState({
             theme: theme
         })
@@ -295,7 +290,7 @@ class EpubReader extends Component {
                             this.setState({
                                 total_locations: book.locations.total
                             });
-                        }, 500);
+                        }, 1500);
                     }}
                     onPress={(cfi, position, rendition)=> {
                         console.log("press", cfi);

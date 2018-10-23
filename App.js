@@ -5,7 +5,8 @@ import {
   Text,
   View,
   AsyncStorage,
-  PushNotificationIOS
+  PushNotificationIOS,
+  Alert
 } from 'react-native';
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 import ListScreen from './screens/ListScreen';
@@ -46,7 +47,11 @@ PushNotification.configure({
       // process the notification
       // required on iOS only (see fetchCompletionHandler docs: https://facebook.github.io/react-native/docs/pushnotificationios.html)
       notification.finish(PushNotificationIOS.FetchResult.NoData);
-      if (notification.data.quote_id){
+      if (notification.data.need_alert){
+        setTimeout(() => {
+          Alert.alert(notification.message);
+        }, 500);
+      } else if (notification.data.quote_id){
         let q_id = notification.data.quote_id;
         NavigationService.navigate('Details', {quote_id: q_id});
       }

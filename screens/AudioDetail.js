@@ -167,7 +167,7 @@ export default class AudioScreen extends Component {
                 }
             });
             this.task
-            .then((res) => {    
+            .then((res) => {
                 // the temp file path
                 console.log('The file saved to ', res.path())
                 let new_downloaded_books = this.state.downloaded_books
@@ -279,7 +279,7 @@ export default class AudioScreen extends Component {
                     }
                 });
                 this.task
-                .then((res) => {    
+                .then((res) => {
                     console.log('The file saved to ', res.path())
                     let new_downloaded_books = this.state.downloaded_books
                     new_downloaded_books.push({
@@ -525,9 +525,9 @@ export default class AudioScreen extends Component {
         }))
     }
     toMMSS(secs){
-        var sec_num = parseInt(secs, 10)    
+        var sec_num = parseInt(secs, 10)
         var minutes = Math.floor(sec_num / 60) % 60
-        var seconds = sec_num % 60    
+        var seconds = sec_num % 60
         return [minutes,seconds]
             .map(v => v < 10 ? "0" + v : v)
             // .filter((v,i) => v !== "00" || i > 0)
@@ -565,7 +565,7 @@ export default class AudioScreen extends Component {
                                         </View>
                                     </TouchableOpacity>
                                 </View>
-                            ) 
+                            )
                         } else {
                             this.state.downloaded_books.forEach(el => {
                                 if (el.id == item.id){

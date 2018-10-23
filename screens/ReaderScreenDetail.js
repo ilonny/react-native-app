@@ -117,6 +117,18 @@ class EpubReader extends Component {
                 console.log('async storage reader_locations value is empty', value);
             }
         })
+        AsyncStorage.getItem('reader_theme', (err,value) => {
+            if (value){
+                console.log('async storage reader_theme value ', value);
+                this.setState({
+                    theme: value
+                })
+                this.props.navigation.setParams({theme: this.state.theme})
+            } else {
+                console.log('async storage reader_theme value is empty', value);
+                AsyncStorage.setItem('reader_theme', 'light');
+            }
+        })
         //get tocs from server
         let request = new XMLHttpRequest();
         request.onreadystatechange = (e) => {
@@ -153,6 +165,7 @@ class EpubReader extends Component {
         this.setState({
             theme: theme
         })
+        AsyncStorage.setItem('reader_theme', theme);
     }
     defineBookLocations(){
         console.log('defineBookLocations', book);

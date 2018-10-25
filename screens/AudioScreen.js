@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { listStyles } from '../constants/list_styles';
 
 export default class AudioScreen extends Component {
     constructor(props){
@@ -73,19 +74,24 @@ export default class AudioScreen extends Component {
           comp = (
             <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF', paddingBottom: 10, paddingTop: 10}}>
                 <FlatList
-                  data={this.state.books}
-                  renderItem={({item}) => (
+                    style={{paddingLeft: 5, paddingRight: 5, marginLeft: 10, paddingBottom: 5, paddingTop: 5}}
+                    data={this.state.books}
+                    renderItem={({item}) => (
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Audio', {book_id: item.id, book_name: item.name, book_src: item.file_src} )}>
-                      <View style={styles.row}>
-                        <View style={{maxWidth: '80%'}}>
-                          <Text style={{color: 'tomato', fontWeight: 'bold'}}>{item.name}</Text>
-                          <Text style={{marginTop: 10}}>{item.description}</Text>
-                          <Text style={{marginTop: 10, color: '#c5c5c5', fontStyle: 'italic'}}>{item.author}</Text>
+                        <View style={listStyles.quoteItem}>
+                            <Text style={listStyles.quoteTitle}>{item.name}</Text>
+                            <View style={listStyles.quoteBottom}>
+                                <View style={listStyles.quoteBottomText}>
+                                    {item.text_short && (<Text style={{color: "#808080"}}>{item.description}</Text>)}
+                                    <Text style={{marginTop: 10, color: '#c5c5c5', fontStyle: 'italic'}}>{item.author}</Text>
+                                </View>
+                                <View style={listStyles.arrowCircle}>
+                                    <View style={listStyles.arrowCircleInside}>
+                                        <Ionicons name="ios-arrow-forward" size={40} color="#fff"/>
+                                    </View>
+                                </View>
+                            </View>
                         </View>
-                        <View>
-                          <Ionicons name="ios-arrow-forward" size={25} color="tomato"/>
-                        </View>
-                      </View>
                     </TouchableOpacity>
                   )}
                   keyExtractor={this._keyExtractor}

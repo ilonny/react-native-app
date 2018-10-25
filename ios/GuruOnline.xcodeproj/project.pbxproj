@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -49,6 +50,7 @@
 		A27A63C6F7FE4D5ABDFC8FA2 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D4064676C5F43139AF2D0E5 /* Foundation.ttf */; };
 		A700C51CF17440119F4892C1 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E35D4D914242437EBDFE352C /* Entypo.ttf */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
+		BE8B83C249AA48E884DF3149 /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FF6D45B8FD442890F75DDA /* libRNSound.a */; };
 		CA8995AD11504962BB218D6C /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4626714030C947AABF2B585A /* EvilIcons.ttf */; };
 		CB225CDBC4834A0BBBEC58ED /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91FBB6DCB52C4F1B8683C098 /* libRNVectorIcons.a */; };
 		CBC9E3396D7D4C9C8124B557 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD84F4417DBD45AA823E253B /* MaterialCommunityIcons.ttf */; };
@@ -58,7 +60,6 @@
 		F0AE621D2AEA44D4A6081C7E /* libRCTOrientation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EE8FA6AB2784C23824D7276 /* libRCTOrientation.a */; };
 		F3933569BA92402E9229CB48 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8407DCC84F104388893D0A66 /* Feather.ttf */; };
 		FDBF6A8CA2034AF59FF7CF81 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D93C46FEF54085AB3B09D9 /* libRNFetchBlob.a */; };
-		BE8B83C249AA48E884DF3149 /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FF6D45B8FD442890F75DDA /* libRNSound.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +118,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 3D05745F1DE6004600184BB4;
 			remoteInfo = "RCTPushNotification-tvOS";
+		};
+		0A8BCEDC2182283E00BEDEA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1555E26405D847C88709FC92 /* RNSound.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 19825A1E1BD4A89800EE0337;
+			remoteInfo = RNSound;
 		};
 		0A903D4221397AEC00266C73 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -439,6 +447,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = GuruOnline/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = GuruOnline/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		1555E26405D847C88709FC92 /* RNSound.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSound.xcodeproj; path = "../node_modules/react-native-sound/RNSound.xcodeproj"; sourceTree = "<group>"; };
 		1CE3D6CBA6454034BC1FCCE4 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		1EE8FA6AB2784C23824D7276 /* libRCTOrientation.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTOrientation.a; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* GuruOnline-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GuruOnline-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -463,6 +472,7 @@
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B5EAC89402204879AE4E3D64 /* libRNFS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFS.a; sourceTree = "<group>"; };
 		C7983D24AF4C479FA415CE02 /* RCTOrientation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOrientation.xcodeproj; path = "../node_modules/react-native-orientation/iOS/RCTOrientation.xcodeproj"; sourceTree = "<group>"; };
+		C7FF6D45B8FD442890F75DDA /* libRNSound.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSound.a; sourceTree = "<group>"; };
 		C9D18866A70848D09520C00B /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		CBFF622215524D9FB56E2945 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		DD84F4417DBD45AA823E253B /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
@@ -471,8 +481,6 @@
 		E90C0BE568424274867CEB20 /* RCTWKWebView.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTWKWebView.xcodeproj; path = "../node_modules/react-native-wkwebview-reborn/ios/RCTWKWebView.xcodeproj"; sourceTree = "<group>"; };
 		EFC561BC91744D849A9871EF /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		F7A07732D2D84AA1BEB4042B /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
-		1555E26405D847C88709FC92 /* RNSound.xcodeproj */ = {isa = PBXFileReference; name = "RNSound.xcodeproj"; path = "../node_modules/react-native-sound/RNSound.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		C7FF6D45B8FD442890F75DDA /* libRNSound.a */ = {isa = PBXFileReference; name = "libRNSound.a"; path = "libRNSound.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -609,6 +617,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		0A8BCED92182283E00BEDEA3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0A8BCEDD2182283E00BEDEA3 /* libRNSound.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		0A903D1821397AEC00266C73 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -677,6 +693,7 @@
 				0AB8D3F901384B00BBEC244A /* libFPStaticServer.a */,
 				69502E0667884CFFA04451E7 /* libRCTWKWebView.a */,
 				AAA3EC7E334345A3BD3EE545 /* libRNZipArchive.a */,
+				C7FF6D45B8FD442890F75DDA /* libRNSound.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1062,6 +1079,10 @@
 					ProjectRef = ADA04BC182724A3FA8C6B32C /* RNFS.xcodeproj */;
 				},
 				{
+					ProductGroup = 0A8BCED92182283E00BEDEA3 /* Products */;
+					ProjectRef = 1555E26405D847C88709FC92 /* RNSound.xcodeproj */;
+				},
+				{
 					ProductGroup = 0A9E236620DBE81900D1E254 /* Products */;
 					ProjectRef = EFC561BC91744D849A9871EF /* RNVectorIcons.xcodeproj */;
 				},
@@ -1128,6 +1149,13 @@
 			fileType = archive.ar;
 			path = "libRCTPushNotification-tvOS.a";
 			remoteRef = 0A3EE4D120ED29C10033F1FB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0A8BCEDD2182283E00BEDEA3 /* libRNSound.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSound.a;
+			remoteRef = 0A8BCEDC2182283E00BEDEA3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		0A903D4321397AEC00266C73 /* libRNFetchBlob.a */ = {

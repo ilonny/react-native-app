@@ -16,7 +16,8 @@ export default async (RemoteMessage) => {
     .setTitle(RemoteMessage.data.title)
     .setBody(messageText)
     .setData({
-            q_id: JSON.parse(RemoteMessage.data.body).q_id
+            q_id: JSON.parse(RemoteMessage.data.body).q_id ? JSON.parse(RemoteMessage.data.body).q_id : 'false',
+            need_alert: JSON.parse(RemoteMessage.data.body).need_alert ? 'true' : 'false'
     })
     .android
         .setBigText(messageText, RemoteMessage.data.title);

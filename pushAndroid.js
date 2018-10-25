@@ -1,5 +1,6 @@
 import {
     AsyncStorage,
+    Alert
   } from 'react-native';
 import { API_URL } from './constants/api';
 import firebase from 'react-native-firebase';
@@ -76,10 +77,13 @@ firebase.messaging().onMessage((message) => {
 });
 
 firebase.notifications().onNotificationOpened((notificationOpen) => {
-  console.log('ONNOTIFICATION OPENED', notificationOpen.notification._data.q_id)
-  let q_id = notificationOpen.notification._data.q_id;
-  // AsyncStorage.setItem('notification_id', q_id);
-  NavigationService.navigate('Details', {quote_id: q_id});
+  console.log('ONNOTIFICATION OPENED', notificationOpen.notification)
+  if (notificationOpen.notification._data.need_alert == 'true'){
+      Alert.alert(notificationOpen.notification._body);
+  } else if (notificationOpen.notification._data.q_id != 'false'){
+    let q_id = notificationOpen.notification._data.q_id;
+    NavigationService.navigate('Details', {quote_id: q_id});
+  }
 });
 // setTimeout(() => {
 //     console.log('showed??');

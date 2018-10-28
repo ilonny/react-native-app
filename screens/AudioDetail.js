@@ -381,7 +381,7 @@ export default class AudioScreen extends Component {
         this.cancelTask();
     }
     playAudio(id, path = null){
-        console.log('play audio fired', id);
+        console.log('play audio fired', id, path);
         let playingAudio = {};
         if (path){
             //проиграть онлайн
@@ -394,6 +394,7 @@ export default class AudioScreen extends Component {
                 }
             })
         }
+        console.log(playingAudio)
         this.state.books.forEach(el => {
             if (el.id == id){
                 playingAudio.name = el.name;

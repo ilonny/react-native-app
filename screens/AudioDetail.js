@@ -150,7 +150,7 @@ export default class AudioScreen extends Component {
             });
             this.task
             // listen to download progress event
-            .progress((received, total) => {
+            .progress({interval: 2100}, (received, total) => {
                 let { downloading_books } = this.state;
                 let index = downloading_books.length - 1;
                 console.log('downloading_books', downloading_books)
@@ -272,7 +272,7 @@ export default class AudioScreen extends Component {
                 .fetch('GET', API_URL + `/get-audio-file?id=${file_id}`, {
                 });
                 this.task
-                .progress((received, total) => {
+                .progress({interval: 2100}, (received, total) => {
                     let { downloading_books } = this.state;
                     let index = downloading_books.length - 1;
                     console.log('downloading_books', downloading_books)

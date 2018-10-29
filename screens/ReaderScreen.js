@@ -31,7 +31,7 @@ export default class ReaderScreen extends Component {
   willFocusSubscription = this.props.navigation.addListener(
     'willFocus',
     payload => {
-        this.getBooks();
+        this.getBooks(this.state.current_page);
     }
   );
   _keyExtractor = (item) => item.text_short + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
@@ -73,6 +73,9 @@ export default class ReaderScreen extends Component {
     });
     this.getBooks(offset = item)
     this.forceUpdate();
+  }
+  componentDidMount(){
+    console.log("CDM")
   }
   render() {
     console.log('render', this.state)

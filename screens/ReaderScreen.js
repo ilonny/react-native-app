@@ -21,6 +21,8 @@ export default class ReaderScreen extends Component {
       books: [],
       date: Date.now(),
       refreshnig: false,
+      pages_count: 0,
+      current_page: 1,
     }
   }
   static navigationOptions = {
@@ -33,8 +35,9 @@ export default class ReaderScreen extends Component {
     }
   );
   _keyExtractor = (item) => item.text_short + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-  getBooks(){
-    console.log('getBooks starts')
+  _keyExtractor2 = (item) => item;
+  getBooks(offset = 0){
+    console.log('getBooks starts', offset)
     let request = new XMLHttpRequest();
     request.onreadystatechange = (e) => {
         if (request.status === 200) {
@@ -49,27 +52,38 @@ export default class ReaderScreen extends Component {
                 }
                 return {
                     ...state,
-                    books: parsedText
+                    books: parsedText.books,
+                    pages_count: parsedText.page_count
                 }
             }
             })
         }
     };
-    request.open('GET', API_URL + `/get-reader-books`);
+    request.open('GET', API_URL + `/get-reader-books?offset=${offset}`);
+    console.log(API_URL + `/get-reader-books?offset=${offset}`)
     request.send();
   }
   componentWillMount(){
       this.getBooks();
   }
-  shouldComponentUpdate(nextProps, nextState){
-      if (this.state.books.length == nextState.books.length){
-          return false;
-      }
-      return true;
+  setPage(item){
+    console.log('setPage', item);
+    this.setState({
+      current_page: item,
+    });
+    this.getBooks(offset = item)
+    this.forceUpdate();
   }
   render() {
     console.log('render', this.state)
     let comp;
+    let pagination_arr = [];
+    if (this.state.pages_count){
+      for (let i = 1; i <= this.state.pages_count; i++){
+        pagination_arr.push(i);
+      }
+    }
+    console.log(pagination_arr);
     if (true) {
       comp = (
         <SafeAreaView style={{flex: 1, backgroundColor: '#efefef'}}>
@@ -103,10 +117,36 @@ export default class ReaderScreen extends Component {
                 </TouchableOpacity>
               )}
               keyExtractor={this._keyExtractor}
-              onRefresh={() => this.getBooks()}
+              onRefresh={() => this.getBooks(this.state.current_page)}
               refreshing={false}
             >
             </FlatList>
+            {this.state.pages_count && (
+              <FlatList
+                data={pagination_arr}
+                horizontal={true}
+                keyExtractor={(item) => item.toString()}
+                contentContainerStyle={styles.pagination}
+                renderItem = {({item}) => (
+                  <TouchableOpacity key={item} onPress={() => this.setPage(item)}>
+                    <View style={{
+                      padding: 5,
+                      borderRadius: 5,
+                      borderWidth: 1,
+                      borderColor: 'red',
+                      margin: 5,
+                      backgroundColor: this.state.current_page == item ? 'red' : 'white',
+                    }}>
+                      <Text style={{
+                        fontSize: 10,
+                        color: this.state.current_page == item ? 'white' : 'black',
+                      }}>{item}</Text>
+                    </View>
+                  </TouchableOpacity>
+                )}
+              >
+              </FlatList>
+            )}
         </SafeAreaView>
       );
     }
@@ -129,5 +169,12 @@ const styles = StyleSheet.create({
     paddingBottom: 25,
     borderBottomWidth: 1,
     borderBottomColor: '#eaeaea'
+  },
+  pagination: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    backgroundColor: '#fff',
   }
 })

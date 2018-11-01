@@ -37,7 +37,7 @@ export default class DetailsScreen extends Component {
                     <TouchableOpacity onPress={() => toggleFav(navigation.state.params.quote_id)}>
                         <Ionicons name={navigation.state.params.isFavorite ? "ios-heart" : "ios-heart-outline"}  size={25} color="tomato" style={{marginTop: 5}}/>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => shareClick()}>
+                    <TouchableOpacity onPress={() => shareClick()} style={{paddingRight: 5}}>
                         <Ionicons name="ios-share-outline" size={25} color="tomato" style={{marginTop: 4, marginLeft: 10}}/>
                     </TouchableOpacity>
                 </View>

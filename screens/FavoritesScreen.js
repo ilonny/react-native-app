@@ -25,6 +25,7 @@ export default class FavoritesScreen extends Component {
       test2: '',
       date: Date.now(),
       favorites: [],
+      online: true,
     }
   }
   static navigationOptions = {
@@ -37,6 +38,7 @@ export default class FavoritesScreen extends Component {
     }
   );
   getQuotes(){
+    console.log('get quotes');
     let request = new XMLHttpRequest();
     request.onreadystatechange = (e) => {
         if (request.readyState !== 4) {
@@ -51,12 +53,32 @@ export default class FavoritesScreen extends Component {
             }
           })
         } else {
+          console.log('its error, go offline')
           this.setState(state => {
             return {
               ...state,
               quotes: API_URL + `/favorites?items=[${this.state.favorites}]`
             }
           })
+          AsyncStorage.getItem('cache_quotes_list', (err, value) => {
+            console.log('cache_quotes_list', value)
+            if (!!value){
+              console.log('offline quotes here )', value)
+              offline_quotes = JSON.parse(value);
+              state_quotes = [];
+              this.state.favorites.forEach(el => {
+                offline_quotes.forEach(el2 => {
+                  if (el == el2.id){
+                    state_quotes.push(el2);
+                  }
+                });
+              })
+              this.setState({
+                quotes: state_quotes,
+                online: false,
+              })
+            }
+          });
         }
     };
     request.open('GET', API_URL + `/favorites?items=[${this.state.favorites}]`);
@@ -64,6 +86,7 @@ export default class FavoritesScreen extends Component {
   }
   getFavs(){
     AsyncStorage.getItem('Favorites', (err,value) => {
+      console.log('getfavs value', value)
       if (value && value.length){
         this.setState(state => {
           return {
@@ -111,7 +134,7 @@ export default class FavoritesScreen extends Component {
             <FlatList
               data={this.state.quotes}
               renderItem={({item}) => (
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Details', {quote_id: item.id, text_short: item.text_short, title: item.title} )}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Details', {quote_id: item.id, text_short: item.text_short, title: item.title, text: item.text, online: this.state.online, author_name: item.author_name} )}>
                   <View style={styles.row}>
                     <View style={{maxWidth: '80%'}}>
                       <Text style={{color: 'tomato', fontWeight: 'bold'}}>{item.title}</Text>

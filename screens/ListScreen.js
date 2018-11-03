@@ -25,6 +25,9 @@ export default class ListScreen extends Component {
       test2: '',
       date: Date.now(),
       refreshnig: false,
+      online: true,
+      pages_count: 0,
+      current_page: 1,
     }
   }
   static navigationOptions = {
@@ -33,34 +36,61 @@ export default class ListScreen extends Component {
   willFocusSubscription = this.props.navigation.addListener(
     'willFocus',
     payload => {
-      this.getSettings();
+      this.state.online && this.getSettings();
     }
   );
   getQuotes(){
+    console.log('get quotes start')
     let request = new XMLHttpRequest();
     request.onreadystatechange = (e) => {
         if (request.readyState !== 4) {
           return;
         }
         if (request.status === 200) {
+          console.log('success req', request.responseText)
           this.setState(state => {
             return {
               ...state,
-              quotes: request.responseText ? JSON.parse(request.responseText) : 'error network'
+              quotes: request.responseText ? JSON.parse(request.responseText) : 'error network',
+              online: true
               // quotes: 'error network 200'
             }
           })
+          AsyncStorage.setItem('cache_quotes_list', request.responseText);
         } else {
+          console.log('error req')
           this.setState(state => {
             return {
               ...state,
               quotes: API_URL + `/quotes?items=[${this.state.items}]`
             }
           })
+          AsyncStorage.getItem('cache_quotes_list', (err, value) => {
+            console.log('cache_quotes_list', value)
+            if (!!value){
+              this.setState({
+                quotes: JSON.parse(value),
+                online: false,
+              })
+            }
+            this.setPagination();
+          });
         }
+        this.setPagination();
     };
     request.open('GET', API_URL + `/quotes?items=[${this.state.items}]`);
     request.send();
+  }
+  setPagination(){
+    let quotes_count = this.state.quotes.length;
+    this.setState({
+      pages_count: Math.ceil(quotes_count/20)
+    });
+  }
+  setPage(page_number){
+    this.setState({
+      current_page: page_number
+    })
   }
   getSettings(){
     AsyncStorage.getItem('Settings', (err,value) => {
@@ -92,9 +122,9 @@ export default class ListScreen extends Component {
   componentWillMount(){
     this.getSettings();
   }
-
   _keyExtractor = (item) => item.text_short + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   refresh(){
+    console.log('refresh')
     this.setState(state => {
       return {
         ...state,
@@ -122,6 +152,16 @@ export default class ListScreen extends Component {
               quotes: API_URL + `/quotes?items=[${this.state.items}]`
             }
           })
+          AsyncStorage.getItem('cache_quotes_list', (err, value) => {
+            console.log('cache_quotes_list', value)
+            if (!!value){
+              this.setState({
+                quotes: JSON.parse(value),
+                online: false,
+              })
+            }
+            this.setPagination();
+          });
         }
     };
     request.open('GET', API_URL + `/quotes?items=[${this.state.items}]`);
@@ -130,15 +170,23 @@ export default class ListScreen extends Component {
   render() {
     let comp;    
     let quotes = this.state.quotes;
+    console.log('render state', this.state)
     quotes = [...new Set(quotes)];
+    let pagination_arr = [];
+    quotes_on_page = quotes.splice((this.state.current_page-1)*20, 20);
+    if (this.state.pages_count){
+      for (let i = 1; i <= this.state.pages_count; i++){
+        pagination_arr.push(i);
+      }
+    }
     if (this.state.storage != '[]'){
       comp = (
         <SafeAreaView style={{flex: 1, backgroundColor: '#efefef'}}>
             <FlatList
               style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5}}
-              data={quotes}
+              data={quotes_on_page}
               renderItem={({item}) => (
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Details', {quote_id: item.id, text_short: item.text_short, title: item.title} )}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Details', {quote_id: item.id, text_short: item.text_short, title: item.title, text: item.text, online: this.state.online, author_name: item.author_name} )}>
                   <View style={listStyles.quoteItem}>
                     <Text style={listStyles.quoteTitle}>{item.title}</Text>
                     <View style={listStyles.quoteBottom}>
@@ -156,11 +204,36 @@ export default class ListScreen extends Component {
                 </TouchableOpacity>
               )}
               keyExtractor={this._keyExtractor}
-              onRefresh={() => this.refresh()}
+              onRefresh={() => this.state.online && this.refresh()}
               refreshing={false}
             >
             </FlatList>
-        {/* </View> */}
+            {this.state.pages_count && (
+              <FlatList
+                data={pagination_arr}
+                horizontal={true}
+                keyExtractor={(item) => item.toString()}
+                contentContainerStyle={[styles.pagination, {flex: this.state.pages_count > 10 ? 0 : 1}]}
+                renderItem = {({item}) => (
+                  <TouchableOpacity key={item} onPress={() => this.setPage(item)}>
+                    <View style={{
+                      padding: 5,
+                      borderRadius: 5,
+                      borderWidth: 1,
+                      borderColor: 'red',
+                      margin: 5,
+                      backgroundColor: this.state.current_page == item ? 'red' : 'white',
+                    }}>
+                      <Text style={{
+                        fontSize: 10,
+                        color: this.state.current_page == item ? 'white' : 'black',
+                      }}>{item}</Text>
+                    </View>
+                  </TouchableOpacity>
+                )}
+              >
+              </FlatList>
+            )}
         </SafeAreaView>
       );
     } else {
@@ -189,5 +262,11 @@ const styles = StyleSheet.create({
     paddingBottom: 25,
     borderBottomWidth: 1, 
     borderBottomColor: '#eaeaea'
+  },
+  pagination: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    backgroundColor: '#fff',
   }
 })

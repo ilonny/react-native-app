@@ -48,7 +48,8 @@ export default class FavoritesScreen extends Component {
           this.setState(state => {
             return {
               ...state,
-              quotes: request.responseText ? JSON.parse(request.responseText) : 'error network'
+              quotes: request.responseText ? JSON.parse(request.responseText) : 'error network',
+              online: true
               // quotes: 'error network 200'
             }
           })

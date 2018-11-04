@@ -23,6 +23,7 @@ export default class ReaderScreen extends Component {
       refreshnig: false,
       pages_count: 0,
       current_page: 1,
+      online: true
     }
   }
   static navigationOptions = {
@@ -47,17 +48,31 @@ export default class ReaderScreen extends Component {
                 try {
                   parsedText = JSON.parse(request.responseText);
                 } catch (e){
-                  console.log('catched parse json', request)
+                  // console.log('catched parse json', request)
                   parsedText = [];
                 }
                 return {
                     ...state,
                     books: parsedText.books,
-                    pages_count: parsedText.page_count
+                    pages_count: parsedText.page_count,
+                    online: true
                 }
             }
             })
+            AsyncStorage.setItem('cache_reader_list', request.responseText);
+        } else {
+          console.log('error reader books req');
+          AsyncStorage.getItem('cache_reader_list', (err, value) => {
+            // console.log('cache_reader_list', value)
+            if (!!value){
+              this.setState({
+                books: JSON.parse(value).books,
+                online: false,
+              })
+            }
+          });
         }
+        this.setPagination();
     };
     request.open('GET', API_URL + `/get-reader-books?offset=${offset}`);
     console.log(API_URL + `/get-reader-books?offset=${offset}`)
@@ -66,21 +81,33 @@ export default class ReaderScreen extends Component {
   componentWillMount(){
       this.getBooks();
   }
-  setPage(item){
-    console.log('setPage', item);
+  setPagination(){
+    try {
+      let books_count = this.state.books.length;
+      console.log('setpagination', books_count)
+      this.setState({
+        pages_count: Math.ceil(books_count/5)
+      });
+    } catch (e){
+      console.log('set pag error', e);
+    }
+  }
+  setPage(page_number){
     this.setState({
-      current_page: item,
-    });
-    this.getBooks(offset = item)
-    this.forceUpdate();
+      current_page: page_number
+    })
   }
   componentDidMount(){
     console.log("CDM")
+    // AsyncStorage.clear();
   }
   render() {
     console.log('render', this.state)
     let comp;
     let pagination_arr = [];
+    let books = this.state.books;
+    books = [...new Set(books)];
+    books_on_page = books.splice((this.state.current_page-1)*5, 5);
     if (this.state.pages_count){
       for (let i = 1; i <= this.state.pages_count; i++){
         pagination_arr.push(i);
@@ -92,12 +119,13 @@ export default class ReaderScreen extends Component {
         <SafeAreaView style={{flex: 1, backgroundColor: '#efefef'}}>
             <FlatList
               style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5}}
-              data={this.state.books}
+              data={books_on_page}
               renderItem={({item}) => (
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Reader', {book_id: item.id, book_name: item.name, book_src: item.file_src} )}>
                   <View style={listStyles.quoteItem}>
                     <View>
                       <View style={listStyles.bookTop}>
+                      {this.state.online && (
                         <View style={{marginRight: 10}}>
                           {item.cover_src && (
                             <Image
@@ -106,6 +134,7 @@ export default class ReaderScreen extends Component {
                             />
                           )}
                         </View>
+                      )}
                         <View style={{flexWrap: 'wrap', flex: 1}}>
                           <Text style={listStyles.quoteTitle}>{item.name}</Text>
                           <Text style={{marginTop: 10, color: '#c5c5c5', fontStyle: 'italic'}}>{item.author}</Text>
@@ -120,7 +149,7 @@ export default class ReaderScreen extends Component {
                 </TouchableOpacity>
               )}
               keyExtractor={this._keyExtractor}
-              onRefresh={() => this.getBooks(this.state.current_page)}
+              onRefresh={() => this.getBooks()}
               refreshing={false}
             >
             </FlatList>

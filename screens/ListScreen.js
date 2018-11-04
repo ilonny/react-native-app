@@ -47,7 +47,6 @@ export default class ListScreen extends Component {
           return;
         }
         if (request.status === 200) {
-          console.log('success req', request.responseText)
           this.setState(state => {
             return {
               ...state,
@@ -145,6 +144,7 @@ export default class ListScreen extends Component {
               // quotes: 'error network 200'
             }
           })
+          AsyncStorage.setItem('cache_quotes_list', request.responseText);
         } else {
           this.setState(state => {
             return {

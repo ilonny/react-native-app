@@ -21,6 +21,7 @@ export default class AudioScreen extends Component {
         books: [],
         date: Date.now(),
         refreshnig: false,
+        online: true,
       }
     }
     static navigationOptions = {
@@ -49,10 +50,23 @@ export default class AudioScreen extends Component {
                     }
                     return {
                         ...state,
-                        books: parsedText
+                        books: parsedText,
+                        online: true
                     }
                 }
                 })
+                AsyncStorage.setItem('cached_audio_list', request.responseText);
+            } else {
+              console.log('error req')
+              AsyncStorage.getItem('cached_audio_list', (err, value) => {
+                // console.log('cached_audio_list', value)
+                if (!!value){
+                  this.setState({
+                    books: JSON.parse(value),
+                    online: false,
+                  })
+                }
+              });
             }
         };
         request.open('GET', API_URL + `/get-audio-books`);
@@ -77,7 +91,7 @@ export default class AudioScreen extends Component {
                     style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5}}
                     data={this.state.books}
                     renderItem={({item}) => (
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Audio', {book_id: item.id, book_name: item.name, book_src: item.file_src} )}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Audio', {book_id: item.id, book_name: item.name, book_src: item.file_src, online: this.state.online} )}>
                         <View style={listStyles.quoteItem}>
                             <Text style={listStyles.quoteTitle}>{item.name}</Text>
                             <View style={listStyles.quoteBottom}>

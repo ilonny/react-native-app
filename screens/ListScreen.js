@@ -120,6 +120,10 @@ export default class ListScreen extends Component {
   }
   componentWillMount(){
     this.getSettings();
+    this.initialStart();
+  }
+  componentDidMount(){
+    // AsyncStorage.clear();
   }
   _keyExtractor = (item) => item.text_short + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   refresh(){
@@ -167,6 +171,37 @@ export default class ListScreen extends Component {
     request.open('GET', API_URL + `/quotes?items=[${this.state.items}]`);
     request.send();
   }
+  //initial start
+  initialStart(){
+    AsyncStorage.getItem('first_runninig', (err, value) => {
+      console.log('first_runninig', value)
+      if (!value){
+        console.log('getBooks  audio starts')
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = (e) => {
+            if (request.status === 200) {
+              // console.log('audio is downloaded', request.responseText);
+                AsyncStorage.setItem('cached_audio_list', request.responseText);
+            } else {
+              console.log('error audio is downloaded', API_URL + `/get-audio-books`);
+            }
+        };
+        request.open('GET', API_URL + `/get-audio-books`);
+        request.send();
+        //
+        console.log('getBooks reader starts')
+        let request2 = new XMLHttpRequest();
+        request2.onreadystatechange = (e) => {
+            if (request2.status === 200) {
+                AsyncStorage.setItem('cache_reader_list', request2.responseText);
+            }
+        };
+        request2.open('GET', API_URL + `/get-reader-books`);
+        request2.send();
+      }
+    });
+  }
+  //
   render() {
     let comp;    
     let quotes = this.state.quotes;

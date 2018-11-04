@@ -169,7 +169,11 @@ class EpubReader extends Component {
                             }
                         });
                     } else {
-                        Alert.alert('Необходимо подключение к интернету для загрузки книги')
+                        setTimeout(() => {
+                            if (!this.state.successLoaded){
+                                Alert.alert('Необходимо подключение к интернету для загрузки книги')
+                            }
+                        }, 2000);
                     }
                 });
             }

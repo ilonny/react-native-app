@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { listStyles } from '../constants/list_styles';
 
 export default class DetailsScreen extends Component {
     constructor(props){
@@ -24,6 +25,10 @@ export default class DetailsScreen extends Component {
           quote_id: this.props.navigation.getParam('quote_id', 'null'),
           title: this.props.navigation.getParam('title', 'null'),
           text_short: this.props.navigation.getParam('text_short', 'null'),
+          text: this.props.navigation.getParam('text', 'null'),
+          author_name: this.props.navigation.getParam('author_name', 'null'),
+          online: this.props.navigation.getParam('online', 'false'),
+        //   online: false,
       }
     }
     static navigationOptions = ({navigation}) => {
@@ -37,7 +42,7 @@ export default class DetailsScreen extends Component {
                     <TouchableOpacity onPress={() => toggleFav(navigation.state.params.quote_id)}>
                         <Ionicons name={navigation.state.params.isFavorite ? "ios-heart" : "ios-heart-outline"}  size={25} color="tomato" style={{marginTop: 5}}/>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => shareClick()} style={{paddingRight: 5}}>
+                    <TouchableOpacity onPress={() => shareClick()}>
                         <Ionicons name="ios-share-outline" size={25} color="tomato" style={{marginTop: 4, marginLeft: 10}}/>
                     </TouchableOpacity>
                 </View>
@@ -90,7 +95,7 @@ export default class DetailsScreen extends Component {
           })
     }
     componentDidMount() {
-        console.log("component did mount state", this.state)
+        console.log("details screen component did mount state", this.state)
         // this.props.navigation.setParams({ increaseCount: this._increaseCount });
         this.props.navigation.setParams({toggleFav: this.toggleFav})
         this.props.navigation.setParams({consoleState: this.consoleState})
@@ -145,10 +150,10 @@ export default class DetailsScreen extends Component {
         }
     }
     // shouldComponentUpdate(nextProps, nextState){
-    //     if (this.state.isFavorite == nextState.isFavorite){
-    //         return false;
-    //     }
-    //     return true;
+        // if (this.state.isFavorite == nextState.isFavorite){
+        //     return false;
+        // }
+        // return true;
     // }
     componentDidUpdate(prevProps){
         console.log('prevProps', JSON.stringify(prevProps))
@@ -160,17 +165,72 @@ export default class DetailsScreen extends Component {
         }
     }
     render(){
-        console.log('render start');
-        console.log('detailsscreen props', this.props)
-        console.log('detailsscreen state', this.state)
-        console.log('render end');
+        console.log('render start', this.state);
+        console.log('detailsscreen props', JSON.stringify(this.props))
+        console.log('detailsscreen state', JSON.stringify(this.state))
         const quote_id = this.state.quote_id;
-        return (
-            <SafeAreaView style={{flex: 1, backgroundColor: '#efefef', paddingBottom: 10, paddingTop: 10}}>
-                <WebView source={{uri: API_URL + `/quote?id=${quote_id}`}}
-                />
-            </SafeAreaView>
-        )
+        console.log('quote_id = ', quote_id);
+        console.log('render end');
+        let comp;
+        if (this.state.online){
+            comp = (
+                <SafeAreaView style={{flex: 1, backgroundColor: '#efefef', paddingBottom: 10, paddingTop: 10}}>
+                    <WebView
+                        source={{uri: API_URL + `/quote?id=${quote_id}`}}
+                        style={{backgroundColor: '#efefef'}}
+                    />
+                </SafeAreaView>
+            );
+        } else {
+            comp = (
+                <SafeAreaView style={{flex: 1, backgroundColor: '#efefef', padding: 10}}>
+                    {/* <WebView
+                        source={{uri: API_URL + `/quote?id=${quote_id}`}}
+                        style={{backgroundColor: '#efefef'}}
+                    /> */}
+                    <Text style={[listStyles.quoteTitle, {textAlign: 'center', padding: 10}]}>{this.state.title}</Text>
+                    <WebView
+                        source={{baseUrl:'', html:
+                                `
+                                <!DOCTYPE html>
+                                <html lang="ru">
+                                <head>
+                                    <title>The Title</title>
+                                    <meta name="viewport" content="width=device-width, maximum-scale=1, user-scalable=no" /> 
+                                    <meta name="theme-color" content="#202020">
+                                </head>
+                                <body>
+                                    <style>
+                                    body{
+                                        margin: 0;
+                                        background-color: #efefef;
+                                        padding: 10px
+                                    }
+                                    .container{
+                                        padding: 0;
+                                    }
+                                    .body{
+                                        padding: 10px 20px;
+                                        background-color: #efefef;
+                                    }
+                                    .block{
+                                        background-color: #fff;
+                                        padding: 20px;
+                                        border-radius: 20px;
+                                        box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.1);
+                                    }
+                                    </style>
+                                    ${this.state.text}
+                                </body>
+                             `}}
+                        style={{backgroundColor: '#efefef'}}
+                    />
+                    {/* <Text style={{padding: 10}}>{this.state.text}</Text> */}
+                    <Text style={{padding: 10, color: '#c5c5c5', fontStyle: 'italic'}}>{this.state.author_name}</Text>
+                </SafeAreaView>
+            )
+        }
+        return comp;
     }
 }
 const styles = StyleSheet.create({

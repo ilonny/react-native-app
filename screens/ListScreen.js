@@ -12,10 +12,7 @@ import {
 } from 'react-native';
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import NavigationService from '../NavigationService'
-import firebase from 'react-native-firebase';
 import { listStyles } from '../constants/list_styles';
-
 export default class ListScreen extends Component {
   constructor(props){
     super(props);
@@ -28,6 +25,9 @@ export default class ListScreen extends Component {
       test2: '',
       date: Date.now(),
       refreshnig: false,
+      online: true,
+      pages_count: 0,
+      current_page: 1,
     }
   }
   static navigationOptions = {
@@ -36,10 +36,11 @@ export default class ListScreen extends Component {
   willFocusSubscription = this.props.navigation.addListener(
     'willFocus',
     payload => {
-      this.getSettings();
+      this.state.online && this.getSettings();
     }
   );
   getQuotes(){
+    console.log('get quotes start')
     let request = new XMLHttpRequest();
     request.onreadystatechange = (e) => {
         if (request.readyState !== 4) {
@@ -49,25 +50,51 @@ export default class ListScreen extends Component {
           this.setState(state => {
             return {
               ...state,
-              quotes: request.responseText ? JSON.parse(request.responseText) : 'error network'
+              quotes: request.responseText ? JSON.parse(request.responseText) : 'error network',
+              online: true
               // quotes: 'error network 200'
             }
           })
+          let quotes = [].concat(this.state.quotes)
+          AsyncStorage.setItem('cache_quotes_list', JSON.stringify(quotes.splice(0, 100)));
         } else {
+          console.log('error req')
           this.setState(state => {
             return {
               ...state,
               quotes: API_URL + `/quotes?items=[${this.state.items}]`
             }
           })
+          AsyncStorage.getItem('cache_quotes_list', (err, value) => {
+            console.log('cache_quotes_list', value)
+            if (!!value){
+              this.setState({
+                quotes: JSON.parse(value),
+                online: false,
+              })
+            }
+            this.setPagination();
+          });
         }
+        this.setPagination();
     };
     request.open('GET', API_URL + `/quotes?items=[${this.state.items}]`);
     request.send();
   }
+  setPagination(){
+    let quotes_count = this.state.quotes.length;
+    this.setState({
+      pages_count: Math.ceil(quotes_count/20)
+    });
+  }
+  setPage(page_number){
+    this.setState({
+      current_page: page_number
+    })
+  }
   getSettings(){
     AsyncStorage.getItem('Settings', (err,value) => {
-      if (value && value.length){
+      if (!!value && value.length){
         this.setState(state => {
           return {
             ...state,
@@ -94,32 +121,14 @@ export default class ListScreen extends Component {
   }
   componentWillMount(){
     this.getSettings();
-    AsyncStorage.getItem('notification_id', (err, value) => {
-      console.log('notification_id', value)
-      if (value){
-        q_id = value;
-        console.log('q_id', q_id)
-        NavigationService.navigate('Details', {quote_id: q_id});
-        // AsyncStorage.setItem('notification_id', null);
-      }
-    }) 
+    this.initialStart();
   }
-  async componentDidMount(){
-    console.log('componentDidMount')
-    const notificationOpen = await firebase.notifications().getInitialNotification();
-    console.log('notificationOpen ', notificationOpen)
-    if (notificationOpen) {
-      // App was opened by a notification
-      // Get the action triggered by the notification being opened
-      // const action = notificationOpen.action;
-      // Get information about the notification that was opened
-      // const Notification = notificationOpen.notification;
-      let q_id = notificationOpen.notification._data.q_id;
-      NavigationService.navigate('Details', {quote_id: q_id});
-    }
+  componentDidMount(){
+    // AsyncStorage.clear();
   }
   _keyExtractor = (item) => item.text_short + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   refresh(){
+    console.log('refresh')
     this.setState(state => {
       return {
         ...state,
@@ -132,14 +141,18 @@ export default class ListScreen extends Component {
           return;
         }
         if (request.status === 200) {
+          console.log('status ok', request.responseText)
           this.setState(state => {
             return {
               ...state,
               quotes: request.responseText ? JSON.parse(request.responseText) : 'error network',
-              refreshing: false
+              refreshing: false,
+              online: true,
               // quotes: 'error network 200'
             }
           })
+          let quotes = [].concat(this.state.quotes)
+          AsyncStorage.setItem('cache_quotes_list', JSON.stringify(quotes.splice(0, 100)));
         } else {
           this.setState(state => {
             return {
@@ -147,28 +160,76 @@ export default class ListScreen extends Component {
               quotes: API_URL + `/quotes?items=[${this.state.items}]`
             }
           })
+          AsyncStorage.getItem('cache_quotes_list', (err, value) => {
+            // console.log('cache_quotes_list', value)
+            if (!!value){
+              this.setState({
+                quotes: JSON.parse(value),
+                online: false,
+              })
+            }
+            this.setPagination();
+          });
         }
     };
     request.open('GET', API_URL + `/quotes?items=[${this.state.items}]`);
     request.send();
   }
+  //initial start
+  initialStart(){
+    AsyncStorage.getItem('first_runninig', (err, value) => {
+      console.log('first_runninig', value)
+      if (!value){
+        console.log('getBooks  audio starts')
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = (e) => {
+            if (request.status === 200) {
+              // console.log('audio is downloaded'git, request.responseText);
+                AsyncStorage.setItem('cached_audio_list', request.responseText);
+            } else {
+              console.log('error audio is downloaded', API_URL + `/get-audio-books`);
+            }
+        };
+        request.open('GET', API_URL + `/get-audio-books`);
+        request.send();
+        //
+        console.log('getBooks reader starts')
+        let request2 = new XMLHttpRequest();
+        request2.onreadystatechange = (e) => {
+            if (request2.status === 200) {
+                AsyncStorage.setItem('cache_reader_list', request2.responseText);
+            }
+        };
+        request2.open('GET', API_URL + `/get-reader-books`);
+        request2.send();
+      }
+    });
+  }
+  //
   render() {
-    // console.log('renderrrr', this.state)
     let comp;    
     let quotes = this.state.quotes;
+    console.log('render state', this.state)
     quotes = [...new Set(quotes)];
+    let pagination_arr = [];
+    quotes_on_page = quotes.splice((this.state.current_page-1)*20, 20);
+    if (this.state.pages_count){
+      for (let i = 1; i <= this.state.pages_count; i++){
+        pagination_arr.push(i);
+      }
+    }
     if (this.state.storage != '[]'){
       comp = (
         <SafeAreaView style={{flex: 1, backgroundColor: '#efefef'}}>
             <FlatList
-              data={quotes}
+              data={quotes_on_page}
               renderItem={({item}) => (
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Details', {quote_id: item.id, text_short: item.text_short, title: item.title} )}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Details', {quote_id: item.id, text_short: item.text_short, title: item.title, text: item.text, online: this.state.online, author_name: item.author_name} )}>
                   <View style={listStyles.quoteItem}>
                     <Text style={listStyles.quoteTitle}>{item.title}</Text>
                     <View style={listStyles.quoteBottom}>
                       <View style={listStyles.quoteBottomText}>
-                        {!!item.text_short && <Text style={{color: "#808080"}}>{item.text_short}</Text>}
+                        {!!item.text_short && (<Text style={{color: "#808080"}}>{item.text_short}</Text>)}
                         <Text style={{marginTop: 10, color: '#c5c5c5', fontStyle: 'italic'}}>{item.author_name}</Text>
                       </View>
                       <View style={listStyles.arrowCircle}>
@@ -181,10 +242,36 @@ export default class ListScreen extends Component {
                 </TouchableOpacity>
               )}
               keyExtractor={this._keyExtractor}
-              onRefresh={() => this.refresh()}
+              onRefresh={() => this.state.online && this.refresh()}
               refreshing={false}
             >
             </FlatList>
+            {!!this.state.pages_count && (
+              <FlatList
+                data={pagination_arr}
+                horizontal={true}
+                keyExtractor={(item) => item.toString()}
+                contentContainerStyle={[styles.pagination, {flex: this.state.pages_count > 10 ? 0 : 1}]}
+                renderItem = {({item}) => (
+                  <TouchableOpacity key={item} onPress={() => this.setPage(item)}>
+                    <View style={{
+                      padding: 5,
+                      borderRadius: 5,
+                      borderWidth: 1,
+                      borderColor: 'red',
+                      margin: 5,
+                      backgroundColor: this.state.current_page == item ? 'red' : 'white',
+                    }}>
+                      <Text style={{
+                        fontSize: 10,
+                        color: this.state.current_page == item ? 'white' : 'black',
+                      }}>{item}</Text>
+                    </View>
+                  </TouchableOpacity>
+                )}
+              >
+              </FlatList>
+            )}
         </SafeAreaView>
       );
     } else {
@@ -213,5 +300,11 @@ const styles = StyleSheet.create({
     paddingBottom: 25,
     borderBottomWidth: 1, 
     borderBottomColor: '#eaeaea'
+  },
+  pagination: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    backgroundColor: '#fff',
   }
 })

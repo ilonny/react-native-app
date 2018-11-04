@@ -43,8 +43,7 @@ export default class AudioScreen extends Component {
         duration: 0,
         currentTime: 0,
         prerender: false,
-        need_to_delete: false,
-        need_to_delete_queue: false,
+        online: this.props.navigation.getParam("online"),
       }
     }
     static navigationOptions = ({navigation}) => {
@@ -52,6 +51,7 @@ export default class AudioScreen extends Component {
         const downloadAll = navigation.getParam('downloadAll');
         const downloading = navigation.getParam('downloading');
         const cancelTask = navigation.getParam('cancelTask');
+        const online = navigation.getParam('online');
         console.log('downloading123', downloading);
         if (downloading){
             return {
@@ -68,6 +68,7 @@ export default class AudioScreen extends Component {
                 headerLeft: null
             }
         } else {
+            if (online){
             return {
                 headerTitle: bookName,
                 headerRight: (
@@ -79,11 +80,19 @@ export default class AudioScreen extends Component {
                     </TouchableOpacity>
                 ),
             }
+            } else {
+                return {
+                    headerTitle: bookName,
+                    headerRight: null,  
         }
+    }
+    }
     }
     whoosh = {};
     getBooks(){
         console.log('getBooks starts')
+        if (this.state.online){
+            console.log('getBooks starts online')
         let request = new XMLHttpRequest();
         request.onreadystatechange = (e) => {
             if (request.status === 200) {
@@ -102,6 +111,26 @@ export default class AudioScreen extends Component {
                     }
                 }
                 })
+                }
+            };
+            request.open('GET', API_URL + `/get-audio-files?book_id=${this.state.book_id}`);
+            request.send();
+        } else {
+            console.log('getBooks starts offline')
+            AsyncStorage.getItem('cached_audio_list', (err,value) => {
+                // console.log('from async storage', value);
+                if (value){
+                    let books_arr = JSON.parse(value);
+                    books_arr.forEach(el => {
+                        if (el.id == this.state.book_id) {
+                            this.setState({
+                                books: el.audiofiles  
+                            })
+                        }
+                    });
+                }
+            });
+        }
                 AsyncStorage.getItem('downloaded_audio', (err,value) => {
                     console.log('from async storage', value);
                     if (value){
@@ -111,10 +140,6 @@ export default class AudioScreen extends Component {
                     }
                 });
             }
-        };
-        request.open('GET', API_URL + `/get-audio-files?book_id=${this.state.book_id}`);
-        request.send();
-    }
     componentWillMount(){
         this.getBooks();
     }
@@ -328,15 +353,12 @@ export default class AudioScreen extends Component {
     }
     componentDidMount(){
         // this.downloadBook(2)
-        console.log('CDM');
             AsyncStorage.getItem('downloaded_audio', (err,value) => {
                 console.log('from async storage', value);
                 if (value){
                     this.setState({
                         downloaded_books: JSON.parse(value)
                     })
-                } else {
-                    console.log('cdm async err valye', value)
                 }
             });
         // AsyncStorage.getItem('downloading_audio', (err,value) => {
@@ -351,6 +373,7 @@ export default class AudioScreen extends Component {
         this.props.navigation.setParams({downloadAll: this.downloadAll})
         this.props.navigation.setParams({downloading: this.state.downloading})
         this.props.navigation.setParams({cancelTask: this.cancelTask})
+        this.props.navigation.setParams({online: this.state.online})
     }
     playFromReader(){
         //проверим пришел ли в пропсы айди аудиофайла, если да, то проиграем его (или скачаем и проиграем)
@@ -409,7 +432,7 @@ export default class AudioScreen extends Component {
         this.cancelTask();
     }
     playAudio(id, path = null){
-        console.log('play audio fired', id);
+        console.log('play audio fired', id, path);
         let playingAudio = {};
         if (path){
             //проиграть онлайн
@@ -422,6 +445,7 @@ export default class AudioScreen extends Component {
                 }
             })
         }
+        console.log(playingAudio)
         this.state.books.forEach(el => {
             if (el.id == id){
                 playingAudio.name = el.name;
@@ -625,7 +649,7 @@ export default class AudioScreen extends Component {
                                 audioAction = (
                                     <View style={{flex: 0, flexDirection: 'row', alignItems: 'center'}}>
                                         {!this.state.downloading ? (
-                                            <TouchableOpacity onPress={() => this.downloadBook(item.id)}>
+                                            <TouchableOpacity onPress={() => this.state.online ? this.downloadBook(item.id) : Alert.alert('Необходимо подключение к интернету')}>
                                                 <View style={{flex: 1, justifyContent: "center", flexDirection: 'column', alignItems: 'center'}}>
                                                     <View>
                                                         <Ionicons name="ios-cloud-download" size={23} color="tomato" style={{margin: 'auto'}} />
@@ -643,7 +667,7 @@ export default class AudioScreen extends Component {
                                                 </View>
                                             </TouchableOpacity>
                                         )}
-                                        <TouchableOpacity onPress={() => this.playAudio(item.id, item.file_src)}>
+                                        <TouchableOpacity onPress={() => this.state.online ? this.playAudio(item.id, item.file_src) : Alert.alert('Необходимо подключение к интернету')}>
                                             <View style={{flex: 1, justifyContent: "center", flexDirection: 'column', alignItems: 'center', marginLeft: 10}}>
                                                 <View>
                                                     <Ionicons name="ios-play" size={23} color="tomato" style={{margin: 'auto'}} />

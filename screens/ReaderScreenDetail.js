@@ -10,7 +10,8 @@ import {
   AsyncStorage,
   TouchableOpacity,
   FlatList,
-  Slider
+  Slider,
+  Alert
 } from 'react-native';
 
 import { Epub, Streamer } from "epubjs-rn";
@@ -41,6 +42,7 @@ class EpubReader extends Component {
             current_location_index: 0,
             progress_width: 0,
             theme: 'light',
+            online: true,
             themes: {
                 light: {
                     body: {
@@ -145,12 +147,31 @@ class EpubReader extends Component {
                     }
                     return {
                         ...state,
-                        book_locations: parsedText
+                        book_locations: parsedText,
+                        online: true,
                     }
                 }
                 })
+                AsyncStorage.setItem('cached_toc_book_'+this.state.book_id, request.responseText);
             } else {
                 console.log('failed reques', request)
+                AsyncStorage.getItem('cached_book_'+this.state.book_id, (err, value) => {
+                    console.log('cache_book', value)
+                    if (!!value){
+                      console.log('it should to open...')
+                        AsyncStorage.getItem('cached_toc_book_'+this.state.book_id, (err, value) => {
+                            // console.log('cache_reader_list', value)
+                            if (!!value){
+                                this.setState({
+                                    book_locations: JSON.parse(value),
+                                    online: false
+                                })
+                            }
+                        });
+                    } else {
+                        Alert.alert('Необходимо подключение к интернету для загрузки книги')
+                    }
+                });
             }
         };
         request.open('GET', API_URL + `/get-tocs?book_id=${this.state.book_id}`);
@@ -303,6 +324,7 @@ class EpubReader extends Component {
                             this.setState({
                                 total_locations: book.locations.total
                             });
+                            AsyncStorage.setItem('cached_book_'+this.state.book_id, 'true')
                         }, 1500);
                     }}
                     onPress={(cfi, position, rendition)=> {

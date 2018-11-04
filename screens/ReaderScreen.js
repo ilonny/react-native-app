@@ -102,7 +102,7 @@ export default class ReaderScreen extends Component {
     // AsyncStorage.clear();
   }
   render() {
-    console.log('render', this.state)
+    // console.log('render', this.state)
     let comp;
     let pagination_arr = [];
     let books = this.state.books;

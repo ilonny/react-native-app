@@ -65,7 +65,7 @@ export default class ListScreen extends Component {
             }
           })
           AsyncStorage.getItem('cache_quotes_list', (err, value) => {
-            console.log('cache_quotes_list', value)
+            // console.log('cache_quotes_list', value)
             if (!!value){
               this.setState({
                 quotes: JSON.parse(value),
@@ -180,7 +180,7 @@ export default class ListScreen extends Component {
         let request = new XMLHttpRequest();
         request.onreadystatechange = (e) => {
             if (request.status === 200) {
-              // console.log('audio is downloaded', request.responseText);
+              // console.log('audio is downloaded'git, request.responseText);
                 AsyncStorage.setItem('cached_audio_list', request.responseText);
             } else {
               console.log('error audio is downloaded', API_URL + `/get-audio-books`);

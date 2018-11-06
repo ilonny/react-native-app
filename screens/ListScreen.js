@@ -144,7 +144,8 @@ export default class ListScreen extends Component {
             return {
               ...state,
               quotes: request.responseText ? JSON.parse(request.responseText) : 'error network',
-              refreshing: false
+              refreshing: false,
+              online: true
               // quotes: 'error network 200'
             }
           })
@@ -153,7 +154,8 @@ export default class ListScreen extends Component {
           this.setState(state => {
             return {
               ...state,
-              quotes: API_URL + `/quotes?items=[${this.state.items}]`
+              quotes: API_URL + `/quotes?items=[${this.state.items}]`,
+              online: false
             }
           })
           AsyncStorage.getItem('cache_quotes_list', (err, value) => {
@@ -205,7 +207,7 @@ export default class ListScreen extends Component {
   render() {
     let comp;    
     let quotes = this.state.quotes;
-    console.log('render state', this.state)
+    // console.log('render state', this.state)
     quotes = [...new Set(quotes)];
     let pagination_arr = [];
     quotes_on_page = quotes.splice((this.state.current_page-1)*20, 20);
@@ -216,9 +218,9 @@ export default class ListScreen extends Component {
     }
     if (this.state.storage != '[]'){
       comp = (
-        <SafeAreaView style={{flex: 1, backgroundColor: '#efefef'}}>
+        <SafeAreaView style={{flex: 1, backgroundColor: '#efefef', justifyContent:'space-between'}}>
             <FlatList
-              style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5}}
+              style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5, flex: 0}}
               data={quotes_on_page}
               renderItem={({item}) => (
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Details', {quote_id: item.id, text_short: item.text_short, title: item.title, text: item.text, online: this.state.online, author_name: item.author_name} )}>
@@ -244,30 +246,32 @@ export default class ListScreen extends Component {
             >
             </FlatList>
             {this.state.pages_count && (
-              <FlatList
-                data={pagination_arr}
-                horizontal={true}
-                keyExtractor={(item) => item.toString()}
-                contentContainerStyle={[styles.pagination, {flex: this.state.pages_count > 10 ? 0 : 1}]}
-                renderItem = {({item}) => (
-                  <TouchableOpacity key={item} onPress={() => this.setPage(item)}>
-                    <View style={{
-                      padding: 5,
-                      borderRadius: 5,
-                      borderWidth: 1,
-                      borderColor: 'red',
-                      margin: 5,
-                      backgroundColor: this.state.current_page == item ? 'red' : 'white',
-                    }}>
-                      <Text style={{
-                        fontSize: 10,
-                        color: this.state.current_page == item ? 'white' : 'black',
-                      }}>{item}</Text>
-                    </View>
-                  </TouchableOpacity>
-                )}
-              >
-              </FlatList>
+              <View style={{backgroundColor: '#fff'}}>
+                <FlatList
+                  data={pagination_arr}
+                  horizontal={true}
+                  keyExtractor={(item) => item.toString()}
+                  contentContainerStyle={[styles.pagination, {flex: this.state.pages_count > 10 ? 0 : 1}]}
+                  renderItem = {({item}) => (
+                    <TouchableOpacity key={item} onPress={() => this.setPage(item)}>
+                      <View style={{
+                        padding: 5,
+                        borderRadius: 5,
+                        borderWidth: 1,
+                        borderColor: 'red',
+                        margin: 5,
+                        backgroundColor: this.state.current_page == item ? 'red' : 'white',
+                      }}>
+                        <Text style={{
+                          fontSize: 10,
+                          color: this.state.current_page == item ? 'white' : 'black',
+                        }}>{item}</Text>
+                      </View>
+                    </TouchableOpacity>
+                  )}
+                >
+                </FlatList>
+              </View>
             )}
         </SafeAreaView>
       );
@@ -284,7 +288,7 @@ export default class ListScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },

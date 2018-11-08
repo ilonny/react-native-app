@@ -66,7 +66,7 @@ export default class ListScreen extends Component {
             }
           })
           AsyncStorage.getItem('cache_quotes_list', (err, value) => {
-            console.log('cache_quotes_list', value)
+            // console.log('cache_quotes_list', value)
             if (!!value){
               this.setState({
                 quotes: JSON.parse(value),
@@ -141,13 +141,12 @@ export default class ListScreen extends Component {
           return;
         }
         if (request.status === 200) {
-          console.log('status ok', request.responseText)
           this.setState(state => {
             return {
               ...state,
               quotes: request.responseText ? JSON.parse(request.responseText) : 'error network',
               refreshing: false,
-              online: true,
+              online: true
               // quotes: 'error network 200'
             }
           })
@@ -157,7 +156,8 @@ export default class ListScreen extends Component {
           this.setState(state => {
             return {
               ...state,
-              quotes: API_URL + `/quotes?items=[${this.state.items}]`
+              quotes: API_URL + `/quotes?items=[${this.state.items}]`,
+              online: false
             }
           })
           AsyncStorage.getItem('cache_quotes_list', (err, value) => {
@@ -209,7 +209,7 @@ export default class ListScreen extends Component {
   render() {
     let comp;    
     let quotes = this.state.quotes;
-    console.log('render state', this.state)
+    // console.log('render state', this.state)
     quotes = [...new Set(quotes)];
     let pagination_arr = [];
     quotes_on_page = quotes.splice((this.state.current_page-1)*20, 20);
@@ -247,6 +247,7 @@ export default class ListScreen extends Component {
             >
             </FlatList>
             {!!this.state.pages_count && (
+              <View style={{backgroundColor: '#fff'}}>
               <FlatList
                 data={pagination_arr}
                 horizontal={true}
@@ -271,6 +272,7 @@ export default class ListScreen extends Component {
                 )}
               >
               </FlatList>
+              </View>
             )}
         </SafeAreaView>
       );
@@ -287,7 +289,7 @@ export default class ListScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },

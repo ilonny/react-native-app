@@ -88,7 +88,6 @@ export default class AudioScreen extends Component {
           comp = (
             <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF', paddingBottom: 10, paddingTop: 10}}>
                 <FlatList
-                    style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5}}
                     data={this.state.books}
                     renderItem={({item}) => (
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Audio', {book_id: item.id, book_name: item.name, book_src: item.file_src, online: this.state.online} )}>

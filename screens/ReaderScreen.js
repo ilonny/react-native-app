@@ -63,12 +63,6 @@ export default class ReaderScreen extends Component {
             }
             })
             AsyncStorage.setItem('cache_reader_list', request.responseText);
-            if (!this.state.covers_fired){
-              this.downloadCovers();
-              this.setState({
-                covers_fired: true
-              })
-            }
         } else {
           console.log('error reader books req');
           AsyncStorage.getItem('cache_reader_list', (err, value) => {
@@ -82,6 +76,12 @@ export default class ReaderScreen extends Component {
           });
         }
         this.setPagination();
+        if (!this.state.covers_fired){
+          this.downloadCovers();
+          this.setState({
+            covers_fired: true
+          })
+        }
     };
     request.open('GET', API_URL + `/get-reader-books?offset=${offset}`);
     console.log(API_URL + `/get-reader-books?offset=${offset}`)

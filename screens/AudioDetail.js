@@ -53,22 +53,23 @@ export default class AudioScreen extends Component {
         const cancelTask = navigation.getParam('cancelTask');
         const online = navigation.getParam('online');
         console.log('downloading123', downloading);
-        if (downloading){
-            return {
-                headerTitle: bookName,
-                headerRight: (
-                    null
-                    // <TouchableOpacity onPress={() => cancelTask()}>
-                    //     <View style={{alignItems: 'center', flex: 1, flexDirection: 'column', marginRight: 10}}>
-                    //             <Ionicons name={"ios-close-circle-outline"} size={25} color="tomato" style={{marginTop: 5}}/>
-                    //             <Text style={{fontSize: 10, marginTop: -7}}>Остановить загрузку</Text>
-                    //     </View>
-                    // </TouchableOpacity>
-                ),
-                headerLeft: null
-            }
-        } else {
-            if (online){
+        // if (downloading){
+        //     return {
+        //         headerTitle: bookName,
+        //         headerRight: (
+        //             null
+        //             // <TouchableOpacity onPress={() => cancelTask()}>
+        //             //     <View style={{alignItems: 'center', flex: 1, flexDirection: 'column', marginRight: 10}}>
+        //             //             <Ionicons name={"ios-close-circle-outline"} size={25} color="tomato" style={{marginTop: 5}}/>
+        //             //             <Text style={{fontSize: 10, marginTop: -7}}>Остановить загрузку</Text>
+        //             //     </View>
+        //             // </TouchableOpacity>
+        //         ),
+        //         headerLeft: null
+        //     }
+        // } else {
+        // }
+        if (online){
             return {
                 headerTitle: bookName,
                 headerRight: (
@@ -80,37 +81,36 @@ export default class AudioScreen extends Component {
                     </TouchableOpacity>
                 ),
             }
-            } else {
-                return {
-                    headerTitle: bookName,
-                    headerRight: null,  
+        } else {
+            return {
+                headerTitle: bookName,
+                headerRight: null,
+            }
         }
-    }
-    }
     }
     whoosh = {};
     getBooks(){
         console.log('getBooks starts')
         if (this.state.online){
             console.log('getBooks starts online')
-        let request = new XMLHttpRequest();
-        request.onreadystatechange = (e) => {
-            if (request.status === 200) {
-                this.setState(state => {
-                  if (request.responseText){
-                    let parsedText;
-                    try {
-                      parsedText = JSON.parse(request.responseText);
-                    } catch (e){
-                      console.log('catched parse json', request)
-                      parsedText = [];
+            let request = new XMLHttpRequest();
+            request.onreadystatechange = (e) => {
+                if (request.status === 200) {
+                    this.setState(state => {
+                      if (request.responseText){
+                        let parsedText;
+                        try {
+                          parsedText = JSON.parse(request.responseText);
+                        } catch (e){
+                          console.log('catched parse json', request)
+                          parsedText = [];
+                        }
+                        return {
+                            ...state,
+                            books: parsedText
+                        }
                     }
-                    return {
-                        ...state,
-                        books: parsedText
-                    }
-                }
-                })
+                    })
                 }
             };
             request.open('GET', API_URL + `/get-audio-files?book_id=${this.state.book_id}`);
@@ -124,22 +124,22 @@ export default class AudioScreen extends Component {
                     books_arr.forEach(el => {
                         if (el.id == this.state.book_id) {
                             this.setState({
-                                books: el.audiofiles  
+                                books: el.audiofiles
                             })
                         }
                     });
                 }
             });
         }
-                AsyncStorage.getItem('downloaded_audio', (err,value) => {
-                    console.log('from async storage', value);
-                    if (value){
-                        this.setState({
-                            downloaded_books: JSON.parse(value)
-                        })
-                    }
-                });
+        AsyncStorage.getItem('downloaded_audio_'+this.state.book_id, (err,value) => {
+            console.log('from async storage', value);
+            if (value){
+                this.setState({
+                    downloaded_books: JSON.parse(value)
+                })
             }
+        });
+    }
     componentWillMount(){
         this.getBooks();
     }
@@ -161,7 +161,7 @@ export default class AudioScreen extends Component {
             downloading: true
         });
         this.props.navigation.setParams({downloading: true})
-        AsyncStorage.setItem('downloading_audio', JSON.stringify(this.state.downloading_books));
+        AsyncStorage.setItem('downloading_audio_'+this.state.book_id, JSON.stringify(this.state.downloading_books));
         this.task = RNFetchBlob
             .config({
                 // add this option that makes response data to be stored as a file,
@@ -184,7 +184,7 @@ export default class AudioScreen extends Component {
                     id: file_id,
                     progress: parseInt((received / total) * 100),
                 }
-                AsyncStorage.setItem('downloading_audio', JSON.stringify(this.state.downloading_books));
+                AsyncStorage.setItem('downloading_audio_'+this.state.book_id, JSON.stringify(this.state.downloading_books));
                 try {
                     this.setState({
                         downloading_books: downloading_books
@@ -209,8 +209,8 @@ export default class AudioScreen extends Component {
                     downloading: false,
                 });
                 this.props.navigation.setParams({downloading: this.state.downloading})
-                AsyncStorage.setItem('downloaded_audio', JSON.stringify(this.state.downloaded_books));
-                AsyncStorage.setItem('downloading_audio', JSON.stringify(this.state.downloading_books));
+                AsyncStorage.setItem('downloaded_audio_'+this.state.book_id, JSON.stringify(this.state.downloaded_books));
+                AsyncStorage.setItem('downloading_audio_'+this.state.book_id, JSON.stringify(this.state.downloading_books));
                     //play after download automatically
                     if (need_play){
                         this.playAudio(file_id);
@@ -245,7 +245,7 @@ export default class AudioScreen extends Component {
                     this.setState({
                         downloaded_books: arr
                     })
-                    AsyncStorage.setItem('downloaded_audio', JSON.stringify(this.state.downloaded_books));
+                    AsyncStorage.setItem('downloaded_audio_'+this.state.book_id, JSON.stringify(this.state.downloaded_books));
                 })
                 .catch((err) => {
                     console.log('error while delete file', err)
@@ -256,7 +256,6 @@ export default class AudioScreen extends Component {
     }
     downloadAll = () => {
         AsyncStorage.getItem('global_downloading', (err, value) => {
-            console.log('download all2')
             console.log('downloadAll global_downloading', value);
             if (value){
                 let downloadObj = JSON.parse(value);
@@ -276,7 +275,7 @@ export default class AudioScreen extends Component {
                     }
                 })
                 if (this.need_to_download.length){
-                    AsyncStorage.setItem('need_to_download', JSON.stringify(this.need_to_download));
+                    AsyncStorage.setItem('need_to_download_'+this.state.book_id, JSON.stringify(this.need_to_download));
                     AsyncStorage.setItem('global_downloading', JSON.stringify({
                         book_name: this.props.navigation.getParam('book_name'),
                         book_id: this.props.navigation.getParam("book_id")
@@ -294,6 +293,12 @@ export default class AudioScreen extends Component {
             if (value){
                 this.need_to_download = [];
                 AsyncStorage.removeItem('cancel_task');
+                AsyncStorage.getItem('need_to_download_'+this.state.book_id, (err, value) => {
+                    if (value){
+                        this.need_to_download = JSON.parse(value)
+                        this.getDownloadingDataFromAyncStorage();
+                    }
+                })
             }
         });
         if (this.need_to_download.length){
@@ -308,7 +313,7 @@ export default class AudioScreen extends Component {
                 downloading: true
             });
             this.props.navigation.setParams({downloading: true})
-            AsyncStorage.setItem('downloading_audio', JSON.stringify(this.state.downloading_books));
+            AsyncStorage.setItem('downloading_audio_'+this.state.book_id, JSON.stringify(this.state.downloading_books));
             this.task = RNFetchBlob
                 .config({
                     fileCache : true,
@@ -317,16 +322,19 @@ export default class AudioScreen extends Component {
                 .fetch('GET', API_URL + `/get-audio-file?id=${file_id}`, {
                 });
                 this.task
-                .progress({interval: 2100}, (received, total) => {
+                .progress((received, total) => {
                     let { downloading_books } = this.state;
                     let index = downloading_books.length - 1;
                     console.log('downloading_books', downloading_books)
+                    if (downloading_books.length > 1){
+                        downloading_books.shift();
+                    }
                     console.log('progress', received / total)
                     downloading_books[index] = {
                         id: file_id,
                         progress: parseInt((received / total) * 100),
                     }
-                    AsyncStorage.setItem('downloading_audio', JSON.stringify(this.state.downloading_books));
+                    AsyncStorage.setItem('downloading_audio_'+this.state.book_id, JSON.stringify(this.state.downloading_books));
                     try {
                         this.setState({
                             downloading_books: downloading_books
@@ -362,36 +370,43 @@ export default class AudioScreen extends Component {
                         });
                         this.need_to_download = [];
                     }
-                    AsyncStorage.setItem('downloaded_audio', JSON.stringify(this.state.downloaded_books));
-                    AsyncStorage.setItem('downloading_audio', JSON.stringify(this.state.downloading_books));
-                    AsyncStorage.setItem('need_to_download', JSON.stringify(this.need_to_download));
+                    AsyncStorage.setItem('downloaded_audio_'+this.state.book_id, JSON.stringify(this.state.downloaded_books));
+                    AsyncStorage.setItem('downloading_audio_'+this.state.book_id, JSON.stringify(this.state.downloading_books));
+                    AsyncStorage.setItem('need_to_download_'+this.state.book_id, JSON.stringify(this.need_to_download));
                     AsyncStorage.getItem('cancel_task', (err, value) => {
                         if (value){
-                        this.need_to_download = [];
+                            this.need_to_download = [];
                             AsyncStorage.removeItem('cancel_task');
                             console.log('removing global_downloading 1-0');
                             return
                         } else {
-                    this.downloadBookQueue();
-                    }
+                            this.downloadBookQueue();
+                        }
                     });
                 })
                 console.log('this task', this.task)
         } else {
-            console.log('removing global_downloading 1')
-            AsyncStorage.removeItem('global_downloading')
+            console.log('removing global_downloading 1');
+            AsyncStorage.removeItem('global_downloading');
+            AsyncStorage.getItem('need_to_download_'+this.state.book_id, (err, value) => {
+                if (value){
+                    this.getDownloadingDataFromAyncStorage();
+                }
+            });  
             return;
         }
     }
     getDownloadingDataFromAyncStorage(){
-        AsyncStorage.getItem('need_to_download', (err, value) => {
+        console.log('getDownloadingDataFromAyncStorage start');
+        AsyncStorage.getItem('need_to_download_'+this.state.book_id, (err, value) => {
             let need_to_download = JSON.parse(value) ? JSON.parse(value) : [];
-            console.log('need_to_download first time', need_to_download);
+            console.log('need_to_download first time '+this.state.book_id, need_to_download);
             if (need_to_download.length){
                 console.log('need to download from async storage!', need_to_download);
                 this.downloaderChecker = setInterval(
                     () => {
-                        AsyncStorage.getItem('downloaded_audio', (err,value) => {
+                        console.log('interval')
+                        AsyncStorage.getItem('downloaded_audio_'+this.state.book_id, (err,value) => {
                             console.log('from async storage downloaded_audio', value);
                             if (value){
                                 this.setState({
@@ -399,38 +414,40 @@ export default class AudioScreen extends Component {
                                 })
                             }
                         });
-                        AsyncStorage.getItem('downloading_audio', (err,value) => {
+                        AsyncStorage.getItem('downloading_audio_'+this.state.book_id, (err,value) => {
                             console.log('from async storage downloading_audio', value);
-                            if (JSON.parse(value).length){
-                                this.setState({
-                                    downloading_books: JSON.parse(value),
-                                    downloading: true
-                                })
-                            } else {
-                                setTimeout(() => {
-                                    AsyncStorage.getItem('downloaded_audio', (err,value) => {
-                                        console.log('from async storage downloaded_audio', value);
-                                        if (value){
-                                            this.setState({
-                                                downloaded_books: JSON.parse(value),
-                                                downloading_books: [],
-                                            })
-                                        }
-                                    });
-                                    clearInterval(this.downloaderChecker);
-                                    console.log('removing global_downloading 2')
-                                    AsyncStorage.removeItem('global_downloading')
+                            if (value){
+                                if (JSON.parse(value).length){
+                                    this.setState({
+                                        downloading_books: JSON.parse(value),
+                                        downloading: true
+                                    })
+                                } else {
+                                    setTimeout(() => {
+                                        AsyncStorage.getItem('downloaded_audio_'+this.state.book_id, (err,value) => {
+                                            console.log('from async storage downloaded_audio', value);
+                                            if (value){
+                                                this.setState({
+                                                    downloaded_books: JSON.parse(value),
+                                                    downloading_books: [],
+                                                })
+                                            }
+                                        });
+                                        clearInterval(this.downloaderChecker);
+                                        console.log('removing global_downloading 2')
+                                        AsyncStorage.removeItem('global_downloading')
 
-            return;
-                                }, 2100);
-        }
+                                        return;
+                                    }, 2100);
+                                }
+                            }
                         });
                     },
                     1000
                 );
             } else {
                 setTimeout(() => {
-                    AsyncStorage.getItem('downloaded_audio', (err,value) => {
+                    AsyncStorage.getItem('downloaded_audio_'+this.state.book_id, (err,value) => {
                         console.log('from async storage downloaded_audio', value);
                         if (value){
                             this.setState({
@@ -438,26 +455,26 @@ export default class AudioScreen extends Component {
                                 downloading_books: [],
                                 downloading: false
                             })
-    }
+                        }
                     });
                     clearInterval(this.downloaderChecker);
-            return;
+                    return;
                 }, 2100);
                 return;
-        }
+            }
         });
     }
     componentDidMount(){
         // AsyncStorage.clear();
         // this.downloadBook(2)
-            AsyncStorage.getItem('downloaded_audio', (err,value) => {
+        AsyncStorage.getItem('downloaded_audio_'+this.state.book_id, (err,value) => {
             // console.log('from async storage', value);
-                if (value){
-                    this.setState({
-                        downloaded_books: JSON.parse(value)
-                    })
-                }
-            });
+            if (value){
+                this.setState({
+                    downloaded_books: JSON.parse(value)
+                })
+            }
+        });
         this.props.navigation.setParams({downloadAll: this.downloadAll})
         this.props.navigation.setParams({downloading: this.state.downloading})
         this.props.navigation.setParams({cancelTask: this.cancelTask})
@@ -521,7 +538,7 @@ export default class AudioScreen extends Component {
             });
         } else {
             console.log('task is not defined')
-            // AsyncStorage.setItem('downloaded_audio', JSON.stringify([]));
+            // AsyncStorage.setItem('downloaded_audio_'+this.state.book_id, JSON.stringify([]));
             // AsyncStorage.setItem('downloading_audio', JSON.stringify([]));
             clearInterval(this.downloaderChecker);
             this.need_to_download = [];
@@ -533,6 +550,7 @@ export default class AudioScreen extends Component {
         }
         console.log('removing global_downloading 4')
         AsyncStorage.removeItem('global_downloading')
+        AsyncStorage.removeItem('need_to_download_'+this.state.book_id)
 
     }
     componentWillUnmount(){

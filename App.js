@@ -17,7 +17,10 @@ import AudioScreen from './screens/AudioScreen';
 import AudioDetail from './screens/AudioDetail';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { API_URL } from './constants/api';
-import NavigationService from './NavigationService'
+import NavigationService from './NavigationService';
+import { Provider } from 'react-redux';
+import configureStore from './store'
+const store = configureStore();
 require('es6-object-assign').polyfill();
 // import 'babel-polyfil'
 setTimeout(() => {
@@ -93,11 +96,13 @@ export default class App extends Component {
   render(){
     console.log('render lol')
     return (
-      <TopLevelNavigator
-        ref={navigatorRef => {
-          NavigationService.setTopLevelNavigator(navigatorRef);
-        }}
-      />
+      <Provider store={store} >
+        <TopLevelNavigator
+          ref={navigatorRef => {
+            NavigationService.setTopLevelNavigator(navigatorRef);
+          }}
+        />
+      </Provider>
     )
   }
 }

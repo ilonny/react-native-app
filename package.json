@@ -24,6 +24,9 @@
     "react-native-wkwebview-reborn": "^1.21.0",
     "react-native-zip-archive": "^2.2.6",
     "react-navigation": "^2.3.1",
+    "react-redux": "^5.1.1",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
     "rn-fetch-blob": "^0.10.13"
   },
   "devDependencies": {

@@ -325,10 +325,14 @@ class EpubReader extends Component {
                         // this.defineBookLocations(book);
                         // clearInterval(interval);
                         setTimeout(() => {
-                            this.setState({
-                                total_locations: book.locations.total
-                            });
-                            AsyncStorage.setItem('cached_book_'+this.state.book_id, 'true')
+                            try {
+                                this.setState({
+                                    total_locations: book.locations.total
+                                });
+                                AsyncStorage.setItem('cached_book_'+this.state.book_id, 'true')
+                            } catch(e){
+                                console.log(e);
+                            }
                         }, 1500);
                     }}
                     onPress={(cfi, position, rendition)=> {

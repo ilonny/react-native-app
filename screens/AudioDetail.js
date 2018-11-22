@@ -322,10 +322,10 @@ export default class AudioScreen extends Component {
                 .fetch('GET', API_URL + `/get-audio-file?id=${file_id}`, {
                 });
                 this.task
-                .progress((received, total) => {
+                .progress({interval: 2100}, (received, total) => {
                     let { downloading_books } = this.state;
                     let index = downloading_books.length - 1;
-                    console.log('downloading_books', downloading_books)
+                    console.log('downloading_books 1', downloading_books)
                     if (downloading_books.length > 1){
                         downloading_books.shift();
                     }
@@ -436,7 +436,6 @@ export default class AudioScreen extends Component {
                                         clearInterval(this.downloaderChecker);
                                         console.log('removing global_downloading 2')
                                         AsyncStorage.removeItem('global_downloading')
-
                                         return;
                                     }, 2100);
                                 }

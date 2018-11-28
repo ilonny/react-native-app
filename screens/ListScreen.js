@@ -124,6 +124,8 @@ export default class ListScreen extends Component {
     this.initialStart();
   }
   componentDidMount(){
+    console.log('remove global after app start downloading');
+    AsyncStorage.removeItem('global_downloading');
     // AsyncStorage.clear();
   }
   _keyExtractor = (item) => item.text_short + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);

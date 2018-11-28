@@ -45,7 +45,7 @@ export default class AudioScreen extends Component {
                     try {
                       parsedText = JSON.parse(request.responseText);
                     } catch (e){
-                      console.log('catched parse json', request)
+                    //   console.log('catched parse json', request)
                       parsedText = [];
                     }
                     return {
@@ -61,10 +61,14 @@ export default class AudioScreen extends Component {
               AsyncStorage.getItem('cached_audio_list', (err, value) => {
                 // console.log('cached_audio_list', value)
                 if (!!value){
-                  this.setState({
-                    books: JSON.parse(value),
-                    online: false,
-                  })
+                    try {
+                        this.setState({
+                            books: JSON.parse(value),
+                            online: false,
+                        })
+                    } catch (e){
+                        console.log('crash!', e)
+                    }
                 }
               });
             }

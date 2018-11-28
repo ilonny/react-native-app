@@ -10,3 +10,32 @@ export const setNeedToDownload = need_to_download => {
         need_to_download
     }
 }
+
+export const setDownloadingBook = downloading_book => {
+    return {
+        type: "SET_DOWNLOADING_BOOK",
+        downloading_book
+    }
+}
+
+export const setDownloadTask = download_task => {
+    return {
+        type: "SET_DOWNLOAD_TASK",
+        download_task
+    }
+}
+
+export const setDownloadedBooks = downloaded_books => {
+    console.log('SET_DOWNLOADED_BOOKS action')
+    return {
+        type: "SET_DOWNLOADED_BOOKS",
+        downloaded_books
+    }
+}
+
+export const setGlobalDownloading = global_downloading => {
+    return {
+        type: "SET_GLOBAL_DOWNLOADING",
+        global_downloading
+    }
+}

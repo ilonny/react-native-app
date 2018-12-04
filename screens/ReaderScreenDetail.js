@@ -173,7 +173,7 @@ class EpubReader extends Component {
                             if (!this.state.successLoaded){
                                 Alert.alert('Необходимо подключение к интернету для загрузки книги')
                             }
-                        }, 5000);
+                        }, 9000);
                     }
                 });
             }
@@ -325,10 +325,14 @@ class EpubReader extends Component {
                         // this.defineBookLocations(book);
                         // clearInterval(interval);
                         setTimeout(() => {
-                            this.setState({
-                                total_locations: book.locations.total
-                            });
-                            AsyncStorage.setItem('cached_book_'+this.state.book_id, 'true')
+                            try {
+                                this.setState({
+                                    total_locations: book.locations.total
+                                });
+                                AsyncStorage.setItem('cached_book_'+this.state.book_id, 'true')
+                            } catch(e){
+                                console.log(e);
+                            }
                         }, 1500);
                     }}
                     onPress={(cfi, position, rendition)=> {
@@ -357,7 +361,7 @@ class EpubReader extends Component {
                         console.log("EPUBJS-Webview", message);
                     }}
                     />
-                {this.state.total_locations && (
+                {!!this.state.total_locations && (
                     <View style={{flex: 0, flexDirection: 'row', alignItems: 'center', padding: 3, backgroundColor: this.state.theme == 'light' ? '#fff' : '#171717', position: 'absolute', bottom: 0}}>
                         <View style={{flex: 1, height: 5}}>
                             <View style={{backgroundColor: '#c1ae97', width: this.state.progress_width+'%', height: 5, borderRadius: 5}}></View>

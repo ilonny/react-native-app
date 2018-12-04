@@ -116,24 +116,36 @@ export default class ReaderScreen extends Component {
       console.log('downloaded_covers value', value)
       if (value){
         this.downloaded_covers = JSON.parse(value);
-        this.setState({
-          downloaded_covers: this.downloaded_covers
-        })
-        if (this.state.books.length != this.downloaded_covers.length){
-          this.need_to_download_covers = []
-          this.state.books.forEach(book => {
-            let isDownloaded = false;
-            this.downloaded_covers.forEach(cover => {
-              if (book.id == cover.id){
-                isDownloaded = true;
-              }
-            });
-            if (!isDownloaded){
-              this.need_to_download_covers.push(book);
+        let File = this.downloaded_covers[0];
+        RNFetchBlob.fs.exists(File.file_path)
+        .then((exist) => {
+            console.log(`file ${exist ? '' : 'not'} exists`)
+            if (!exist){
+              this.downloaded_covers = [];
+              this.need_to_download_covers = [].concat(this.state.books);
+              this.downloadCoverQueue();
+            } else {
+              this.setState({
+                downloaded_covers: this.downloaded_covers
+              })
+              if (this.state.books.length != this.downloaded_covers.length){
+                  this.need_to_download_covers = []
+                  this.state.books.forEach(book => {
+                    let isDownloaded = false;
+                    this.downloaded_covers.forEach(cover => {
+                      if (book.id == cover.id){
+                        isDownloaded = true;
+                      }
+                    });
+                    if (!isDownloaded){
+                      this.need_to_download_covers.push(book);
+                    }
+                  });
+                  this.downloadCoverQueue();  
+                }
             }
-          });
-          this.downloadCoverQueue();  
-        }
+        })
+        .catch(() => { console.log("RNFB error") });
       } else {
         this.downloaded_covers = [];
         this.need_to_download_covers = [].concat(this.state.books);

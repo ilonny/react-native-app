@@ -20,6 +20,9 @@ import AudioDetail from './screens/AudioDetail';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { API_URL } from './constants/api';
 import NavigationService from './NavigationService';
+import { Provider } from 'react-redux';
+import configureStore from './store'
+const store = configureStore();
 var PushNotification = require('react-native-push-notification');
 PushNotification.configure({
 
@@ -144,11 +147,13 @@ const TopLevelNavigator = createBottomTabNavigator(
 export default class App extends Component {
   render(){
     return (
-      <TopLevelNavigator
-        ref={navigatorRef => {
-          NavigationService.setTopLevelNavigator(navigatorRef);
-        }}
-      />
+      <Provider store={store} >
+        <TopLevelNavigator
+          ref={navigatorRef => {
+            NavigationService.setTopLevelNavigator(navigatorRef);
+          }}
+        />
+      </Provider>
     )
   }
 }

@@ -454,23 +454,27 @@ class AudioScreen extends Component {
     getDownloadedDataFromAyncStorage(){
         console.log('getDownloadedDataFromAyncStorage');
         AsyncStorage.getItem('downloaded_audio_'+this.state.book_id, (err,value) => {
-            console.log('from async storage downloaded_audio_'+this.state.book_id, value);
-            console.log('-----');
-            console.log('check existing files');
-            let val_arr = JSON.parse(value);
-            val_arr.forEach(File => {
-                console.log('check path -- ', File.file_path);
-                RNFetchBlob.fs.exists(File.file_path)
-                    .then((exist) => {
-                        console.log(`file ${exist ? '' : 'not'} exists`)
-                        if (!exist){
-                            this.deleteBook(File.id);
-                        }
-                    })
-                    .catch(() => { console.log("RNFB error") });
-            });
-            console.log('-----');
             if (value){
+                console.log('from async storage downloaded_audio_'+this.state.book_id, value);
+                console.log('-----');
+                console.log('check existing files');
+                try {
+                    let val_arr = JSON.parse(value);
+                    val_arr.forEach(File => {
+                        console.log('check path -- ', File.file_path);
+                        RNFetchBlob.fs.exists(File.file_path)
+                        .then((exist) => {
+                            console.log(`file ${exist ? '' : 'not'} exists`)
+                            if (!exist){
+                                this.deleteBook(File.id);
+                            }
+                        })
+                        .catch(() => { console.log("RNFB error") });
+                    });
+                    console.log('-----');
+                } catch (e){
+                    console.log('crash on 476 line', e);
+                }
                 this.setState({
                     downloaded_books: JSON.parse(value),
                 })

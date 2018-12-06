@@ -691,6 +691,7 @@ class AudioScreen extends Component {
     render(){
         console.log('audio details render state', this.state);
         console.log('audio details render props', this.props);
+        console.log('main store string: ', JSON.stringify(this.props.main));
         return (
             <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF', paddingBottom: 10, paddingTop: 10}}>
                 <FlatList

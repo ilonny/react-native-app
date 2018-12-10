@@ -19,6 +19,7 @@ import {
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import RNFetchBlob from 'rn-fetch-blob'
+import RNBackgroundDownloader from 'react-native-background-downloader';
 // import { ServerRequest } from 'http';
 import { listStyles } from '../constants/list_styles';
 import { connect } from 'react-redux'
@@ -29,7 +30,7 @@ import {
     setDownloadedBooks,
     setGlobalDownloading
 } from '../actions/index'
-let dirs = RNFetchBlob.fs.dirs
+// let dirs = RNFetchBlob.fs.dirs
 var Sound = require('react-native-sound');
 Sound.setCategory('Playback');
 
@@ -263,34 +264,36 @@ class AudioScreen extends Component {
                 Alert.alert('', 'Дождитесь окончания загрузки книги ' + downloadObj.book_name)
             } else {
                 this.need_to_download = [];
-                this.state.books.forEach(book => {
-                    let downloaded = false;
-                    this.state.downloaded_books.forEach(d_book => {
-                        if (book.id == d_book.id) {
-                            downloaded = true;
+                setTimeout(() => {
+                    this.state.books.forEach(book => {
+                        let downloaded = false;
+                        this.state.downloaded_books.forEach(d_book => {
+                            if (book.id == d_book.id) {
+                                downloaded = true;
+                            }
+                        })
+                        if (!downloaded){
+                            this.need_to_download.push(book.id);
+                            // this.downloadBook(book.id, false);
                         }
-                    })
-                    if (!downloaded){
-                        this.need_to_download.push(book.id);
-                        // this.downloadBook(book.id, false);
-                    }
-                });
-                this.props.setNeedToDownload(this.need_to_download);
-                if (this.props.main.audio.need_to_download.length){
-                    console.log('download all', this.need_to_download)
-                    console.log('need_to_download', this.need_to_download);
-                    console.log('download all starting')
-                    this.downloadBookQueue();
-                } else {
-                    setTimeout(() => {
-                        console.log('props is empty')
+                    });
+                    this.props.setNeedToDownload(this.need_to_download);
+                    if (this.props.main.audio.need_to_download.length){
+                        console.log('download all', this.need_to_download)
+                        console.log('need_to_download', this.need_to_download);
+                        console.log('download all starting')
                         this.downloadBookQueue();
-                    }, 300);
-                }
+                    } else {
+                        setTimeout(() => {
+                            console.log('props is empty')
+                            this.downloadBookQueue();
+                        }, 300);
+                    }
+                }, 300);
             }
         });
     }
-    downloadBookQueue(){
+    downloadBookQueueOld(){
         let need_to_download = this.props.main.audio.need_to_download;
         console.log('downloadBookQueue', need_to_download)
         if (need_to_download.length){
@@ -378,6 +381,93 @@ class AudioScreen extends Component {
                 })
                 this.props.setDownloadTask(this.task);
                 console.log('this task', this.task)
+        } else {
+            console.log('removing global_downloading 1');
+            AsyncStorage.removeItem('global_downloading');
+            return;
+        }
+    }
+    downloadBookQueue(){
+        let need_to_download = this.props.main.audio.need_to_download;
+        console.log('downloadBookQueue', need_to_download)
+        if (need_to_download.length){
+            let { downloading_books } = this.state;
+            let file_id = need_to_download[0];
+            console.log('start downloading', file_id)
+            AsyncStorage.setItem('global_downloading', JSON.stringify({
+                book_name: this.props.navigation.getParam('book_name'),
+                book_id: this.props.navigation.getParam("book_id")
+            }));
+            this.props.setDownloadingBook({
+                id: file_id,
+                progress: 0
+            });
+            this.props.navigation.setParams({downloading: true})
+            let path = RNBackgroundDownloader.directories.documents+`/audio_${file_id}.mp3`;
+            this.task = RNBackgroundDownloader.download({
+                id: 'file123',
+                url: API_URL + `/get-audio-file?id=${file_id}`,
+                destination: path,
+            }).begin((expectedBytes) => {
+                console.log(`Going to download ${expectedBytes} bytes!`);
+            }).progress((percent) => {
+                console.log(`Downloaded: ${percent * 100}%`);
+                this.props.setDownloadingBook({
+                    id: file_id,
+                    progress: parseInt(percent * 100),
+                })
+            }).done((arg) => {
+                console.log('Download is done!', path);
+                let new_downloaded_books = this.state.downloaded_books
+                new_downloaded_books.push({
+                    id: file_id,
+                    file_path: path,
+                });
+                this.props.setDownloadedBooks(new_downloaded_books);
+                this.setState({
+                    downloaded_books: new_downloaded_books,
+                    downloading: false,
+                });
+                this.props.setDownloadingBook({});
+                this.props.navigation.setParams({downloading: this.state.downloading})
+                need_to_download.shift();
+                //
+                AsyncStorage.getItem('need_to_delete_queue', (err, value) => {
+                    console.log('need_to_delete_queue AS value', value)
+                    if (value){
+                        let need_to_delete_id = parseInt(value);
+                        console.log('need to delete props', this.props);
+                        console.log('need to delete id', need_to_delete_id);
+                        this.deleteBook(need_to_delete_id);
+                        this.setState({
+                            need_to_delete_queue: false,
+                            need_to_delete: false,
+                            need_to_delete_id: null,
+                        });
+                        this.props.setDownloadingBook({});
+                        this.props.setNeedToDownload([]);
+                        AsyncStorage.removeItem('need_to_delete_queue')
+                        return;
+                    } else {
+                        console.log('set item to downloaded_audio_'+this.state.book_id, this.state.downloaded_books)
+                        AsyncStorage.setItem('downloaded_audio_'+this.state.book_id, JSON.stringify(this.state.downloaded_books));
+                        AsyncStorage.getItem('cancel_task', (err, value) => {
+                            if (value){
+                                this.need_to_download = [];
+                                AsyncStorage.removeItem('cancel_task');
+                                console.log('removing global_downloading 1-0');
+                                return
+                            } else {
+                                //return it!!!
+                                this.downloadBookQueue();
+                            }
+                        });
+                    }
+                })
+            }).error((error) => {
+                console.log('Download canceled due to error: ', error);
+            });
+            this.props.setDownloadTask(this.task);
         } else {
             console.log('removing global_downloading 1');
             AsyncStorage.removeItem('global_downloading');
@@ -488,20 +578,23 @@ class AudioScreen extends Component {
         this.props.setDownloadingBook({});
         this.props.setNeedToDownload([]);
         this.need_to_download = [];
-        this.props.main.audio.task.cancel((err, taskId) => {
-            console.log('task cancelled', err, taskId);
-            AsyncStorage.setItem('need_to_delete_queue', String(audio_id));
-            this.setState({
-        //         downloading: false,
-        //         downloading_books: [],
-        //         need_to_delete: true,
-                need_to_delete_queue: true,
-                need_to_delete_id: this.props.main.audio.downloading_book.id,
-            })
-        //     this.props.navigation.setParams({downloading: false})
-        //     this.props.setDownloadingBook({});
-        //     this.props.setNeedToDownload([]);
-        })
+        // this.props.main.audio.task.cancel((err, taskId) => {
+        //     console.log('task cancelled', err, taskId);
+        //     AsyncStorage.setItem('need_to_delete_queue', String(audio_id));
+        //     this.setState({
+        // //         downloading: false,
+        // //         downloading_books: [],
+        // //         need_to_delete: true,
+        //         need_to_delete_queue: true,
+        //         need_to_delete_id: this.props.main.audio.downloading_book.id,
+        //     })
+        // //     this.props.navigation.setParams({downloading: false})
+        // //     this.props.setDownloadingBook({});
+        // //     this.props.setNeedToDownload([]);
+        // })
+        //
+        this.props.main.audio.task.stop();
+        //
         console.log('removing global_downloading 4');
         AsyncStorage.removeItem('global_downloading');
         AsyncStorage.removeItem('need_to_download_'+this.state.book_id);
@@ -689,9 +782,9 @@ class AudioScreen extends Component {
         this.props.navigation.navigate('Reader', {book_id: book_id, book_name: book_name, book_src: book_src, toc: toc_href});
     }
     render(){
-        console.log('audio details render state', this.state);
-        console.log('audio details render props', this.props);
-        console.log('main store string: ', JSON.stringify(this.props.main));
+        // console.log('audio details render state', this.state);
+        // console.log('audio details render props', this.props);
+        // console.log('main store string: ', JSON.stringify(this.props.main));
         return (
             <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF', paddingBottom: 10, paddingTop: 10}}>
                 <FlatList

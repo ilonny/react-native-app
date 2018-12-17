@@ -91,14 +91,15 @@ PushNotification.configure({
 const ListStack = createStackNavigator({
   Цитаты: ListScreen,
   Details: DetailsScreen,
+  Settings: SettingsScreen
 });
 const FavoritesStack = createStackNavigator({
   Избранное: FavoritesScreen,
   Details: DetailsScreen,
 });
-const SettingsStack = createStackNavigator({
-  Настройки: SettingsScreen,
-});
+// const SettingsStack = createStackNavigator({
+//   Настройки: SettingsScreen,
+// });
 const ReaderStack = createStackNavigator({
   Книги: ReaderScreen,
   Reader: ReaderScreenDetail,
@@ -113,7 +114,7 @@ const TopLevelNavigator = createBottomTabNavigator(
     Избранное: FavoritesStack,
     Книги: ReaderStack,
     Аудиокниги: AudioStack,
-    Настройки: SettingsStack,
+    // Настройки: SettingsStack,
   },
   {
     navigationOptions: ({ navigation }) => ({

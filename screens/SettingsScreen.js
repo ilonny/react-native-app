@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 import { API_URL } from '../constants/api';
-
+import { listStyles } from '../constants/list_styles';
 export default class SettingsScreen extends Component {
     constructor(){
         super();
@@ -166,16 +166,17 @@ export default class SettingsScreen extends Component {
         console.log('settings render', this.state);
         this.updateTokenSetting();
         return (
-            <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF'}}>
+            <SafeAreaView style={{flex: 1, backgroundColor: '#efefef'}}>
                 <View style={styles.container}>
                     <ScrollView>
-                    {/* <Text>{ JSON.stringify(this.state.selectedItems) }</Text>
-                    <Text>{ this.state.testString }</Text>
-                    <Text>{ JSON.stringify(this.state.asyncSettings) }</Text> */}
-                    {/* <Text>{ (this.state.apiText) }</Text> */}
+                    <View style={[listStyles.quoteItem, {marginLeft: 10, marginRight: 10, marginTop: 10}]}>
+                        <Text style={{color: "#808080", textAlign: 'center'}}>Выберите интересные Вам источники для получения ежедневной рассылки цитат.</Text>
+                    </View>
                     <SectionList
+                        style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5, flex: 0}}
+                        stickySectionHeadersEnabled={true}
                         renderItem={({item, index, section}) => (
-                            <View key={item.id} style={styles.row}>
+                            <View key={item.id} style={[listStyles.quoteItem, {marginTop: -5, borderRadius: 0, shadowRadius: 0, flex: 1, flexDirection: 'row', justifyContent: 'space-between'}]}>
                                 <View style={{maxWidth: '80%'}}>
                                     <Text style={{fontWeight: 'bold'}}>{item.name ? item.name : item.title}</Text>
                                     <Text>{item.description} {/*item.description.length > 20 ? '...' : '' */}</Text>
@@ -184,8 +185,8 @@ export default class SettingsScreen extends Component {
                             </View>
                         )}
                         renderSectionHeader={({section: {title}}) => (
-                            <View style={styles.row}>
-                                <Text style={{fontWeight: 'bold', fontSize: 30}}>{title}</Text>
+                            <View style={[listStyles.quoteItem, {borderBottomLeftRadius: 0, borderBottomRightRadius: 0}]}>
+                                <Text style={listStyles.quoteTitle}>{title}</Text>
                             </View>
                         )}
                         sections={[
@@ -202,23 +203,4 @@ export default class SettingsScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        padding: 10,
-        // paddingTop: 20,
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'stretch',  
-    },
-    row: {
-        paddingTop: 10,
-        paddingBottom: 10,
-        marginBottom: 5,
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'flex-start',
-        backgroundColor: '#fafafa',
-        borderBottomWidth: 1,
-        borderBottomColor: 'tomato'
-    }
 })

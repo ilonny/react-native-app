@@ -82,7 +82,7 @@ class EpubReader extends Component {
                 // <TouchableOpacity onPress={navigation.getParam('consoleState')}>
                 <View style={{alignItems: 'center', flex: 1, flexDirection: 'row'}}>
                     <TouchableOpacity onPress={() => toggleSettings()}>
-                        <Ionicons name={"ios-settings"} size={25} color={theme == 'light' ? 'tomato' : '#c1ae97'} style={{marginTop: 5, marginRight: 15}}/>
+                        <Ionicons name={"ios-cog"} size={30} color={theme == 'light' ? 'tomato' : '#c1ae97'} style={{marginTop: 5, marginRight: 15}}/>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => toggleNavigation()}>
                         <Ionicons name={"ios-list"} size={35} color={theme == 'light' ? 'tomato' : '#c1ae97'} style={{marginTop: 5}}/>

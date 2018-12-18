@@ -17,6 +17,7 @@ import ReaderScreen from './screens/ReaderScreen';
 import ReaderScreenDetail from './screens/ReaderScreenDetail';
 import AudioScreen from './screens/AudioScreen';
 import AudioDetail from './screens/AudioDetail';
+import SiteScreen from './screens/SiteScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { API_URL } from './constants/api';
 import NavigationService from './NavigationService';
@@ -108,8 +109,21 @@ const AudioStack = createStackNavigator({
   Аудиокниги: AudioScreen,
   Audio: AudioDetail
 });
+const SiteStack = createStackNavigator({
+  HareKrishna: {
+    screen: SiteScreen,
+    navigationOptions: ({ navigation }) => ({
+      tapBar: {
+        title: '123'
+      },
+      tapBarTitle: '1234',
+      title: 'harekrishna.ru',
+    }),
+  },
+});
 const TopLevelNavigator = createBottomTabNavigator(
   {
+    Harekrishna: SiteStack,
     Цитаты: ListStack,
     Избранное: FavoritesStack,
     Книги: ReaderStack,
@@ -131,10 +145,16 @@ const TopLevelNavigator = createBottomTabNavigator(
           iconName = `ios-book${focused ? '' : '-outline'}`;
         } else if (routeName === 'Аудиокниги') {
           iconName = `ios-headset${focused ? '' : '-outline'}`;
+        } else if (routeName === 'Harekrishna') {
+          iconName = `ios-globe${focused ? '' : '-outline'}`;
         }
         // You can return any component that you like here! We usually use an
         // icon component from react-native-vector-icons
-        return <Ionicons name={iconName} size={25} color={tintColor} />;
+        return <Ionicons name={iconName} size={routeName === 'Цитаты' ? 35 : 25} color={tintColor} />;
+      },
+      tapBarLabel: (props) =>{
+        console.log('tapBarLabel', props)
+        return '123'
       },
       headerTitle: navigation.state.routeName,
     }),

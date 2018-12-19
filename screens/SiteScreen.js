@@ -15,7 +15,7 @@ import {
 import { TabView, TabBar, SceneMap } from "react-native-tab-view";
 import SiteScreenDetail from "./SiteScreenDetail";
 
-const FirstRoute = () => <SiteScreenDetail text="test text for component" />;
+const FirstRoute = () => <SiteScreenDetail type="content" />;
 const SecondRoute = () => (
     <View style={[styles.container, { backgroundColor: "#673ab7" }]} />
 );

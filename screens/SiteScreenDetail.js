@@ -22,18 +22,17 @@ class SiteScreenDetail extends Component {
     };
     state = {};
     _renderItem = ({ item }) => {
-        <View>
-            <Text>13</Text>
-        </View>;
-        // <TouchableOpacity
-        //     onPress={() => {
-        //         console.log("nav will here");
-        //     }}
-        // >
-        //     <View style={listStyles.quoteItem}>
-        //         <Text style={listStyles.quoteTitle}>{item.title}</Text>
-        //     </View>
-        // </TouchableOpacity>
+        return(
+            <TouchableOpacity
+                onPress={() => {
+                    console.log("nav will here");
+                }}
+            >
+                <View style={listStyles.quoteItem}>
+                    <Text style={listStyles.quoteTitle}>{item.title}</Text>
+                </View>
+            </TouchableOpacity>
+        )
     };
     _keyExtractor = item => {
         return item.title;
@@ -64,19 +63,18 @@ class SiteScreenDetail extends Component {
                 </View>
                 <View>
                 <FlatList
-                    // style={{
-                    //     paddingLeft: 10,
-                    //     paddingRight: 10,
-                    //     paddingBottom: 5,
-                    //     paddingTop: 5,
-                    //     flex: 0
-                    // }}
+                    style={{
+                        paddingLeft: 10,
+                        paddingRight: 10,
+                        paddingBottom: 5,
+                        paddingTop: 5,
+                        flex: 0
+                    }}
                     data={this.props.site.news.items}
                     extraData={this.props.site.news.items}
-                    renderItem={({item}) => {
-                        <View><Text>123</Text></View>
-                    }}
+                    renderItem={this._renderItem}
                     keyExtractor={this._keyExtractor}
+                    refreshing={false}
                     />
                 </View>
             </SafeAreaView>

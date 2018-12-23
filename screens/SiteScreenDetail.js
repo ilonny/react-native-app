@@ -15,12 +15,15 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { listStyles } from "../constants/list_styles";
+import { getItems } from "../actions/site";
 
 class SiteScreenDetail extends Component {
     static navigationOptions = {
         header: null
     };
-    state = {};
+    state = {
+        page: 1,
+    };
     _renderItem = ({ item }) => {
         return(
             <TouchableOpacity
@@ -29,16 +32,45 @@ class SiteScreenDetail extends Component {
                 }}
             >
                 <View style={listStyles.quoteItem}>
-                    <Text style={listStyles.quoteTitle}>{item.title}</Text>
+                    <Text style={listStyles.quoteTitle}>{item.NAME}</Text>
                 </View>
             </TouchableOpacity>
         )
     };
+    _onEndReached = () => {
+        console.log('_onEndReached fired')
+        this.setState({
+            page: this.state.page + 1,
+        });
+        setTimeout(() => {
+            this.props.getItems(this.props.type, this.state.page);    
+        }, 100);
+    }
     _keyExtractor = item => {
         return item.title;
     };
+    componentDidMount(){
+        this.props.getItems(this.props.type, this.state.page)
+    }
     render() {
-        console.log("site screen detail props: ", this.props.site.news.items);
+        console.log("site screen detail props: ", this.props);
+        let items = [];
+        try{
+            switch (this.props.type){
+                case "read":
+                items = this.props.site.read.items
+                break;
+                case "content":
+                items = this.props.site.content.items
+                break;
+                case "look":
+                items = this.props.site.look.items
+                break;
+                case "listen":
+                items = this.props.site.listen.items
+                break;
+            }
+        } catch(e) {console.log('crash', e)}
         return (
             <SafeAreaView
                 style={{
@@ -66,13 +98,15 @@ class SiteScreenDetail extends Component {
                     style={{
                         paddingLeft: 10,
                         paddingRight: 10,
-                        paddingBottom: 5,
+                        paddingBottom: 15,
                         paddingTop: 5,
-                        flex: 0
+                        flex: 0,
+                        marginBottom: 43
                     }}
-                    data={this.props.site.news.items}
-                    extraData={this.props.site.news.items}
+                    data={items}
                     renderItem={this._renderItem}
+                    // onEndReached={this._onEndReached}
+                    // onEndReachedThreshold={.7}
                     keyExtractor={this._keyExtractor}
                     refreshing={false}
                     />
@@ -83,12 +117,12 @@ class SiteScreenDetail extends Component {
 }
 const mapStateToProps = state => {
     return {
-        site: state.siteReducer
+        site: state.siteReducer,
     };
 };
 const mapDispatchToProps = dispatch => {
     return {
-        // setNeedToDownload: arr => dispatch(setNeedToDownload(arr)),
+        getItems: (type, offset) => dispatch(getItems(type, offset)),
     };
 };
 

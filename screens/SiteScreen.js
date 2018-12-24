@@ -13,12 +13,12 @@ import {
     Animated
 } from "react-native";
 import { TabView, TabBar, SceneMap } from "react-native-tab-view";
-import SiteScreenDetail from "./SiteScreenDetail";
+import SiteScreenList from "./SiteScreenList";
 
-const NewsRoute = () => <SiteScreenDetail type="content" />;
-const LookRoute = () => <SiteScreenDetail type="look" />;
-const ListenRoute = () => <SiteScreenDetail type="listen" />;
-const ReadRoute = () => <SiteScreenDetail type="read" />;
+const NewsRoute = () => <SiteScreenList type="content" />;
+const LookRoute = () => <SiteScreenList type="look" />;
+const ListenRoute = () => <SiteScreenList type="listen" />;
+const ReadRoute = () => <SiteScreenList type="read" />;
 
 export default class SiteScreen extends Component {
     static navigationOptions = {
@@ -31,7 +31,6 @@ export default class SiteScreen extends Component {
             { key: "look", title: "Смотреть" },
             { key: "listen", title: "Слушать" },
             { key: "read", title: "Читать" },
-            { key: "read", title: "Читать" }
         ]
     };
     _handleIndexChange = index => this.setState({ index });
@@ -76,7 +75,7 @@ export default class SiteScreen extends Component {
         news: NewsRoute,
         look: LookRoute,
         listen: ListenRoute,
-        read: ReadRoute
+        read: ReadRoute,
     });
     render() {
         return (

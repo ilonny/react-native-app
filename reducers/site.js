@@ -29,6 +29,19 @@ const uniqArrOfObjsNews = arr => {
     ret = arr.filter(
         (thing, index, self) => index === self.findIndex(t => t.ID === thing.ID)
     );
+    let end_btn_index;
+    ret.find((el, ind) => {
+        console.log(el.type);
+        if (el.type == "end") {
+            end_btn_index = ind;
+        }
+    });
+    console.log("end_btn_index", end_btn_index);
+    ret.splice(end_btn_index, 1);
+    ret.push({
+        type: "end",
+        NAME: "end_of_list"
+    });
     return ret;
 };
 
@@ -39,9 +52,13 @@ const siteReducer = function(state = initialState, action) {
             let items;
             switch (action.items_type) {
                 case "content":
-                    items = uniqArrOfObjsNews(
-                        state.content.items.concat(action.items)
-                    );
+                    if (action.action_type == "add") {
+                        items = uniqArrOfObjsNews(
+                            state.content.items.concat(action.items)
+                        );
+                    } else {
+                        items = uniqArrOfObjsNews([].concat(action.items));
+                    }
                     return {
                         ...state,
                         content: {
@@ -51,9 +68,13 @@ const siteReducer = function(state = initialState, action) {
                         }
                     };
                 case "read":
-                    items = uniqArrOfObjsNews(
-                        state.read.items.concat(action.items)
-                    );
+                    if (action.action_type == "add") {
+                        items = uniqArrOfObjsNews(
+                            state.read.items.concat(action.items)
+                        );
+                    } else {
+                        items = uniqArrOfObjsNews([].concat(action.items));
+                    }
                     return {
                         ...state,
                         read: {
@@ -63,9 +84,13 @@ const siteReducer = function(state = initialState, action) {
                         }
                     };
                 case "look":
-                    items = uniqArrOfObjsNews(
-                        state.look.items.concat(action.items)
-                    );
+                    if (action.action_type == "add") {
+                        items = uniqArrOfObjsNews(
+                            state.look.items.concat(action.items)
+                        );
+                    } else {
+                        items = uniqArrOfObjsNews([].concat(action.items));
+                    }
                     return {
                         ...state,
                         look: {
@@ -75,9 +100,13 @@ const siteReducer = function(state = initialState, action) {
                         }
                     };
                 case "listen":
-                    items = uniqArrOfObjsNews(
-                        state.listen.items.concat(action.items)
-                    );
+                    if (action.action_type == "add") {
+                        items = uniqArrOfObjsNews(
+                            state.listen.items.concat(action.items)
+                        );
+                    } else {
+                        items = uniqArrOfObjsNews([].concat(action.items));
+                    }
                     return {
                         ...state,
                         listen: {

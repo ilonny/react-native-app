@@ -18,6 +18,7 @@ import {
 import { connect } from "react-redux";
 import { listStyles } from "../constants/list_styles";
 import { getItems } from "../actions/site";
+import NavigationService from '../NavigationService';
 
 class SiteScreenList extends Component {
     static navigationOptions = {
@@ -28,12 +29,14 @@ class SiteScreenList extends Component {
         q_str: ""
     };
     _renderItem = ({ item }) => {
-        console.log("render item..");
+        // console.log("render item..");
         if (item.type != "end") {
             return (
                 <TouchableOpacity
                     onPress={() => {
-                        console.log("nav will here");
+                        NavigationService.navigate("SiteDetail", {
+                            id: item.ID
+                        });
                     }}
                 >
                     <View style={[listStyles.quoteItem]}>
@@ -93,7 +96,7 @@ class SiteScreenList extends Component {
         }
     };
     _onEndReached = () => {
-        console.log("_onEndReached fired");
+        // console.log("_onEndReached fired");
         this.setState({
             page: this.state.page + 1
         });
@@ -140,8 +143,8 @@ class SiteScreenList extends Component {
         }, 100);
     }
     render() {
-        console.log("site screen detail props: ", this.props);
-        console.log("site screen detail state: ", this.state);
+        // console.log("site screen detail props: ", this.props);
+        // console.log("site screen detail state: ", this.state);
         let items = [];
         try {
             switch (this.props.type) {
@@ -157,9 +160,12 @@ class SiteScreenList extends Component {
                 case "listen":
                     items = this.props.site.listen.items;
                     break;
+                case "important":
+                    items = this.props.site.important.items;
+                    break;
             }
         } catch (e) {
-            console.log("crash", e);
+            // console.log("crash", e);
         }
         return (
             <SafeAreaView
@@ -187,7 +193,7 @@ class SiteScreenList extends Component {
                     />
                 </View>
                 {items.length == 0 ? (
-                        <View
+                    <View
                         style={[
                             listStyles.quoteItem,
                             {
@@ -200,7 +206,7 @@ class SiteScreenList extends Component {
                             }
                         ]}
                     >
-                        <ActivityIndicator/>
+                        <ActivityIndicator />
                     </View>
                 ) : items.length > 1 ? (
                     <FlatList
@@ -220,22 +226,25 @@ class SiteScreenList extends Component {
                     />
                 ) : (
                     <View
-                    style={[
-                        listStyles.quoteItem,
-                        {
-                            marginLeft: 10,
-                            marginRight: 10,
-                            marginBottom: 5,
-                            marginTop: 5,
-                            flex: 1,
-                            padding: 8,
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }
-                    ]}
-                >
-                    <Text style={{textAlign: 'center'}}>Ничего не найдено :({"\n"}Попробуйте изменить параметры поиска</Text>
-                </View>
+                        style={[
+                            listStyles.quoteItem,
+                            {
+                                marginLeft: 10,
+                                marginRight: 10,
+                                marginBottom: 5,
+                                marginTop: 5,
+                                flex: 1,
+                                padding: 8,
+                                alignItems: "center",
+                                justifyContent: "center"
+                            }
+                        ]}
+                    >
+                        <Text style={{ textAlign: "center" }}>
+                            Ничего не найдено :({"\n"}Попробуйте изменить
+                            параметры поиска
+                        </Text>
+                    </View>
                 )}
             </SafeAreaView>
         );

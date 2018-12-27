@@ -18,6 +18,7 @@ import ReaderScreenDetail from './screens/ReaderScreenDetail';
 import AudioScreen from './screens/AudioScreen';
 import AudioDetail from './screens/AudioDetail';
 import SiteScreen from './screens/SiteScreen';
+import SiteScreenDetail from './screens/SiteScreenDetail';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { API_URL } from './constants/api';
 import NavigationService from './NavigationService';
@@ -110,16 +111,8 @@ const AudioStack = createStackNavigator({
   Audio: AudioDetail
 });
 const SiteStack = createStackNavigator({
-  HareKrishna: {
-    screen: SiteScreen,
-    navigationOptions: ({ navigation }) => ({
-      tapBar: {
-        title: '123'
-      },
-      tapBarTitle: '1234',
-      title: 'harekrishna.ru',
-    }),
-  },
+  SiteTabScreen: SiteScreen,
+  SiteDetail: SiteScreenDetail,
 });
 const TopLevelNavigator = createBottomTabNavigator(
   {

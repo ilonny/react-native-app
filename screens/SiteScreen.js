@@ -14,11 +14,14 @@ import {
 } from "react-native";
 import { TabView, TabBar, SceneMap } from "react-native-tab-view";
 import SiteScreenList from "./SiteScreenList";
+import CalendarScreen from "./CalendarScreen";
 
-const NewsRoute = () => <SiteScreenList type="content" />;
+const ContentRoute = () => <SiteScreenList type="content" />;
 const LookRoute = () => <SiteScreenList type="look" />;
 const ListenRoute = () => <SiteScreenList type="listen" />;
 const ReadRoute = () => <SiteScreenList type="read" />;
+const ImportantRoute = () => <SiteScreenList type="important" />;
+const CalendarRoute = () => <CalendarScreen />;
 
 export default class SiteScreen extends Component {
     static navigationOptions = {
@@ -27,39 +30,16 @@ export default class SiteScreen extends Component {
     state = {
         index: 0,
         routes: [
-            { key: "news", title: "Новости" },
+            { key: "calendar", title: "Вайшнавский календарь" },
+            { key: "content", title: "Новости" },
             { key: "look", title: "Смотреть" },
             { key: "listen", title: "Слушать" },
             { key: "read", title: "Читать" },
+            { key: "important", title: "Это важно" },
         ]
     };
     _handleIndexChange = index => this.setState({ index });
 
-    // _renderTabBar = props => {
-    //     const inputRange = props.navigationState.routes.map((x, i) => i);
-    //     return (
-    //         <View style={styles.tabBar}>
-    //             {props.navigationState.routes.map((route, i) => {
-    //                 const color = props.position.interpolate({
-    //                     inputRange,
-    //                     outputRange: inputRange.map(inputIndex =>
-    //                         inputIndex === i ? "#D6356C" : "#222"
-    //                     )
-    //                 });
-    //                 return (
-    //                     <TouchableOpacity
-    //                         style={styles.tabItem}
-    //                         onPress={() => this.setState({ index: i })}
-    //                     >
-    //                         <Animated.Text style={[{color}]}>
-    //                             {route.title}
-    //                         </Animated.Text>
-    //                     </TouchableOpacity>
-    //                 );
-    //             })}
-    //         </View>
-    //     );
-    // };
     _renderTabBar = props => (
         <TabBar
             {...props}
@@ -68,14 +48,28 @@ export default class SiteScreen extends Component {
             style={styles.tabbar}
             tabStyle={styles.tab}
             labelStyle={styles.label}
+            renderLabel={this._renderLabel}
         />
     );
-
+    _renderLabel = route => {
+        // console.log('route', route.route)
+        return (
+            <Text
+                style={styles.label}
+                numberOfLines={route.route.title == 'Вайшнавский календарь' ? 2 : 1}
+                ellipsizeMode='tail'
+            >
+               {route.route.title}
+            </Text>
+        );
+    };
     _renderScene = SceneMap({
-        news: NewsRoute,
+        content: ContentRoute,
         look: LookRoute,
         listen: ListenRoute,
         read: ReadRoute,
+        important: ImportantRoute,
+        calendar: CalendarRoute,
     });
     render() {
         return (
@@ -115,13 +109,17 @@ const styles = StyleSheet.create({
         backgroundColor: "#f7f7f7"
     },
     tab: {
-        width: 120
+        width: 120,
+        // flex: 1,
     },
     indicator: {
         backgroundColor: "#75644f"
     },
     label: {
         color: "#75644f",
-        fontWeight: "400"
+        fontWeight: "400",
+        padding: 0,
+        textAlign: 'center'
+        // flex: 1,
     }
 });

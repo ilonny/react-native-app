@@ -220,6 +220,7 @@ export default class ListScreen extends Component {
     let comp;    
     let quotes = this.state.quotes;
     // console.log('render state', this.state)
+    console.log('render props', this.props)
     quotes = [...new Set(quotes)];
     let pagination_arr = [];
     quotes_on_page = quotes.splice((this.state.current_page-1)*20, 20);

@@ -22,6 +22,20 @@ const initialState = {
         loading: false,
         query_string: "",
         page: 1
+    },
+    important: {
+        items: [],
+        loading: false,
+        query_string: "",
+        page: 1
+    },
+    calendar: {
+        items: [],
+        loading: false,
+        query_string: "",
+        page: 1,
+        city: 'moscow',
+        month: '',
     }
 };
 
@@ -31,12 +45,12 @@ const uniqArrOfObjsNews = arr => {
     );
     let end_btn_index;
     ret.find((el, ind) => {
-        console.log(el.type);
+        // console.log(el.type);
         if (el.type == "end") {
             end_btn_index = ind;
         }
     });
-    console.log("end_btn_index", end_btn_index);
+    // console.log("end_btn_index", end_btn_index);
     ret.splice(end_btn_index, 1);
     ret.push({
         type: "end",
@@ -48,7 +62,7 @@ const uniqArrOfObjsNews = arr => {
 const siteReducer = function(state = initialState, action) {
     switch (action.type) {
         case "SUCCESS_GET_ITEMS":
-            console.log("SUCCESS_GET_ITEMS", action.items_type, action.page);
+            // console.log("SUCCESS_GET_ITEMS", action.items_type, action.page);
             let items;
             switch (action.items_type) {
                 case "content":
@@ -115,9 +129,30 @@ const siteReducer = function(state = initialState, action) {
                             page: action.page
                         }
                     };
+                case "important":
+                    // console.log('action items important', action.items)
+                    items = [].concat(action.items);
+                    // console.log('action items important 2', items)
+                    return {
+                        ...state,
+                        important: {
+                            ...state.important,
+                            items: [...new Set(items)],
+                            page: action.page
+                        }
+                    };
                 default:
                     return state;
             }
+        case "SUCCESS_GET_CALENDAR":
+            items = [].concat(action.items);
+            return {
+                ...state,
+                calendar: {
+                    ...state.calendar,
+                    items: [...new Set(items)],
+                }
+            };
         default:
             return state;
     }

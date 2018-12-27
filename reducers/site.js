@@ -34,8 +34,8 @@ const initialState = {
         loading: false,
         query_string: "",
         page: 1,
-        city: 'moscow',
-        month: '',
+        city: "moscow",
+        month: ""
     }
 };
 
@@ -43,15 +43,15 @@ const uniqArrOfObjsNews = arr => {
     ret = arr.filter(
         (thing, index, self) => index === self.findIndex(t => t.ID === thing.ID)
     );
-    let end_btn_index;
-    ret.find((el, ind) => {
-        // console.log(el.type);
+    // let end_btn_index;
+    // ret.find((el, ind) => {
+    // });
+    ret.forEach((el, index) => {
+        // console.log(el, index);
         if (el.type == "end") {
-            end_btn_index = ind;
+            ret.splice(index, 1);
         }
     });
-    // console.log("end_btn_index", end_btn_index);
-    ret.splice(end_btn_index, 1);
     ret.push({
         type: "end",
         NAME: "end_of_list"
@@ -66,12 +66,15 @@ const siteReducer = function(state = initialState, action) {
             let items;
             switch (action.items_type) {
                 case "content":
+                    console.log("content items", action.items);
                     if (action.action_type == "add") {
                         items = uniqArrOfObjsNews(
                             state.content.items.concat(action.items)
                         );
+                        console.log("content items 2", items);
                     } else {
                         items = uniqArrOfObjsNews([].concat(action.items));
+                        console.log("content items 3", items);
                     }
                     return {
                         ...state,
@@ -150,7 +153,7 @@ const siteReducer = function(state = initialState, action) {
                 ...state,
                 calendar: {
                     ...state.calendar,
-                    items: [...new Set(items)],
+                    items: [...new Set(items)]
                 }
             };
         default:

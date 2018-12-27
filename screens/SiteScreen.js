@@ -30,12 +30,12 @@ export default class SiteScreen extends Component {
     state = {
         index: 0,
         routes: [
-            { key: "calendar", title: "Вайшнавский календарь" },
             { key: "content", title: "Новости" },
             { key: "look", title: "Смотреть" },
             { key: "listen", title: "Слушать" },
             { key: "read", title: "Читать" },
             { key: "important", title: "Это важно" },
+            { key: "calendar", title: "Вайшнавский календарь" },
         ]
     };
     _handleIndexChange = index => this.setState({ index });

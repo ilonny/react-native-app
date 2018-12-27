@@ -14,13 +14,12 @@ import {
     TextInput,
     Image,
     ActivityIndicator,
-    Picker
+    Picker,
+    WebView
 } from "react-native";
 import { connect } from "react-redux";
 import { listStyles } from "../constants/list_styles";
 import { getCalendar } from "../actions/site";
-import NavigationService from "../NavigationService";
-import DropDown, { Select, Option, OptionList } from "react-native-selectme";
 
 class CalendarScreen extends Component {
     // static navigationOptions = {
@@ -39,14 +38,14 @@ class CalendarScreen extends Component {
             city: value
         });
         setTimeout(() => {
-            this.props.getCalendar(this.state.city)    
+            this.props.getCalendar(this.state.city);
         }, 100);
     }
-    componentDidMount(){
-        this.props.getCalendar(this.state.city)
+    componentDidMount() {
+        // this.props.getCalendar(this.state.city);
     }
     render() {
-        console.log('calendar props', this.props)
+        console.log("calendar props", this.props);
         return (
             <SafeAreaView
                 style={{
@@ -54,53 +53,11 @@ class CalendarScreen extends Component {
                     backgroundColor: "#efefef"
                 }}
             >
-                <View
-                    style={[
-                        listStyles.quoteItem,
-                        {
-                            marginLeft: 10,
-                            marginRight: 10,
-                            marginBottom: 5,
-                            marginTop: 5,
-                            flex: 0,
-                            padding: 8,
-                            flexDirection: "row",
-                            alignItems: "center"
-                        }
-                    ]}
-                >
-                    <Text>Выбор города: {this.state.canada}</Text>
-                    <Select
-                        style={styles.select}
-                        ref="SELECT1"
-                        optionListRef={this._getOptionList.bind(this)}
-                        defaultValue="Москва"
-                        onSelect={this._select.bind(this)}
-                    >
-                        <Option style={styles.option} value={"moscow"}>
-                            Москва
-                        </Option>
-                        <Option style={styles.option} value={"spb"}>
-                            Санкт - Петербург
-                        </Option>
-                        <Option style={styles.option} value={"kiev"}>
-                            Киев
-                        </Option>
-                        <Option style={styles.option} value={"spb"}>
-                            Санкт - Петербург
-                        </Option>
-                        <Option style={styles.option} value={"khabarovsk"}>
-                            Хабаровск
-                        </Option>
-                        <Option style={styles.option} value={"common"}>
-                            Общий
-                        </Option>
-                    </Select>
-                </View>
-                <OptionList
-                    ref="OPTIONLIST"
-                    overlayStyles={{ backgroundColor: "#efefef", flex: 0 }}
-                    itemsStyles={{ flex: 1, width: 300 }}
+                <WebView
+                    source={{
+                        uri:
+                            "https://harekrishna.ru/mobile-api/get-calendar-html.php?city=moscow"
+                    }}
                 />
             </SafeAreaView>
         );

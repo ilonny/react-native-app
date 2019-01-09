@@ -15,11 +15,24 @@ import {
     Image,
     ActivityIndicator,
     Picker,
-    WebView
+    WebView,
+    Linking
 } from "react-native";
 import { connect } from "react-redux";
 import { listStyles } from "../constants/list_styles";
 import { getCalendar } from "../actions/site";
+
+const injectScript = `
+  (function () {
+    window.onclick = function(e) {
+        if (e.target.className != 'fixed_r_month--item-city'){
+            e.preventDefault();
+            window.postMessage(e.target.href);
+            e.stopPropagation()
+        }
+    }
+  }());
+`;
 
 class CalendarScreen extends Component {
     // static navigationOptions = {
@@ -57,6 +70,13 @@ class CalendarScreen extends Component {
                     source={{
                         uri:
                             "https://harekrishna.ru/mobile-api/get-calendar-html.php?city=moscow"
+                    }}
+                    injectedJavaScript={injectScript}
+                    onMessage={({ nativeEvent }) => {
+                        const data = nativeEvent.data;
+                        if (data !== undefined && data !== null) {
+                            Linking.openURL(data);
+                        }
                     }}
                 />
             </SafeAreaView>

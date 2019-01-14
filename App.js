@@ -41,7 +41,7 @@ PushNotification.configure({
                 
             }
         };
-        request.open('GET', API_URL + `/set-token?token=${JSON.stringify(token)}&settings=all`);
+        request.open('GET', API_URL + `/set-token?token=${JSON.stringify(token)}&settings=all&news_settings=all&version=2`);
         request.send();
         console.log(API_URL + `/set-token?token=${JSON.stringify(token)}&settings=all`);
   },
@@ -59,6 +59,9 @@ PushNotification.configure({
       } else if (notification.data.quote_id){
         let q_id = notification.data.quote_id;
         NavigationService.navigate('Details', {quote_id: q_id});
+      } else if (notification.data.news_id){
+        let n_id = notification.data.news_id;
+        NavigationService.navigate('SiteDetail', {id: n_id});
       }
   },
 

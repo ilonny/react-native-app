@@ -40,7 +40,7 @@ window.postMessage = patchedPostMessage;
 export default class SiteScreen extends Component {
     static navigationOptions = ({navigation}) => {
         return {
-            headerTitle: navigation.getParam("id")
+            headerTitle: navigation.getParam("title"),
         }
     };
     state = {

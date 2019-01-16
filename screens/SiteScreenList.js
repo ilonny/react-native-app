@@ -18,7 +18,7 @@ import {
 import { connect } from "react-redux";
 import { listStyles } from "../constants/list_styles";
 import { getItems } from "../actions/site";
-import NavigationService from '../NavigationService';
+import NavigationService from "../NavigationService";
 
 class SiteScreenList extends Component {
     static navigationOptions = {
@@ -35,7 +35,8 @@ class SiteScreenList extends Component {
                 <TouchableOpacity
                     onPress={() => {
                         NavigationService.navigate("SiteDetail", {
-                            id: item.ID
+                            id: item.ID,
+                            title: item.NAME,
                         });
                     }}
                 >
@@ -142,6 +143,12 @@ class SiteScreenList extends Component {
             );
         }, 100);
     }
+    // refresh(){
+    //     this.setState({
+    //         refreshing: true
+    //     });
+    //     this.props.getItems(this.props.type, this.state.page, "", "replace");
+    // }
     render() {
         // console.log("site screen detail props: ", this.props);
         // console.log("site screen detail state: ", this.state);
@@ -222,7 +229,16 @@ class SiteScreenList extends Component {
                         // onEndReached={this._onEndReached}
                         // onEndReachedThreshold={.7}
                         keyExtractor={this._keyExtractor}
-                        refreshing={false}
+                        refreshing={this.props.refreshing}
+                        onRefresh={() => {
+                            this.setState({ page: 1 });
+                            this.props.getItems(
+                                this.props.type,
+                                1,
+                                "",
+                                "replace"
+                            );
+                        }}
                     />
                 ) : (
                     <View
@@ -252,7 +268,8 @@ class SiteScreenList extends Component {
 }
 const mapStateToProps = state => {
     return {
-        site: state.siteReducer
+        site: state.siteReducer,
+        refreshing: state.siteReducer.refreshing
     };
 };
 const mapDispatchToProps = dispatch => {

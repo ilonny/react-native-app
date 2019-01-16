@@ -30,7 +30,7 @@ export default class SettingsScreen extends Component {
         // this.switchToggle(id) = this.switchToggle(id).bind(this)
     }
     static navigationOptions = {
-        title: 'Настройки подписок'
+        title: 'Настройки'
     }
     componentWillMount(){
         // AsyncStorage.removeItem('Settings');
@@ -92,18 +92,19 @@ export default class SettingsScreen extends Component {
         request.open('GET', API_URL + '/items');
         request.send();
         AsyncStorage.getItem('Token', (err, value) => {
+            let token = value ? value : "test-token";
             this.setState(state => {
                 return {
                     ...state,
-                    token: value,
+                    token: token,
                 }
             })
         })
-        console.log('token state?', this.state)
+        // console.log('token state?', this.state)
     }
     switchToggle(id){
         if (this.state.selectedItems.includes(id)){
-            console.log('need delete item', id)
+            // console.log('need delete item', id)
             let arr = [...this.state.selectedItems];
             let index = arr.indexOf(id);
             arr.splice(index, 1);
@@ -118,7 +119,7 @@ export default class SettingsScreen extends Component {
             AsyncStorage.removeItem('Settings');
             AsyncStorage.setItem('Settings', JSON.stringify(arr));
         } else {
-            console.log('need add item', id)
+            // console.log('need add item', id)
             this.setState(state => {
                 return {
                     ...state,
@@ -158,12 +159,12 @@ export default class SettingsScreen extends Component {
                 
             }
         };
-        request.open('GET', API_URL + `/set-token?token=${this.state.token}&settings=${JSON.stringify(this.state.selectedItems)}`);
+        request.open('GET', API_URL + `/set-token?token=${this.state.token}&settings=${JSON.stringify(this.state.selectedItems)}&news_settings=old&version=2`);
         request.send();
-        console.log('updateTokenSetting', API_URL + `/set-token?token=${this.state.token}&settings=${JSON.stringify(this.state.selectedItems)}`);
+        console.log('updateTokenSetting', API_URL + `/set-token?token=${this.state.token}&settings=${JSON.stringify(this.state.selectedItems)}&news_settings=old&version=2`);
     }
     render() {
-        console.log('settings render', this.state);
+        // console.log('settings render', this.state);
         this.updateTokenSetting();
         return (
             <SafeAreaView style={{flex: 1, backgroundColor: '#efefef'}}>

@@ -28,8 +28,9 @@ export const errorGetItems = () => {
     };
 };
 export const getItems = (type, page = 1, q_str = "", action_type) => {
+    // console.log('get items fired')
     return dispatch => {
-        dispatch(startGetItems);
+        dispatch(startGetItems());
         // console.log("get items start with type: ", type, "page: ", page, "q_str: ", q_str, "action_type", action_type);
         let request = new XMLHttpRequest();
         request.onreadystatechange = e => {
@@ -54,7 +55,7 @@ export const getItems = (type, page = 1, q_str = "", action_type) => {
                     if (request.status != 200) {
                         Alert.alert("Ошибка получения данных");
                     }
-                }, 1000);
+                }, 5000);
                 // dispatch(errorGetItems);
             }
         };
@@ -72,7 +73,7 @@ export const successGetCalendar = items => {
     }
 }
 export const getCalendar = city => {
-    console.log('getCalendar fired', city)
+    // console.log('getCalendar fired', city)
     return dispatch => {
         let request = new XMLHttpRequest();
         request.onreadystatechange = e => {

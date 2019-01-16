@@ -1,4 +1,5 @@
 const initialState = {
+    refreshing: false,
     read: {
         items: [],
         loading: false,
@@ -61,23 +62,30 @@ const uniqArrOfObjsNews = arr => {
 
 const siteReducer = function(state = initialState, action) {
     switch (action.type) {
+        case "START_GET_ITEMS":
+            // console.log("start get items reducer");
+            return {
+                ...state,
+                refreshing: true
+            };
         case "SUCCESS_GET_ITEMS":
             // console.log("SUCCESS_GET_ITEMS", action.items_type, action.page);
             let items;
             switch (action.items_type) {
                 case "content":
-                    console.log("content items", action.items);
+                    // console.log("content items", action.items);
                     if (action.action_type == "add") {
                         items = uniqArrOfObjsNews(
                             state.content.items.concat(action.items)
                         );
-                        console.log("content items 2", items);
+                        // console.log("content items 2", items);
                     } else {
                         items = uniqArrOfObjsNews([].concat(action.items));
-                        console.log("content items 3", items);
+                        // console.log("content items 3", items);
                     }
                     return {
                         ...state,
+                        refreshing: false,
                         content: {
                             ...state.content,
                             items: [...new Set(items)],
@@ -94,6 +102,7 @@ const siteReducer = function(state = initialState, action) {
                     }
                     return {
                         ...state,
+                        refreshing: false,
                         read: {
                             ...state.read,
                             items: [...new Set(items)],
@@ -110,6 +119,7 @@ const siteReducer = function(state = initialState, action) {
                     }
                     return {
                         ...state,
+                        refreshing: false,
                         look: {
                             ...state.look,
                             items: [...new Set(items)],
@@ -126,6 +136,7 @@ const siteReducer = function(state = initialState, action) {
                     }
                     return {
                         ...state,
+                        refreshing: false,
                         listen: {
                             ...state.listen,
                             items: [...new Set(items)],
@@ -138,6 +149,7 @@ const siteReducer = function(state = initialState, action) {
                     // console.log('action items important 2', items)
                     return {
                         ...state,
+                        refreshing: false,
                         important: {
                             ...state.important,
                             items: [...new Set(items)],
@@ -151,6 +163,7 @@ const siteReducer = function(state = initialState, action) {
             items = [].concat(action.items);
             return {
                 ...state,
+                refreshing: false,
                 calendar: {
                     ...state.calendar,
                     items: [...new Set(items)]

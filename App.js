@@ -19,6 +19,7 @@ import AudioScreen from './screens/AudioScreen';
 import AudioDetail from './screens/AudioDetail';
 import SiteScreen from './screens/SiteScreen';
 import SiteScreenDetail from './screens/SiteScreenDetail';
+import SettingsMainScreen from './screens/SettingsMainScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { API_URL } from './constants/api';
 import NavigationService from './NavigationService';
@@ -30,20 +31,36 @@ PushNotification.configure({
 
   // (optional) Called when Token is generated (iOS and Android)
   onRegister: function(token) {
-      console.log( 'TOKEN:', token );
-      AsyncStorage.setItem('Token', JSON.stringify(token));
-      let request = new XMLHttpRequest();
-        request.onreadystatechange = (e) => {
+    let device_settings;
+    let device_settings_site;
+    AsyncStorage.getItem('Settings', (err, value) => {
+      if (value){
+        device_settings = value;
+      } else {
+        device_settings = 'all';
+      }
+      AsyncStorage.getItem('SiteSettings', (err, value2) => {
+        if (value){
+          device_settings_site = value;
+        } else {
+          device_settings_site = ['news', 'read', 'look', 'listen', 'important'];
+        }
+          console.log( 'TOKEN:', token );
+          AsyncStorage.setItem('Token', JSON.stringify(token));
+          let request = new XMLHttpRequest();
+          request.onreadystatechange = (e) => {
             if (request.readyState !== 4) {
               return;
             }
             if (request.status === 200) {
                 
             }
-        };
-        request.open('GET', API_URL + `/set-token?token=${JSON.stringify(token)}&settings=all&news_settings=all&version=2`);
-        request.send();
-        console.log(API_URL + `/set-token?token=${JSON.stringify(token)}&settings=all`);
+          };
+          request.open('GET', API_URL + `/set-token?token=${JSON.stringify(token)}&settings=${device_settings}&news_settings=${device_settings_site}&version=2`);
+          request.send();
+          console.log(API_URL + `/set-token?token=${JSON.stringify(token)}&settings=${device_settings}&news_settings=${device_settings_site}&version=2`);
+      });
+    });
   },
 
   // (required) Called when a remote or local notification is opened or received
@@ -61,7 +78,8 @@ PushNotification.configure({
         NavigationService.navigate('Details', {quote_id: q_id});
       } else if (notification.data.news_id){
         let n_id = notification.data.news_id;
-        NavigationService.navigate('SiteDetail', {id: n_id});
+        let n_t = notification.data.news_title;
+        NavigationService.navigate('SiteDetail', {id: n_id, title: n_t,});
       }
   },
 
@@ -96,12 +114,13 @@ PushNotification.configure({
 const ListStack = createStackNavigator({
   Цитаты: ListScreen,
   Details: DetailsScreen,
-  Settings: SettingsScreen
+  Settings: SettingsScreen,
+  Favorites: FavoritesScreen
 });
-const FavoritesStack = createStackNavigator({
-  Избранное: FavoritesScreen,
-  Details: DetailsScreen,
-});
+// const FavoritesStack = createStackNavigator({
+//   Избранное: FavoritesScreen,
+//   Details: DetailsScreen,
+// });
 // const SettingsStack = createStackNavigator({
 //   Настройки: SettingsScreen,
 // });
@@ -121,9 +140,10 @@ const TopLevelNavigator = createBottomTabNavigator(
   {
     Harekrishna: SiteStack,
     Цитаты: ListStack,
-    Избранное: FavoritesStack,
+    // Избранное: FavoritesStack,
     Книги: ReaderStack,
     Аудиокниги: AudioStack,
+    Настройки: SettingsMainScreen,
     // Настройки: SettingsStack,
   },
   {

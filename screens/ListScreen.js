@@ -36,8 +36,8 @@ export default class ListScreen extends Component {
       headerRight: (
         // <TouchableOpacity onPress={navigation.getParam('consoleState')}>
         <View style={{alignItems: 'center', flex: 1, flexDirection: 'row'}}>
-            <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
-                <Ionicons name={"ios-cog"} size={30} color={'tomato'} style={{marginTop: 5, marginRight: 15}}/>
+            <TouchableOpacity onPress={() => navigation.navigate('Favorites')}>
+                <Ionicons name={"ios-star"} size={30} color={'tomato'} style={{marginTop: 5, marginRight: 15}}/>
             </TouchableOpacity>
         </View>
       ),

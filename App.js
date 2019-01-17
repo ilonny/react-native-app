@@ -40,10 +40,10 @@ PushNotification.configure({
         device_settings = 'all';
       }
       AsyncStorage.getItem('SiteSettings', (err, value2) => {
-        if (value){
-          device_settings_site = value;
+        if (value2){
+          device_settings_site = value2;
         } else {
-          device_settings_site = ['news', 'read', 'look', 'listen', 'important'];
+          device_settings_site = JSON.stringify(['news', 'read', 'look', 'listen', 'important']);
         }
           console.log( 'TOKEN:', token );
           AsyncStorage.setItem('Token', JSON.stringify(token));

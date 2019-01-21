@@ -30,8 +30,18 @@ export default class ListScreen extends Component {
       current_page: 1,
     }
   }
-  static navigationOptions = {
-    title: 'Цитаты'
+  static navigationOptions = ({navigation}) =>  {
+    return {
+      title: 'Цитаты',
+      headerRight: (
+        // <TouchableOpacity onPress={navigation.getParam('consoleState')}>
+        <View style={{alignItems: 'center', flex: 1, flexDirection: 'row'}}>
+          <TouchableOpacity onPress={() => navigation.navigate('Favorites')}>
+              <Ionicons name={"ios-star"} size={30} color={'tomato'} style={{marginTop: 5, marginRight: 15}}/>
+          </TouchableOpacity>
+        </View>
+      ),
+    } 
   }
   willFocusSubscription = this.props.navigation.addListener(
     'willFocus',

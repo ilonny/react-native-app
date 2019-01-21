@@ -17,10 +17,21 @@ export default async (RemoteMessage) => {
     .setBody(messageText)
     .setData({
             q_id: JSON.parse(RemoteMessage.data.body).q_id ? JSON.parse(RemoteMessage.data.body).q_id : 'false',
-            need_alert: JSON.parse(RemoteMessage.data.body).need_alert ? 'true' : 'false'
+            need_alert: JSON.parse(RemoteMessage.data.body).need_alert ? 'true' : 'false',
+            news_id: JSON.parse(RemoteMessage.data.body).news_id ? JSON.parse(RemoteMessage.data.body).news_id : 'false',
+            news_title: JSON.parse(RemoteMessage.data.body).news_title ? JSON.parse(RemoteMessage.data.body).news_title : 'false',
     })
     .android
         .setBigText(messageText, RemoteMessage.data.title);
+    if (JSON.parse(RemoteMessage.data.body).news_id){
+        AsyncStorage.setItem('redirect', JSON.stringify({
+            screen: 'SiteDetail',
+            data: {
+                id: JSON.parse(RemoteMessage.data.body).news_id,
+                title: JSON.parse(RemoteMessage.data.body).news_title
+            }
+        }));
+    }
     // AsyncStorage.setItem('notification_id', JSON.parse(RemoteMessage.data.body).q_id);
     
     // let request = new XMLHttpRequest();

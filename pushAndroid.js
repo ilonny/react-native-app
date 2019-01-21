@@ -11,21 +11,36 @@ console.log('push-android is required')
 firebase.messaging().getToken()
   .then(fcmToken => {
     if (fcmToken) {
-      // user has a device token
-      console.log('yesssss token is' + fcmToken)
-      AsyncStorage.setItem('Token', JSON.stringify(fcmToken));
-      let request = new XMLHttpRequest();
-        request.onreadystatechange = (e) => {
-            if (request.readyState !== 4) {
-              return;
-            }
-            if (request.status === 200) {
-                
-            }
-        };
-        request.open('GET', API_URL + `/set-token?token=${JSON.stringify(fcmToken)}&settings=all`);
-        request.send();
-        console.log(API_URL + `/set-token?token=${JSON.stringify(fcmToken)}&settings=all`);
+      let device_settings;
+      let device_settings_site;
+      AsyncStorage.getItem('Settings', (err, value) => {
+        if (value){
+          device_settings = value;
+        } else {
+          device_settings = 'all';
+        }
+        AsyncStorage.getItem('SiteSettings', (err, value2) => {
+          if (value2){
+            device_settings_site = value2;
+          } else {
+            device_settings_site = JSON.stringify(['news', 'read', 'look', 'listen', 'important']);
+          }
+            console.log( 'TOKEN:', fcmToken );
+            AsyncStorage.setItem('Token', JSON.stringify(fcmToken));
+            let request = new XMLHttpRequest();
+            request.onreadystatechange = (e) => {
+              if (request.readyState !== 4) {
+                return;
+              }
+              if (request.status === 200) {
+                  
+              }
+            };
+            request.open('GET', API_URL + `/set-token?token=${JSON.stringify(fcmToken)}&settings=${device_settings}&news_settings=${device_settings_site}&version=2`);
+            request.send();
+            console.log(API_URL + `/set-token?token=${JSON.stringify(fcmToken)}&settings=${device_settings}&news_settings=${device_settings_site}&version=2`);
+        });
+      });
     } else {
       console.log('nooo((((((( token is' + fcmToken)
       // user doesn't have a device token yet
@@ -33,21 +48,36 @@ firebase.messaging().getToken()
 });
 firebase.messaging().onTokenRefresh(fcmToken => {
   if (fcmToken) {
-    // user has a device token
-    console.log('yesssss token is' + fcmToken)
-    AsyncStorage.setItem('Token', JSON.stringify(fcmToken));
-    let request = new XMLHttpRequest();
-      request.onreadystatechange = (e) => {
-          if (request.readyState !== 4) {
-            return;
-          }
-          if (request.status === 200) {
-              
-          }
-      };
-      request.open('GET', API_URL + `/set-token?token=${JSON.stringify(fcmToken)}&settings=all`);
-      request.send();
-      console.log(API_URL + `/set-token?token=${JSON.stringify(fcmToken)}&settings=all`);
+    let device_settings;
+    let device_settings_site;
+    AsyncStorage.getItem('Settings', (err, value) => {
+      if (value){
+        device_settings = value;
+      } else {
+        device_settings = 'all';
+      }
+      AsyncStorage.getItem('SiteSettings', (err, value2) => {
+        if (value2){
+          device_settings_site = value2;
+        } else {
+          device_settings_site = JSON.stringify(['news', 'read', 'look', 'listen', 'important']);
+        }
+          console.log( 'TOKEN:', fcmToken );
+          AsyncStorage.setItem('Token', JSON.stringify(fcmToken));
+          let request = new XMLHttpRequest();
+          request.onreadystatechange = (e) => {
+            if (request.readyState !== 4) {
+              return;
+            }
+            if (request.status === 200) {
+                
+            }
+          };
+          request.open('GET', API_URL + `/set-token?token=${JSON.stringify(fcmToken)}&settings=${device_settings}&news_settings=${device_settings_site}&version=2`);
+          request.send();
+          console.log(API_URL + `/set-token?token=${JSON.stringify(fcmToken)}&settings=${device_settings}&news_settings=${device_settings_site}&version=2`);
+      });
+    });
   } else {
     console.log('nooo((((((( token is' + fcmToken)
     // user doesn't have a device token yet
@@ -83,6 +113,14 @@ firebase.notifications().onNotificationOpened((notificationOpen) => {
   } else if (notificationOpen.notification._data.q_id != 'false'){
     let q_id = notificationOpen.notification._data.q_id;
     NavigationService.navigate('Details', {quote_id: q_id});
+  } else if (notificationOpen.notification._data.news_id != 'false'){
+    let n_id = notificationOpen.notification._data.news_id;
+    let n_t = notificationOpen.notification._data.news_title;
+    NavigationService.navigate('SiteDetail', {id: n_id, title: n_t,});
+    AsyncStorage.setItem('redirect', JSON.stringify({
+      screen: 'SiteDetail',
+      data: {id: n_id, title: n_t}
+    }));
   }
 });
 // setTimeout(() => {

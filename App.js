@@ -15,6 +15,9 @@ import ReaderScreen from './screens/ReaderScreen';
 import ReaderScreenDetail from './screens/ReaderScreenDetail';
 import AudioScreen from './screens/AudioScreen';
 import AudioDetail from './screens/AudioDetail';
+import SiteScreen from './screens/SiteScreen';
+import SiteScreenDetail from './screens/SiteScreenDetail';
+import SettingsMainScreen from './screens/SettingsMainScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { API_URL } from './constants/api';
 import NavigationService from './NavigationService';
@@ -39,14 +42,15 @@ setTimeout(() => {
 const ListStack = createStackNavigator({
   Цитаты: ListScreen,
   Details: DetailsScreen,
+  Favorites: FavoritesScreen
 });
-const FavoritesStack = createStackNavigator({
-  Избранное: FavoritesScreen,
-  Details: DetailsScreen,
-});
-const SettingsStack = createStackNavigator({
-  Настройки: SettingsScreen,
-});
+// const FavoritesStack = createStackNavigator({
+//   Избранное: FavoritesScreen,
+//   Details: DetailsScreen,
+// });
+// const SettingsStack = createStackNavigator({
+//   Настройки: SettingsScreen,
+// });
 const ReaderStack = createStackNavigator({
   Книги: ReaderScreen,
   Reader: ReaderScreenDetail,
@@ -55,13 +59,18 @@ const AudioStack = createStackNavigator({
   Аудиокниги: AudioScreen,
   Audio: AudioDetail
 });
+const SiteStack = createStackNavigator({
+  SiteTabScreen: SiteScreen,
+  SiteDetail: SiteScreenDetail,
+});
 const TopLevelNavigator = createBottomTabNavigator(
   {
+    Harekrishna: SiteStack,
     Цитаты: ListStack,
-    Избранное: FavoritesStack,
+    // Избранное: FavoritesStack,
     Книги: ReaderStack,
     Аудиокниги: AudioStack,
-    Настройки: SettingsStack,
+    Настройки: SettingsMainScreen,
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -78,6 +87,8 @@ const TopLevelNavigator = createBottomTabNavigator(
           iconName = `ios-book${focused ? '' : '-outline'}`;
         } else if (routeName === 'Аудиокниги') {
           iconName = `ios-headset${focused ? '' : '-outline'}`;
+        } else if (routeName === 'Harekrishna') {
+          iconName = `ios-globe${focused ? '' : '-outline'}`;
         }
         // You can return any component that you like here! We usually use an
         // icon component from react-native-vector-icons

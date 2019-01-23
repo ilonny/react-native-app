@@ -12,6 +12,14 @@ const initialState = {
         downloaded_books: [],
         progress: {},
         task: {},
+	},
+	now_playing: {
+		playing: false,
+		track_id: null,
+		track_name: null,
+		track_duration: null,
+		toc_id: null,
+		whoosh: {},
 	}
 }
 
@@ -57,6 +65,20 @@ const mainReducer = function (state = initialState, action) {
 					globalDownloading: action.global_downloading
 				}
 			}
+		case "SET_NOW_PLAYING":
+		console.log('SET_NOW_PLAYING', action)
+		return {
+			...state,
+			now_playing: {
+				...state.now_playing,
+				playing: action.playing,
+				track_id: action.track_id,
+				track_name: action.track_name,
+				track_duration: action.track_duration,
+				toc_id: action.toc_id,
+				whoosh: action.whoosh
+			}
+		}
 		default:
 			return state
 	}

@@ -1,5 +1,6 @@
 import { SITE_URL } from "../constants/api";
 import { Alert } from "react-native";
+import NavigationService from '../NavigationService';
 export const startGetItems = () => {
     return {
         type: "START_GET_ITEMS"
@@ -27,6 +28,7 @@ export const errorGetItems = () => {
         type: "ERROR_GET_ITEMS"
     };
 };
+let alertShowed = false;
 export const getItems = (type, page = 1, q_str = "", action_type) => {
     // console.log('get items fired')
     return dispatch => {
@@ -53,7 +55,12 @@ export const getItems = (type, page = 1, q_str = "", action_type) => {
                 // console.log("error get items", request);
                 setTimeout(() => {
                     if (request.status != 200) {
-                        Alert.alert("Ошибка получения данных");
+                        if (!alertShowed){
+                            console.log(alertShowed);
+                            Alert.alert("Ошибка получения данных");
+                            NavigationService.navigate('Цитаты');
+                            alertShowed = true;
+                        }
                     }
                 }, 5000);
                 // dispatch(errorGetItems);

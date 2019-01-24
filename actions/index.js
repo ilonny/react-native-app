@@ -39,3 +39,14 @@ export const setGlobalDownloading = global_downloading => {
         global_downloading
     }
 }
+export const setNowPlaying = (playing, track_id, track_name, track_duration, toc_id, whoosh) => {
+    return {
+        type: "SET_NOW_PLAYING",
+        playing,
+        track_id,
+        track_name,
+        track_duration,
+        toc_id,
+        whoosh
+    }
+}

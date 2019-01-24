@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.guruonline"
-    android:versionCode="7"
+    android:versionCode="8"
     android:versionName="1.1.04" >
 
     <uses-sdk
@@ -54,7 +54,6 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:showOnLockScreen="true"
-        android:testOnly="true"
         android:theme="@style/AppTheme" >
         <service android:name="io.invertase.firebase.messaging.RNFirebaseMessagingService" >
             <intent-filter>
@@ -169,6 +168,10 @@
             android:name="com.google.android.gms.common.api.GoogleApiActivity"
             android:exported="false"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <service
+            android:name="com.tanguyantoine.react.MusicControlNotification$NotificationService"
+            android:stopWithTask="true" />
 
         <provider
             android:name="com.google.firebase.provider.FirebaseInitProvider"

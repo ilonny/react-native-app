@@ -22,7 +22,7 @@ const ListenRoute = () => <SiteScreenList type="listen" />;
 const ReadRoute = () => <SiteScreenList type="read" />;
 const ImportantRoute = () => <SiteScreenList type="important" />;
 const CalendarRoute = () => <CalendarScreen />;
-
+import NavigationService from '../NavigationService'
 export default class SiteScreen extends Component {
     static navigationOptions = {
         header: null
@@ -79,6 +79,7 @@ export default class SiteScreen extends Component {
     });
 
     componentDidMount(){
+        // AsyncStorage.clear();
         // console.log('cdm fired')
         // this.checkRedirect();
     }
@@ -87,11 +88,13 @@ export default class SiteScreen extends Component {
         // AsyncStorage.clear();
         setTimeout(() => {
             AsyncStorage.getItem('redirect', (err, value) =>{
-                if (value){
-                    console.log('need redirect', JSON.parse(value));
-                } else {
-                    console.log('not need redirect');
-                }
+                // if (value){
+                //     console.log('need redirect111', JSON.parse(value));
+                //     let valueObj = JSON.parse(value);
+                //     NavigationService.navigate('SiteDetail', {id: valueObj.data.id, title: valueObj.data.title,});                    
+                // } else {
+                //     console.log('not need redirect');
+                // }
             });
             AsyncStorage.removeItem('redirect');
         }, 500);

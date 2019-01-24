@@ -383,7 +383,7 @@ class EpubReader extends Component {
                                 keyExtractor={item => String(item.id)}
                                 renderItem={({item}) => (
                                     <View style={styles.navigation_list_row}>
-                                        <View style={{maxWidth: '97%'}}>
+                                        <View style={{maxWidth: '85%'}}>
                                         <TouchableOpacity onPress={() => this.setState({location: item.app_href, nav_opened: false})}>
                                             <View style={{flex: 1, height: "100%"}}>
                                                 <Text>{item.title.trim()}</Text>

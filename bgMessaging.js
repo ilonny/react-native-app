@@ -24,6 +24,7 @@ export default async (RemoteMessage) => {
     .android
         .setBigText(messageText, RemoteMessage.data.title);
     if (JSON.parse(RemoteMessage.data.body).news_id){
+        
         AsyncStorage.setItem('redirect', JSON.stringify({
             screen: 'SiteDetail',
             data: {

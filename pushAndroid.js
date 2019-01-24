@@ -23,9 +23,9 @@ firebase.messaging().getToken()
           if (value2){
             device_settings_site = value2;
           } else {
-            device_settings_site = JSON.stringify(['news', 'read', 'look', 'listen', 'important']);
+            device_settings_site = JSON.stringify(['content', 'read', 'look', 'listen', 'important']);
           }
-            console.log( 'TOKEN:', fcmToken );
+            console.log( 'TOKEN13:', fcmToken );
             AsyncStorage.setItem('Token', JSON.stringify(fcmToken));
             let request = new XMLHttpRequest();
             request.onreadystatechange = (e) => {
@@ -60,9 +60,10 @@ firebase.messaging().onTokenRefresh(fcmToken => {
         if (value2){
           device_settings_site = value2;
         } else {
-          device_settings_site = JSON.stringify(['news', 'read', 'look', 'listen', 'important']);
+          device_settings_site = JSON.stringify(['content', 'read', 'look', 'listen', 'important']);
         }
-          console.log( 'TOKEN:', fcmToken );
+        
+          console.log( 'TOKEN123:', fcmToken );
           AsyncStorage.setItem('Token', JSON.stringify(fcmToken));
           let request = new XMLHttpRequest();
           request.onreadystatechange = (e) => {
@@ -75,6 +76,7 @@ firebase.messaging().onTokenRefresh(fcmToken => {
           };
           request.open('GET', API_URL + `/set-token?token=${JSON.stringify(fcmToken)}&settings=${device_settings}&news_settings=${device_settings_site}&version=2`);
           request.send();
+          console.log('device_settings_site', device_settings_site);
           console.log(API_URL + `/set-token?token=${JSON.stringify(fcmToken)}&settings=${device_settings}&news_settings=${device_settings_site}&version=2`);
       });
     });
@@ -110,6 +112,25 @@ firebase.notifications().onNotificationOpened((notificationOpen) => {
   console.log('ONNOTIFICATION OPENED', notificationOpen.notification)
   if (notificationOpen.notification._data.need_alert == 'true'){
       Alert.alert("", notificationOpen.notification._body);
+  } else if (notificationOpen.notification._data.q_id != 'false'){
+    let q_id = notificationOpen.notification._data.q_id;
+    NavigationService.navigate('Details', {quote_id: q_id});
+  } else if (notificationOpen.notification._data.news_id != 'false'){
+    let n_id = notificationOpen.notification._data.news_id;
+    let n_t = notificationOpen.notification._data.news_title;
+    NavigationService.navigate('SiteDetail', {id: n_id, title: n_t,});
+    AsyncStorage.setItem('redirect', JSON.stringify({
+      screen: 'SiteDetail',
+      data: {id: n_id, title: n_t}
+    }));
+  }
+});
+
+firebase.notifications().getInitialNotification()
+.then((notificationOpen) => {
+  console.log('notif OFFLINE OPENED', notificationOpen);
+  if (notificationOpen.notification._data.need_alert == 'true'){
+    Alert.alert("", notificationOpen.notification._body);
   } else if (notificationOpen.notification._data.q_id != 'false'){
     let q_id = notificationOpen.notification._data.q_id;
     NavigationService.navigate('Details', {quote_id: q_id});

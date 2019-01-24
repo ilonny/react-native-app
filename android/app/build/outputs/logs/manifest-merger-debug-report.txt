@@ -24,6 +24,7 @@ MERGED from [com.google.firebase:firebase-iid:16.2.0] /Users/dmitry/.gradle/cach
 MERGED from [com.google.firebase:firebase-iid-interop:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-iid-interop-16.0.0.aar/fe4ab2039425f2a7a9087b2883fdebb4/AndroidManifest.xml:2:1-10:12
 MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/AndroidManifest.xml:17:1-29:12
 MERGED from [me.leolin:ShortcutBadger:1.1.21] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.21.aar/c19a9d4a07063157e3be00399e486b2c/AndroidManifest.xml:2:1-52:12
+MERGED from [:react-native-music-control] /Users/dmitry/projects/react-native-app/node_modules/react-native-music-control/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-17:12
 MERGED from [com.facebook.react:react-native:0.55.4] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/react-native-0.55.4.aar/96620dd658df25bb41c33dc999cacaed/AndroidManifest.xml:2:1-15:12
 MERGED from [com.android.support:appcompat-v7:23.1.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.firebase:firebase-common:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.0.aar/40b42bbbd2e1244caeefce96795c5191/AndroidManifest.xml:2:1-16:12
@@ -129,6 +130,8 @@ MERGED from [com.google.firebase:firebase-iid-interop:16.0.0] /Users/dmitry/.gra
 MERGED from [com.google.firebase:firebase-iid-interop:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-iid-interop-16.0.0.aar/fe4ab2039425f2a7a9087b2883fdebb4/AndroidManifest.xml:7:5-8:19
 MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/AndroidManifest.xml:22:5-27:19
 MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/AndroidManifest.xml:22:5-27:19
+MERGED from [:react-native-music-control] /Users/dmitry/projects/react-native-app/node_modules/react-native-music-control/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:11:5-15:19
+MERGED from [:react-native-music-control] /Users/dmitry/projects/react-native-app/node_modules/react-native-music-control/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:11:5-15:19
 MERGED from [com.facebook.react:react-native:0.55.4] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/react-native-0.55.4.aar/96620dd658df25bb41c33dc999cacaed/AndroidManifest.xml:13:5-20
 MERGED from [com.facebook.react:react-native:0.55.4] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/react-native-0.55.4.aar/96620dd658df25bb41c33dc999cacaed/AndroidManifest.xml:13:5-20
 MERGED from [com.android.support:appcompat-v7:23.1.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/AndroidManifest.xml:22:5-20
@@ -291,6 +294,8 @@ MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/dmitry/.gr
 MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/AndroidManifest.xml:20:5-44
 MERGED from [me.leolin:ShortcutBadger:1.1.21] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.21.aar/c19a9d4a07063157e3be00399e486b2c/AndroidManifest.xml:7:5-9:41
 MERGED from [me.leolin:ShortcutBadger:1.1.21] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.21.aar/c19a9d4a07063157e3be00399e486b2c/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-music-control] /Users/dmitry/projects/react-native-app/node_modules/react-native-music-control/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-music-control] /Users/dmitry/projects/react-native-app/node_modules/react-native-music-control/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.55.4] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/react-native-0.55.4.aar/96620dd658df25bb41c33dc999cacaed/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.55.4] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/react-native-0.55.4.aar/96620dd658df25bb41c33dc999cacaed/AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:appcompat-v7:23.1.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/AndroidManifest.xml:20:5-43
@@ -581,6 +586,12 @@ uses-permission#me.everything.badger.permission.BADGE_COUNT_WRITE
 ADDED from [me.leolin:ShortcutBadger:1.1.21] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.21.aar/c19a9d4a07063157e3be00399e486b2c/AndroidManifest.xml:50:5-89
 	android:name
 		ADDED from [me.leolin:ShortcutBadger:1.1.21] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/ShortcutBadger-1.1.21.aar/c19a9d4a07063157e3be00399e486b2c/AndroidManifest.xml:50:22-86
+service#com.tanguyantoine.react.MusicControlNotification$NotificationService
+ADDED from [:react-native-music-control] /Users/dmitry/projects/react-native-app/node_modules/react-native-music-control/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:12:9-14:43
+	android:stopWithTask
+		ADDED from [:react-native-music-control] /Users/dmitry/projects/react-native-app/node_modules/react-native-music-control/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:14:13-40
+	android:name
+		ADDED from [:react-native-music-control] /Users/dmitry/projects/react-native-app/node_modules/react-native-music-control/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:13:13-96
 provider#com.google.firebase.provider.FirebaseInitProvider
 ADDED from [com.google.firebase:firebase-common:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.0.aar/40b42bbbd2e1244caeefce96795c5191/AndroidManifest.xml:9:9-13:39
 	android:authorities

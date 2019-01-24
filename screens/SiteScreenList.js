@@ -197,6 +197,7 @@ class SiteScreenList extends Component {
                     <TextInput
                         placeholder="Поиск"
                         onChangeText={text => this.changeSearchText(text)}
+                        style={{height: 35, padding: 2}}
                     />
                 </View>
                 {items.length == 0 ? (

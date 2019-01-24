@@ -1,0 +1,46 @@
+[
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/skip_forward_5.png",
+        "source": "/Users/dmitry/projects/react-native-app/node_modules/react-native-music-control/android/build/intermediates/packaged_res/debug/drawable-ldpi-v4/skip_forward_5.png"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/skip_forward_10.png",
+        "source": "/Users/dmitry/projects/react-native-app/node_modules/react-native-music-control/android/build/intermediates/packaged_res/debug/drawable-ldpi-v4/skip_forward_10.png"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/stop.png",
+        "source": "/Users/dmitry/projects/react-native-app/node_modules/react-native-music-control/android/build/intermediates/packaged_res/debug/drawable-ldpi-v4/stop.png"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/skip_backward_5.png",
+        "source": "/Users/dmitry/projects/react-native-app/node_modules/react-native-music-control/android/build/intermediates/packaged_res/debug/drawable-ldpi-v4/skip_backward_5.png"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/play.png",
+        "source": "/Users/dmitry/projects/react-native-app/node_modules/react-native-music-control/android/build/intermediates/packaged_res/debug/drawable-ldpi-v4/play.png"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/pause.png",
+        "source": "/Users/dmitry/projects/react-native-app/node_modules/react-native-music-control/android/build/intermediates/packaged_res/debug/drawable-ldpi-v4/pause.png"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/skip_backward_10.png",
+        "source": "/Users/dmitry/projects/react-native-app/node_modules/react-native-music-control/android/build/intermediates/packaged_res/debug/drawable-ldpi-v4/skip_backward_10.png"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/next.png",
+        "source": "/Users/dmitry/projects/react-native-app/node_modules/react-native-music-control/android/build/intermediates/packaged_res/debug/drawable-ldpi-v4/next.png"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/skip_backward_30.png",
+        "source": "/Users/dmitry/projects/react-native-app/node_modules/react-native-music-control/android/build/intermediates/packaged_res/debug/drawable-ldpi-v4/skip_backward_30.png"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/previous.png",
+        "source": "/Users/dmitry/projects/react-native-app/node_modules/react-native-music-control/android/build/intermediates/packaged_res/debug/drawable-ldpi-v4/previous.png"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/skip_forward_30.png",
+        "source": "/Users/dmitry/projects/react-native-app/node_modules/react-native-music-control/android/build/intermediates/packaged_res/debug/drawable-ldpi-v4/skip_forward_30.png"
+    }
+]

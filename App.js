@@ -43,7 +43,7 @@ PushNotification.configure({
         if (value2){
           device_settings_site = value2;
         } else {
-          device_settings_site = JSON.stringify(['news', 'read', 'look', 'listen', 'important']);
+          device_settings_site = JSON.stringify(['content', 'read', 'look', 'listen', 'important']);
         }
           console.log( 'TOKEN:', token );
           AsyncStorage.setItem('Token', JSON.stringify(token));

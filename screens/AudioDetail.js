@@ -504,7 +504,7 @@ class AudioScreen extends Component {
             this.checkBookIdFromNavProps();
             this.getDownloadedDataFromAyncStorage();
             // console.log('playFromReader start')
-            // this.playFromReader();
+            this.playFromReader();
         }
     );
     willBlurSubscription = this.props.navigation.addListener(

@@ -10,7 +10,8 @@ import {
     FlatList,
     TouchableOpacity,
     Dimensions,
-    Animated
+    Animated,
+    Modal
 } from "react-native";
 import { TabView, TabBar, SceneMap } from "react-native-tab-view";
 import SiteScreenList from "./SiteScreenList";
@@ -22,17 +23,17 @@ const ListenRoute = () => <SiteScreenList type="listen" />;
 const ReadRoute = () => <SiteScreenList type="read" />;
 const ImportantRoute = () => <SiteScreenList type="important" />;
 const CalendarRoute = () => <CalendarScreen />;
-import NavigationService from '../NavigationService'
+import NavigationService from "../NavigationService";
 export default class SiteScreen extends Component {
     static navigationOptions = {
         header: null
     };
     willFocusSubscription = this.props.navigation.addListener(
-        'willFocus',
+        "willFocus",
         payload => {
-          this.checkRedirect();
+            this.checkRedirect();
         }
-      );
+    );
     state = {
         index: 0,
         routes: [
@@ -41,8 +42,9 @@ export default class SiteScreen extends Component {
             { key: "listen", title: "Слушать" },
             { key: "read", title: "Читать" },
             { key: "important", title: "Это важно" },
-            { key: "calendar", title: "Вайшнавский календарь" },
-        ]
+            { key: "calendar", title: "Вайшнавский календарь" }
+        ],
+        modalShowed: true
     };
     _handleIndexChange = index => this.setState({ index });
 
@@ -62,10 +64,12 @@ export default class SiteScreen extends Component {
         return (
             <Text
                 style={styles.label}
-                numberOfLines={route.route.title == 'Вайшнавский календарь' ? 2 : 1}
-                ellipsizeMode='tail'
+                numberOfLines={
+                    route.route.title == "Вайшнавский календарь" ? 2 : 1
+                }
+                ellipsizeMode="tail"
             >
-               {route.route.title}
+                {route.route.title}
             </Text>
         );
     };
@@ -75,39 +79,100 @@ export default class SiteScreen extends Component {
         listen: ListenRoute,
         read: ReadRoute,
         important: ImportantRoute,
-        calendar: CalendarRoute,
+        calendar: CalendarRoute
     });
 
-    componentDidMount(){
+    componentDidMount() {
         // AsyncStorage.clear();
-        // console.log('cdm fired')
-        // this.checkRedirect();
-    }
-    checkRedirect(){
-        console.log('check redirect fired');
-        // AsyncStorage.clear();
-        setTimeout(() => {
-            AsyncStorage.getItem('redirect', (err, value) =>{
-                // if (value){
-                //     console.log('need redirect111', JSON.parse(value));
-                //     let valueObj = JSON.parse(value);
-                //     NavigationService.navigate('SiteDetail', {id: valueObj.data.id, title: valueObj.data.title,});                    
-                // } else {
-                //     console.log('not need redirect');
-                // }
-            });
-            AsyncStorage.removeItem('redirect');
-        }, 500);
+        AsyncStorage.getItem("initial_modal", (err, value) => {
+            // console.log("initial_modal", value);
+            if (!value) {
+                this.setState({
+                    modalShowed: false
+                });
+                AsyncStorage.setItem("initial_modal", "true");
+            }
+        });
     }
     render() {
-        return (
-            <TabView
-                navigationState={this.state}
-                renderScene={this._renderScene}
-                renderTabBar={this._renderTabBar}
-                onIndexChange={this._handleIndexChange}
-            />
-        );
+        if (this.state.modalShowed) {
+            return (
+                <TabView
+                    navigationState={this.state}
+                    renderScene={this._renderScene}
+                    renderTabBar={this._renderTabBar}
+                    onIndexChange={this._handleIndexChange}
+                />
+            );
+        } else
+            return (
+                <Modal
+                    animationType="slide"
+                    transparent={false}
+                    visible={!this.state.modalShowed}
+                    onRequestClose={() => {
+                        Alert.alert("Modal has been closed.");
+                    }}
+                >
+                    <ScrollView
+                        contentContainerStyle={{
+                            flex: 1,
+                            justifyContent: "center",
+                            alignItems: "center",
+                            padding: 20
+                        }}
+                    >
+                        <Text
+                            style={{
+                                color: "#75644f",
+                                fontSize: 16,
+                                textAlign: "center",
+                                lineHeight: 20
+                            }}
+                        >
+                            Дорогие друзья! Мы рады предложить вашему вниманию
+                            приложение
+                            {"\n"}
+                            <Text style={{ fontWeight: "bold" }}>
+                                «Guru Online»
+                            </Text>
+                            {"\n"}Оно позволяет:
+                            {"\n"}- Слушать и смотреть лекции современных
+                            духовных учителей;
+                            {"\n"}- Изучать наследие святых прошлого из книг –
+                            как в текстовом формате, так и в формате аудиокниги;
+                            {"\n"}- Ежедневно получать в виде рассылки жемчужины
+                            духовных откровений – цитаты мудрецов древности и
+                            современности, с возможностью настраивать их по
+                            авторам.
+                            {"\n"}Мы искренне надеемся, что наше приложение
+                            позволит вам в любом месте и в любое время жить в
+                            мире высоких идеалов, красоты, гармонии и любви.
+                        </Text>
+                        <TouchableOpacity
+                            onPress={() => this.setState({ modalShowed: true })}
+                            style={{
+                                margin: 10,
+                                padding: 10,
+                                borderRadius: 10,
+                                borderWidth: 0.5,
+                                borderColor: "#75644f",
+                                width: 100
+                            }}
+                        >
+                            <Text
+                                style={{
+                                    textAlign: "center",
+                                    color: "#75644f",
+                                    fontSize: 16
+                                }}
+                            >
+                                Ок
+                            </Text>
+                        </TouchableOpacity>
+                    </ScrollView>
+                </Modal>
+            );
     }
 }
 // const styles = StyleSheet.create({
@@ -137,7 +202,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#f7f7f7"
     },
     tab: {
-        width: 120,
+        width: 120
         // flex: 1,
     },
     indicator: {
@@ -147,7 +212,7 @@ const styles = StyleSheet.create({
         color: "#75644f",
         fontWeight: "400",
         padding: 0,
-        textAlign: 'center'
+        textAlign: "center"
         // flex: 1,
     }
 });

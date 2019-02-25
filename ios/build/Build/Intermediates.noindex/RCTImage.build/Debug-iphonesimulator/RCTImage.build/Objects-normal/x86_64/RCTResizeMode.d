@@ -2,6 +2,7 @@ dependencies: \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/Libraries/Image/RCTResizeMode.m \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/Libraries/Image/RCTResizeMode.h \
   /Users/dmitry/projects/react-native-app/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTConvert.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.3.sdk/usr/include/libxml2/module.modulemap \
   /Users/dmitry/projects/react-native-app/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAnimationType.h \
   /Users/dmitry/projects/react-native-app/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBorderStyle.h \
   /Users/dmitry/projects/react-native-app/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \

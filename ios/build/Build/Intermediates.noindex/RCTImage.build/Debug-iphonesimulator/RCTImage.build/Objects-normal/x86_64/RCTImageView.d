@@ -1,6 +1,7 @@
 dependencies: \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/Libraries/Image/RCTImageView.m \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/Libraries/Image/RCTImageView.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.3.sdk/usr/include/libxml2/module.modulemap \
   /Users/dmitry/projects/react-native-app/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTResizeMode.h \
   /Users/dmitry/projects/react-native-app/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTConvert.h \
   /Users/dmitry/projects/react-native-app/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAnimationType.h \

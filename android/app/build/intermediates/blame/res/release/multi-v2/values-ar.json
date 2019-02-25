@@ -4,6 +4,23 @@
             "outputFile": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ar/values-ar.xml",
             "map": [
                 {
+                    "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-16.1.0.aar/17423c527e57757b2852cdbf10edd3a1/res/values-ar/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "190",
+                        "endColumns": "97",
+                        "endOffsets": "287"
+                    },
+                    "to": {
+                        "startLines": "40",
+                        "startColumns": "4",
+                        "startOffsets": "4722",
+                        "endColumns": "101",
+                        "endOffsets": "4819"
+                    }
+                },
+                {
                     "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.1.0.aar/bdafe4829f12b49e6079f1ddda5f4304/res/values-ar/values.xml",
                     "from": {
                         "startLines": "4",
@@ -52,23 +69,6 @@
                         "startOffsets": "3144",
                         "endColumns": "188",
                         "endOffsets": "3328"
-                    }
-                },
-                {
-                    "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-16.0.0.aar/4f14d8e97f9f821307bd8f05a6352998/res/values-ar/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "190",
-                        "endColumns": "97",
-                        "endOffsets": "287"
-                    },
-                    "to": {
-                        "startLines": "40",
-                        "startColumns": "4",
-                        "startOffsets": "4722",
-                        "endColumns": "101",
-                        "endOffsets": "4819"
                     }
                 },
                 {
@@ -94,6 +94,23 @@
             "outputFile": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/values-ar/values-ar.xml",
             "map": [
                 {
+                    "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-16.1.0.aar/17423c527e57757b2852cdbf10edd3a1/res/values-ar/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "190",
+                        "endColumns": "97",
+                        "endOffsets": "287"
+                    },
+                    "to": {
+                        "startLines": "40",
+                        "startColumns": "4",
+                        "startOffsets": "4722",
+                        "endColumns": "101",
+                        "endOffsets": "4819"
+                    }
+                },
+                {
                     "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.1.0.aar/bdafe4829f12b49e6079f1ddda5f4304/res/values-ar/values.xml",
                     "from": {
                         "startLines": "4",
@@ -142,23 +159,6 @@
                         "startOffsets": "3144",
                         "endColumns": "188",
                         "endOffsets": "3328"
-                    }
-                },
-                {
-                    "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-16.0.0.aar/4f14d8e97f9f821307bd8f05a6352998/res/values-ar/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "190",
-                        "endColumns": "97",
-                        "endOffsets": "287"
-                    },
-                    "to": {
-                        "startLines": "40",
-                        "startColumns": "4",
-                        "startOffsets": "4722",
-                        "endColumns": "101",
-                        "endOffsets": "4819"
                     }
                 },
                 {

@@ -13,8 +13,8 @@ MERGED from [:react-native-orientation] /Users/dmitry/projects/react-native-app/
 MERGED from [:react-native-fs] /Users/dmitry/projects/react-native-app/node_modules/react-native-fs/android/build/intermediates/manifests/full/release/AndroidManifest.xml:2:1-13:12
 MERGED from [:react-native-fetch-blob] /Users/dmitry/projects/react-native-app/node_modules/react-native-fetch-blob/android/build/intermediates/manifests/full/release/AndroidManifest.xml:2:1-14:12
 MERGED from [:react-native-firebase] /Users/dmitry/projects/react-native-app/node_modules/react-native-firebase/android/build/intermediates/manifests/full/release/AndroidManifest.xml:2:1-15:12
-MERGED from [com.google.android.gms:play-services-gcm:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-16.0.0.aar/4f14d8e97f9f821307bd8f05a6352998/AndroidManifest.xml:17:1-28:12
-MERGED from [com.google.android.gms:play-services-iid:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-16.0.0.aar/b9f6bcaa0880f489d782c733bc34e079/AndroidManifest.xml:17:1-28:12
+MERGED from [com.google.android.gms:play-services-gcm:16.1.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-16.1.0.aar/17423c527e57757b2852cdbf10edd3a1/AndroidManifest.xml:17:1-28:12
+MERGED from [com.google.android.gms:play-services-iid:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-16.0.1.aar/279cb5c48cd5d5b7deb4a0877a713a60/AndroidManifest.xml:17:1-28:12
 MERGED from [com.google.firebase:firebase-messaging:17.1.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.1.0.aar/bdafe4829f12b49e6079f1ddda5f4304/AndroidManifest.xml:17:1-37:12
 MERGED from [com.google.firebase:firebase-core:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-core-16.0.1.aar/32f92b6cd5ee3ea3805f11c6bafa1fed/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-16.0.1.aar/4fb8d7f3ca63f119d2687135932e905c/AndroidManifest.xml:17:1-34:12
@@ -72,10 +72,10 @@ uses-permission#android.permission.INTERNET
 ADDED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml:4:5-67
 MERGED from [:react-native-firebase] /Users/dmitry/projects/react-native-app/node_modules/react-native-firebase/android/build/intermediates/manifests/full/release/AndroidManifest.xml:11:5-67
 MERGED from [:react-native-firebase] /Users/dmitry/projects/react-native-app/node_modules/react-native-firebase/android/build/intermediates/manifests/full/release/AndroidManifest.xml:11:5-67
-MERGED from [com.google.android.gms:play-services-gcm:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-16.0.0.aar/4f14d8e97f9f821307bd8f05a6352998/AndroidManifest.xml:24:5-67
-MERGED from [com.google.android.gms:play-services-gcm:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-16.0.0.aar/4f14d8e97f9f821307bd8f05a6352998/AndroidManifest.xml:24:5-67
-MERGED from [com.google.android.gms:play-services-iid:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-16.0.0.aar/b9f6bcaa0880f489d782c733bc34e079/AndroidManifest.xml:24:5-67
-MERGED from [com.google.android.gms:play-services-iid:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-16.0.0.aar/b9f6bcaa0880f489d782c733bc34e079/AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-gcm:16.1.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-16.1.0.aar/17423c527e57757b2852cdbf10edd3a1/AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-gcm:16.1.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-16.1.0.aar/17423c527e57757b2852cdbf10edd3a1/AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-iid:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-16.0.1.aar/279cb5c48cd5d5b7deb4a0877a713a60/AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-iid:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-16.0.1.aar/279cb5c48cd5d5b7deb4a0877a713a60/AndroidManifest.xml:24:5-67
 MERGED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-16.0.1.aar/4fb8d7f3ca63f119d2687135932e905c/AndroidManifest.xml:22:5-67
 MERGED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-16.0.1.aar/4fb8d7f3ca63f119d2687135932e905c/AndroidManifest.xml:22:5-67
 MERGED from [com.google.firebase:firebase-analytics:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.1.aar/9180cb57c1b35a121a6ce5d398278727/AndroidManifest.xml:23:5-67
@@ -110,10 +110,10 @@ application
 ADDED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml:12:5-53:19
 MERGED from [:react-native-fetch-blob] /Users/dmitry/projects/react-native-app/node_modules/react-native-fetch-blob/android/build/intermediates/manifests/full/release/AndroidManifest.xml:11:5-12:19
 MERGED from [:react-native-fetch-blob] /Users/dmitry/projects/react-native-app/node_modules/react-native-fetch-blob/android/build/intermediates/manifests/full/release/AndroidManifest.xml:11:5-12:19
-MERGED from [com.google.android.gms:play-services-gcm:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-16.0.0.aar/4f14d8e97f9f821307bd8f05a6352998/AndroidManifest.xml:26:5-20
-MERGED from [com.google.android.gms:play-services-gcm:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-16.0.0.aar/4f14d8e97f9f821307bd8f05a6352998/AndroidManifest.xml:26:5-20
-MERGED from [com.google.android.gms:play-services-iid:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-16.0.0.aar/b9f6bcaa0880f489d782c733bc34e079/AndroidManifest.xml:26:5-20
-MERGED from [com.google.android.gms:play-services-iid:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-16.0.0.aar/b9f6bcaa0880f489d782c733bc34e079/AndroidManifest.xml:26:5-20
+MERGED from [com.google.android.gms:play-services-gcm:16.1.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-16.1.0.aar/17423c527e57757b2852cdbf10edd3a1/AndroidManifest.xml:26:5-20
+MERGED from [com.google.android.gms:play-services-gcm:16.1.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-16.1.0.aar/17423c527e57757b2852cdbf10edd3a1/AndroidManifest.xml:26:5-20
+MERGED from [com.google.android.gms:play-services-iid:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-16.0.1.aar/279cb5c48cd5d5b7deb4a0877a713a60/AndroidManifest.xml:26:5-20
+MERGED from [com.google.android.gms:play-services-iid:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-16.0.1.aar/279cb5c48cd5d5b7deb4a0877a713a60/AndroidManifest.xml:26:5-20
 MERGED from [com.google.firebase:firebase-messaging:17.1.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.1.0.aar/bdafe4829f12b49e6079f1ddda5f4304/AndroidManifest.xml:22:5-35:19
 MERGED from [com.google.firebase:firebase-messaging:17.1.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.1.0.aar/bdafe4829f12b49e6079f1ddda5f4304/AndroidManifest.xml:22:5-35:19
 MERGED from [com.google.firebase:firebase-core:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-core-16.0.1.aar/32f92b6cd5ee3ea3805f11c6bafa1fed/AndroidManifest.xml:7:5-20
@@ -272,10 +272,10 @@ MERGED from [:react-native-fetch-blob] /Users/dmitry/projects/react-native-app/n
 MERGED from [:react-native-fetch-blob] /Users/dmitry/projects/react-native-app/node_modules/react-native-fetch-blob/android/build/intermediates/manifests/full/release/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-firebase] /Users/dmitry/projects/react-native-app/node_modules/react-native-firebase/android/build/intermediates/manifests/full/release/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-firebase] /Users/dmitry/projects/react-native-app/node_modules/react-native-firebase/android/build/intermediates/manifests/full/release/AndroidManifest.xml:7:5-9:41
-MERGED from [com.google.android.gms:play-services-gcm:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-16.0.0.aar/4f14d8e97f9f821307bd8f05a6352998/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-gcm:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-16.0.0.aar/4f14d8e97f9f821307bd8f05a6352998/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-iid:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-16.0.0.aar/b9f6bcaa0880f489d782c733bc34e079/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-iid:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-16.0.0.aar/b9f6bcaa0880f489d782c733bc34e079/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-gcm:16.1.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-16.1.0.aar/17423c527e57757b2852cdbf10edd3a1/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-gcm:16.1.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-16.1.0.aar/17423c527e57757b2852cdbf10edd3a1/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-iid:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-16.0.1.aar/279cb5c48cd5d5b7deb4a0877a713a60/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-iid:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-16.0.1.aar/279cb5c48cd5d5b7deb4a0877a713a60/AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-messaging:17.1.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.1.0.aar/bdafe4829f12b49e6079f1ddda5f4304/AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-messaging:17.1.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.1.0.aar/bdafe4829f12b49e6079f1ddda5f4304/AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-core:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-core-16.0.1.aar/32f92b6cd5ee3ea3805f11c6bafa1fed/AndroidManifest.xml:5:5-44
@@ -383,13 +383,13 @@ MERGED from [com.google.firebase:firebase-iid:16.2.0] /Users/dmitry/.gradle/cach
 	android:name
 		ADDED from [:react-native-firebase] /Users/dmitry/projects/react-native-app/node_modules/react-native-firebase/android/build/intermediates/manifests/full/release/AndroidManifest.xml:13:22-76
 uses-permission#com.google.android.c2dm.permission.RECEIVE
-ADDED from [com.google.android.gms:play-services-gcm:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-16.0.0.aar/4f14d8e97f9f821307bd8f05a6352998/AndroidManifest.xml:23:5-82
-MERGED from [com.google.android.gms:play-services-iid:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-16.0.0.aar/b9f6bcaa0880f489d782c733bc34e079/AndroidManifest.xml:23:5-82
-MERGED from [com.google.android.gms:play-services-iid:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-16.0.0.aar/b9f6bcaa0880f489d782c733bc34e079/AndroidManifest.xml:23:5-82
+ADDED from [com.google.android.gms:play-services-gcm:16.1.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-16.1.0.aar/17423c527e57757b2852cdbf10edd3a1/AndroidManifest.xml:23:5-82
+MERGED from [com.google.android.gms:play-services-iid:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-16.0.1.aar/279cb5c48cd5d5b7deb4a0877a713a60/AndroidManifest.xml:23:5-82
+MERGED from [com.google.android.gms:play-services-iid:16.0.1] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-iid-16.0.1.aar/279cb5c48cd5d5b7deb4a0877a713a60/AndroidManifest.xml:23:5-82
 MERGED from [com.google.firebase:firebase-iid:16.2.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-iid-16.2.0.aar/36385e5c3bf4c05f668eda68ba62791e/AndroidManifest.xml:26:5-82
 MERGED from [com.google.firebase:firebase-iid:16.2.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-iid-16.2.0.aar/36385e5c3bf4c05f668eda68ba62791e/AndroidManifest.xml:26:5-82
 	android:name
-		ADDED from [com.google.android.gms:play-services-gcm:16.0.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-16.0.0.aar/4f14d8e97f9f821307bd8f05a6352998/AndroidManifest.xml:23:22-79
+		ADDED from [com.google.android.gms:play-services-gcm:16.1.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-gcm-16.1.0.aar/17423c527e57757b2852cdbf10edd3a1/AndroidManifest.xml:23:22-79
 service#com.google.firebase.messaging.FirebaseMessagingService
 ADDED from [com.google.firebase:firebase-messaging:17.1.0] /Users/dmitry/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.1.0.aar/bdafe4829f12b49e6079f1ddda5f4304/AndroidManifest.xml:28:9-34:19
 	android:exported

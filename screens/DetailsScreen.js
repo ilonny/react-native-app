@@ -57,7 +57,7 @@ export default class DetailsScreen extends Component {
         AsyncStorage.getItem('Favorites', (err,value) => {
             if (!value){
                 fav_arr = [];
-                console.log('storage values not found, state is eq to []')
+                // console.log('storage values not found, state is eq to []')
                 this.setState(state => {
                     return {
                         ...state,
@@ -65,7 +65,7 @@ export default class DetailsScreen extends Component {
                     }
                 })
                 this.props.navigation.setParams({isFavorite: this.state.isFavorite});
-                console.log('CWM state change to:', this.state)
+                // console.log('CWM state change to:', this.state)
             } else {
                 this.setState(state => {
                     return {
@@ -75,12 +75,12 @@ export default class DetailsScreen extends Component {
                     }
                 })
                 this.props.navigation.setParams({isFavorite: this.state.isFavorite});
-                console.log('CWM state change to:', this.state)
+                // console.log('CWM state change to:', this.state)
             }
         })
     }
     shareClick = () => {
-        console.log('share state', this.state)
+        // console.log('share state', this.state)
         Share.share({
             message: this.state.text_short,
             url: API_URL + `/quote?id=${this.state.quote_id}`,
@@ -95,25 +95,25 @@ export default class DetailsScreen extends Component {
           })
     }
     componentDidMount() {
-        console.log("details screen component did mount state", this.state)
+        // console.log("details screen component did mount state", this.state)
         // this.props.navigation.setParams({ increaseCount: this._increaseCount });
         this.props.navigation.setParams({toggleFav: this.toggleFav})
         this.props.navigation.setParams({consoleState: this.consoleState})
         this.props.navigation.setParams({shareClick: this.shareClick})
     }
     consoleState = () => {
-        console.log(this.state);
+        // console.log(this.state);
     }
     toggleFav = (id) =>{
-        console.log('toggle fav start', id)
+        // console.log('toggle fav start', id)
         if (this.state.favorites.includes(id)){
             //delete from favs
-            console.log('need to delete');
+            // console.log('need to delete');
             let arr = [...this.state.favorites];
-            console.log('arr', arr)
+            // console.log('arr', arr)
             let index = arr.indexOf(id);
             arr.splice(index, 1);
-            console.log('arr2', arr)
+            // console.log('arr2', arr)
             this.setState(state => {
                 return {
                     ...state,
@@ -130,9 +130,9 @@ export default class DetailsScreen extends Component {
             }, 10);
         } else {
             //add to favs
-            console.log('need to add');
+            // console.log('need to add');
             let arr = [...this.state.favorites];
-            console.log('arr', arr)
+            // console.log('arr', arr)
             this.setState(state => {
                 return {
                     ...state,
@@ -141,7 +141,7 @@ export default class DetailsScreen extends Component {
                 }
             })
             setTimeout(() => {
-                console.log('state after tap', this.state)
+                // console.log('state after tap', this.state)
                 AsyncStorage.removeItem('Favorites');
                 AsyncStorage.setItem('Favorites', JSON.stringify(this.state.favorites));
                 this.props.navigation.setParams({isFavorite: this.state.isFavorite});
@@ -156,21 +156,21 @@ export default class DetailsScreen extends Component {
         // return true;
     // }
     componentDidUpdate(prevProps){
-        console.log('prevProps', JSON.stringify(prevProps))
-        console.log('nextProps', JSON.stringify(this.props))
-        console.log('state_q_id? ', this.state.quote_id)
-        console.log('props_q_id? ', this.props.navigation.state.params.quote_id)
+        // console.log('prevProps', JSON.stringify(prevProps))
+        // console.log('nextProps', JSON.stringify(this.props))
+        // console.log('state_q_id? ', this.state.quote_id)
+        // console.log('props_q_id? ', this.props.navigation.state.params.quote_id)
         if (this.state.quote_id != this.props.navigation.state.params.quote_id){
             this.setState({quote_id: this.props.navigation.state.params.quote_id})
         }
     }
     render(){
-        console.log('render start', this.state);
-        console.log('detailsscreen props', JSON.stringify(this.props))
-        console.log('detailsscreen state', JSON.stringify(this.state))
+        // console.log('render start', this.state);
+        // console.log('detailsscreen props', JSON.stringify(this.props))
+        // console.log('detailsscreen state', JSON.stringify(this.state))
         const quote_id = this.state.quote_id;
-        console.log('quote_id = ', quote_id);
-        console.log('render end');
+        // console.log('quote_id = ', quote_id);
+        // console.log('render end');
         let comp;
         if (this.state.online){
             comp = (

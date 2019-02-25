@@ -28,12 +28,6 @@ export default class SiteScreen extends Component {
     static navigationOptions = {
         header: null
     };
-    willFocusSubscription = this.props.navigation.addListener(
-        "willFocus",
-        payload => {
-            this.checkRedirect();
-        }
-    );
     state = {
         index: 0,
         routes: [

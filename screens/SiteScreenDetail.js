@@ -11,29 +11,33 @@ import {
     TouchableOpacity,
     Dimensions,
     Animated,
-    WebView,
     Linking,
     Easing,
 } from "react-native";
 import { SITE_URL } from "../constants/api";
 import TextTicker from "react-native-text-ticker";
+// import { WebView } from "react-native-webview";
+import WKWebView from 'react-native-wkwebview-reborn';
 
 const injectScript = `
-var originalPostMessage = window.postMessage;
+// var originalPostMessage = window.postMessage;
 
-var patchedPostMessage = function(message, targetOrigin, transfer) { 
-  originalPostMessage(message, targetOrigin, transfer);
-};
+// var patchedPostMessage = function(message, targetOrigin, transfer) { 
+//   originalPostMessage(message, targetOrigin, transfer);
+// };
 
-patchedPostMessage.toString = function() { 
-  return String(Object.hasOwnProperty).replace('hasOwnProperty', 'postMessage'); 
-};
+// patchedPostMessage.toString = function() { 
+//   return String(Object.hasOwnProperty).replace('hasOwnProperty', 'postMessage'); 
+// };
 
-window.postMessage = patchedPostMessage;
+// window.postMessage = patchedPostMessage;
   (function () {
     window.onclick = function(e) {
+        console.log('window clicked');
       e.preventDefault();
-      window.postMessage(e.target.href);
+      if (e.target.href){
+          window.postMessage(e.target.href);
+        }
       e.stopPropagation()
     }
   }());
@@ -74,7 +78,7 @@ export default class SiteScreen extends Component {
                     paddingTop: 10
                 }}
             >
-                <WebView
+                <WKWebView
                     source={{
                         uri:
                             SITE_URL +
@@ -83,10 +87,11 @@ export default class SiteScreen extends Component {
                             )}`
                     }}
                     style={{ backgroundColor: "#efefef" }}
-                    allowsInlineMediaPlayback={true}
-                    mediaPlaybackRequiresUserAction={true}
+                    // allowsInlineMediaPlayback={true}
+                    // mediaPlaybackRequiresUserAction={true}
                     injectedJavaScript={injectScript}
                     onMessage={({ nativeEvent }) => {
+                        console.log('onMessage', nativeEvent);
                         const data = nativeEvent.data;
                         if (data !== undefined && data !== null) {
                             Linking.openURL(data);

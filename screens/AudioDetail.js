@@ -752,7 +752,11 @@ class AudioScreen extends Component {
         // this.whoosh.reset();
         let {playing, track_id, track_name, track_duration, toc_id, whoosh} = this.props.now_playing;
         setNowPlaying(!playing, track_id, track_name, track_duration, toc_id, whoosh)
-        whoosh.pause();
+        try {
+            whoosh.pause();
+        } catch (e) {
+            console.log('crash')
+        }
     }
     changePlyingPos(val){
         console.log('changePlyingPos', val)
@@ -821,8 +825,8 @@ class AudioScreen extends Component {
         }
     }
     render(){
-        console.log('audio details render state', this.state);
-        console.log('audio details render props', this.props);
+        // console.log('audio details render state', this.state);
+        // console.log('audio details render props', this.props);
         // console.log('main store string: ', JSON.stringify(this.props.main));
         return (
             <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF', paddingBottom: 10, paddingTop: 10}}>

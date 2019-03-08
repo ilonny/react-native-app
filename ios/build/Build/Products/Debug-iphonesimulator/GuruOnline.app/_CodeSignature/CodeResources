@@ -38,11 +38,11 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		7KBH4YSbsTOatby2VM1ZBuJiO9Q=
+		5Q0lNA8jqoth4n1V7U+5e2bG/XE=
 		</data>
 		<key>Base.lproj/LaunchScreen.nib</key>
 		<data>
-		Zi0is7PB3boCkB6RnQry65iACDs=
+		S0Jg7HtIlIsCOOyoPZtrFIKKqgc=
 		</data>
 		<key>Entypo.ttf</key>
 		<data>
@@ -107,7 +107,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		zFhHFXBytLJRrLfskoJV4RlGnGo=
+		RtGgyMEFCNN7O4tlUFH8bzrYdbg=
 		</data>
 		<key>Ionicons.ttf</key>
 		<data>
@@ -252,22 +252,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			7KBH4YSbsTOatby2VM1ZBuJiO9Q=
+			5Q0lNA8jqoth4n1V7U+5e2bG/XE=
 			</data>
 			<key>hash2</key>
 			<data>
-			BEFRR/IzxxCRHubsXc7x/kJX4EFt4miJgp87ADV72ME=
+			Xgbh4RlmispuGZ2taFm5IRVWVxjodwg230sI/7HYWik=
 			</data>
 		</dict>
 		<key>Base.lproj/LaunchScreen.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Zi0is7PB3boCkB6RnQry65iACDs=
+			S0Jg7HtIlIsCOOyoPZtrFIKKqgc=
 			</data>
 			<key>hash2</key>
 			<data>
-			Ox9kb321W+Jowij1gce7wUEAv0oQPrn5TFuOeP1gByM=
+			rfIimAPwh8d9ZY+TGN7egxDP3cNOfSWV2XvWEXBQ9uM=
 			</data>
 		</dict>
 		<key>Entypo.ttf</key>
@@ -550,7 +550,7 @@
 	</dict>
 	<key>rules</key>
 	<dict>
-		<key>^</key>
+		<key>^.*</key>
 		<true/>
 		<key>^.*\.lproj/</key>
 		<dict>
@@ -581,24 +581,12 @@
 			<key>weight</key>
 			<real>11</real>
 		</dict>
-		<key>^</key>
-		<dict>
-			<key>weight</key>
-			<real>20</real>
-		</dict>
 		<key>^(.*/)?\.DS_Store$</key>
 		<dict>
 			<key>omit</key>
 			<true/>
 			<key>weight</key>
 			<real>2000</real>
-		</dict>
-		<key>^(Frameworks|SharedFrameworks|PlugIns|Plug-ins|XPCServices|Helpers|MacOS|Library/(Automator|Spotlight|LoginItems))/</key>
-		<dict>
-			<key>nested</key>
-			<true/>
-			<key>weight</key>
-			<real>10</real>
 		</dict>
 		<key>^.*</key>
 		<true/>
@@ -634,13 +622,6 @@
 			<true/>
 			<key>weight</key>
 			<real>20</real>
-		</dict>
-		<key>^[^/]+$</key>
-		<dict>
-			<key>nested</key>
-			<true/>
-			<key>weight</key>
-			<real>10</real>
 		</dict>
 		<key>^embedded\.provisionprofile$</key>
 		<dict>

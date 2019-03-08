@@ -374,4 +374,5 @@ dependencies: \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/React/../third-party/folly-2016.09.26.00/folly/Format-inl.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/React/../third-party/folly-2016.09.26.00/folly/Exception.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/React/../third-party/folly-2016.09.26.00/folly/portability/Windows.h \
+  /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/NativeModule.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/SystraceSection.h

@@ -4,7 +4,6 @@ dependencies: \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/Libraries/Text/TextInput/RCTBaseTextInputViewManager.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/Libraries/Text/BaseText/RCTBaseTextViewManager.h \
   /Users/dmitry/projects/react-native-app/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTViewManager.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.3.sdk/usr/include/libxml2/module.modulemap \
   /Users/dmitry/projects/react-native-app/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
   /Users/dmitry/projects/react-native-app/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
   /Users/dmitry/projects/react-native-app/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTConvert.h \

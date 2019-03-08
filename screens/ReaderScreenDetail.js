@@ -17,6 +17,7 @@ import {
 import { Epub, Streamer } from "epubjs-rn";
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Dialog from "react-native-dialog";
 
 class EpubReader extends Component {
     constructor(props) {
@@ -66,6 +67,11 @@ class EpubReader extends Component {
             },
             fontSize: 16,
             settingsOpened: false,
+            bookmarks: [],
+            bookmarksDialogVisible: false,
+            bookmarksDialogComment: '',
+            pageHaveBookmark: false,
+            listScreen: 'content',
         };
         this.streamer = new Streamer();
         console.log('constructor props: ', this.props)
@@ -76,11 +82,17 @@ class EpubReader extends Component {
         const toggleSettings = navigation.getParam('toggleSettings');
         const bookName = navigation.getParam('book_name');
         const theme = navigation.getParam('theme');
+        const pageHaveBookmark =  navigation.getParam('pageHaveBookmark');
+        const showBookmarkPopup =  navigation.getParam('showBookmarkPopup');
+        const deleteBookmark =  navigation.getParam('deleteBookmark');
         return {
             headerTitle: bookName,
             headerRight: (
                 // <TouchableOpacity onPress={navigation.getParam('consoleState')}>
                 <View style={{alignItems: 'center', flex: 1, flexDirection: 'row'}}>
+                    <TouchableOpacity onPress={() => pageHaveBookmark ? deleteBookmark() : showBookmarkPopup()}>
+                        <Ionicons name={pageHaveBookmark ? "ios-bookmark" : "ios-bookmark-outline"} size={30} color={theme == 'light' ? 'tomato' : '#c1ae97'} style={{marginTop: 5, marginRight: 15}}/>
+                    </TouchableOpacity>
                     <TouchableOpacity onPress={() => toggleSettings()}>
                         <Ionicons name={"ios-cog"} size={30} color={theme == 'light' ? 'tomato' : '#c1ae97'} style={{marginTop: 5, marginRight: 15}}/>
                     </TouchableOpacity>
@@ -180,10 +192,80 @@ class EpubReader extends Component {
         };
         request.open('GET', API_URL + `/get-tocs?book_id=${this.state.book_id}`);
         request.send();
-
+        //получаем закладки с нужной книги
+        AsyncStorage.getItem('reader_bookmarks_'+this.state.book_id, (err,value) => {
+            if (value){
+                console.log('reader_bookmarks_'+this.state.book_id, value);
+                this.setState({
+                    bookmarks: JSON.parse(value)
+                })
+            } else {
+                console.log('reader_bookmarks_'+this.state.book_id, value);
+            }
+        });
         this.props.navigation.setParams({toggleNavigation: this.toggleNavigation})
         this.props.navigation.setParams({toggleSettings: this.toggleSettings})
         this.props.navigation.setParams({theme: this.state.theme})
+        this.props.navigation.setParams({showBookmarkPopup: this.showBookmarkPopup})
+        this.props.navigation.setParams({deleteBookmark: this.deleteBookmark})
+    }
+    showBookmarkPopup = () => {
+        this.setState({bookmarksDialogVisible: true})
+    }
+    addBookmark = () => {
+        console.log('addBookmark()', this.state)
+        let comment = this.state.bookmarksDialogComment;
+        let location = this.state.visibleLocation.start.cfi;
+        let book_id = this.state.book_id;
+        let toc_title;
+        this.state.book_locations.forEach(chapter => {
+            console.log(chapter.app_href, this.state.visibleLocation.start.href);
+            if (chapter.app_href == this.state.visibleLocation.start.href) {
+                toc_title = chapter.title
+            }
+        })
+        let bookmarks = this.state.bookmarks.concat({
+            book_id: book_id,
+            location: location,
+            comment: comment,
+            toc_title: toc_title,
+        });
+        this.setState({bookmarks: bookmarks, bookmarksDialogVisible: false})
+        AsyncStorage.setItem('reader_bookmarks_'+this.state.book_id, JSON.stringify(bookmarks));
+    }
+    deleteBookmark = (location = '') => {
+        if (location == ''){
+            location = this.state.visibleLocation.start.cfi;
+        }
+        let {bookmarks} = this.state;
+        bookmarks.forEach((bookmark, index) => {
+            if (bookmark.location == location) {
+                bookmarks.splice(index, 1);
+            }
+        });
+        this.setState({
+            bookmarks: [].concat(bookmarks)
+        });
+        AsyncStorage.setItem('reader_bookmarks_'+this.state.book_id, JSON.stringify(bookmarks));
+        console.log('delete bookmark', location)
+        setTimeout(() => {
+            this.checkPageHaveBookmark();
+        }, 300);
+    }
+    checkPageHaveBookmark(){
+        let flag;
+        this.state.bookmarks.forEach(bookmark => {
+            console.log('checkPageHaveBookmark()', bookmark.location == this.state.visibleLocation.start.cfi, bookmark.location, this.state.visibleLocation.start.cfi);
+            if (bookmark.location == this.state.visibleLocation.start.cfi) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+        });
+        this.setState({
+            pageHaveBookmark: flag
+        });
+        this.props.navigation.setParams({pageHaveBookmark: flag});
     }
     setTheme(theme){
         this.props.navigation.setParams({theme: theme})
@@ -249,6 +331,7 @@ class EpubReader extends Component {
         }
         console.log('saveBookLocation end', JSON.stringify(reader_locations))
         AsyncStorage.setItem('reader_locations', JSON.stringify(reader_locations))   
+        this.checkPageHaveBookmark();
     }
 
     getInitialLocation(){
@@ -298,7 +381,6 @@ class EpubReader extends Component {
                         try {
                             // if (visibleLocation.start){
                                 // if (visibleLocation.start.location != this.state.visibleLocation.start.location){
-                            this.saveBookLocation(visibleLocation.start.cfi, this.state.book_id);
                                 // }
                             // }
                             this.setState({visibleLocation});
@@ -308,6 +390,7 @@ class EpubReader extends Component {
                             this.setState({
                                 progress_width: (this.state.current_location_index / this.state.total_locations) * 100
                             })
+                            this.saveBookLocation(visibleLocation.start.cfi, this.state.book_id);
                         } catch (e) {
                             console.log('locationChanged failed', e)
                         }
@@ -372,12 +455,20 @@ class EpubReader extends Component {
                 {this.state.nav_opened && (
                     <View style={styles.navigation}>
                         <View style={styles.navigation_header}>
-                            <Text style={{padding: 15}}>Содержание книги</Text>
+                            <View style={{flexDirection: 'row'}}>
+                                <TouchableOpacity onPress={() => this.setState({listScreen: 'content'})}>
+                                    <Text style={{padding: 15, color: this.state.listScreen == 'content' ? 'tomato' : 'black'}}>Содержание книги</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => this.setState({listScreen: 'bookmarks'})}>
+                                    <Text style={{padding: 15, color: this.state.listScreen == 'bookmarks' ? 'tomato' : 'black'}}>Закладки</Text>
+                                </TouchableOpacity>
+                            </View>
                             <TouchableOpacity onPress={() => this.setState({nav_opened: false})}>
                                 <Ionicons style={{padding: 15}} name="ios-close-circle-outline" size={25} color="tomato" />
                             </TouchableOpacity>
                         </View>
-                        <View style={styles.navigation_list}>
+                        {this.state.listScreen == 'content' ? (
+                            <View style={styles.navigation_list}>
                             <FlatList
                                 data={this.state.book_locations}
                                 keyExtractor={item => String(item.id)}
@@ -403,6 +494,33 @@ class EpubReader extends Component {
                             >
                             </FlatList>
                         </View>
+                        ) : (
+                            <View style={styles.navigation_list}>
+                                <FlatList
+                                    data={this.state.bookmarks}
+                                    keyExtractor={item => String(item.location)}
+                                    renderItem={({item}) => (
+                                        <View style={styles.navigation_list_row}>
+                                            <View style={{maxWidth: '85%'}}>
+                                            <TouchableOpacity onPress={() => this.setState({location: item.location, nav_opened: false})}>
+                                                <View style={{flex: 1, height: "100%"}}>
+                                                    <Text>Глава: {!!item.toc_title ? item.toc_title.trim() : 'Не указано'}</Text>
+                                                    <Text>Комментарий: {item.comment.trim()}</Text>
+                                                </View>
+                                            </TouchableOpacity>
+                                            </View>
+                                            <TouchableOpacity onPress={() => this.deleteBookmark(item.location)}>
+                                                <View style={{flex: 0, alignItems: 'center', marginTop: -10}}>
+                                                    <Ionicons name={"ios-trash-outline"} size={25} color="tomato" style={{marginTop: 5}}/>
+                                                    <Text style={{fontSize: 10, marginTop: -8,}}>Удалить</Text>
+                                                </View>
+                                            </TouchableOpacity>
+                                        </View>
+                                    )}
+                                >
+                                </FlatList>
+                            </View>
+                        )}
                     </View>
                 )}
                 {this.state.settingsOpened && (
@@ -441,6 +559,15 @@ class EpubReader extends Component {
                         <Text style={{padding: 15, textAlign: 'center', fontSize: this.state.fontSize}}>Пример текста ({this.state.fontSize} px)</Text>
                     </View>
                 )}
+                <View>
+                <Dialog.Container visible={this.state.bookmarksDialogVisible}>
+                    <Dialog.Title>Добавить закладку</Dialog.Title>
+                    <Dialog.Description>Пожалуйста, введите комментарий к закладке</Dialog.Description>
+                    <Dialog.Input onChangeText={value => this.setState({bookmarksDialogComment: value})}></Dialog.Input>
+                    <Dialog.Button onPress={() => this.setState({bookmarksDialogVisible: false, bookmarksDialogComment: ''})} label="Отменить" />
+                    <Dialog.Button onPress={() => this.addBookmark()} label="Сохранить" />
+                </Dialog.Container>
+            </View>
             </View>
         );
     }

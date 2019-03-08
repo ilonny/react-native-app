@@ -388,12 +388,15 @@ dependencies: \
   /Users/dmitry/projects/react-native-app/ios/build/Build/Products/Debug-iphonesimulator/include/jschelpers/JSCHelpers.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/JSBigString.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/JSBundleType.h \
+  /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/JSExecutor.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/MessageQueueThread.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/MethodCall.h \
+  /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/NativeToJsBridge.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/RAMBundleRegistry.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/React/../ReactCommon/cxxreact/JSModulesUnbundle.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/RecoverableError.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/SystraceSection.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/React/../ReactCommon/cxxreact/JSIndexedRAMBundle.h \
+  /Users/dmitry/projects/react-native-app/node_modules/react-native/React/../ReactCommon/cxxreact/JSBigString.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/React/../third-party/folly-2016.09.26.00/folly/Memory.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/React/../third-party/folly-2016.09.26.00/folly/MoveWrapper.h

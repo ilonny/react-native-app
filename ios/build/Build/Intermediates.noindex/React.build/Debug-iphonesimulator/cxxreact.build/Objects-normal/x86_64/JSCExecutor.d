@@ -390,13 +390,17 @@ dependencies: \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/JSBundleType.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/JSCLegacyTracing.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/JSCMemory.h \
+  /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/JSCNativeModules.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/JSCPerfStats.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/JSCSamplingProfiler.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/JSCTracing.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/JSCUtils.h \
+  /Users/dmitry/projects/react-native-app/node_modules/react-native/React/../ReactCommon/cxxreact/JSBigString.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/JSModulesUnbundle.h \
+  /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/ModuleRegistry.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/Platform.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/React/../ReactCommon/cxxreact/MessageQueueThread.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/RAMBundleRegistry.h \
+  /Users/dmitry/projects/react-native-app/node_modules/react-native/React/../ReactCommon/cxxreact/JSModulesUnbundle.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/RecoverableError.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/SystraceSection.h

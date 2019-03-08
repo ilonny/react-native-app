@@ -388,6 +388,7 @@ dependencies: \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/React/../third-party/folly-2016.09.26.00/folly/Memory.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/React/../third-party/folly-2016.09.26.00/folly/MoveWrapper.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/Instance.h \
+  /Users/dmitry/projects/react-native-app/node_modules/react-native/React/../ReactCommon/cxxreact/NativeToJsBridge.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/JSBigString.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/SystraceSection.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/cxxreact/MethodCall.h \

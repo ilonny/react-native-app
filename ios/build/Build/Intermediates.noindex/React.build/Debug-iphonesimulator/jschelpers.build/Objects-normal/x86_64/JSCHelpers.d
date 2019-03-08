@@ -376,4 +376,6 @@ dependencies: \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/React/../third-party/folly-2016.09.26.00/folly/portability/Windows.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/React/../ReactCommon/jschelpers/Unicode.h \
   /Users/dmitry/projects/react-native-app/node_modules/react-native/React/../ReactCommon/jschelpers/noncopyable.h \
-  /Users/dmitry/projects/react-native-app/ios/build/Build/Products/Debug-iphonesimulator/include/privatedata/PrivateDataBase.h
+  /Users/dmitry/projects/react-native-app/ios/build/Build/Products/Debug-iphonesimulator/include/privatedata/PrivateDataBase.h \
+  /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/jschelpers/JavaScriptCore.h \
+  /Users/dmitry/projects/react-native-app/node_modules/react-native/ReactCommon/jschelpers/Value.h

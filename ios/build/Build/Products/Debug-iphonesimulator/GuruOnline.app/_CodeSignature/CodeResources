@@ -82,15 +82,15 @@
 		</data>
 		<key>Frameworks/XCTest.framework/Info.plist</key>
 		<data>
-		53QH0QrAmT2lt1KIweV2nkJMArY=
+		DQ4GPJ7FuM6H+FaCC/2wxhPSGCQ=
 		</data>
 		<key>Frameworks/XCTest.framework/XCTest</key>
 		<data>
-		Gdkq4my/W+Wncmm9H9gSiFdlbus=
+		HK6asLJ70IK7E4e83e8R1gxACHo=
 		</data>
 		<key>Frameworks/XCTest.framework/_CodeSignature/CodeResources</key>
 		<data>
-		NZVWBiJdSoWtOlI5zY2P2Y+YauE=
+		/8LQToTPOL9FsEsYDaACQ21Day0=
 		</data>
 		<key>Frameworks/XCTest.framework/en.lproj/InfoPlist.strings</key>
 		<dict>
@@ -103,11 +103,15 @@
 		</dict>
 		<key>Frameworks/XCTest.framework/version.plist</key>
 		<data>
-		0KaQXY+RwumYiFnS4CGdkt22Bi0=
+		P6P66kW7+LvLIo4WHjXGltpT8CA=
+		</data>
+		<key>Frameworks/libXCTestBundleInject.dylib</key>
+		<data>
+		xKX69bDGMJa2TcU/BC9ypZ06rsI=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		RtGgyMEFCNN7O4tlUFH8bzrYdbg=
+		s2Rjkaiafh41ONmzjPX/bCnBQG8=
 		</data>
 		<key>Ionicons.ttf</key>
 		<data>
@@ -135,19 +139,19 @@
 		</data>
 		<key>PlugIns/GuruOnlineTests.xctest.dSYM/Contents/Resources/DWARF/GuruOnlineTests</key>
 		<data>
-		XZ/IG7MLkoU5rrqXsa0Q/A/WksQ=
+		g/xIOprDlzrqO0SZWwaBGYibS2Q=
 		</data>
 		<key>PlugIns/GuruOnlineTests.xctest/GuruOnlineTests</key>
 		<data>
-		JLpJlo1ovGijgOnBtEq/KnhDFZo=
+		MNTWGZg9lQG1h4f3r+qEkKSc0KA=
 		</data>
 		<key>PlugIns/GuruOnlineTests.xctest/Info.plist</key>
 		<data>
-		g2U93Wpjs4wD/5FcyFaOleY+ZLI=
+		G9x5Dp23rJa9KzC2sgfGYG2E5XU=
 		</data>
 		<key>PlugIns/GuruOnlineTests.xctest/_CodeSignature/CodeResources</key>
 		<data>
-		IE0xbKNDKk275BvnWQIPaIbEIn0=
+		Qc03dk6tnMRgT+I7FbEJVvFX3GU=
 		</data>
 		<key>SimpleLineIcons.ttf</key>
 		<data>
@@ -373,33 +377,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			53QH0QrAmT2lt1KIweV2nkJMArY=
+			DQ4GPJ7FuM6H+FaCC/2wxhPSGCQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			W8gDydyYsnKks91l6E6mE/LHCHyTKjEQUmuqbttIm98=
+			VfVpYXVjG5OK2j8J39CP2mIMg1P5eFaYkRIJ/Hb2RSQ=
 			</data>
 		</dict>
 		<key>Frameworks/XCTest.framework/XCTest</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Gdkq4my/W+Wncmm9H9gSiFdlbus=
+			HK6asLJ70IK7E4e83e8R1gxACHo=
 			</data>
 			<key>hash2</key>
 			<data>
-			1hGMjSnYIuGWvQ8i/bOJDKCFrhrl6q7tYN9xqYAUZrA=
+			olgg9NXiZ2M1ifvjBR8uTJxtXlM5EacLdDrNxfmImoY=
 			</data>
 		</dict>
 		<key>Frameworks/XCTest.framework/_CodeSignature/CodeResources</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			NZVWBiJdSoWtOlI5zY2P2Y+YauE=
+			/8LQToTPOL9FsEsYDaACQ21Day0=
 			</data>
 			<key>hash2</key>
 			<data>
-			4iNtj3HNym8ZSwZTfV6Oa7/IuUDba8eMxDAqB4NPIUU=
+			C7sJpbu4qpi8/rH5JYpdQYncotP69JQ9Fiu8jrHXYvU=
 			</data>
 		</dict>
 		<key>Frameworks/XCTest.framework/en.lproj/InfoPlist.strings</key>
@@ -419,11 +423,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			0KaQXY+RwumYiFnS4CGdkt22Bi0=
+			P6P66kW7+LvLIo4WHjXGltpT8CA=
 			</data>
 			<key>hash2</key>
 			<data>
-			xDe7lkxC6ot8QncGaSp6qZ9/XbOQA/fGkPvRG+5ksCo=
+			2BV684CZjHtMZHxSiwC5qc/DGXv9WIOWUc9dEU/Q1pw=
+			</data>
+		</dict>
+		<key>Frameworks/libXCTestBundleInject.dylib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			xKX69bDGMJa2TcU/BC9ypZ06rsI=
+			</data>
+			<key>hash2</key>
+			<data>
+			jJ/zKe1SwWk9KkZ4MXV01NPW4QiHpU1aZhpfTDknkp0=
 			</data>
 		</dict>
 		<key>Ionicons.ttf</key>
@@ -485,44 +500,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			XZ/IG7MLkoU5rrqXsa0Q/A/WksQ=
+			g/xIOprDlzrqO0SZWwaBGYibS2Q=
 			</data>
 			<key>hash2</key>
 			<data>
-			Wc2b2sHuxF8hOjwMBcVDxW+i3FRqKd89enx2quJwMYg=
+			fymO/GHIKbhwKvr8WyCRQt4U2vUJgJflSi48zHrlRq0=
 			</data>
 		</dict>
 		<key>PlugIns/GuruOnlineTests.xctest/GuruOnlineTests</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			JLpJlo1ovGijgOnBtEq/KnhDFZo=
+			MNTWGZg9lQG1h4f3r+qEkKSc0KA=
 			</data>
 			<key>hash2</key>
 			<data>
-			yvyPKby8IslvJxNdSzRMCDXqgqCMYuzY3KUXRU5Y8U0=
+			FHDenV/q6+poDANG3ZZoUAPUNvTby7ttq1JnnC05mE8=
 			</data>
 		</dict>
 		<key>PlugIns/GuruOnlineTests.xctest/Info.plist</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			g2U93Wpjs4wD/5FcyFaOleY+ZLI=
+			G9x5Dp23rJa9KzC2sgfGYG2E5XU=
 			</data>
 			<key>hash2</key>
 			<data>
-			LBR4mKMXdvkwXW+gyPVfV1JRmp+WxJP80v2e5cZDSiE=
+			DA5gEUtzQW0IGa9OruI6PoA9PGCDy4VzJS0QwtDmwpc=
 			</data>
 		</dict>
 		<key>PlugIns/GuruOnlineTests.xctest/_CodeSignature/CodeResources</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			IE0xbKNDKk275BvnWQIPaIbEIn0=
+			Qc03dk6tnMRgT+I7FbEJVvFX3GU=
 			</data>
 			<key>hash2</key>
 			<data>
-			T3PQRAp+gfGDXmB/60grcmiDqbF6dDvlSC0UXrG8HLw=
+			/gyYKY452zavNDW6PsSVnTIpFoIHSGUCoDMQ/n6DprY=
 			</data>
 		</dict>
 		<key>SimpleLineIcons.ttf</key>

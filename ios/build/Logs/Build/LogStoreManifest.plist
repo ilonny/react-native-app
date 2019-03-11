@@ -5,6 +5,36 @@
 	<key>logFormatVersion</key>
 	<integer>9</integer>
 	<key>logs</key>
-	<dict/>
+	<dict>
+		<key>85C4CF00-224C-4350-B89B-5F5C6FD41F51</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>85C4CF00-224C-4350-B89B-5F5C6FD41F51.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>E</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>GuruOnline project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>GuruOnline</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project GuruOnline with scheme GuruOnline and configuration Debug</string>
+			<key>timeStartedRecording</key>
+			<real>573763793.79559302</real>
+			<key>timeStoppedRecording</key>
+			<real>573763798.38188398</real>
+			<key>title</key>
+			<string>Building project GuruOnline with scheme GuruOnline and configuration Debug</string>
+			<key>uniqueIdentifier</key>
+			<string>85C4CF00-224C-4350-B89B-5F5C6FD41F51</string>
+		</dict>
+	</dict>
 </dict>
 </plist>

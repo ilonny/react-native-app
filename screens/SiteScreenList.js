@@ -17,7 +17,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { listStyles } from "../constants/list_styles";
-import { getItems } from "../actions/site";
+import { getItems, setTag } from "../actions/site";
 import NavigationService from "../NavigationService";
 
 class SiteScreenList extends Component {
@@ -36,7 +36,7 @@ class SiteScreenList extends Component {
                     onPress={() => {
                         NavigationService.navigate("SiteDetail", {
                             id: item.ID,
-                            title: item.NAME,
+                            title: item.NAME
                         });
                     }}
                 >
@@ -102,14 +102,14 @@ class SiteScreenList extends Component {
             page: this.state.page + 1
         });
         setTimeout(() => {
-            this.props.getItems(this.props.type, this.state.page);
+            this.props.getItems(this.props.type, this.state.page, "", "add", this.props.site.tag);
         }, 100);
     };
     _keyExtractor = item => {
         return item.NAME + item.ID;
     };
     componentDidMount() {
-        this.props.getItems(this.props.type, this.state.page, "", "replace");
+        this.props.getItems(this.props.type, this.state.page, "", "replace", this.props.site.tag);
     }
     addPage() {
         this.setState({
@@ -120,7 +120,8 @@ class SiteScreenList extends Component {
                 this.props.type,
                 this.state.page,
                 this.state.q_str,
-                "add"
+                "add",
+                this.props.site.tag
             );
         }, 100);
     }
@@ -139,7 +140,8 @@ class SiteScreenList extends Component {
                 this.props.type,
                 this.state.page,
                 this.state.q_str,
-                "replace"
+                "replace",
+                this.props.site.tag
             );
         }, 100);
     }
@@ -147,8 +149,13 @@ class SiteScreenList extends Component {
     //     this.setState({
     //         refreshing: true
     //     });
-    //     this.props.getItems(this.props.type, this.state.page, "", "replace");
+    //     this.props.getItems(this.props.type, this.state.page, "", "replace", this.props.site.tag);
     // }
+    componentDidUpdate(prevProps) {
+        if (prevProps.site.tag != this.props.site.tag) {
+            this.props.getItems(this.props.type, this.state.page, "", "replace", this.props.site.tag);
+        }
+    }
     render() {
         // console.log("site screen detail props: ", this.props);
         // console.log("site screen detail state: ", this.state);
@@ -194,10 +201,26 @@ class SiteScreenList extends Component {
                         }
                     ]}
                 >
-                    <TextInput
-                        placeholder="Поиск"
-                        onChangeText={text => this.changeSearchText(text)}
-                    />
+                    {!this.props.site.tag ? (
+                        <TextInput
+                            placeholder="Поиск"
+                            onChangeText={text => this.changeSearchText(text)}
+                        />
+                    ) : (
+                        <View>
+                            <Text style={{ textAlign: "center" }}>
+                                Публикации по теме: {this.props.site.tag.title}.
+                            </Text>
+                            <TouchableOpacity
+                                onPress={() => this.props.setTag(false)}
+                                style={{ padding: 5 }}
+                            >
+                                <Text style={{ textAlign: "center" }}>
+                                    Отменить фильтр
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                    )}
                 </View>
                 {items.length == 0 ? (
                     <View
@@ -236,7 +259,8 @@ class SiteScreenList extends Component {
                                 this.props.type,
                                 1,
                                 "",
-                                "replace"
+                                "replace",
+                                this.props.site.tag
                             );
                         }}
                     />
@@ -274,8 +298,9 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        getItems: (type, offset, q_str, action_type) =>
-            dispatch(getItems(type, offset, q_str, action_type))
+        getItems: (type, offset, q_str, action_type, tag) =>
+            dispatch(getItems(type, offset, q_str, action_type, tag)),
+        setTag: tag => dispatch(setTag(tag))
     };
 };
 

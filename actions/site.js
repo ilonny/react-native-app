@@ -29,8 +29,11 @@ export const errorGetItems = () => {
     };
 };
 let alertShowed = false;
-export const getItems = (type, page = 1, q_str = "", action_type) => {
-    // console.log('get items fired')
+export const getItems = (type, page = 1, q_str = "", action_type, tag) => {
+    // console.log('get items fired', type, page, q_str, action_type, tag);
+    if (tag){
+        tag = tag.id
+    }
     return dispatch => {
         dispatch(startGetItems());
         // console.log("get items start with type: ", type, "page: ", page, "q_str: ", q_str, "action_type", action_type);
@@ -68,8 +71,9 @@ export const getItems = (type, page = 1, q_str = "", action_type) => {
         };
         request.open(
             "GET",
-            SITE_URL + `/get-list.php?type=${type}&page=${page}&q=${q_str}`
+            SITE_URL + `/get-list.php?type=${type}&page=${page}&q=${q_str}&tag_id=${tag}`
         );
+        console.log('get-items-url', SITE_URL + `/get-list.php?type=${type}&page=${page}&q=${q_str}&tag_id=${tag}`);
         request.send();
     };
 };
@@ -109,3 +113,10 @@ export const getCalendar = city => {
         request.send();
     };
 };
+
+export const setTag = tag => {
+    return {
+        type: "SET_TAG",
+        tag
+    }
+}

@@ -58,7 +58,7 @@ class CalendarScreen extends Component {
         // this.props.getCalendar(this.state.city);
     }
     render() {
-        console.log("calendar props", this.props);
+        // console.log("calendar props", this.props);
         return (
             <SafeAreaView
                 style={{

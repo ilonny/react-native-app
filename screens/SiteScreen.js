@@ -76,6 +76,7 @@ export default class SiteScreen extends Component {
         calendar: CalendarRoute
     });
     componentDidMount() {
+        // console.log("component did moung props", this.props);
         // AsyncStorage.clear();
         AsyncStorage.getItem("initial_modal", (err, value) => {
             // console.log("initial_modal", value);
@@ -87,7 +88,28 @@ export default class SiteScreen extends Component {
             }
         });
     }
+    // componentDidUpdate(prevProps) {
+    //     console.log("component did update props", this.props);
+    //     if (
+    //         prevProps.navigation.getParam("type") !=
+    //         this.props.navigation.getParam("type")
+    //     ) {
+    //         if (this.props.navigation.getParam("type") == "tag") {
+    //             this.setState({
+    //                 tag: {
+    //                     id: this.props.navigation.getParam("id"),
+    //                     title: this.props.navigation.getParam("title")
+    //                 }
+    //             });
+    //         } else {
+    //             this.setState({
+    //                 tag: false
+    //             });
+    //         }
+    //     }
+    // }
     render() {
+        console.log('root render state', this.state)
         if (this.state.modalShowed) {
             return (
                 <TabView

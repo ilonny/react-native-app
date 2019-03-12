@@ -37,7 +37,8 @@ const initialState = {
         page: 1,
         city: "moscow",
         month: ""
-    }
+    },
+    tag: false
 };
 
 const uniqArrOfObjsNews = arr => {
@@ -168,6 +169,12 @@ const siteReducer = function(state = initialState, action) {
                     ...state.calendar,
                     items: [...new Set(items)]
                 }
+            };
+        case "SET_TAG":
+        console.log('SET_TAG Reducer', action)
+            return {
+                ...state,
+                tag: action.tag
             };
         default:
             return state;

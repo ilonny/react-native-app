@@ -17,6 +17,9 @@ import {
 } from "react-native";
 import { SITE_URL } from "../constants/api";
 import TextTicker from "react-native-text-ticker";
+import NavigationService from "../NavigationService";
+import { connect } from "react-redux";
+import { setTag } from "../actions/site";
 
 const injectScript = `
 var originalPostMessage = window.postMessage;
@@ -39,7 +42,7 @@ window.postMessage = patchedPostMessage;
   }());
 `;
 
-export default class SiteScreen extends Component {
+class SiteScreen extends Component {
     static navigationOptions = ({ navigation }) => {
         console.log('title length', navigation.getParam("title").length);
         return {
@@ -80,16 +83,46 @@ export default class SiteScreen extends Component {
                             SITE_URL +
                             `/detail.php?id=${this.props.navigation.getParam(
                                 "id"
-                            )}`
+                            )}&test=1`
                     }}
                     style={{ backgroundColor: "#efefef" }}
                     allowsInlineMediaPlayback={true}
                     mediaPlaybackRequiresUserAction={true}
                     injectedJavaScript={injectScript}
                     onMessage={({ nativeEvent }) => {
-                        const data = nativeEvent.data;
+                        data = decodeURI(nativeEvent.data);
+                        console.log('on message fired', data);
                         if (data !== undefined && data !== null) {
-                            Linking.openURL(data);
+                            if (data.indexOf('{') > 0 ){
+                                try {
+                                    var index = data.indexOf('{');
+                                    var obj = JSON.parse(data.substr(index, data.length));
+                                    data = obj;
+                                    if (data.type == "similar") {
+                                        NavigationService.navigate("SiteDetail", {
+                                            id: data.id,
+                                            title: data.title
+                                        });
+                                    }
+                                    if (data.type == "tag") {
+                                        this.props.setTag({
+                                            id: data.id,
+                                            title: data.title,
+                                            type: "tag"
+                                        });
+                                        NavigationService.navigate("SiteTabScreen", {
+                                            id: data.id,
+                                            title: data.title,
+                                            type: "tag"
+                                        });
+                                    }
+                                } catch (e){
+                                    console.log('crash', e)
+                                }
+                            } else {
+                                console.log('it simple link')
+                                // Linking.openURL(data);
+                            }
                         }
                     }}
                 />
@@ -97,3 +130,20 @@ export default class SiteScreen extends Component {
         );
     }
 }
+const mapStateToProps = state => {
+    return {
+        site: state.siteReducer
+    };
+};
+const mapDispatchToProps = dispatch => {
+    return {
+        setTag: tag => dispatch(setTag(tag))
+        // getItems: (type, offset, q_str, action_type) =>
+        // dispatch(getItems(type, offset, q_str, action_type))
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SiteScreen);

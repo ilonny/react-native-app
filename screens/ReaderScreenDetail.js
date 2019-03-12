@@ -148,7 +148,7 @@ class EpubReader extends Component {
         let request = new XMLHttpRequest();
         request.onreadystatechange = (e) => {
             if (request.status === 200) {
-                console.log('response: ', request.responseText)
+                // console.log('response: ', request.responseText)
                 this.setState(state => {
                   if (request.responseText){
                     let parsedText;
@@ -513,7 +513,7 @@ class EpubReader extends Component {
                                             <TouchableOpacity onPress={() => this.deleteBookmark(item.location)}>
                                                 <View style={{flex: 0, alignItems: 'center', marginTop: -10}}>
                                                     <Ionicons name={"ios-trash-outline"} size={25} color="tomato" style={{marginTop: 5}}/>
-                                                    <Text style={{fontSize: 10, marginTop: -8,}}>Удалить</Text>
+                                                    <Text style={{fontSize: 10, marginTop: -6,}}>Удалить</Text>
                                                 </View>
                                             </TouchableOpacity>
                                         </View>

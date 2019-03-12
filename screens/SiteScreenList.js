@@ -164,7 +164,7 @@ class SiteScreenList extends Component {
     //     this.props.getItems(this.props.type, this.state.page, "", "replace", this.props.site.tag);
     // }
     componentDidUpdate(prevProps) {
-        console.log('componentDidUpdate', prevProps, this.props);
+        // console.log('componentDidUpdate', prevProps, this.props);
         if (prevProps.site.tag != this.props.site.tag) {
             this.props.getItems(
                 this.props.type,

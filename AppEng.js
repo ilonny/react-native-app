@@ -134,14 +134,14 @@ const ListStack = createStackNavigator({
     Цитаты: {
         screen: ListScreen,
         navigationOptions: {
-            title: "Цитаты"
+            title: 'Quotes'
         }
     },
     Details: DetailsScreen,
     Favorites: {
         screen: FavoritesScreen,
         navigationOptions: {
-            title: "Избранные цитаты"
+            title: 'Favorites quotes'
         }
     }
 });
@@ -149,16 +149,16 @@ const ReaderStack = createStackNavigator({
     Книги: {
         screen: ReaderScreen,
         navigationOptions: {
-            title: "Книги"
+          title: "Books"
         }
-    },
+      },
     Reader: ReaderScreenDetail
 });
 const AudioStack = createStackNavigator({
     Аудиокниги: {
         screen: AudioScreen,
         navigationOptions: {
-            title: "Аудиокниги"
+            title: "Audiobooks"
         }
     },
     Audio: AudioDetail
@@ -172,19 +172,24 @@ let TopLevelNavigator = createBottomTabNavigator(
         Harekrishna: {
             screen: SiteStack,
             navigationOptions: {
-                title: "harekrishna.ru"
+                title: 'scsmath.com'
             }
         },
-        Цитаты: {
+        Quotes: {
             screen: ListStack,
             navigationOptions: {
-                title: "Цитаты"
+                title: 'Quotes'
             }
         },
-        // Избранное: FavoritesStack,
-        Книги: ReaderStack,
-        Аудиокниги: AudioStack,
-        Настройки: SettingsMainScreen
+        Books: {
+            screen: ReaderStack,
+            navigationOptions: {
+                title: 'Books'
+            }
+        },
+        Books: ReaderStack,
+        Audiobooks: AudioStack,
+        Settings: SettingsMainScreen
         // Настройки: SettingsStack,
     },
     {
@@ -192,15 +197,15 @@ let TopLevelNavigator = createBottomTabNavigator(
             tabBarIcon: ({ focused, tintColor }) => {
                 const { routeName } = navigation.state;
                 let iconName;
-                if (routeName === "Цитаты") {
+                if (routeName === "Quotes") {
                     iconName = `ios-list${focused ? "" : "-outline"}`;
-                } else if (routeName === "Настройки") {
+                } else if (routeName === "Settings") {
                     iconName = `ios-options${focused ? "" : "-outline"}`;
                 } else if (routeName === "Избранное") {
                     iconName = `ios-star${focused ? "" : "-outline"}`;
-                } else if (routeName === "Книги") {
+                } else if (routeName === "Books") {
                     iconName = `ios-book${focused ? "" : "-outline"}`;
-                } else if (routeName === "Аудиокниги") {
+                } else if (routeName === "Audiobooks") {
                     iconName = `ios-headset${focused ? "" : "-outline"}`;
                 } else if (routeName === "Harekrishna") {
                     iconName = `ios-globe${focused ? "" : "-outline"}`;
@@ -225,7 +230,7 @@ let TopLevelNavigator = createBottomTabNavigator(
     }
 );
 
-export default class App extends Component {
+export default class AppEng extends Component {
     render() {
         console.log("app render");
         return (

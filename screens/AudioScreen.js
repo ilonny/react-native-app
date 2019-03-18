@@ -13,8 +13,9 @@ import {
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { listStyles } from '../constants/list_styles';
+import { connect } from "react-redux";
 
-export default class AudioScreen extends Component {
+class AudioScreen extends Component {
     constructor(props){
       super(props);
       this.state = {
@@ -25,7 +26,7 @@ export default class AudioScreen extends Component {
       }
     }
     static navigationOptions = {
-      title: 'Аудиокниги'
+      // title: 'Аудиокниги'
     }
     willFocusSubscription = this.props.navigation.addListener(
       'willFocus',
@@ -57,8 +58,14 @@ export default class AudioScreen extends Component {
                 })
                 AsyncStorage.setItem('cached_audio_list', request.responseText);
             } else {
-              console.log('error req')
-              AsyncStorage.getItem('cached_audio_list', (err, value) => {
+              console.log('error req', API_URL + `/get-audio-books?lang=${this.props.main.lang}`)
+              let cached_audio_list;
+              if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+                cached_audio_list = 'cached_audio_list_eng';
+              } else {
+                cached_audio_list = 'cached_audio_list';
+              }
+              AsyncStorage.getItem(cached_audio_list, (err, value) => {
                 // console.log('cached_audio_list', value)
                 if (!!value){
                     try {
@@ -73,7 +80,7 @@ export default class AudioScreen extends Component {
               });
             }
         };
-        request.open('GET', API_URL + `/get-audio-books`);
+        request.open('GET', API_URL + `/get-audio-books?lang=${this.props.main.lang}`);
         request.send();
     }
     componentWillMount(){
@@ -123,6 +130,22 @@ export default class AudioScreen extends Component {
         return comp;
     }
 }
+const mapStateToProps = state => {
+  return {
+      main: state.mainReducer,
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+      // setLangInside: lang => dispatch(setLangInside(lang))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AudioScreen);
+
 const styles = StyleSheet.create({
     container: {
       flex: 1,

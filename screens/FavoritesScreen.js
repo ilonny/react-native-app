@@ -12,8 +12,9 @@ import {
 } from 'react-native';
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { connect } from "react-redux";
 
-export default class FavoritesScreen extends Component {
+class FavoritesScreen extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -38,7 +39,7 @@ export default class FavoritesScreen extends Component {
     }
   );
   getQuotes(){
-    console.log('get quotes');
+    console.log('get quotes', API_URL + `/favorites?items=[${this.state.favorites}]&lang=${this.props.main.lang}`);
     let request = new XMLHttpRequest();
     request.onreadystatechange = (e) => {
         if (request.readyState !== 4) {
@@ -58,10 +59,16 @@ export default class FavoritesScreen extends Component {
           this.setState(state => {
             return {
               ...state,
-              quotes: API_URL + `/favorites?items=[${this.state.favorites}]`
+              quotes: API_URL + `/favorites?items=[${this.state.favorites}]&lang=${this.props.main.lang}`
             }
           })
-          AsyncStorage.getItem('cache_quotes_list', (err, value) => {
+          let AStore;
+          if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+            AStore = 'cache_quotes_list_eng';
+          } else {
+            AStore = 'cache_quotes_list';
+          }
+          AsyncStorage.getItem(AStore, (err, value) => {
             console.log('cache_quotes_list', value)
             if (!!value){
               console.log('offline quotes here )', value)
@@ -82,11 +89,17 @@ export default class FavoritesScreen extends Component {
           });
         }
     };
-    request.open('GET', API_URL + `/favorites?items=[${this.state.favorites}]`);
+    request.open('GET', API_URL + `/favorites?items=[${this.state.favorites}]&lang=${this.props.main.lang}`);
     request.send();
   }
   getFavs(){
-    AsyncStorage.getItem('Favorites', (err,value) => {
+    let AStore;
+    if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+      AStore = 'Favorites_eng';
+    } else {
+      AStore = 'Favorites';
+    }
+    AsyncStorage.getItem(AStore, (err,value) => {
       console.log('getfavs value', value)
       if (value && value.length){
         this.setState(state => {
@@ -171,6 +184,22 @@ export default class FavoritesScreen extends Component {
       );
     }
   }
+
+  const mapStateToProps = state => {
+    return {
+        main: state.mainReducer,
+    };
+  };
+  const mapDispatchToProps = dispatch => {
+    return {
+        // setLangInside: lang => dispatch(setLangInside(lang))
+    };
+  };
+  
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(FavoritesScreen);
 
   const styles = StyleSheet.create({
     container: {

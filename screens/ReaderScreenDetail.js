@@ -19,6 +19,8 @@ import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Dialog from "react-native-dialog";
 
+import { connect } from "react-redux";
+
 class EpubReader extends Component {
     constructor(props) {
         super(props);
@@ -112,6 +114,17 @@ class EpubReader extends Component {
         }
     }
     componentDidMount() {
+        // AsyncStorage.clear();
+        //////
+        //todo
+        //расставить AsyncStorage с _eng префиксами
+        //////
+        let AStore;
+        if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+            AStore = 'reader_locations_eng';
+        } else {
+            AStore = 'reader_locations';
+        }
         this.streamer.start()
         .then((origin) => {
             this.setState({origin})
@@ -120,7 +133,12 @@ class EpubReader extends Component {
         .then((src) => {
             return this.setState({src});
         });
-        AsyncStorage.getItem('reader_locations', (err,value) => {
+        if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+        AStore = 'reader_locations_eng';
+        } else {
+        AStore = 'reader_locations';
+        }
+        AsyncStorage.getItem(AStore, (err,value) => {
             if (value){
                 console.log('async storage reader_locations value ', value);
                 this.setState({
@@ -131,7 +149,13 @@ class EpubReader extends Component {
                 console.log('async storage reader_locations value is empty', value);
             }
         })
-        AsyncStorage.getItem('reader_theme', (err,value) => {
+        let AStore2;
+        if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+        AStore2 = 'reader_theme_eng';
+        } else {
+        AStore2 = 'reader_theme';
+        }
+        AsyncStorage.getItem(AStore2, (err,value) => {
             if (value){
                 console.log('async storage reader_theme value ', value);
                 this.setState({
@@ -140,7 +164,7 @@ class EpubReader extends Component {
                 this.props.navigation.setParams({theme: this.state.theme})
             } else {
                 console.log('async storage reader_theme value is empty', value);
-                AsyncStorage.setItem('reader_theme', 'light');
+                AsyncStorage.setItem(AStore2, 'light');
             }
         })
         //get tocs from server
@@ -164,14 +188,32 @@ class EpubReader extends Component {
                     }
                 }
                 })
-                AsyncStorage.setItem('cached_toc_book_'+this.state.book_id, request.responseText);
+                let cached_toc_book_;
+                if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+                    cached_toc_book_ = 'cached_toc_book_eng';
+                } else {
+                    cached_toc_book_ = 'cached_toc_book_';
+                }
+                AsyncStorage.setItem(cached_toc_book_+this.state.book_id, request.responseText);
             } else {
                 console.log('failed reques', request)
-                AsyncStorage.getItem('cached_book_'+this.state.book_id, (err, value) => {
+                let cached_book_;
+                if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+                    cached_book_ = 'cached_book_eng';
+                } else {
+                    cached_book_ = 'cached_book_';
+                }
+                AsyncStorage.getItem(cached_book_+this.state.book_id, (err, value) => {
                     console.log('cache_book', value)
                     if (!!value){
                       console.log('it should to open...')
-                        AsyncStorage.getItem('cached_toc_book_'+this.state.book_id, (err, value) => {
+                        let cached_toc_book_;
+                        if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+                            cached_toc_book_ = 'cached_toc_book_eng';
+                        } else {
+                            cached_toc_book_ = 'cached_toc_book_';
+                        }                      
+                        AsyncStorage.getItem(cached_toc_book_+this.state.book_id, (err, value) => {
                             // console.log('cache_reader_list', value)
                             if (!!value){
                                 this.setState({
@@ -190,10 +232,17 @@ class EpubReader extends Component {
                 });
             }
         };
-        request.open('GET', API_URL + `/get-tocs?book_id=${this.state.book_id}`);
+        request.open('GET', API_URL + `/get-tocs?book_id=${this.state.book_id}&lang=${this.props.main.lang}`);
         request.send();
+        console.log('get tocs url', API_URL + `/get-tocs?book_id=${this.state.book_id}&lang=${this.props.main.lang}`)
         //получаем закладки с нужной книги
-        AsyncStorage.getItem('reader_bookmarks_'+this.state.book_id, (err,value) => {
+        let reader_bookmarks_;
+        if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+            reader_bookmarks_ = 'reader_bookmarks_eng';
+        } else {
+            reader_bookmarks_ = 'reader_bookmarks_';
+        }
+        AsyncStorage.getItem(reader_bookmarks_+this.state.book_id, (err,value) => {
             if (value){
                 console.log('reader_bookmarks_'+this.state.book_id, value);
                 this.setState({
@@ -231,7 +280,13 @@ class EpubReader extends Component {
             toc_title: toc_title,
         });
         this.setState({bookmarks: bookmarks, bookmarksDialogVisible: false})
-        AsyncStorage.setItem('reader_bookmarks_'+this.state.book_id, JSON.stringify(bookmarks));
+        let reader_bookmarks_;
+        if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+            reader_bookmarks_ = 'reader_bookmarks_eng';
+        } else {
+            reader_bookmarks_ = 'reader_bookmarks_';
+        }
+        AsyncStorage.setItem(reader_bookmarks_+this.state.book_id, JSON.stringify(bookmarks));
     }
     deleteBookmark = (location = '') => {
         if (location == ''){
@@ -246,7 +301,13 @@ class EpubReader extends Component {
         this.setState({
             bookmarks: [].concat(bookmarks)
         });
-        AsyncStorage.setItem('reader_bookmarks_'+this.state.book_id, JSON.stringify(bookmarks));
+        let reader_bookmarks_;
+        if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+            reader_bookmarks_ = 'reader_bookmarks_eng';
+        } else {
+            reader_bookmarks_ = 'reader_bookmarks_';
+        }
+        AsyncStorage.setItem(reader_bookmarks_+this.state.book_id, JSON.stringify(bookmarks));
         console.log('delete bookmark', location)
         setTimeout(() => {
             this.checkPageHaveBookmark();
@@ -272,7 +333,13 @@ class EpubReader extends Component {
         this.setState({
             theme: theme
         })
-        AsyncStorage.setItem('reader_theme', theme);
+        let reader_theme;
+        if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+            reader_theme = 'reader_theme_eng';
+        } else {
+            reader_theme = 'reader_theme';
+        }
+        AsyncStorage.setItem(reader_theme, theme);
     }
     defineBookLocations(){
         console.log('defineBookLocations', book);
@@ -330,7 +397,13 @@ class EpubReader extends Component {
             })
         }
         console.log('saveBookLocation end', JSON.stringify(reader_locations))
-        AsyncStorage.setItem('reader_locations', JSON.stringify(reader_locations))   
+        let ASreader_locations;
+        if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+            ASreader_locations = 'reader_locations_eng';
+        } else {
+            ASreader_locations = 'reader_locations';
+        }
+        AsyncStorage.setItem(ASreader_locations, JSON.stringify(reader_locations))   
         this.checkPageHaveBookmark();
     }
 
@@ -412,7 +485,13 @@ class EpubReader extends Component {
                                 this.setState({
                                     total_locations: book.locations.total
                                 });
-                                AsyncStorage.setItem('cached_book_'+this.state.book_id, 'true')
+                                let cached_book_;
+                                if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+                                    cached_book_ = 'cached_book__eng';
+                                } else {
+                                    cached_book_ = 'cached_book_';
+                                }
+                                AsyncStorage.setItem(cached_book_+this.state.book_id, 'true')
                             } catch(e){
                                 console.log(e);
                             }
@@ -650,5 +729,18 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
     }
 });
-
-export default EpubReader;
+const mapStateToProps = state => {
+    return {
+        main: state.mainReducer,
+    };
+  };
+  const mapDispatchToProps = dispatch => {
+    return {
+        // setLangInside: lang => dispatch(setLangInside(lang))
+    };
+  };
+  
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(EpubReader);

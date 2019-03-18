@@ -10,10 +10,11 @@ import {
   ScrollView,
   AsyncStorage
 } from 'react-native';
+import { connect } from "react-redux";
 
 import { API_URL } from '../constants/api';
 import { listStyles } from '../constants/list_styles';
-export default class SettingsScreen extends Component {
+class SettingsScreen extends Component {
     constructor(){
         super();
         this.state = {
@@ -34,6 +35,13 @@ export default class SettingsScreen extends Component {
     }
     componentWillMount(){
         // AsyncStorage.removeItem('Settings');
+        console.log('CWM', API_URL + `/items?&lang=${this.props.main.lang}`)
+        let AStore;
+          if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+            AStore = 'Settings_eng';
+          } else {
+            AStore = 'Settings';
+        }
         let request = new XMLHttpRequest();
         request.onreadystatechange = (e) => {
             if (request.readyState !== 4) {
@@ -51,7 +59,7 @@ export default class SettingsScreen extends Component {
                     }
                 });
                 //проверим если до этого ничего не было выбрано то выберем все и сохраним и в стейт, и в сторедж
-                AsyncStorage.getItem('Settings', (err,value) => {
+                AsyncStorage.getItem(AStore, (err,value) => {
                     if (!value){
                         this.setState(state => {
                             return {
@@ -68,11 +76,11 @@ export default class SettingsScreen extends Component {
                                 testString: value,
                             }
                         })
-                        AsyncStorage.removeItem('Settings');
-                        AsyncStorage.setItem('Settings', JSON.stringify(this.state.selectedItems));
+                        AsyncStorage.removeItem(AStore);
+                        AsyncStorage.setItem(AStore, JSON.stringify(this.state.selectedItems));
                     }
                 });
-                AsyncStorage.getItem('Settings', (err, value) => {
+                AsyncStorage.getItem(AStore, (err, value) => {
                     this.setState(state => {
                         return {
                             ...state,
@@ -89,7 +97,7 @@ export default class SettingsScreen extends Component {
                 });
             }
         };
-        request.open('GET', API_URL + '/items');
+        request.open('GET', API_URL + `/items?&lang=${this.props.main.lang}`);
         request.send();
         AsyncStorage.getItem('Token', (err, value) => {
             let token = value ? value : "test-token";
@@ -103,6 +111,12 @@ export default class SettingsScreen extends Component {
         // console.log('token state?', this.state)
     }
     switchToggle(id){
+        let AStore;
+          if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+            AStore = 'Settings_eng';
+          } else {
+            AStore = 'Settings';
+        }
         if (this.state.selectedItems.includes(id)){
             // console.log('need delete item', id)
             let arr = [...this.state.selectedItems];
@@ -116,8 +130,8 @@ export default class SettingsScreen extends Component {
                     asyncSettings: arr,
                 }
             })
-            AsyncStorage.removeItem('Settings');
-            AsyncStorage.setItem('Settings', JSON.stringify(arr));
+            AsyncStorage.removeItem(AStore);
+            AsyncStorage.setItem(AStore, JSON.stringify(arr));
         } else {
             // console.log('need add item', id)
             this.setState(state => {
@@ -129,11 +143,11 @@ export default class SettingsScreen extends Component {
                     testString: 'delete2',
                 }
             })
-            AsyncStorage.removeItem('Settings');
-            AsyncStorage.setItem('Settings', JSON.stringify(this.state.selectedItems.concat(id)));
+            AsyncStorage.removeItem(AStore);
+            AsyncStorage.setItem(AStore, JSON.stringify(this.state.selectedItems.concat(id)));
         }
         setTimeout(() => {
-            AsyncStorage.getItem('Settings', (err, value) => {
+            AsyncStorage.getItem(AStore, (err, value) => {
                 this.setState(state => {
                     return {
                         ...state,
@@ -159,9 +173,9 @@ export default class SettingsScreen extends Component {
                 
             }
         };
-        request.open('GET', API_URL + `/set-token?token=${this.state.token}&settings=${JSON.stringify(this.state.selectedItems)}&news_settings=old&version=2`);
+        request.open('GET', API_URL + `/set-token?token=${this.state.token}&settings=${JSON.stringify(this.state.selectedItems)}&news_settings=old&version=2&lang=${this.props.main.lang}`);
         request.send();
-        console.log('updateTokenSetting', API_URL + `/set-token?token=${this.state.token}&settings=${JSON.stringify(this.state.selectedItems)}&news_settings=old&version=2`);
+        console.log('updateTokenSetting', API_URL + `/set-token?token=${this.state.token}&settings=${JSON.stringify(this.state.selectedItems)}&news_settings=old&version=2&lang=${this.props.main.lang}`);
     }
     render() {
         // console.log('settings render', this.state);
@@ -171,7 +185,7 @@ export default class SettingsScreen extends Component {
                 <View style={styles.container}>
                     <ScrollView>
                     <View style={[listStyles.quoteItem, {marginLeft: 10, marginRight: 10, marginTop: 10}]}>
-                        <Text style={{color: "#808080", textAlign: 'center'}}>Выберите интересные Вам источники для получения ежедневной рассылки цитат.</Text>
+                        <Text style={{color: "#808080", textAlign: 'center'}}>{this.props.main.lang == 'en' || this.props.main.lang == 'eng' ? 'Select sources of interest to you for receiving daily quotes' : 'Выберите интересные Вам источники для получения ежедневной рассылки цитат.'}</Text>
                     </View>
                     <SectionList
                         style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5, flex: 0}}
@@ -191,8 +205,8 @@ export default class SettingsScreen extends Component {
                             </View>
                         )}
                         sections={[
-                            {title: 'Авторы', data: this.state.authors},
-                            {title: 'Книги', data: this.state.books},
+                            {title: this.props.main.lang == 'en' || this.props.main.lang == 'eng' ? 'Authors' : 'Авторы', data: this.state.authors},
+                            {title: this.props.main.lang == 'en' || this.props.main.lang == 'eng' ?  'Books' : 'Книги', data: this.state.books},
                         ]}
                         keyExtractor={(item, index) => item + index}
                     />
@@ -202,6 +216,20 @@ export default class SettingsScreen extends Component {
         );
     }
 }
-
+const mapStateToProps = state => {
+    return {
+        main: state.mainReducer,
+    };
+  };
+  const mapDispatchToProps = dispatch => {
+    return {
+        // setLangInside: lang => dispatch(setLangInside(lang))
+    };
+  };
+  
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(SettingsScreen);
 const styles = StyleSheet.create({
 })

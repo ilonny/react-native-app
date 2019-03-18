@@ -10,5 +10,7 @@ YellowBox.ignoreWarnings([
     'required dispatch_sync to load',
     'Required dispatch'
 ]);
-import App from './App';
-AppRegistry.registerComponent('GuruOnline', () => App);
+// import App from './App';
+import AppLR from './AppLR'
+// AppRegistry.registerComponent('GuruOnline', () => App);
+AppRegistry.registerComponent('GuruOnline', () => AppLR);

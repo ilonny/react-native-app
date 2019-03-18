@@ -15,7 +15,9 @@ import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { listStyles } from '../constants/list_styles';
 import RNFetchBlob from 'rn-fetch-blob'
-export default class ReaderScreen extends Component {
+import { connect } from "react-redux";
+
+class ReaderScreen extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -30,7 +32,7 @@ export default class ReaderScreen extends Component {
     }
   }
   static navigationOptions = {
-    title: 'Книги'
+    // title: 'Books'
   }
   willFocusSubscription = this.props.navigation.addListener(
     'willFocus',
@@ -42,6 +44,12 @@ export default class ReaderScreen extends Component {
   _keyExtractor2 = (item) => item;
   getBooks(offset = 0){
     console.log('getBooks starts', offset)
+    let AStore;
+    if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+      AStore = 'cache_reader_list_eng';
+    } else {
+      AStore = 'cache_reader_list';
+    }
     let request = new XMLHttpRequest();
     request.onreadystatechange = (e) => {
         if (request.status === 200) {
@@ -62,11 +70,11 @@ export default class ReaderScreen extends Component {
                 }
             }
             })
-            AsyncStorage.setItem('cache_reader_list', request.responseText);
+            AsyncStorage.setItem(AStore, request.responseText);
         } else {
           console.log('error reader books req');
-          AsyncStorage.getItem('cache_reader_list', (err, value) => {
-            // console.log('cache_reader_list', value)
+          AsyncStorage.getItem(AStore, (err, value) => {
+            // console.log(AStore, value)
             if (!!value){
               this.setState({
                 books: JSON.parse(value).books,
@@ -83,8 +91,8 @@ export default class ReaderScreen extends Component {
           })
         }
     };
-    request.open('GET', API_URL + `/get-reader-books?offset=${offset}`);
-    console.log(API_URL + `/get-reader-books?offset=${offset}`)
+    request.open('GET', API_URL + `/get-reader-books?offset=${offset}&lang=${this.props.main.lang}`);
+    console.log(API_URL + `/get-reader-books?offset=${offset}&lang=${this.props.main.lang}`)
     request.send();
   }
   componentWillMount(){
@@ -112,7 +120,13 @@ export default class ReaderScreen extends Component {
   }
   downloadCovers(){
     console.log('downloadCovers() fired')
-    AsyncStorage.getItem('downloaded_covers', (err, value) => {
+    let ASdownloaded_covers;
+    if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+      ASdownloaded_covers = 'downloaded_covers_eng';
+    } else {
+      ASdownloaded_covers = 'downloaded_covers';
+    }
+    AsyncStorage.getItem(ASdownloaded_covers, (err, value) => {
       console.log('downloaded_covers value', value)
       if (value){
         this.downloaded_covers = JSON.parse(value);
@@ -175,7 +189,13 @@ export default class ReaderScreen extends Component {
               id: book_to_download.id,
               file_path: res.path(),
             })
-            AsyncStorage.setItem('downloaded_covers', JSON.stringify(this.downloaded_covers))
+            let ASdownloaded_covers;
+            if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+              ASdownloaded_covers = 'downloaded_covers_eng';
+            } else {
+              ASdownloaded_covers = 'downloaded_covers';
+            }
+            AsyncStorage.setItem(ASdownloaded_covers, JSON.stringify(this.downloaded_covers))
             this.setState({
               downloaded_covers: this.downloaded_covers,
             })
@@ -204,9 +224,9 @@ export default class ReaderScreen extends Component {
     console.log('render state', this.state);
     if (true) {
       comp = (
-        <SafeAreaView style={{flex: 1, backgroundColor: '#efefef'}}>
+        <SafeAreaView style={{flex: 1, backgroundColor: '#efefef', justifyContent: 'space-between'}}>
             <FlatList
-              style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5}}
+              style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5, flex: 0, height: '100%'}}
               data={books_on_page}
               renderItem={({item}) => {
                 // console.log('render item )')
@@ -298,6 +318,21 @@ export default class ReaderScreen extends Component {
     return comp;
   }
 }
+const mapStateToProps = state => {
+  return {
+      main: state.mainReducer,
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+      // setLangInside: lang => dispatch(setLangInside(lang))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ReaderScreen);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -316,10 +351,12 @@ const styles = StyleSheet.create({
     borderBottomColor: '#eaeaea'
   },
   pagination: {
-    flex: 1,
+    flex: 0,
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
     backgroundColor: '#fff',
+    maxHeight:40,
   }
 })

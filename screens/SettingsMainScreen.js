@@ -15,34 +15,44 @@ import {
 import { TabView, TabBar, SceneMap } from "react-native-tab-view";
 import SettingsScreen from "./SettingsScreen";
 import SettingsSite from "./SettingsSite";
+import SettingsLangScreen from "./SettingsLangScreen";
+
+import { connect } from "react-redux";
 
 const SettingsRoute = () => <SettingsScreen />;
 const SettingsSiteRoute = () => <SettingsSite />;
+const SettingsLangRoute = () => <SettingsLangScreen />;
 
-export default class SettingsMainScreen extends Component {
+class SettingsMainScreen extends Component {
     static navigationOptions = {
         header: null
     };
     state = {
         index: 0,
-        routes: [
+        routes: this.props.main.lang == 'en' || this.props.main.lang == 'eng' ? [
+            { key: "settings", title: "Daily quotes"},
+            { key: "settingsLang", title: "Language"},
+        ] : [
             { key: "settings", title: "Ежедневная рассылка цитат"},
             { key: "settingsSite", title: "Разделы сайта harekrisha.ru" },
+            { key: "settingsLang", title: "Язык приложения"},
         ]
     };
     _handleIndexChange = index => this.setState({ index });
 
-    _renderTabBar = props => (
-        <TabBar
-            {...props}
-            scrollEnabled
-            indicatorStyle={styles.indicator}
-            style={styles.tabbar}
-            tabStyle={styles.tab}
-            labelStyle={styles.label}
-            renderLabel={this._renderLabel}
-        />
-    );
+    _renderTabBar = props => {
+        return (
+            <TabBar
+                {...props}
+                scrollEnabled
+                indicatorStyle={styles.indicator}
+                style={styles.tabbar}
+                tabStyle={[styles.tab]}
+                labelStyle={styles.label}
+                renderLabel={this._renderLabel}
+            />
+        )
+    };
     _renderLabel = route => {
         // console.log('route', route.route)
         return (
@@ -59,6 +69,7 @@ export default class SettingsMainScreen extends Component {
     _renderScene = SceneMap({
         settings: SettingsRoute,
         settingsSite: SettingsSiteRoute,
+        settingsLang: SettingsLangRoute
     });
     render() {
         return (
@@ -71,6 +82,21 @@ export default class SettingsMainScreen extends Component {
         );
     }
 }
+const mapStateToProps = state => {
+    return {
+        main: state.mainReducer,
+    };
+  };
+  const mapDispatchToProps = dispatch => {
+    return {
+        // setLangInside: lang => dispatch(setLangInside(lang))
+    };
+  };
+  
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(SettingsMainScreen);
 
 const styles = StyleSheet.create({
     container: {

@@ -3,6 +3,7 @@ package com.guruonline;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.avishayil.rnrestart.ReactNativeRestartPackage;
 import com.tanguyantoine.react.MusicControl;
 import com.eko.RNBackgroundDownloaderPackage;
 import com.zmxv.RNSound.RNSoundPackage;
@@ -35,6 +36,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativeRestartPackage(),
             new MusicControl(),
             new RNBackgroundDownloaderPackage(),
             new RNSoundPackage(),

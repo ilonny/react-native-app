@@ -15,8 +15,9 @@ import {
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { listStyles } from '../constants/list_styles';
+import { connect } from "react-redux";
 
-export default class DetailsScreen extends Component {
+class DetailsScreen extends Component {
     constructor(props){
       super(props);
       this.state = {
@@ -54,7 +55,13 @@ export default class DetailsScreen extends Component {
         }
     }
     componentWillMount(){
-        AsyncStorage.getItem('Favorites', (err,value) => {
+        let AStore;
+        if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+            AStore = 'Favorites_eng';
+        } else {
+            AStore = 'Favorites';
+        }
+        AsyncStorage.getItem(AStore, (err,value) => {
             if (!value){
                 fav_arr = [];
                 // console.log('storage values not found, state is eq to []')
@@ -83,7 +90,7 @@ export default class DetailsScreen extends Component {
         // console.log('share state', this.state)
         Share.share({
             message: this.state.text_short,
-            url: API_URL + `/quote?id=${this.state.quote_id}`,
+            url: API_URL + `/quote?id=${this.state.quote_id}&lang=${this.props.main.lang}`,
             title: this.state.title
           }, {
             // Android only:
@@ -123,8 +130,13 @@ export default class DetailsScreen extends Component {
             })
             setTimeout(() => {
                 console.log('state after tap', this.state)
-                AsyncStorage.removeItem('Favorites');
-                AsyncStorage.setItem('Favorites', JSON.stringify(this.state.favorites));
+                if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
+                    AsyncStorage.removeItem('Favorites_eng');
+                    AsyncStorage.setItem('Favorites_eng', JSON.stringify(this.state.favorites));
+                } else {
+                    AsyncStorage.removeItem('Favorites');
+                    AsyncStorage.setItem('Favorites', JSON.stringify(this.state.favorites));
+                }
                 this.props.navigation.setParams({isFavorite: this.state.isFavorite});
                 this.forceUpdate();    
             }, 10);
@@ -142,8 +154,13 @@ export default class DetailsScreen extends Component {
             })
             setTimeout(() => {
                 // console.log('state after tap', this.state)
-                AsyncStorage.removeItem('Favorites');
-                AsyncStorage.setItem('Favorites', JSON.stringify(this.state.favorites));
+                if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
+                    AsyncStorage.removeItem('Favorites_eng');
+                    AsyncStorage.setItem('Favorites_eng', JSON.stringify(this.state.favorites));
+                } else {
+                    AsyncStorage.removeItem('Favorites');
+                    AsyncStorage.setItem('Favorites', JSON.stringify(this.state.favorites));
+                }
                 this.props.navigation.setParams({isFavorite: this.state.isFavorite});
                 this.forceUpdate();    
             }, 10);
@@ -176,7 +193,7 @@ export default class DetailsScreen extends Component {
             comp = (
                 <SafeAreaView style={{flex: 1, backgroundColor: '#efefef', paddingBottom: 10, paddingTop: 10}}>
                     <WebView
-                        source={{uri: API_URL + `/quote?id=${quote_id}`}}
+                        source={{uri: API_URL + `/quote?id=${quote_id}&lang=${this.props.main.lang}`}}
                         style={{backgroundColor: '#efefef'}}
                     />
                 </SafeAreaView>
@@ -233,6 +250,21 @@ export default class DetailsScreen extends Component {
         return comp;
     }
 }
+const mapStateToProps = state => {
+    return {
+        main: state.mainReducer,
+    };
+  };
+  const mapDispatchToProps = dispatch => {
+    return {
+        // setLangInside: lang => dispatch(setLangInside(lang))
+    };
+  };
+
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(DetailsScreen);
 const styles = StyleSheet.create({
     container: {
       flex: 1,

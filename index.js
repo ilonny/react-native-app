@@ -8,6 +8,8 @@ YellowBox.ignoreWarnings([
     'Remote debugger',
     'RCTBridge required dispatch_sycn to load'
 ]);
-import App from './App';
-AppRegistry.registerComponent('GuruOnline', () => App);
+// import App from './App';
+import AppLR from './AppLR'
+// AppRegistry.registerComponent('GuruOnline', () => App);
+AppRegistry.registerComponent('GuruOnline', () => AppLR);
 AppRegistry.registerHeadlessTask('RNFirebaseBackgroundMessage', () => bgMessaging);

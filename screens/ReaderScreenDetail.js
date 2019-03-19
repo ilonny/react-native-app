@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  Animated,
-  Modal,
-  StatusBar,
-  AsyncStorage,
-  TouchableOpacity,
-  FlatList,
-  Slider,
-  Alert
+    AppRegistry,
+    StyleSheet,
+    Text,
+    View,
+    Animated,
+    Modal,
+    StatusBar,
+    AsyncStorage,
+    TouchableOpacity,
+    FlatList,
+    Slider,
+    Alert
 } from 'react-native';
 
 import { Epub, Streamer } from "epubjs-rn";
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Dialog from "react-native-dialog";
+
+import { connect } from "react-redux";
 
 class EpubReader extends Component {
     constructor(props) {
@@ -77,27 +79,27 @@ class EpubReader extends Component {
         console.log('constructor props: ', this.props)
     }
 
-    static navigationOptions = ({navigation}) => {
+    static navigationOptions = ({ navigation }) => {
         const toggleNavigation = navigation.getParam('toggleNavigation');
         const toggleSettings = navigation.getParam('toggleSettings');
         const bookName = navigation.getParam('book_name');
         const theme = navigation.getParam('theme');
-        const pageHaveBookmark =  navigation.getParam('pageHaveBookmark');
-        const showBookmarkPopup =  navigation.getParam('showBookmarkPopup');
-        const deleteBookmark =  navigation.getParam('deleteBookmark');
+        const pageHaveBookmark = navigation.getParam('pageHaveBookmark');
+        const showBookmarkPopup = navigation.getParam('showBookmarkPopup');
+        const deleteBookmark = navigation.getParam('deleteBookmark');
         return {
             headerTitle: bookName,
             headerRight: (
                 // <TouchableOpacity onPress={navigation.getParam('consoleState')}>
-                <View style={{alignItems: 'center', flex: 1, flexDirection: 'row'}}>
+                <View style={{ alignItems: 'center', flex: 1, flexDirection: 'row' }}>
                     <TouchableOpacity onPress={() => pageHaveBookmark ? deleteBookmark() : showBookmarkPopup()}>
-                        <Ionicons name={pageHaveBookmark ? "ios-bookmark" : "ios-bookmark-outline"} size={30} color={theme == 'light' ? 'tomato' : '#c1ae97'} style={{marginTop: 5, marginRight: 15, marginLeft: 10}}/>
+                        <Ionicons name={pageHaveBookmark ? "ios-bookmark" : "ios-bookmark-outline"} size={30} color={theme == 'light' ? 'tomato' : '#c1ae97'} style={{ marginTop: 5, marginRight: 15, marginLeft: 10 }} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => toggleSettings()}>
-                        <Ionicons name={"ios-cog"} size={30} color={theme == 'light' ? 'tomato' : '#c1ae97'} style={{marginTop: 5, marginRight: 15}}/>
+                        <Ionicons name={"ios-cog"} size={30} color={theme == 'light' ? 'tomato' : '#c1ae97'} style={{ marginTop: 5, marginRight: 15 }} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => toggleNavigation()}>
-                        <Ionicons name={"ios-list"} size={35} color={theme == 'light' ? 'tomato' : '#c1ae97'} style={{marginTop: 5}}/>
+                        <Ionicons name={"ios-list"} size={35} color={theme == 'light' ? 'tomato' : '#c1ae97'} style={{ marginTop: 5 }} />
                     </TouchableOpacity>
                 </View>
             ),
@@ -113,16 +115,27 @@ class EpubReader extends Component {
         }
     }
     componentDidMount() {
+        let AStore;
+        if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
+            AStore = 'reader_locations_eng';
+        } else {
+            AStore = 'reader_locations';
+        }
         this.streamer.start()
-        .then((origin) => {
-            this.setState({origin})
-            return this.streamer.get(this.state.url);
-        })
-        .then((src) => {
-            return this.setState({src});
-        });
-        AsyncStorage.getItem('reader_locations', (err,value) => {
-            if (value){
+            .then((origin) => {
+                this.setState({ origin })
+                return this.streamer.get(this.state.url);
+            })
+            .then((src) => {
+                return this.setState({ src });
+            });
+            if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
+                AStore = 'reader_locations_eng';
+            } else {
+                AStore = 'reader_locations';
+            }
+            AsyncStorage.getItem(AStore, (err, value) => {
+            if (value) {
                 console.log('async storage reader_locations value ', value);
                 this.setState({
                     reader_locations: JSON.parse(value)
@@ -132,16 +145,22 @@ class EpubReader extends Component {
                 console.log('async storage reader_locations value is empty', value);
             }
         })
-        AsyncStorage.getItem('reader_theme', (err,value) => {
-            if (value){
+        let AStore2;
+        if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
+            AStore2 = 'reader_theme_eng';
+        } else {
+            AStore2 = 'reader_theme';
+        }
+        AsyncStorage.getItem(AStore2, (err, value) => {
+            if (value) {
                 console.log('async storage reader_theme value ', value);
                 this.setState({
                     theme: value
                 })
-                this.props.navigation.setParams({theme: this.state.theme})
+                this.props.navigation.setParams({ theme: this.state.theme })
             } else {
                 console.log('async storage reader_theme value is empty', value);
-                AsyncStorage.setItem('reader_theme', 'light');
+                AsyncStorage.setItem(AStore2, 'light');
             }
         })
         //get tocs from server
@@ -150,31 +169,49 @@ class EpubReader extends Component {
             if (request.status === 200) {
                 // console.log('response: ', request.responseText)
                 this.setState(state => {
-                  if (request.responseText){
-                    let parsedText;
-                    try {
-                      parsedText = JSON.parse(request.responseText);
-                    } catch (e){
-                      console.log('catched parse json', request)
-                      parsedText = [];
+                    if (request.responseText) {
+                        let parsedText;
+                        try {
+                            parsedText = JSON.parse(request.responseText);
+                        } catch (e) {
+                            console.log('catched parse json', request)
+                            parsedText = [];
+                        }
+                        return {
+                            ...state,
+                            book_locations: parsedText,
+                            online: true,
+                        }
                     }
-                    return {
-                        ...state,
-                        book_locations: parsedText,
-                        online: true,
-                    }
-                }
                 })
-                AsyncStorage.setItem('cached_toc_book_'+this.state.book_id, request.responseText);
+                let cached_toc_book_;
+                if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
+                    cached_toc_book_ = 'cached_toc_book_eng';
+                } else {
+                    cached_toc_book_ = 'cached_toc_book_';
+                }
+                AsyncStorage.setItem(cached_toc_book_ + this.state.book_id, request.responseText);
             } else {
                 console.log('failed reques', request)
-                AsyncStorage.getItem('cached_book_'+this.state.book_id, (err, value) => {
+                let cached_book_;
+                if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
+                    cached_book_ = 'cached_book_eng';
+                } else {
+                    cached_book_ = 'cached_book_';
+                }
+                AsyncStorage.getItem(cached_book_ + this.state.book_id, (err, value) => {
                     console.log('cache_book', value)
-                    if (!!value){
-                      console.log('it should to open...')
-                        AsyncStorage.getItem('cached_toc_book_'+this.state.book_id, (err, value) => {
+                    if (!!value) {
+                        console.log('it should to open...')
+                        let cached_toc_book_;
+                        if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
+                            cached_toc_book_ = 'cached_toc_book_eng';
+                        } else {
+                            cached_toc_book_ = 'cached_toc_book_';
+                        }
+                        AsyncStorage.getItem(cached_toc_book_ + this.state.book_id, (err, value) => {
                             // console.log('cache_reader_list', value)
-                            if (!!value){
+                            if (!!value) {
                                 this.setState({
                                     book_locations: JSON.parse(value),
                                     online: false
@@ -183,7 +220,7 @@ class EpubReader extends Component {
                         });
                     } else {
                         setTimeout(() => {
-                            if (!this.state.successLoaded){
+                            if (!this.state.successLoaded) {
                                 Alert.alert('Необходимо подключение к интернету для загрузки книги')
                             }
                         }, 9000);
@@ -191,27 +228,33 @@ class EpubReader extends Component {
                 });
             }
         };
-        request.open('GET', API_URL + `/get-tocs?book_id=${this.state.book_id}`);
+        request.open('GET', API_URL + `/get-tocs?book_id=${this.state.book_id}&lang=${this.props.main.lang}`);
         request.send();
         //получаем закладки с нужной книги
-        AsyncStorage.getItem('reader_bookmarks_'+this.state.book_id, (err,value) => {
-            if (value){
-                console.log('reader_bookmarks_'+this.state.book_id, value);
+        let reader_bookmarks_;
+        if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
+            reader_bookmarks_ = 'reader_bookmarks_eng';
+        } else {
+            reader_bookmarks_ = 'reader_bookmarks_';
+        }
+        AsyncStorage.getItem(reader_bookmarks_ + this.state.book_id, (err, value) => {
+            if (value) {
+                console.log('reader_bookmarks_' + this.state.book_id, value);
                 this.setState({
                     bookmarks: JSON.parse(value)
                 })
             } else {
-                console.log('reader_bookmarks_'+this.state.book_id, value);
+                console.log('reader_bookmarks_' + this.state.book_id, value);
             }
         });
-        this.props.navigation.setParams({toggleNavigation: this.toggleNavigation})
-        this.props.navigation.setParams({toggleSettings: this.toggleSettings})
-        this.props.navigation.setParams({theme: this.state.theme})
-        this.props.navigation.setParams({showBookmarkPopup: this.showBookmarkPopup})
-        this.props.navigation.setParams({deleteBookmark: this.deleteBookmark})
+        this.props.navigation.setParams({ toggleNavigation: this.toggleNavigation })
+        this.props.navigation.setParams({ toggleSettings: this.toggleSettings })
+        this.props.navigation.setParams({ theme: this.state.theme })
+        this.props.navigation.setParams({ showBookmarkPopup: this.showBookmarkPopup })
+        this.props.navigation.setParams({ deleteBookmark: this.deleteBookmark })
     }
     showBookmarkPopup = () => {
-        this.setState({bookmarksDialogVisible: true})
+        this.setState({ bookmarksDialogVisible: true })
     }
     addBookmark = () => {
         console.log('addBookmark()', this.state)
@@ -231,14 +274,20 @@ class EpubReader extends Component {
             comment: comment,
             toc_title: toc_title,
         });
-        this.setState({bookmarks: bookmarks, bookmarksDialogVisible: false})
-        AsyncStorage.setItem('reader_bookmarks_'+this.state.book_id, JSON.stringify(bookmarks));
+        this.setState({ bookmarks: bookmarks, bookmarksDialogVisible: false })
+        let reader_bookmarks_;
+        if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
+            reader_bookmarks_ = 'reader_bookmarks_eng';
+        } else {
+            reader_bookmarks_ = 'reader_bookmarks_';
+        }
+        AsyncStorage.setItem(reader_bookmarks_ + this.state.book_id, JSON.stringify(bookmarks));
     }
     deleteBookmark = (location = '') => {
-        if (location == ''){
+        if (location == '') {
             location = this.state.visibleLocation.start.cfi;
         }
-        let {bookmarks} = this.state;
+        let { bookmarks } = this.state;
         bookmarks.forEach((bookmark, index) => {
             if (bookmark.location == location) {
                 bookmarks.splice(index, 1);
@@ -247,13 +296,19 @@ class EpubReader extends Component {
         this.setState({
             bookmarks: [].concat(bookmarks)
         });
-        AsyncStorage.setItem('reader_bookmarks_'+this.state.book_id, JSON.stringify(bookmarks));
+        let reader_bookmarks_;
+        if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
+            reader_bookmarks_ = 'reader_bookmarks_eng';
+        } else {
+            reader_bookmarks_ = 'reader_bookmarks_';
+        }
+        AsyncStorage.setItem(reader_bookmarks_ + this.state.book_id, JSON.stringify(bookmarks));
         console.log('delete bookmark', location)
         setTimeout(() => {
             this.checkPageHaveBookmark();
         }, 300);
     }
-    checkPageHaveBookmark(){
+    checkPageHaveBookmark() {
         let flag;
         this.state.bookmarks.forEach(bookmark => {
             console.log('checkPageHaveBookmark()', bookmark.location == this.state.visibleLocation.start.cfi, bookmark.location, this.state.visibleLocation.start.cfi);
@@ -266,24 +321,30 @@ class EpubReader extends Component {
         this.setState({
             pageHaveBookmark: flag
         });
-        this.props.navigation.setParams({pageHaveBookmark: flag});
+        this.props.navigation.setParams({ pageHaveBookmark: flag });
     }
-    setTheme(theme){
-        this.props.navigation.setParams({theme: theme})
+    setTheme(theme) {
+        this.props.navigation.setParams({ theme: theme })
         this.setState({
             theme: theme
         })
-        AsyncStorage.setItem('reader_theme', theme);
+        let reader_theme;
+        if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
+            reader_theme = 'reader_theme_eng';
+        } else {
+            reader_theme = 'reader_theme';
+        }
+        AsyncStorage.setItem(reader_theme, theme);
     }
-    defineBookLocations(){
+    defineBookLocations() {
         console.log('defineBookLocations', book);
         // this.setState({
         //     book_locations: book.navigation.toc
         // })
     }
-    checkInitialLocation(){
+    checkInitialLocation() {
         this.toc_from_nav = this.props.navigation.getParam('toc');
-        if (this.toc_from_nav && this.state.successLoaded){
+        if (this.toc_from_nav && this.state.successLoaded) {
             this.setState({
                 location: this.toc_from_nav,
                 nav_opened: false
@@ -293,7 +354,7 @@ class EpubReader extends Component {
     willFocusSubscription = this.props.navigation.addListener(
         'willFocus',
         payload => {
-          this.checkInitialLocation();
+            this.checkInitialLocation();
         }
     );
     componentWillUnmount() {
@@ -305,7 +366,7 @@ class EpubReader extends Component {
         this.setState({ showBars: !this.state.showBars });
     }
 
-    saveBookLocation(location, book_id){
+    saveBookLocation(location, book_id) {
         console.log('saveBookLocation', location, book_id)
         let { reader_locations } = this.state
         console.log('reader_locations', reader_locations)
@@ -316,10 +377,10 @@ class EpubReader extends Component {
                 el.location = location
                 this.setState({
                     reader_locations: [].concat(reader_locations)
-                })    
+                })
             }
         });
-        if (!changed){
+        if (!changed) {
             console.log('not changed')
             let new_location = {
                 id: book_id,
@@ -331,15 +392,21 @@ class EpubReader extends Component {
             })
         }
         console.log('saveBookLocation end', JSON.stringify(reader_locations))
-        AsyncStorage.setItem('reader_locations', JSON.stringify(reader_locations))   
+        let ASreader_locations;
+        if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
+            ASreader_locations = 'reader_locations_eng';
+        } else {
+            ASreader_locations = 'reader_locations';
+        }
+        AsyncStorage.setItem(ASreader_locations, JSON.stringify(reader_locations))  
         this.checkPageHaveBookmark();
     }
 
-    getInitialLocation(){
+    getInitialLocation() {
         let { book_id, reader_locations } = this.state
         if (reader_locations instanceof Array) {
             reader_locations.forEach(element => {
-                if (element.id == book_id){
+                if (element.id == book_id) {
                     this.setState({
                         location: element.location
                     })
@@ -360,9 +427,9 @@ class EpubReader extends Component {
         })
     }
 
-    redirectToAudio(audio_book_id, audiofile_id, audio_book_name){
+    redirectToAudio(audio_book_id, audiofile_id, audio_book_name) {
         console.log('redirectToAudio', audio_book_id, audiofile_id);
-        this.props.navigation.navigate('Audio', {book_id: audio_book_id, audiofile_id: audiofile_id, book_name: audio_book_name/*, book_src: item.file_src,*/});
+        this.props.navigation.navigate('Audio', { book_id: audio_book_id, audiofile_id: audiofile_id, book_name: audio_book_name/*, book_src: item.file_src,*/ });
     }
     render() {
         console.log("render state", this.state)
@@ -376,15 +443,15 @@ class EpubReader extends Component {
                     gap={10}
                     themes={this.state.themes}
                     theme={this.state.theme}
-                    fontSize={this.state.fontSize+'px'}
-                    onLocationChange={(visibleLocation)=> {
+                    fontSize={this.state.fontSize + 'px'}
+                    onLocationChange={(visibleLocation) => {
                         console.log("locationChanged", visibleLocation)
                         try {
                             // if (visibleLocation.start){
-                                // if (visibleLocation.start.location != this.state.visibleLocation.start.location){
-                                // }
+                            // if (visibleLocation.start.location != this.state.visibleLocation.start.location){
                             // }
-                            this.setState({visibleLocation});
+                            // }
+                            this.setState({ visibleLocation });
                             this.setState({
                                 current_location_index: visibleLocation.end.location,
                             })
@@ -396,11 +463,11 @@ class EpubReader extends Component {
                             console.log('locationChanged failed', e)
                         }
                     }}
-                    onLocationsReady={(locations)=> {
+                    onLocationsReady={(locations) => {
                         // console.log("location total", locations.total);
-                        this.setState({sliderDisabled : false});
+                        this.setState({ sliderDisabled: false });
                     }}
-                    onReady={(book)=> {
+                    onReady={(book) => {
                         console.log('onReady fired', book)
                         this.setState({
                             successLoaded: true,
@@ -413,17 +480,23 @@ class EpubReader extends Component {
                                 this.setState({
                                     total_locations: book.locations.total
                                 });
-                                AsyncStorage.setItem('cached_book_'+this.state.book_id, 'true')
-                            } catch(e){
+                                let cached_book_;
+                                if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
+                                    cached_book_ = 'cached_book__eng';
+                                } else {
+                                    cached_book_ = 'cached_book_';
+                                }
+                                AsyncStorage.setItem(cached_book_ + this.state.book_id, 'true')
+                            } catch (e) {
                                 console.log(e);
                             }
                         }, 1500);
                     }}
-                    onPress={(cfi, position, rendition)=> {
+                    onPress={(cfi, position, rendition) => {
                         console.log("press", cfi);
-                        
+
                     }}
-                    onLongPress={(cfi, rendition)=> {
+                    onLongPress={(cfi, rendition) => {
                         console.log("longpress", cfi);
                     }}
                     onViewAdded={(index) => {
@@ -444,131 +517,131 @@ class EpubReader extends Component {
                     onError={(message) => {
                         console.log("EPUBJS-Webview", message);
                     }}
-                    />
+                />
                 {!!this.state.total_locations && (
-                    <View style={{flex: 0, flexDirection: 'row', alignItems: 'center', padding: 3, backgroundColor: this.state.theme == 'light' ? '#fff' : '#171717', position: 'absolute', bottom: 0}}>
-                        <View style={{flex: 1, height: 5}}>
-                            <View style={{backgroundColor: '#c1ae97', width: this.state.progress_width+'%', height: 5, borderRadius: 5}}></View>
+                    <View style={{ flex: 0, flexDirection: 'row', alignItems: 'center', padding: 3, backgroundColor: this.state.theme == 'light' ? '#fff' : '#171717', position: 'absolute', bottom: 0 }}>
+                        <View style={{ flex: 1, height: 5 }}>
+                            <View style={{ backgroundColor: '#c1ae97', width: this.state.progress_width + '%', height: 5, borderRadius: 5 }}></View>
                         </View>
-                        <Text style={{fontSize: 10, color: this.state.theme == 'light' ? '#000' : '#bebebe'}}>{this.state.current_location_index} из {this.state.total_locations}</Text>
+                        <Text style={{ fontSize: 10, color: this.state.theme == 'light' ? '#000' : '#bebebe' }}>{this.state.current_location_index} из {this.state.total_locations}</Text>
                     </View>
                 )}
                 {this.state.nav_opened && (
                     <View style={styles.navigation}>
                         <View style={styles.navigation_header}>
-                            <View style={{flexDirection: 'row'}}>
-                                <TouchableOpacity onPress={() => this.setState({listScreen: 'content'})}>
-                                    <Text style={{padding: 15, color: this.state.listScreen == 'content' ? 'tomato' : 'black'}}>Содержание книги</Text>
+                            <View style={{ flexDirection: 'row' }}>
+                                <TouchableOpacity onPress={() => this.setState({ listScreen: 'content' })}>
+                                    <Text style={{ padding: 15, color: this.state.listScreen == 'content' ? 'tomato' : 'black' }}>Содержание книги</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.setState({listScreen: 'bookmarks'})}>
-                                    <Text style={{padding: 15, color: this.state.listScreen == 'bookmarks' ? 'tomato' : 'black'}}>Закладки</Text>
+                                <TouchableOpacity onPress={() => this.setState({ listScreen: 'bookmarks' })}>
+                                    <Text style={{ padding: 15, color: this.state.listScreen == 'bookmarks' ? 'tomato' : 'black' }}>Закладки</Text>
                                 </TouchableOpacity>
                             </View>
-                            <TouchableOpacity onPress={() => this.setState({nav_opened: false})}>
-                                <Ionicons style={{padding: 15}} name="ios-close-circle-outline" size={25} color="tomato" />
+                            <TouchableOpacity onPress={() => this.setState({ nav_opened: false })}>
+                                <Ionicons style={{ padding: 15 }} name="ios-close-circle-outline" size={25} color="tomato" />
                             </TouchableOpacity>
                         </View>
                         {this.state.listScreen == 'content' ? (
                             <View style={styles.navigation_list}>
-                            <FlatList
-                                data={this.state.book_locations}
-                                keyExtractor={item => String(item.id)}
-                                renderItem={({item}) => (
-                                    <View style={styles.navigation_list_row}>
-                                        <View style={{maxWidth: '85%'}}>
-                                        <TouchableOpacity onPress={() => this.setState({location: item.app_href, nav_opened: false})}>
-                                            <View style={{flex: 1, height: "100%"}}>
-                                                <Text>{item.title.trim()}</Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                        </View>
-                                        {item.audiofile_id && (
-                                            <TouchableOpacity onPress={() => this.redirectToAudio(item.audio_book_id, item.audiofile_id, item.audio_book_name)}>
-                                                <View style={{flex: 0, alignItems: 'center', marginTop: -10}}>
-                                                    <Ionicons name={"ios-volume-mute"} size={35} color="tomato" style={{marginTop: 5}}/>
-                                                    <Text style={{fontSize: 10, marginTop: -10,}}>Слушать</Text>
-                                                </View>
-                                            </TouchableOpacity>
-                                        )}
-                                    </View>
-                                )}
-                            >
-                            </FlatList>
-                        </View>
-                        ) : (
-                            <View style={styles.navigation_list}>
                                 <FlatList
-                                    data={this.state.bookmarks}
-                                    keyExtractor={item => String(item.location)}
-                                    renderItem={({item}) => (
+                                    data={this.state.book_locations}
+                                    keyExtractor={item => String(item.id)}
+                                    renderItem={({ item }) => (
                                         <View style={styles.navigation_list_row}>
-                                            <View style={{maxWidth: '85%'}}>
-                                            <TouchableOpacity onPress={() => this.setState({location: item.location, nav_opened: false})}>
-                                                <View style={{flex: 1, height: "100%"}}>
-                                                    <Text>Глава: {!!item.toc_title ? item.toc_title.trim() : 'Не указано'}</Text>
-                                                    <Text>Комментарий: {item.comment.trim()}</Text>
-                                                </View>
-                                            </TouchableOpacity>
+                                            <View style={{ maxWidth: '85%' }}>
+                                                <TouchableOpacity onPress={() => this.setState({ location: item.app_href, nav_opened: false })}>
+                                                    <View style={{ flex: 1, height: "100%" }}>
+                                                        <Text>{item.title.trim()}</Text>
+                                                    </View>
+                                                </TouchableOpacity>
                                             </View>
-                                            <TouchableOpacity onPress={() => this.deleteBookmark(item.location)}>
-                                                <View style={{flex: 0, alignItems: 'center', marginTop: -10}}>
-                                                    <Ionicons name={"ios-trash-outline"} size={25} color="tomato" style={{marginTop: 5}}/>
-                                                    <Text style={{fontSize: 10, marginTop: -6,}}>Удалить</Text>
-                                                </View>
-                                            </TouchableOpacity>
+                                            {item.audiofile_id && (
+                                                <TouchableOpacity onPress={() => this.redirectToAudio(item.audio_book_id, item.audiofile_id, item.audio_book_name)}>
+                                                    <View style={{ flex: 0, alignItems: 'center', marginTop: -10 }}>
+                                                        <Ionicons name={"ios-volume-mute"} size={35} color="tomato" style={{ marginTop: 5 }} />
+                                                        <Text style={{ fontSize: 10, marginTop: -10, }}>Слушать</Text>
+                                                    </View>
+                                                </TouchableOpacity>
+                                            )}
                                         </View>
                                     )}
                                 >
                                 </FlatList>
                             </View>
-                        )}
+                        ) : (
+                                <View style={styles.navigation_list}>
+                                    <FlatList
+                                        data={this.state.bookmarks}
+                                        keyExtractor={item => String(item.location)}
+                                        renderItem={({ item }) => (
+                                            <View style={styles.navigation_list_row}>
+                                                <View style={{ maxWidth: '85%' }}>
+                                                    <TouchableOpacity onPress={() => this.setState({ location: item.location, nav_opened: false })}>
+                                                        <View style={{ flex: 1, height: "100%" }}>
+                                                            <Text>Глава: {!!item.toc_title ? item.toc_title.trim() : 'Не указано'}</Text>
+                                                            <Text>Комментарий: {item.comment.trim()}</Text>
+                                                        </View>
+                                                    </TouchableOpacity>
+                                                </View>
+                                                <TouchableOpacity onPress={() => this.deleteBookmark(item.location)}>
+                                                    <View style={{ flex: 0, alignItems: 'center', marginTop: -10 }}>
+                                                        <Ionicons name={"ios-trash-outline"} size={25} color="tomato" style={{ marginTop: 5 }} />
+                                                        <Text style={{ fontSize: 10, marginTop: -6, }}>Удалить</Text>
+                                                    </View>
+                                                </TouchableOpacity>
+                                            </View>
+                                        )}
+                                    >
+                                    </FlatList>
+                                </View>
+                            )}
                     </View>
                 )}
                 {this.state.settingsOpened && (
                     <View style={styles.navigation}>
                         <View style={styles.navigation_header}>
-                            <Text style={{padding: 15}}>Настройки</Text>
-                            <TouchableOpacity onPress={() => this.setState({settingsOpened: false})}>
-                                <Ionicons style={{padding: 15}} name="ios-close-circle-outline" size={25} color="tomato" />
+                            <Text style={{ padding: 15 }}>Настройки</Text>
+                            <TouchableOpacity onPress={() => this.setState({ settingsOpened: false })}>
+                                <Ionicons style={{ padding: 15 }} name="ios-close-circle-outline" size={25} color="tomato" />
                             </TouchableOpacity>
                         </View>
-                        <Text style={{padding: 15}}>Режим чтения</Text>
+                        <Text style={{ padding: 15 }}>Режим чтения</Text>
                         <View style={styles.setting_themes}>
-                            <TouchableOpacity onPress={() => this.setTheme('light')} style={{marginRight: 15}}>
+                            <TouchableOpacity onPress={() => this.setTheme('light')} style={{ marginRight: 15 }}>
                                 <View style={this.state.theme == 'light' ? styles.active_theme : styles.non_active_theme}>
-                                    <Ionicons color="#75644f" name={"ios-sunny"} size={30}/>
+                                    <Ionicons color="#75644f" name={"ios-sunny"} size={30} />
                                     <Text>День</Text>
                                 </View>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => this.setTheme('dark')} >
                                 <View style={this.state.theme == 'dark' ? styles.active_theme : styles.non_active_theme}>
-                                    <Ionicons color="#75644f" name={"ios-moon"} size={30}/>
+                                    <Ionicons color="#75644f" name={"ios-moon"} size={30} />
                                     <Text>Ночь</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
-                        <Text style={{padding: 15}}>Размер текста</Text>
-                        <View style={{paddingLeft: 15, paddingRight: 15}}>
+                        <Text style={{ padding: 15 }}>Размер текста</Text>
+                        <View style={{ paddingLeft: 15, paddingRight: 15 }}>
                             <Slider
                                 step={1}
                                 maximumValue={25}
                                 minimumValue={10}
                                 value={this.state.fontSize}
-                                onValueChange={val => this.setState({fontSize: val})}
+                                onValueChange={val => this.setState({ fontSize: val })}
                             />
                         </View>
-                        <Text style={{padding: 15, textAlign: 'center', fontSize: this.state.fontSize}}>Пример текста ({this.state.fontSize} px)</Text>
+                        <Text style={{ padding: 15, textAlign: 'center', fontSize: this.state.fontSize }}>Пример текста ({this.state.fontSize} px)</Text>
                     </View>
                 )}
                 <View>
-                <Dialog.Container visible={this.state.bookmarksDialogVisible}>
-                    <Dialog.Title>Добавить закладку</Dialog.Title>
-                    <Dialog.Description>Пожалуйста, введите комментарий к закладке</Dialog.Description>
-                    <Dialog.Input onChangeText={value => this.setState({bookmarksDialogComment: value})}></Dialog.Input>
-                    <Dialog.Button onPress={() => this.setState({bookmarksDialogVisible: false, bookmarksDialogComment: ''})} label="Отменить" />
-                    <Dialog.Button onPress={() => this.addBookmark()} label="Сохранить" />
-                </Dialog.Container>
-            </View>
+                    <Dialog.Container visible={this.state.bookmarksDialogVisible}>
+                        <Dialog.Title>Добавить закладку</Dialog.Title>
+                        <Dialog.Description>Пожалуйста, введите комментарий к закладке</Dialog.Description>
+                        <Dialog.Input onChangeText={value => this.setState({ bookmarksDialogComment: value })}></Dialog.Input>
+                        <Dialog.Button onPress={() => this.setState({ bookmarksDialogVisible: false, bookmarksDialogComment: '' })} label="Отменить" />
+                        <Dialog.Button onPress={() => this.addBookmark()} label="Сохранить" />
+                    </Dialog.Container>
+                </View>
             </View>
         );
     }
@@ -584,10 +657,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#3F3F3C'
     },
     bar: {
-        position:"absolute",
-        left:0,
-        right:0,
-        height:55
+        position: "absolute",
+        left: 0,
+        right: 0,
+        height: 55
     },
     navigation: {
         position: "absolute",
@@ -652,4 +725,18 @@ const styles = StyleSheet.create({
     }
 });
 
-export default EpubReader;
+const mapStateToProps = state => {
+    return {
+        main: state.mainReducer,
+    };
+};
+const mapDispatchToProps = dispatch => {
+    return {
+        // setLangInside: lang => dispatch(setLangInside(lang))
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(EpubReader); 

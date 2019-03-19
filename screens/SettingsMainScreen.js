@@ -15,20 +15,27 @@ import {
 import { TabView, TabBar, SceneMap } from "react-native-tab-view";
 import SettingsScreen from "./SettingsScreen";
 import SettingsSite from "./SettingsSite";
+import SettingsLangScreen from "./SettingsLangScreen";
 
+import { connect } from "react-redux";
 const SettingsRoute = () => <SettingsScreen />;
 const SettingsSiteRoute = () => <SettingsSite />;
+const SettingsLangRoute = () => <SettingsLangScreen />;
 
-export default class SettingsMainScreen extends Component {
+class SettingsMainScreen extends Component {
     static navigationOptions = {
         header: null
     };
     state = {
         index: 0,
-        routes: [
-            { key: "settings", title: "Ежедневная рассылка цитат"},
-            { key: "settingsSite", title: "Разделы сайта harekrisha.ru" },
-        ]
+        routes: this.props.main.lang == 'en' || this.props.main.lang == 'eng' ? [
+            { key: "settings", title: "Daily quotes" },
+            { key: "settingsLang", title: "Language" },
+        ] : [
+                { key: "settings", title: "Ежедневная рассылка цитат" },
+                { key: "settingsSite", title: "Разделы сайта harekrisha.ru" },
+                { key: "settingsLang", title: "Язык приложения" },
+            ]
     };
     _handleIndexChange = index => this.setState({ index });
 
@@ -47,18 +54,19 @@ export default class SettingsMainScreen extends Component {
         // console.log('route', route.route)
         return (
             <Text
-                style={[styles.label, {textAlign: 'center'}]}
+                style={[styles.label, { textAlign: 'center' }]}
                 numberOfLines={2}
-                // numberOfLines={route.route.title == 'Вайшнавский календарь' ? 2 : 1}
-                // ellipsizeMode='tail'
+            // numberOfLines={route.route.title == 'Вайшнавский календарь' ? 2 : 1}
+            // ellipsizeMode='tail'
             >
-               {route.route.title}
+                {route.route.title}
             </Text>
         );
     };
     _renderScene = SceneMap({
         settings: SettingsRoute,
         settingsSite: SettingsSiteRoute,
+        settingsLang: SettingsLangRoute
     });
     render() {
         return (
@@ -71,7 +79,21 @@ export default class SettingsMainScreen extends Component {
         );
     }
 }
+const mapStateToProps = state => {
+    return {
+        main: state.mainReducer,
+    };
+};
+const mapDispatchToProps = dispatch => {
+    return {
+        // setLangInside: lang => dispatch(setLangInside(lang))
+    };
+};
 
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SettingsMainScreen);
 const styles = StyleSheet.create({
     container: {
         flex: 1

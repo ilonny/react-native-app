@@ -20,7 +20,8 @@ const initialState = {
         track_duration: null,
         toc_id: null,
         whoosh: {}
-    }
+    },
+    lang: "ru"
 };
 
 const mainReducer = function(state = initialState, action) {
@@ -78,6 +79,11 @@ const mainReducer = function(state = initialState, action) {
                     toc_id: action.toc_id,
                     whoosh: action.whoosh
                 }
+            };
+        case "SET_LANG":
+            return {
+                ...state,
+                lang: action.lang
             };
         default:
             return state;

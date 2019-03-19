@@ -17,6 +17,9 @@ import { TabView, TabBar, SceneMap } from "react-native-tab-view";
 import SiteScreenList from "./SiteScreenList";
 import CalendarScreen from "./CalendarScreen";
 
+import { setLang, setLangInside } from "../actions/lang";
+import { connect } from "react-redux";
+
 const ContentRoute = () => <SiteScreenList type="content" />;
 const LookRoute = () => <SiteScreenList type="look" />;
 const ListenRoute = () => <SiteScreenList type="listen" />;
@@ -24,7 +27,7 @@ const ReadRoute = () => <SiteScreenList type="read" />;
 const ImportantRoute = () => <SiteScreenList type="important" />;
 const CalendarRoute = () => <CalendarScreen />;
 import NavigationService from "../NavigationService";
-export default class SiteScreen extends Component {
+class SiteScreen extends Component {
     static navigationOptions = {
         header: null
     };
@@ -38,7 +41,8 @@ export default class SiteScreen extends Component {
             { key: "important", title: "Это важно" },
             { key: "calendar", title: "Вайшнавский календарь" }
         ],
-        modalShowed: true
+        modalShowed: true,
+        modalStep: 1
     };
     _handleIndexChange = index => this.setState({ index });
 
@@ -87,86 +91,182 @@ export default class SiteScreen extends Component {
                 AsyncStorage.setItem("initial_modal", "true");
             }
         });
+        AsyncStorage.getItem("lang", (err, value) => {
+            console.log("lang is ", value);
+            if (!value || value == "ru") {
+                this.props.setLangInside("ru");
+            } else {
+                this.props.setLangInside("eng");
+            }
+        });
     }
     render() {
+        console.log("root render state", this.state);
+        console.log("root render props", this.props);
         if (this.state.modalShowed) {
-            return (
-                <TabView
-                    navigationState={this.state}
-                    renderScene={this._renderScene}
-                    renderTabBar={this._renderTabBar}
-                    onIndexChange={this._handleIndexChange}
-                />
-            );
-        } else
+            if (this.props.main.lang == "ru") {
+                return (
+                    <TabView
+                        navigationState={this.state}
+                        renderScene={this._renderScene}
+                        renderTabBar={this._renderTabBar}
+                        onIndexChange={this._handleIndexChange}
+                    />
+                );
+            } else {
+                return (
+                    <View
+                        style={{
+                            flex: 1,
+                            justifyContent: "center",
+                            alignItems: "center"
+                        }}
+                    >
+                        <Text>http://www.scsmath.com/</Text>
+                    </View>
+                );
+            }
+        } else {
             return (
                 <Modal
                     animationType="slide"
                     transparent={false}
                     visible={!this.state.modalShowed}
-                    onRequestClose={() => {
-                        Alert.alert("Modal has been closed.");
-                    }}
+                    onRequestClose={() => this.setState({ modalShowed: true })}
                 >
-                    <ScrollView
-                        contentContainerStyle={{
-                            flex: 1,
-                            justifyContent: "center",
-                            alignItems: "center",
-                            padding: 20
-                        }}
-                    >
-                        <Text
-                            style={{
-                                color: "#75644f",
-                                fontSize: 16,
-                                textAlign: "center",
-                                lineHeight: 20
-                            }}
-                        >
-                            Дорогие друзья! Мы рады предложить вашему вниманию
-                            приложение
-                            {"\n"}
-                            <Text style={{ fontWeight: "bold" }}>
-                                «Guru Online»
-                            </Text>
-                            {"\n"}Оно позволяет:
-                            {"\n"}- Слушать и смотреть лекции современных
-                            духовных учителей;
-                            {"\n"}- Изучать наследие святых прошлого из книг –
-                            как в текстовом формате, так и в формате аудиокниги;
-                            {"\n"}- Ежедневно получать в виде рассылки жемчужины
-                            духовных откровений – цитаты мудрецов древности и
-                            современности, с возможностью настраивать их по
-                            авторам.
-                            {"\n"}Мы искренне надеемся, что наше приложение
-                            позволит вам в любом месте и в любое время жить в
-                            мире высоких идеалов, красоты, гармонии и любви.
-                        </Text>
-                        <TouchableOpacity
-                            onPress={() => this.setState({ modalShowed: true })}
-                            style={{
-                                margin: 10,
-                                padding: 10,
-                                borderRadius: 10,
-                                borderWidth: 0.5,
-                                borderColor: "#75644f",
-                                width: 100
+                    {this.state.modalStep == 1 && (
+                        <ScrollView
+                            contentContainerStyle={{
+                                flex: 1,
+                                justifyContent: "center",
+                                alignItems: "center",
+                                padding: 20
                             }}
                         >
                             <Text
                                 style={{
-                                    textAlign: "center",
                                     color: "#75644f",
-                                    fontSize: 16
+                                    fontSize: 16,
+                                    textAlign: "center",
+                                    lineHeight: 20
                                 }}
                             >
-                                Ок
+                                Дорогие друзья! Мы рады предложить вашему
+                                вниманию приложение
+                                {"\n"}
+                                <Text style={{ fontWeight: "bold" }}>
+                                    «Guru Online»
+                                </Text>
+                                {"\n"}Оно позволяет:
+                                {"\n"}- Слушать и смотреть лекции современных
+                                духовных учителей;
+                                {"\n"}- Изучать наследие святых прошлого из книг
+                                – как в текстовом формате, так и в формате
+                                аудиокниги;
+                                {"\n"}- Ежедневно получать в виде рассылки
+                                жемчужины духовных откровений – цитаты мудрецов
+                                древности и современности, с возможностью
+                                настраивать их по авторам.
+                                {"\n"}Мы искренне надеемся, что наше приложение
+                                позволит вам в любом месте и в любое время жить
+                                в мире высоких идеалов, красоты, гармонии и
+                                любви.
                             </Text>
-                        </TouchableOpacity>
-                    </ScrollView>
+                            <TouchableOpacity
+                                onPress={() => this.setState({ modalStep: 2 })}
+                                style={{
+                                    margin: 10,
+                                    padding: 10,
+                                    borderRadius: 10,
+                                    borderWidth: 0.5,
+                                    borderColor: "#75644f",
+                                    width: 100
+                                }}
+                            >
+                                <Text
+                                    style={{
+                                        textAlign: "center",
+                                        color: "#75644f",
+                                        fontSize: 16
+                                    }}
+                                >
+                                    Ок
+                                </Text>
+                            </TouchableOpacity>
+                        </ScrollView>
+                    )}
+                    {this.state.modalStep == 2 && (
+                        <ScrollView
+                            contentContainerStyle={{
+                                flex: 1,
+                                justifyContent: "center",
+                                alignItems: "center",
+                                padding: 20
+                            }}
+                        >
+                            <Text
+                                style={{
+                                    color: "#75644f",
+                                    fontSize: 16,
+                                    textAlign: "center",
+                                    lineHeight: 20
+                                }}
+                            >
+                                Пожалуйста, выберите Ваш язык, вы сможете
+                                изменить его в разделе "настройки"
+                                {"\n"}
+                                Please select your language, you can change it
+                                in the "settings" section
+                            </Text>
+                            <View style={{ flexDirection: "row" }}>
+                                <TouchableOpacity
+                                    onPress={() => setLang("ru")}
+                                    style={{
+                                        margin: 10,
+                                        padding: 10,
+                                        borderRadius: 10,
+                                        borderWidth: 0.5,
+                                        borderColor: "#75644f",
+                                        width: 100
+                                    }}
+                                >
+                                    <Text
+                                        style={{
+                                            textAlign: "center",
+                                            color: "#75644f",
+                                            fontSize: 16
+                                        }}
+                                    >
+                                        Русский
+                                    </Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    onPress={() => setLang("en")}
+                                    style={{
+                                        margin: 10,
+                                        padding: 10,
+                                        borderRadius: 10,
+                                        borderWidth: 0.5,
+                                        borderColor: "#75644f",
+                                        width: 100
+                                    }}
+                                >
+                                    <Text
+                                        style={{
+                                            textAlign: "center",
+                                            color: "#75644f",
+                                            fontSize: 16
+                                        }}
+                                    >
+                                        English
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
+                        </ScrollView>
+                    )}
                 </Modal>
             );
+        }
     }
 }
 // const styles = StyleSheet.create({
@@ -186,7 +286,21 @@ export default class SiteScreen extends Component {
 //         padding: 16
 //     }
 // });
+const mapStateToProps = state => {
+    return {
+        main: state.mainReducer,
+    };
+};
+const mapDispatchToProps = dispatch => {
+    return {
+        setLangInside: lang => dispatch(setLangInside(lang))
+    };
+};
 
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SiteScreen);
 const styles = StyleSheet.create({
     container: {
         flex: 1

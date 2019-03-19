@@ -13,7 +13,8 @@ import {
 import { API_URL } from "../constants/api";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { listStyles } from "../constants/list_styles";
-export default class ListScreen extends Component {
+import { connect } from "react-redux";
+class ListScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -33,7 +34,7 @@ export default class ListScreen extends Component {
     }
     static navigationOptions = ({ navigation }) => {
         return {
-            title: "Цитаты",
+            // title: "Цитаты",
             headerRight: (
                 // <TouchableOpacity onPress={navigation.getParam('consoleState')}>
                 <View
@@ -64,7 +65,7 @@ export default class ListScreen extends Component {
         }
     );
     getQuotes() {
-        console.log("get quotes start");
+        console.log('get quotes start', API_URL + `/quotes?items=[${this.state.items}]&lang=${this.props.main.lang}`)
         let request = new XMLHttpRequest();
         this.setState({
             refreshing: true,
@@ -93,10 +94,11 @@ export default class ListScreen extends Component {
                     refreshing: false
                 });
                 setTimeout(() => {
-                    AsyncStorage.setItem(
-                        "cache_quotes_list",
-                        JSON.stringify(quotes.splice(0, 50))
-                    );
+                    if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
+                        AsyncStorage.setItem('cache_quotes_list_eng', request.responseText);
+                    } else {
+                        AsyncStorage.setItem('cache_quotes_list', request.responseText);
+                    }
                 }, 1000);
             } else {
                 console.log("error req");
@@ -107,20 +109,33 @@ export default class ListScreen extends Component {
                         queue: false
                     };
                 });
-                AsyncStorage.getItem("cache_quotes_list", (err, value) => {
-                    // console.log('cache_quotes_list', value)
-                    if (!!value) {
-                        this.setState({
-                            quotes: JSON.parse(value),
-                            online: false
-                        });
-                    }
-                    this.setPagination();
-                });
+                if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
+                    AsyncStorage.getItem('cache_quotes_list_eng', (err, value) => {
+                        console.log('cache_quotes_list', value)
+                        if (!!value) {
+                            this.setState({
+                                quotes: JSON.parse(value),
+                                online: false,
+                            })
+                        }
+                        this.setPagination();
+                    });
+                } else {
+                    AsyncStorage.getItem('cache_quotes_list', (err, value) => {
+                        // console.log('cache_quotes_list', value)
+                        if (!!value) {
+                            this.setState({
+                                quotes: JSON.parse(value),
+                                online: false,
+                            })
+                        }
+                        this.setPagination();
+                    });
+                }
             }
             this.setPagination();
         };
-        request.open("GET", API_URL + `/quotes?items=[${this.state.items}]`);
+        request.open('GET', API_URL + `/quotes?items=[${this.state.items}]&lang=${this.props.main.lang}`);
         request.send();
     }
     setPagination() {
@@ -135,7 +150,13 @@ export default class ListScreen extends Component {
         });
     }
     getSettings() {
-        AsyncStorage.getItem("Settings", (err, value) => {
+      let ASSettings
+        if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
+            ASSettings = 'Settings_eng'
+        } else {
+            ASSettings = 'Settings'
+        }
+        AsyncStorage.getItem(ASSettings, (err, value) => {
             if (!!value && value.length) {
                 this.setState(state => {
                     return {
@@ -168,7 +189,13 @@ export default class ListScreen extends Component {
     componentWillMount() {}
     componentDidMount() {
         console.log("remove global after app start downloading");
-        AsyncStorage.removeItem("global_downloading");
+        let ASglobal_downloading
+        if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
+            ASglobal_downloading = 'global_downloading_eng'
+        } else {
+            ASglobal_downloading = 'global_downloading'
+        }
+        AsyncStorage.removeItem(ASglobal_downloading);
         this.getSettings();
         setTimeout(() => {
             this.initialStart();
@@ -219,10 +246,11 @@ export default class ListScreen extends Component {
                     };
                 });
                 let quotes = [].concat(this.state.quotes);
-                AsyncStorage.setItem(
-                    "cache_quotes_list",
-                    JSON.stringify(quotes.splice(0, 100))
-                );
+                if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
+                    AsyncStorage.setItem('cache_quotes_list_eng', request.responseText);
+                } else {
+                    AsyncStorage.setItem('cache_quotes_list', request.responseText);
+                }
             } else {
                 this.setState(state => {
                     return {
@@ -231,19 +259,32 @@ export default class ListScreen extends Component {
                         online: false
                     };
                 });
-                AsyncStorage.getItem("cache_quotes_list", (err, value) => {
-                    // console.log('cache_quotes_list', value)
-                    if (!!value) {
-                        this.setState({
-                            quotes: JSON.parse(value),
-                            online: false
-                        });
-                    }
-                    this.setPagination();
-                });
+                if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
+                    AsyncStorage.getItem('cache_quotes_list_eng', (err, value) => {
+                        console.log('cache_quotes_list_eng', value)
+                        if (!!value) {
+                            this.setState({
+                                quotes: JSON.parse(value),
+                                online: false,
+                            })
+                        }
+                        this.setPagination();
+                    });
+                } else {
+                    AsyncStorage.getItem('cache_quotes_list', (err, value) => {
+                        console.log('cache_quotes_list', value)
+                        if (!!value) {
+                            this.setState({
+                                quotes: JSON.parse(value),
+                                online: false,
+                            })
+                        }
+                        this.setPagination();
+                    });
+                }
             }
         };
-        request.open("GET", API_URL + `/quotes?items=[${this.state.items}]`);
+        request.open('GET', API_URL + `/quotes?items=[${this.state.items}]&lang=${this.props.main.lang}`);
         request.send();
     }
     //initial start
@@ -421,6 +462,23 @@ export default class ListScreen extends Component {
         return comp;
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        main: state.mainReducer,
+    };
+};
+const mapDispatchToProps = dispatch => {
+    return {
+        // setLangInside: lang => dispatch(setLangInside(lang))
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ListScreen);
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,

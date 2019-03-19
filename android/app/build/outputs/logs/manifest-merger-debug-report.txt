@@ -4,6 +4,7 @@ ADDED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidM
 INJECTED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml:1:1-55:12
 INJECTED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml:1:1-55:12
 INJECTED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml:1:1-55:12
+MERGED from [:react-native-restart] /Users/dmitry/projects/react-native-app/node_modules/react-native-restart/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-sound] /Users/dmitry/projects/react-native-app/node_modules/react-native-sound/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-12:12
 MERGED from [:react-native-vector-icons] /Users/dmitry/projects/react-native-app/node_modules/react-native-vector-icons/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-zip-archive] /Users/dmitry/projects/react-native-app/node_modules/react-native-zip-archive/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
@@ -254,6 +255,8 @@ uses-sdk
 INJECTED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml
 INJECTED from /Users/dmitry/projects/react-native-app/android/app/src/main/AndroidManifest.xml
+MERGED from [:react-native-restart] /Users/dmitry/projects/react-native-app/node_modules/react-native-restart/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-restart] /Users/dmitry/projects/react-native-app/node_modules/react-native-restart/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-sound] /Users/dmitry/projects/react-native-app/node_modules/react-native-sound/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:8:5-10:41
 MERGED from [:react-native-sound] /Users/dmitry/projects/react-native-app/node_modules/react-native-sound/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:8:5-10:41
 MERGED from [:react-native-vector-icons] /Users/dmitry/projects/react-native-app/node_modules/react-native-vector-icons/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41

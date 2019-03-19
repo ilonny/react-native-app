@@ -148,6 +148,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-restart')
     compile project(':react-native-sound')
 //    implementation project(':rn-fetch-blob')
     implementation project(':react-native-vector-icons')

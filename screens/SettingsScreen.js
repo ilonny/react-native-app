@@ -37,11 +37,11 @@ class SettingsScreen extends Component {
         // AsyncStorage.removeItem('Settings');
         console.log('CWM', API_URL + `/items?&lang=${this.props.main.lang}`)
         let AStore;
-          if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
-            AStore = 'Settings_eng';
-          } else {
-            AStore = 'Settings';
-        }
+        //   if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+        //     AStore = 'Settings_eng';
+        //   } else {
+        // }
+        AStore = 'Settings';
         let request = new XMLHttpRequest();
         request.onreadystatechange = (e) => {
             if (request.readyState !== 4) {
@@ -112,11 +112,11 @@ class SettingsScreen extends Component {
     }
     switchToggle(id){
         let AStore;
-          if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
-            AStore = 'Settings_eng';
-          } else {
-            AStore = 'Settings';
-        }
+        //   if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+        //     AStore = 'Settings_eng';
+        //   } else {
+        // }
+        AStore = 'Settings';
         if (this.state.selectedItems.includes(id)){
             // console.log('need delete item', id)
             let arr = [...this.state.selectedItems];

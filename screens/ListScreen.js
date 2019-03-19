@@ -154,7 +154,13 @@ class ListScreen extends Component {
   componentDidMount(){
     // AsyncStorage.clear();
     console.log('remove global after app start downloading');
-    AsyncStorage.removeItem('global_downloading');
+    let ASglobal_downloading;
+    if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+      ASglobal_downloading = 'global_downloading_eng';
+    } else {
+      ASglobal_downloading = 'global_downloading';
+    }
+    AsyncStorage.removeItem(ASglobal_downloading);
 
   }
   _keyExtractor = (item) => item.text_short + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);

@@ -150,13 +150,7 @@ class ListScreen extends Component {
         });
     }
     getSettings() {
-      let ASSettings
-        if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
-            ASSettings = 'Settings_eng'
-        } else {
-            ASSettings = 'Settings'
-        }
-        AsyncStorage.getItem(ASSettings, (err, value) => {
+        AsyncStorage.getItem('Settings', (err, value) => {
             if (!!value && value.length) {
                 this.setState(state => {
                     return {

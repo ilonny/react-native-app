@@ -53,7 +53,7 @@ PushNotification.configure({
                         "important"
                     ]);
                 }
-                console.log("TOKEN:", token);
+                console.log("TOKEN2:", token);
                 AsyncStorage.setItem("Token", JSON.stringify(token));
                 let request = new XMLHttpRequest();
                 request.onreadystatechange = e => {
@@ -83,7 +83,7 @@ PushNotification.configure({
 
     // (required) Called when a remote or local notification is opened or received
     onNotification: function(notification) {
-        console.log("NOTIFICATION:", JSON.stringify(notification));
+        console.log("NOTIFICATION2:", JSON.stringify(notification));
         // process the notification
         // required on iOS only (see fetchCompletionHandler docs: https://facebook.github.io/react-native/docs/pushnotificationios.html)
         notification.finish(PushNotificationIOS.FetchResult.NoData);
@@ -93,11 +93,17 @@ PushNotification.configure({
             }, 500);
         } else if (notification.data.quote_id) {
             let q_id = notification.data.quote_id;
-            NavigationService.navigate("Details", { quote_id: q_id });
+            setTimeout(() => {
+              console.log('REDIRECT TIMEOUT')
+              NavigationService.navigate("Details", { quote_id: q_id });
+            }, 3000);
         } else if (notification.data.news_id) {
             let n_id = notification.data.news_id;
             let n_t = notification.data.news_title;
-            NavigationService.navigate("SiteDetail", { id: n_id, title: n_t });
+            setTimeout(() => {
+              console.log('REDIRECT TIMEOUT')
+              NavigationService.navigate("SiteDetail", { id: n_id, title: n_t });
+            }, 3000)
         }
     },
 

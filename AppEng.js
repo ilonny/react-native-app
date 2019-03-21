@@ -53,7 +53,7 @@ PushNotification.configure({
                         "important"
                     ]);
                 }
-                console.log("TOKEN:", token);
+                console.log("TOKEN3:", token);
                 AsyncStorage.setItem("Token", JSON.stringify(token));
                 let request = new XMLHttpRequest();
                 request.onreadystatechange = e => {
@@ -63,27 +63,29 @@ PushNotification.configure({
                     if (request.status === 200) {
                     }
                 };
-                request.open(
-                    "GET",
-                    API_URL +
-                        `/set-token?token=${JSON.stringify(
-                            token
-                        )}&settings=${device_settings}&news_settings=${device_settings_site}&version=2&lang=en`
-                );
-                request.send();
-                console.log(
-                    API_URL +
-                        `/set-token?token=${JSON.stringify(
-                            token
-                        )}&settings=${device_settings}&news_settings=${device_settings_site}&version=2&lang=en`
-                );
+                AsyncStorage.getItem("lang", (err, lang) => {
+                    request.open(
+                        "GET",
+                        API_URL +
+                            `/set-token?token=${JSON.stringify(
+                                token
+                            )}&settings=${device_settings}&news_settings=${device_settings_site}&version=2&lang=${lang}`
+                    );
+                    request.send();
+                    console.log(
+                        API_URL +
+                            `/set-token?token=${JSON.stringify(
+                                token
+                            )}&settings=${device_settings}&news_settings=${device_settings_site}&version=2&lang=${lang}`
+                    );
+                });
             });
         });
     },
 
     // (required) Called when a remote or local notification is opened or received
     onNotification: function(notification) {
-        console.log("NOTIFICATION:", JSON.stringify(notification));
+        console.log("NOTIFICATION3:", JSON.stringify(notification));
         // process the notification
         // required on iOS only (see fetchCompletionHandler docs: https://facebook.github.io/react-native/docs/pushnotificationios.html)
         notification.finish(PushNotificationIOS.FetchResult.NoData);
@@ -93,11 +95,17 @@ PushNotification.configure({
             }, 500);
         } else if (notification.data.quote_id) {
             let q_id = notification.data.quote_id;
-            NavigationService.navigate("Details", { quote_id: q_id });
+            setTimeout(() => {
+                console.log('REDIRECT TIMEOUT')
+                NavigationService.navigate("Details", { quote_id: q_id });
+              }, 3000);
         } else if (notification.data.news_id) {
             let n_id = notification.data.news_id;
             let n_t = notification.data.news_title;
-            NavigationService.navigate("SiteDetail", { id: n_id, title: n_t });
+            setTimeout(() => {
+                console.log('REDIRECT TIMEOUT')
+                NavigationService.navigate("SiteDetail", { id: n_id, title: n_t });
+            }, 3000);
         }
     },
 
@@ -134,14 +142,14 @@ const ListStack = createStackNavigator({
     Цитаты: {
         screen: ListScreen,
         navigationOptions: {
-            title: 'Quotes'
+            title: "Quotes"
         }
     },
     Details: DetailsScreen,
     Favorites: {
         screen: FavoritesScreen,
         navigationOptions: {
-            title: 'Favorites quotes'
+            title: "Favorites quotes"
         }
     }
 });
@@ -149,9 +157,9 @@ const ReaderStack = createStackNavigator({
     Книги: {
         screen: ReaderScreen,
         navigationOptions: {
-          title: "Books"
+            title: "Books"
         }
-      },
+    },
     Reader: ReaderScreenDetail
 });
 const AudioStack = createStackNavigator({
@@ -172,19 +180,19 @@ let TopLevelNavigator = createBottomTabNavigator(
         Harekrishna: {
             screen: SiteStack,
             navigationOptions: {
-                title: 'scsmath.com'
+                title: "scsmath.com"
             }
         },
         Quotes: {
             screen: ListStack,
             navigationOptions: {
-                title: 'Quotes'
+                title: "Quotes"
             }
         },
         Books: {
             screen: ReaderStack,
             navigationOptions: {
-                title: 'Books'
+                title: "Books"
             }
         },
         Books: ReaderStack,

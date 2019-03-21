@@ -17,6 +17,8 @@ import { TabView, TabBar, SceneMap } from "react-native-tab-view";
 import SiteScreenList from "./SiteScreenList";
 import CalendarScreen from "./CalendarScreen";
 
+import ScsmathScreen from "./ScsmathScreen";
+
 import { setLang, setLangInside } from '../actions/lang';
 import { connect } from "react-redux";
 
@@ -115,9 +117,10 @@ class SiteScreen extends Component {
                     );
             } else {
                 return (
-                    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                        <Text>http://www.scsmath.com/</Text>
-                    </View>
+                    // <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                    //     <Text>http://www.scsmath.com/</Text>
+                    // </View>
+                    <ScsmathScreen></ScsmathScreen>
                 )
             }
         } else

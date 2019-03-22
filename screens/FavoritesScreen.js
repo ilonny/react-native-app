@@ -175,7 +175,7 @@ class FavoritesScreen extends Component {
         } else {
             comp = (
                 <View style={styles.container}>
-                    <Text>Нет избранных</Text>
+                  <Text>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'No favorites' : 'Нет избранных'}</Text>
                 </View>
             )
         }

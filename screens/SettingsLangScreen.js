@@ -9,7 +9,8 @@ import {
     Switch,
     ScrollView,
     AsyncStorage,
-    TouchableOpacity
+    TouchableOpacity,
+    Linking
 } from "react-native";
 import { setLang } from "../actions/lang";
 import { connect } from "react-redux";
@@ -85,6 +86,30 @@ class SettingsLangScreen extends Component {
                                     </Text>
                                 </TouchableOpacity>
                             </View>
+                        </View>
+                        <View
+                            style={[
+                                listStyles.quoteItem,
+                                {
+                                    marginLeft: 10,
+                                    marginRight: 10,
+                                    marginTop: 10
+                                }
+                            ]}
+                        >
+                        <TouchableOpacity onPress={() => Linking.openURL('mailto:7782810@mail.ru')}>
+                            <Text
+                                style={{
+                                    color: "#808080",
+                                    textAlign: "center"
+                                }}
+                            >
+                                {this.props.main.lang == "en" ||
+                                this.props.main.lang == "eng"
+                                    ? `Contact us: \n 7782810@mail.ru`
+                                    : `Напишите нам: \n 7782810@mail.ru`}
+                            </Text>
+                        </TouchableOpacity>
                         </View>
                     </ScrollView>
                 </View>

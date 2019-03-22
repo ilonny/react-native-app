@@ -45,7 +45,9 @@ export default async (RemoteMessage) => {
     // };
     // request.open('GET', `https://mobile-app.flamesclient.ru/api/quotes?items=${JSON.stringify(RemoteMessage)}`);
     // request.send();
-
+    const channelId = new firebase.notifications.Android.Channel('123', '123', firebase.notifications.Android.Importance.Max);
+    // Create the channel
+    firebase.notifications().android.createChannel(channelId);
     firebase.notifications().displayNotification(notification)
     console.log(notification);
     return Promise.resolve();

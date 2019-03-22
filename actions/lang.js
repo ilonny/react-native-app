@@ -5,8 +5,9 @@ export const setLang = lang => {
     console.log('set lang fired', lang);
     AsyncStorage.setItem('lang', lang);
     setTimeout(() => {
+        console.log('restart app')
         RNRestart.Restart(); 
-    }, 500);
+    }, 1000);
 
 };
 

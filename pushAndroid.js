@@ -108,6 +108,7 @@ firebase.messaging().hasPermission()
 firebase.messaging().onMessage((message) => {
     // Process your message as required
     console.log('MESSAGE IS', message);
+    firebase.notifications().displayNotification(message)
 });
 
 firebase.notifications().onNotificationOpened((notificationOpen) => {
@@ -116,11 +117,15 @@ firebase.notifications().onNotificationOpened((notificationOpen) => {
       Alert.alert("", notificationOpen.notification._body);
   } else if (notificationOpen.notification._data.q_id != 'false'){
     let q_id = notificationOpen.notification._data.q_id;
-    NavigationService.navigate('Details', {quote_id: q_id});
+    setTimeout(() => {
+      NavigationService.navigate('Details', {quote_id: q_id});
+    }, 2000);
   } else if (notificationOpen.notification._data.news_id != 'false'){
     let n_id = notificationOpen.notification._data.news_id;
     let n_t = notificationOpen.notification._data.news_title;
-    NavigationService.navigate('SiteDetail', {id: n_id, title: n_t,});
+    setTimeout(() => {
+      NavigationService.navigate('SiteDetail', {id: n_id, title: n_t,});
+    }, 2000);
     AsyncStorage.setItem('redirect', JSON.stringify({
       screen: 'SiteDetail',
       data: {id: n_id, title: n_t}
@@ -135,11 +140,15 @@ firebase.notifications().getInitialNotification()
     Alert.alert("", notificationOpen.notification._body);
   } else if (notificationOpen.notification._data.q_id != 'false'){
     let q_id = notificationOpen.notification._data.q_id;
-    NavigationService.navigate('Details', {quote_id: q_id});
+    setTimeout(() => {
+      NavigationService.navigate('Details', {quote_id: q_id});
+    }, 2000);
   } else if (notificationOpen.notification._data.news_id != 'false'){
     let n_id = notificationOpen.notification._data.news_id;
     let n_t = notificationOpen.notification._data.news_title;
-    NavigationService.navigate('SiteDetail', {id: n_id, title: n_t,});
+    setTimeout(() => {
+      NavigationService.navigate('SiteDetail', {id: n_id, title: n_t,});
+    }, 2000);
     AsyncStorage.setItem('redirect', JSON.stringify({
       screen: 'SiteDetail',
       data: {id: n_id, title: n_t}

@@ -159,6 +159,7 @@
     <orderEntry type="module" module-name="react-native-music-control" />
     <orderEntry type="module" module-name="react-native-push-notification" />
     <orderEntry type="module" module-name="react-native-fetch-blob" />
+    <orderEntry type="module" module-name="react-native-restart" />
     <orderEntry type="module" module-name="react-native-vector-icons" />
     <orderEntry type="module" module-name="react-native-zip-archive" />
     <orderEntry type="module" module-name="react-native-sound" />

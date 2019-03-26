@@ -923,6 +923,117 @@ class AudioScreen extends Component {
             this.redirectToReader(track.reader_book_id, track.reader_book_name, track.reader_book_src, track.toc_href)
         }
     }
+    _renderItem = ({ item }) => {
+        let audioAction;
+        let flag = false;
+        let fl = false;
+        let progress;
+        let toc_id = item.toc_id ? item.toc_id : false
+        // this.state.downloading_books.forEach(e => {
+        if (this.props.main.audio.downloading_book.id == item.id){
+            fl = true;
+            progress = this.props.main.audio.downloading_book.progress;
+        }
+        if (fl){
+            audioAction = (
+                <View style={{flex: 0, flexDirection: 'row', alignItems: 'center'}}>
+                    <TouchableOpacity style={{minWidth: 100}}><Text>{this.props.main.lang == 'ru' ? 'Загрузка' : 'Downloading'} {progress}%</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.cancelTask(item.id)}>
+                        <View style={{alignItems: 'center', flex: 1, flexDirection: 'column', marginRight: 10, marginLeft: 10}}>
+                            <Ionicons name={"ios-close-circle-outline"} size={25} color="tomato" style={{marginTop: 5}}/>
+                            <Text style={{fontSize: 10, marginTop: -7}}>{this.props.main.lang == 'ru' ? 'Остановить загрузку' : 'Cancel download'}</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+            )
+        } else {
+            this.state.downloaded_books.forEach(el => {
+                if (el.id == item.id){
+                    flag = true;
+                }
+            })
+            this.props.main.audio.downloaded_books.forEach(el => {
+                if (el.id == item.id){
+                    flag = true;
+                }
+            })
+            if (flag){
+                audioAction = (
+                    <View style={{flex: 0, flexDirection: 'row', alignItems: 'center'}}>
+                        <TouchableOpacity onPress={() => this.deleteBook(item.id)}>
+                            <View style={{flex: 1, justifyContent: "center", flexDirection: 'column', alignItems: 'center'}}>
+                                <View>
+                                    <Ionicons name="ios-trash" size={23} color="tomato" style={{margin: 'auto'}} />
+                                </View>
+                                <Text>{this.props.main.lang == 'ru' ? 'Удалить' : 'Delete'}</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.playAudio(item.id, null, toc_id)}>
+                            <View style={{flex: 1, justifyContent: "center", flexDirection: 'column', alignItems: 'center', marginLeft: 10}}>
+                                <View>
+                                    <Ionicons name="ios-play" size={23} color="tomato" style={{margin: 'auto'}} />
+                                </View>
+                                <Text>{this.props.main.lang == 'ru' ? 'Слушать' : 'Listen'}</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                )
+            } else {
+                audioAction = (
+                    <View style={{flex: 0, flexDirection: 'row', alignItems: 'center'}}>
+                        {(!this.state.downloading && !this.props.main.audio.need_to_download.length && !this.props.main.audio.downloading_book.id) ? (
+                            <TouchableOpacity onPress={() => this.state.online ? this.downloadBook(item.id) : Alert.alert('Необходимо подключение к интернету')}>
+                                <View style={{flex: 1, justifyContent: "center", flexDirection: 'column', alignItems: 'center'}}>
+                                    <View>
+                                        <Ionicons name="ios-cloud-download" size={23} color="tomato" style={{margin: 'auto'}} />
+                                    </View>
+                                    <Text>{this.props.main.lang == 'ru' ? 'Скачать' : 'Download'}</Text>
+                                </View>
+                            </TouchableOpacity>
+                        ) : (
+                            <TouchableOpacity onPress={() => Alert.alert('Дождитесь окончания загрузки')}>
+                                <View style={{flex: 1, justifyContent: "center", flexDirection: 'column', alignItems: 'center'}}>
+                                    <View>
+                                        <Ionicons name="ios-cloud-download" size={23} color="#c1ae97" style={{margin: 'auto'}} />
+                                    </View>
+                                    <Text>{this.props.main.lang == 'ru' ? 'Скачать' : 'Download'}</Text>
+                                </View>
+                            </TouchableOpacity>
+                        )}
+                        <TouchableOpacity onPress={() => this.state.online ? this.playAudio(item.id, item.file_src, toc_id) : Alert.alert('Необходимо подключение к интернету')}>
+                            <View style={{flex: 1, justifyContent: "center", flexDirection: 'column', alignItems: 'center', marginLeft: 10}}>
+                                <View>
+                                    <Ionicons name="ios-play" size={23} color="tomato" style={{margin: 'auto'}} />
+                                </View>
+                                <Text>{this.props.main.lang == 'ru' ? 'Слушать онлайн' : 'Listen online'}</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                )
+            }
+        }
+        return (
+            <View style={listStyles.quoteItem}>
+                <View style={{flex: 1}}>
+                    <Text style={[listStyles.quoteTitle, {textAlign: 'center'}]}>{item.name}</Text>
+                    {!!item.description && <Text style={{marginTop: 10, textAlign: 'center'}}>{item.description}</Text>}
+                </View>
+                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 5}}>
+                    {audioAction}
+                    {item.toc_id && (
+                        <TouchableOpacity onPress={() => this.redirectToReader(item.reader_book_id, item.reader_book_name, item.reader_book_src, item.toc_href)}>
+                            <View style={{flex: 0, justifyContent: "center", flexDirection: 'column', alignItems: 'center', marginLeft: 10}}>
+                                 <View>
+                                    <Ionicons name="ios-book" size={23} color="tomato" style={{margin: 'auto'}} />
+                                </View>
+                                <Text>{this.props.main.lang == 'ru' ? 'Читать' : 'To read'}</Text>
+                            </View>
+                        </TouchableOpacity>
+                    )}
+                </View>
+            </View>
+        )
+    }
     render(){
         // console.log('audio details render state', this.state);
         // console.log('audio details render props', this.props);
@@ -932,117 +1043,7 @@ class AudioScreen extends Component {
                 <FlatList
                     style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5}}
                     data={this.state.books}
-                    renderItem={({item}) => {
-                        let audioAction;
-                        let flag = false;
-                        let fl = false;
-                        let progress;
-                        let toc_id = item.toc_id ? item.toc_id : false
-                        // this.state.downloading_books.forEach(e => {
-                        if (this.props.main.audio.downloading_book.id == item.id){
-                            fl = true;
-                            progress = this.props.main.audio.downloading_book.progress;
-                        }
-                        if (fl){
-                            audioAction = (
-                                <View style={{flex: 0, flexDirection: 'row', alignItems: 'center'}}>
-                                    <TouchableOpacity style={{minWidth: 100}}><Text>{this.props.main.lang == 'ru' ? 'Загрузка' : 'Downloading'} {progress}%</Text></TouchableOpacity>
-                                    <TouchableOpacity onPress={() => this.cancelTask(item.id)}>
-                                        <View style={{alignItems: 'center', flex: 1, flexDirection: 'column', marginRight: 10, marginLeft: 10}}>
-                                            <Ionicons name={"ios-close-circle-outline"} size={25} color="tomato" style={{marginTop: 5}}/>
-                                            <Text style={{fontSize: 10, marginTop: -7}}>{this.props.main.lang == 'ru' ? 'Остановить загрузку' : 'Cancel download'}</Text>
-                                        </View>
-                                    </TouchableOpacity>
-                                </View>
-                            )
-                        } else {
-                            this.state.downloaded_books.forEach(el => {
-                                if (el.id == item.id){
-                                    flag = true;
-                                }
-                            })
-                            this.props.main.audio.downloaded_books.forEach(el => {
-                                if (el.id == item.id){
-                                    flag = true;
-                                }
-                            })
-                            if (flag){
-                                audioAction = (
-                                    <View style={{flex: 0, flexDirection: 'row', alignItems: 'center'}}>
-                                        <TouchableOpacity onPress={() => this.deleteBook(item.id)}>
-                                            <View style={{flex: 1, justifyContent: "center", flexDirection: 'column', alignItems: 'center'}}>
-                                                <View>
-                                                    <Ionicons name="ios-trash" size={23} color="tomato" style={{margin: 'auto'}} />
-                                                </View>
-                                                <Text>{this.props.main.lang == 'ru' ? 'Удалить' : 'Delete'}</Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => this.playAudio(item.id, null, toc_id)}>
-                                            <View style={{flex: 1, justifyContent: "center", flexDirection: 'column', alignItems: 'center', marginLeft: 10}}>
-                                                <View>
-                                                    <Ionicons name="ios-play" size={23} color="tomato" style={{margin: 'auto'}} />
-                                                </View>
-                                                <Text>{this.props.main.lang == 'ru' ? 'Слушать' : 'Listen'}</Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                    </View>
-                                )
-                            } else {
-                                audioAction = (
-                                    <View style={{flex: 0, flexDirection: 'row', alignItems: 'center'}}>
-                                        {(!this.state.downloading && !this.props.main.audio.need_to_download.length && !this.props.main.audio.downloading_book.id) ? (
-                                            <TouchableOpacity onPress={() => this.state.online ? this.downloadBook(item.id) : Alert.alert('Необходимо подключение к интернету')}>
-                                                <View style={{flex: 1, justifyContent: "center", flexDirection: 'column', alignItems: 'center'}}>
-                                                    <View>
-                                                        <Ionicons name="ios-cloud-download" size={23} color="tomato" style={{margin: 'auto'}} />
-                                                    </View>
-                                                    <Text>{this.props.main.lang == 'ru' ? 'Скачать' : 'Download'}</Text>
-                                                </View>
-                                            </TouchableOpacity>
-                                        ) : (
-                                            <TouchableOpacity onPress={() => Alert.alert('Дождитесь окончания загрузки')}>
-                                                <View style={{flex: 1, justifyContent: "center", flexDirection: 'column', alignItems: 'center'}}>
-                                                    <View>
-                                                        <Ionicons name="ios-cloud-download" size={23} color="#c1ae97" style={{margin: 'auto'}} />
-                                                    </View>
-                                                    <Text>{this.props.main.lang == 'ru' ? 'Скачать' : 'Download'}</Text>
-                                                </View>
-                                            </TouchableOpacity>
-                                        )}
-                                        <TouchableOpacity onPress={() => this.state.online ? this.playAudio(item.id, item.file_src, toc_id) : Alert.alert('Необходимо подключение к интернету')}>
-                                            <View style={{flex: 1, justifyContent: "center", flexDirection: 'column', alignItems: 'center', marginLeft: 10}}>
-                                                <View>
-                                                    <Ionicons name="ios-play" size={23} color="tomato" style={{margin: 'auto'}} />
-                                                </View>
-                                                <Text>{this.props.main.lang == 'ru' ? 'Слушать онлайн' : 'Listen online'}</Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                    </View>
-                                )
-                            }
-                        }
-                        return (
-                            <View style={listStyles.quoteItem}>
-                                <View style={{flex: 1}}>
-                                    <Text style={[listStyles.quoteTitle, {textAlign: 'center'}]}>{item.name}</Text>
-                                    {!!item.description && <Text style={{marginTop: 10, textAlign: 'center'}}>{item.description}</Text>}
-                                </View>
-                                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 5}}>
-                                    {audioAction}
-                                    {item.toc_id && (
-                                        <TouchableOpacity onPress={() => this.redirectToReader(item.reader_book_id, item.reader_book_name, item.reader_book_src, item.toc_href)}>
-                                            <View style={{flex: 0, justifyContent: "center", flexDirection: 'column', alignItems: 'center', marginLeft: 10}}>
-                                                 <View>
-                                                    <Ionicons name="ios-book" size={23} color="tomato" style={{margin: 'auto'}} />
-                                                </View>
-                                                <Text>{this.props.main.lang == 'ru' ? 'Читать' : 'To read'}</Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                    )}
-                                </View>
-                            </View>
-                        )
-                    }}
+                    renderItem={this._renderItem}
                     keyExtractor={this._keyExtractor}
                     onRefresh={() => this.getBooks()}
                     refreshing={false}

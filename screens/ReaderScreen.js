@@ -9,7 +9,8 @@ import {
   ScrollView,
   FlatList,
   TouchableOpacity,
-  Image
+  Image,
+  TextInput
 } from 'react-native';
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -22,6 +23,7 @@ class ReaderScreen extends Component {
     super(props);
     this.state = {
       books: [],
+      searched_books: [],
       date: Date.now(),
       refreshnig: false,
       pages_count: 0,
@@ -208,23 +210,60 @@ class ReaderScreen extends Component {
       })
     }
   }
+  changeSearchText(text){
+    let books = this.state.books;
+    let new_books = books.filter(function(item){
+      return item.name.toLowerCase().search(
+        text.toLowerCase()) !== -1;
+    });
+    this.setState({
+      searched_books: new_books,
+    })
+  }
   render() {
     // console.log('render', this.state)
     let comp;
     let pagination_arr = [];
     let books = this.state.books;
-    books = [...new Set(books)];
-    books_on_page = books.splice((this.state.current_page-1)*5, 5);
-    if (this.state.pages_count){
-      for (let i = 1; i <= this.state.pages_count; i++){
-        pagination_arr.push(i);
+    let searched_books = this.state.searched_books;
+    let need_pagination;
+    if (searched_books.length == 0 || searched_books.length == books.length) {
+      books = [...new Set(books)];
+      need_pagination = true;
+      books_on_page = books.splice((this.state.current_page-1)*5, 5);
+      if (this.state.pages_count){
+        for (let i = 1; i <= this.state.pages_count; i++){
+          pagination_arr.push(i);
+        }
       }
+    } else {
+      books = [...new Set(searched_books)];
+      need_pagination = false;
+      books_on_page = books;
     }
     // console.log(pagination_arr);
     console.log('render state', this.state);
     if (true) {
       comp = (
         <SafeAreaView style={{flex: 1, backgroundColor: '#efefef', justifyContent: 'space-between'}}>
+            <View
+            style={[
+                  listStyles.quoteItem,
+                  {
+                      marginLeft: 10,
+                      marginRight: 10,
+                      marginBottom: 5,
+                      marginTop: 5,
+                      flex: 0,
+                      padding: 8,
+                  }
+              ]}
+              >
+              <TextInput
+                  placeholder="Введите название книги"
+                  onChangeText={text => this.changeSearchText(text)}
+              />
+            </View>
             <FlatList
               style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5, flex: 0, height: '100%'}}
               data={books_on_page}
@@ -286,12 +325,12 @@ class ReaderScreen extends Component {
               refreshing={false}
             >
             </FlatList>
-            {this.state.pages_count && (
+            {this.state.pages_count && need_pagination ? (
               <FlatList
                 data={pagination_arr}
                 horizontal={true}
                 keyExtractor={(item) => item.toString()}
-                contentContainerStyle={styles.pagination}
+                contentContainerStyle={[styles.pagination]}
                 renderItem = {({item}) => (
                   <TouchableOpacity key={item} onPress={() => this.setPage(item)}>
                     <View style={{
@@ -301,6 +340,8 @@ class ReaderScreen extends Component {
                       borderColor: 'red',
                       margin: 5,
                       backgroundColor: this.state.current_page == item ? 'red' : 'white',
+                      flex: 0,
+                      minHeight: 25
                     }}>
                       <Text style={{
                         fontSize: 10,
@@ -311,7 +352,7 @@ class ReaderScreen extends Component {
                 )}
               >
               </FlatList>
-            )}
+            ): null}
         </SafeAreaView>
       );
     }
@@ -358,5 +399,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#fff',
     maxHeight:40,
+    flexShrink: 0,
   }
 })

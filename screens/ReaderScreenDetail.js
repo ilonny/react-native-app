@@ -221,7 +221,7 @@ class EpubReader extends Component {
                     } else {
                         setTimeout(() => {
                             if (!this.state.successLoaded) {
-                                Alert.alert({this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Some problems with connection' : 'Необходимо подключение к интернету для загрузки книги'})
+                                Alert.alert(this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Some problems with connection' : 'Необходимо подключение к интернету для загрузки книги')
                             }
                         }, 9000);
                     }

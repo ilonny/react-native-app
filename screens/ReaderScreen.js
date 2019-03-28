@@ -251,7 +251,7 @@ class ReaderScreen extends Component {
                       ]}
                       >
                       <TextInput
-                          placeholder="Введите название книги"
+                          placeholder={this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? "Search by book name": "Введите название книги"}
                           onChangeText={text => this.changeSearchText(text)}
                       />
                     </View>

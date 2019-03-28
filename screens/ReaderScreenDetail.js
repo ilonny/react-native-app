@@ -221,7 +221,7 @@ class EpubReader extends Component {
                     } else {
                         setTimeout(() => {
                             if (!this.state.successLoaded) {
-                                Alert.alert('Необходимо подключение к интернету для загрузки книги')
+                                Alert.alert({this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Some problems with connection' : 'Необходимо подключение к интернету для загрузки книги'})
                             }
                         }, 9000);
                     }
@@ -600,27 +600,27 @@ class EpubReader extends Component {
                 {this.state.settingsOpened && (
                     <View style={styles.navigation}>
                         <View style={styles.navigation_header}>
-                            <Text style={{ padding: 15 }}>Настройки</Text>
+                            <Text style={{ padding: 15 }}>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Settings' : 'Настройки'}</Text>
                             <TouchableOpacity onPress={() => this.setState({ settingsOpened: false })}>
                                 <Ionicons style={{ padding: 15 }} name="ios-close-circle-outline" size={25} color="tomato" />
                             </TouchableOpacity>
                         </View>
-                        <Text style={{ padding: 15 }}>Режим чтения</Text>
+                        <Text style={{ padding: 15 }}>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Color theme' : 'Режим чтения'}</Text>
                         <View style={styles.setting_themes}>
                             <TouchableOpacity onPress={() => this.setTheme('light')} style={{ marginRight: 15 }}>
                                 <View style={this.state.theme == 'light' ? styles.active_theme : styles.non_active_theme}>
                                     <Ionicons color="#75644f" name={"ios-sunny"} size={30} />
-                                    <Text>День</Text>
+                                    <Text>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Day' : 'День'}</Text>
                                 </View>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => this.setTheme('dark')} >
                                 <View style={this.state.theme == 'dark' ? styles.active_theme : styles.non_active_theme}>
                                     <Ionicons color="#75644f" name={"ios-moon"} size={30} />
-                                    <Text>Ночь</Text>
+                                    <Text>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Night' : 'Ночь'}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
-                        <Text style={{ padding: 15 }}>Размер текста</Text>
+                        <Text style={{ padding: 15 }}>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Font size' : 'Размер текста'}</Text>
                         <View style={{ paddingLeft: 15, paddingRight: 15 }}>
                             <Slider
                                 step={1}
@@ -630,16 +630,16 @@ class EpubReader extends Component {
                                 onValueChange={val => this.setState({ fontSize: val })}
                             />
                         </View>
-                        <Text style={{ padding: 15, textAlign: 'center', fontSize: this.state.fontSize }}>Пример текста ({this.state.fontSize} px)</Text>
+                        <Text style={{ padding: 15, textAlign: 'center', fontSize: this.state.fontSize }}>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Text example' : 'Пример текста'} ({this.state.fontSize} px)</Text>
                     </View>
                 )}
                 <View>
                     <Dialog.Container visible={this.state.bookmarksDialogVisible}>
-                        <Dialog.Title>Добавить закладку</Dialog.Title>
-                        <Dialog.Description>Пожалуйста, введите комментарий к закладке</Dialog.Description>
+                        <Dialog.Title>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Add bookmark' : 'Добавить закладку'}</Dialog.Title>
+                        <Dialog.Description>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Please enter a comment for the bookmark' : 'Пожалуйста, введите комментарий к закладке'}</Dialog.Description>
                         <Dialog.Input onChangeText={value => this.setState({ bookmarksDialogComment: value })}></Dialog.Input>
-                        <Dialog.Button onPress={() => this.setState({ bookmarksDialogVisible: false, bookmarksDialogComment: '' })} label="Отменить" />
-                        <Dialog.Button onPress={() => this.addBookmark()} label="Сохранить" />
+                        <Dialog.Button onPress={() => this.setState({ bookmarksDialogVisible: false, bookmarksDialogComment: '' })} label={this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Cancel' : 'Отменить'} />
+                        <Dialog.Button onPress={() => this.addBookmark()} label={this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Save' : 'Сохранить'} />
                     </Dialog.Container>
                 </View>
             </View>

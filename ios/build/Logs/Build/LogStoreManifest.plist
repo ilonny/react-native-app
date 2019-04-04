@@ -6,7 +6,7 @@
 	<integer>9</integer>
 	<key>logs</key>
 	<dict>
-		<key>7352BC1D-F894-47F6-95D7-0B78AC450F45</key>
+		<key>14B8BB94-D3F7-4C32-A7CD-831C2F8C942C</key>
 		<dict>
 			<key>className</key>
 			<string>IDECommandLineBuildLog</string>
@@ -15,9 +15,9 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
 			<key>fileName</key>
-			<string>7352BC1D-F894-47F6-95D7-0B78AC450F45.xcactivitylog</string>
+			<string>14B8BB94-D3F7-4C32-A7CD-831C2F8C942C.xcactivitylog</string>
 			<key>highLevelStatus</key>
-			<string>E</string>
+			<string>W</string>
 			<key>schemeIdentifier-containerName</key>
 			<string>GuruOnline project</string>
 			<key>schemeIdentifier-schemeName</key>
@@ -27,13 +27,42 @@
 			<key>signature</key>
 			<string>Building project GuruOnline with scheme GuruOnline and configuration Debug</string>
 			<key>timeStartedRecording</key>
-			<real>575485313.37320805</real>
+			<real>575909142.98603106</real>
 			<key>timeStoppedRecording</key>
-			<real>575485316.65289903</real>
+			<real>575909145.40011704</real>
 			<key>title</key>
 			<string>Building project GuruOnline with scheme GuruOnline and configuration Debug</string>
 			<key>uniqueIdentifier</key>
-			<string>7352BC1D-F894-47F6-95D7-0B78AC450F45</string>
+			<string>14B8BB94-D3F7-4C32-A7CD-831C2F8C942C</string>
+		</dict>
+		<key>2B3A367D-47E3-4249-8DB0-F017B27AA9B5</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>2B3A367D-47E3-4249-8DB0-F017B27AA9B5.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>W</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>GuruOnline project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>GuruOnline</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project GuruOnline with scheme GuruOnline and configuration Debug</string>
+			<key>timeStartedRecording</key>
+			<real>575736527.15642405</real>
+			<key>timeStoppedRecording</key>
+			<real>575736529.30217004</real>
+			<key>title</key>
+			<string>Building project GuruOnline with scheme GuruOnline and configuration Debug</string>
+			<key>uniqueIdentifier</key>
+			<string>2B3A367D-47E3-4249-8DB0-F017B27AA9B5</string>
 		</dict>
 	</dict>
 </dict>

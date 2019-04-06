@@ -11,14 +11,15 @@ import {
     TouchableOpacity,
     FlatList,
     Slider,
-    Alert
+    Alert,
+    Easing
 } from 'react-native';
 
 import { Epub, Streamer } from "epubjs-rn";
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Dialog from "react-native-dialog";
-
+import TextTicker from "react-native-text-ticker";
 import { connect } from "react-redux";
 
 class EpubReader extends Component {
@@ -88,7 +89,21 @@ class EpubReader extends Component {
         const showBookmarkPopup = navigation.getParam('showBookmarkPopup');
         const deleteBookmark = navigation.getParam('deleteBookmark');
         return {
-            headerTitle: bookName,
+            headerTitle: (
+                <View style={{maxWidth: 200}}>
+                    <TextTicker
+                        style={{ fontSize: 14 }}
+                        duration={bookName.length*238}
+                        loop
+                        bounce
+                        repeatSpacer={50}
+                        marqueeDelay={1000}
+                        easing={Easing.linear}
+                        >
+                        {bookName}
+                    </TextTicker>
+                </View>
+            ),
             headerRight: (
                 // <TouchableOpacity onPress={navigation.getParam('consoleState')}>
                 <View style={{ alignItems: 'center', flex: 1, flexDirection: 'row' }}>
@@ -531,10 +546,10 @@ class EpubReader extends Component {
                         <View style={styles.navigation_header}>
                             <View style={{ flexDirection: 'row' }}>
                                 <TouchableOpacity onPress={() => this.setState({ listScreen: 'content' })}>
-                                    <Text style={{ padding: 15, color: this.state.listScreen == 'content' ? 'tomato' : 'black' }}>Содержание книги</Text>
+                                    <Text style={{ padding: 15, color: this.state.listScreen == 'content' ? 'tomato' : 'black' }}>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Contents' : 'Содержание книги'}</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => this.setState({ listScreen: 'bookmarks' })}>
-                                    <Text style={{ padding: 15, color: this.state.listScreen == 'bookmarks' ? 'tomato' : 'black' }}>Закладки</Text>
+                                    <Text style={{ padding: 15, color: this.state.listScreen == 'bookmarks' ? 'tomato' : 'black' }}>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Bookmarks' : 'Закладки'}</Text>
                                 </TouchableOpacity>
                             </View>
                             <TouchableOpacity onPress={() => this.setState({ nav_opened: false })}>
@@ -578,8 +593,8 @@ class EpubReader extends Component {
                                                 <View style={{ maxWidth: '85%' }}>
                                                     <TouchableOpacity onPress={() => this.setState({ location: item.location, nav_opened: false })}>
                                                         <View style={{ flex: 1, height: "100%" }}>
-                                                            <Text>Глава: {!!item.toc_title ? item.toc_title.trim() : 'Не указано'}</Text>
-                                                            <Text>Комментарий: {item.comment.trim()}</Text>
+                                                            <Text>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Chapter' : 'Глава'}: {!!item.toc_title ? item.toc_title.trim() : (this.props.main.lang == 'eng' || this.props.main.lang == 'en') ? 'Not specified' : 'Не указано'}</Text>
+                                                            <Text>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Comment' : 'Комментарий'}: {item.comment.trim()}</Text>
                                                         </View>
                                                     </TouchableOpacity>
                                                 </View>

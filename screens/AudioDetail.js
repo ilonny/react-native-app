@@ -15,10 +15,12 @@ import {
   TouchableWithoutFeedback,
   Slider,
   ActivityIndicator,
+  Easing
 } from 'react-native';
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import RNFetchBlob from 'rn-fetch-blob'
+import TextTicker from "react-native-text-ticker";
 // import { ServerRequest } from 'http';
 import { listStyles } from '../constants/list_styles';
 import { connect } from 'react-redux'
@@ -65,7 +67,21 @@ class AudioScreen extends Component {
         console.log('downloading123', downloading);
         if (online){
             return {
-                headerTitle: bookName,
+                headerTitle: (
+                    <View style={{maxWidth: 230}}>
+                        <TextTicker
+                            style={{ fontSize: 14 }}
+                            duration={bookName.length*238}
+                            loop
+                            bounce
+                            repeatSpacer={50}
+                            marqueeDelay={1000}
+                            easing={Easing.linear}
+                            >
+                            {bookName}
+                        </TextTicker>
+                    </View>
+                ),
                 headerRight: (
                     <TouchableOpacity onPress={() => downloadAll()}>
                         <View style={{alignItems: 'center', flex: 1, flexDirection: 'column', marginRight: 10}}>

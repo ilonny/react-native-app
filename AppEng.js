@@ -98,14 +98,14 @@ PushNotification.configure({
             setTimeout(() => {
                 console.log('REDIRECT TIMEOUT')
                 NavigationService.navigate("Details", { quote_id: q_id });
-              }, 3000);
+              }, 2000);
         } else if (notification.data.news_id) {
             let n_id = notification.data.news_id;
             let n_t = notification.data.news_title;
             setTimeout(() => {
                 console.log('REDIRECT TIMEOUT')
                 NavigationService.navigate("SiteDetail", { id: n_id, title: n_t });
-            }, 3000);
+            }, 2000);
         }
     },
 
@@ -166,7 +166,8 @@ const AudioStack = createStackNavigator({
     Аудиокниги: {
         screen: AudioScreen,
         navigationOptions: {
-            title: "Audiobooks"
+            title: "Audiobooks",
+            headerBackTitle: " ",
         }
     },
     Audio: AudioDetail

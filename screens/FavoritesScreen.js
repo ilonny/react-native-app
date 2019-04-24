@@ -65,6 +65,8 @@ class FavoritesScreen extends Component {
                 let AStore;
                 if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
                     AStore = 'cache_quotes_list_eng';
+                } else if (this.props.main.lang == 'es') {
+                    AStore = 'cache_quotes_list_es';
                 } else {
                     AStore = 'cache_quotes_list';
                 }
@@ -96,6 +98,8 @@ class FavoritesScreen extends Component {
         let AStore;
         if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
             AStore = 'Favorites_eng';
+        } else if (this.props.main.lang == 'es') {
+            AStore = 'Favorites_es';
         } else {
             AStore = 'Favorites';
         }
@@ -175,7 +179,7 @@ class FavoritesScreen extends Component {
         } else {
             comp = (
                 <View style={styles.container}>
-                  <Text>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'No favorites' : 'Нет избранных'}</Text>
+                  <Text>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'No favorites' : this.props.main.lang == 'es' ? 'No favoritos' : 'Нет избранных'}</Text>
                 </View>
             )
         }

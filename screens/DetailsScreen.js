@@ -58,6 +58,8 @@ class DetailsScreen extends Component {
         let AStore;
         if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
             AStore = 'Favorites_eng';
+        } else if (this.props.main.lang == 'es') {
+            AStore = 'Favorites_es';
         } else {
             AStore = 'Favorites';
         }
@@ -133,6 +135,9 @@ class DetailsScreen extends Component {
                 if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
                     AsyncStorage.removeItem('Favorites_eng');
                     AsyncStorage.setItem('Favorites_eng', JSON.stringify(this.state.favorites));
+                } else if (this.props.main.lang == 'es') {
+                    AsyncStorage.removeItem('Favorites_es');
+                    AsyncStorage.setItem('Favorites_es', JSON.stringify(this.state.favorites));
                 } else {
                     AsyncStorage.removeItem('Favorites');
                     AsyncStorage.setItem('Favorites', JSON.stringify(this.state.favorites));
@@ -157,6 +162,9 @@ class DetailsScreen extends Component {
                 if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
                     AsyncStorage.removeItem('Favorites_eng');
                     AsyncStorage.setItem('Favorites_eng', JSON.stringify(this.state.favorites));
+                } else if (this.props.main.lang == 'es') {
+                    AsyncStorage.removeItem('Favorites_es');
+                    AsyncStorage.setItem('Favorites_es', JSON.stringify(this.state.favorites));
                 } else {
                     AsyncStorage.removeItem('Favorites');
                     AsyncStorage.setItem('Favorites', JSON.stringify(this.state.favorites));

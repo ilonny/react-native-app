@@ -29,13 +29,16 @@ class SettingsMainScreen extends Component {
     state = {
         index: 0,
         routes: this.props.main.lang == 'en' || this.props.main.lang == 'eng' ? [
-            { key: "settings", title: "Daily quotes" },
-            { key: "settingsLang", title: "Language" },
+            { key: "settings", title: "Daily quotes"},
+            { key: "settingsLang", title: "Language"},
+        ] : this.props.main.lang == 'es' ? [
+            { key: "settings", title: "Cotizaciones diarias"},
+            { key: "settingsLang", title: "Idioma"},
         ] : [
-                { key: "settings", title: "Ежедневная рассылка цитат" },
-                { key: "settingsSite", title: "Разделы сайта harekrisha.ru" },
-                { key: "settingsLang", title: "Язык приложения" },
-            ]
+            { key: "settings", title: "Ежедневная рассылка цитат"},
+            { key: "settingsSite", title: "Разделы сайта harekrisha.ru" },
+            { key: "settingsLang", title: "Язык приложения"},
+        ]
     };
     _handleIndexChange = index => this.setState({ index });
 

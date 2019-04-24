@@ -38,20 +38,29 @@ class SettingsLangScreen extends Component {
                                 }}
                             >
                                 {this.props.main.lang == "en" ||
-                                    this.props.main.lang == "eng"
+                                this.props.main.lang == "eng"
                                     ? "Select your language, after selecting the application will restart"
+                                    : this.props.main.lang == "es"
+                                    ? "Seleccione su idioma, después de seleccionar la aplicación se reiniciará."
                                     : "Выберите ваш язык, после выбора приложение перезапустится"}
                             </Text>
-                            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
+                            <View
+                                style={{
+                                    flexDirection: "column",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    marginTop: 20
+                                }}
+                            >
                                 <TouchableOpacity
-                                    onPress={() => setLang('ru')}
+                                    onPress={() => setLang("ru")}
                                     style={{
                                         margin: 10,
                                         padding: 10,
                                         borderRadius: 10,
                                         borderWidth: 0.5,
                                         borderColor: "#75644f",
-                                        width: 100
+                                        width: 300
                                     }}
                                 >
                                     <Text
@@ -65,14 +74,14 @@ class SettingsLangScreen extends Component {
                                     </Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity
-                                    onPress={() => setLang('en')}
+                                    onPress={() => setLang("en")}
                                     style={{
                                         margin: 10,
                                         padding: 10,
                                         borderRadius: 10,
                                         borderWidth: 0.5,
                                         borderColor: "#75644f",
-                                        width: 100
+                                        width: 300
                                     }}
                                 >
                                     <Text
@@ -83,6 +92,27 @@ class SettingsLangScreen extends Component {
                                         }}
                                     >
                                         English
+                                    </Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    onPress={() => setLang("es")}
+                                    style={{
+                                        margin: 10,
+                                        padding: 10,
+                                        borderRadius: 10,
+                                        borderWidth: 0.5,
+                                        borderColor: "#75644f",
+                                        width: 300
+                                    }}
+                                >
+                                    <Text
+                                        style={{
+                                            textAlign: "center",
+                                            color: "#75644f",
+                                            fontSize: 16
+                                        }}
+                                    >
+                                        Español
                                     </Text>
                                 </TouchableOpacity>
                             </View>
@@ -97,19 +127,24 @@ class SettingsLangScreen extends Component {
                                 }
                             ]}
                         >
-                        <TouchableOpacity onPress={() => Linking.openURL('mailto:7782810@mail.ru')}>
-                            <Text
-                                style={{
-                                    color: "#808080",
-                                    textAlign: "center"
-                                }}
+                            <TouchableOpacity
+                                onPress={() =>
+                                    Linking.openURL("mailto:7782810@mail.ru")
+                                }
                             >
-                                {this.props.main.lang == "en" ||
-                                this.props.main.lang == "eng"
-                                    ? `Contact us: \n 7782810@mail.ru`
-                                    : `Напишите нам: \n 7782810@mail.ru`}
-                            </Text>
-                        </TouchableOpacity>
+                                <Text
+                                    style={{
+                                        color: "#808080",
+                                        textAlign: "center"
+                                    }}
+                                >
+                                    {this.props.main.lang == "en" ||
+                                    this.props.main.lang == "eng"
+                                        ? `Contact us: \n 7782810@mail.ru`
+                                        : this.props.main.lang == "es" ? "Contáctenos: \n 7782810@mail.ru"
+                                        : `Напишите нам: \n 7782810@mail.ru`}
+                                </Text>
+                            </TouchableOpacity>
                         </View>
                     </ScrollView>
                 </View>

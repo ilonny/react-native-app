@@ -133,6 +133,8 @@ class EpubReader extends Component {
         let AStore;
         if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
             AStore = 'reader_locations_eng';
+        } else if (this.props.main.lang == 'es') {
+            AStore = 'reader_locations_es';
         } else {
             AStore = 'reader_locations';
         }
@@ -146,6 +148,8 @@ class EpubReader extends Component {
             });
             if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
                 AStore = 'reader_locations_eng';
+            } else if (this.props.main.lang == 'es') {
+                AStore = 'reader_locations_es';
             } else {
                 AStore = 'reader_locations';
             }
@@ -161,11 +165,13 @@ class EpubReader extends Component {
             }
         })
         let AStore2;
-        if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
-            AStore2 = 'reader_theme_eng';
-        } else {
-            AStore2 = 'reader_theme';
-        }
+        if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+                AStore2 = 'reader_theme_eng';
+            } else if (this.props.main.lang == 'es') {
+                AStore2 = 'reader_theme_es';
+            } else {
+                AStore2 = 'reader_theme';
+            }
         AsyncStorage.getItem(AStore2, (err, value) => {
             if (value) {
                 console.log('async storage reader_theme value ', value);
@@ -202,6 +208,8 @@ class EpubReader extends Component {
                 let cached_toc_book_;
                 if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
                     cached_toc_book_ = 'cached_toc_book_eng';
+                } else if (this.props.main.lang == 'es') {
+                    cached_toc_book_ = 'cached_toc_book_es';
                 } else {
                     cached_toc_book_ = 'cached_toc_book_';
                 }
@@ -211,6 +219,8 @@ class EpubReader extends Component {
                 let cached_book_;
                 if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
                     cached_book_ = 'cached_book_eng';
+                } else if (this.props.main.lang == 'es') {
+                    cached_book_ = 'cached_book_es';
                 } else {
                     cached_book_ = 'cached_book_';
                 }
@@ -221,6 +231,8 @@ class EpubReader extends Component {
                         let cached_toc_book_;
                         if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
                             cached_toc_book_ = 'cached_toc_book_eng';
+                        } else if (this.props.main.lang == 'es'){
+                            cached_toc_book_ = 'cached_toc_book_es';
                         } else {
                             cached_toc_book_ = 'cached_toc_book_';
                         }
@@ -236,7 +248,11 @@ class EpubReader extends Component {
                     } else {
                         setTimeout(() => {
                             if (!this.state.successLoaded) {
-                                Alert.alert(this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Some problems with connection' : 'Необходимо подключение к интернету для загрузки книги')
+                                Alert.alert(this.props.main.lang == 'eng' || this.props.main.lang == 'en'
+                                ? 'Some problems with connection'
+                                : this.props.main.lang == 'es'
+                                ? 'Algunos problemas con la conexión'
+                                : 'Необходимо подключение к интернету для загрузки книги')
                             }
                         }, 9000);
                     }
@@ -249,6 +265,8 @@ class EpubReader extends Component {
         let reader_bookmarks_;
         if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
             reader_bookmarks_ = 'reader_bookmarks_eng';
+        } else if (this.props.main.lang == 'es' ){
+            reader_bookmarks_ = 'reader_bookmarks_es';
         } else {
             reader_bookmarks_ = 'reader_bookmarks_';
         }
@@ -293,6 +311,8 @@ class EpubReader extends Component {
         let reader_bookmarks_;
         if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
             reader_bookmarks_ = 'reader_bookmarks_eng';
+        } else if (this.props.main.lang == 'es'){
+            reader_bookmarks_ = 'reader_bookmarks_es';
         } else {
             reader_bookmarks_ = 'reader_bookmarks_';
         }
@@ -314,6 +334,8 @@ class EpubReader extends Component {
         let reader_bookmarks_;
         if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
             reader_bookmarks_ = 'reader_bookmarks_eng';
+        } else if (this.props.main.lang == 'es'){
+            reader_bookmarks_ = 'reader_bookmarks_es';
         } else {
             reader_bookmarks_ = 'reader_bookmarks_';
         }
@@ -346,6 +368,8 @@ class EpubReader extends Component {
         let reader_theme;
         if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
             reader_theme = 'reader_theme_eng';
+        } else if (this.props.main.lang == 'es') {
+            reader_theme = 'reader_theme_es';
         } else {
             reader_theme = 'reader_theme';
         }
@@ -410,6 +434,8 @@ class EpubReader extends Component {
         let ASreader_locations;
         if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
             ASreader_locations = 'reader_locations_eng';
+        } else if (this.props.main.lang == 'es') {
+            ASreader_locations = 'reader_locations_es';
         } else {
             ASreader_locations = 'reader_locations';
         }
@@ -498,6 +524,8 @@ class EpubReader extends Component {
                                 let cached_book_;
                                 if (this.props.main.lang == 'eng' || this.props.main.lang == 'en') {
                                     cached_book_ = 'cached_book__eng';
+                                } else if (this.props.main.lang == 'es') {
+                                    cached_book_ = 'cached_book_es';
                                 } else {
                                     cached_book_ = 'cached_book_';
                                 }
@@ -546,10 +574,16 @@ class EpubReader extends Component {
                         <View style={styles.navigation_header}>
                             <View style={{ flexDirection: 'row' }}>
                                 <TouchableOpacity onPress={() => this.setState({ listScreen: 'content' })}>
-                                    <Text style={{ padding: 15, color: this.state.listScreen == 'content' ? 'tomato' : 'black' }}>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Contents' : 'Содержание книги'}</Text>
+                                <Text style={{padding: 15, color: this.state.listScreen == 'content' ? 'tomato' : 'black'}}>
+                                        {this.props.main.lang == 'eng' || this.props.main.lang == 'en'
+                                        ? 'Contents'
+                                        : this.props.main.lang == 'es'
+                                        ? 'Contenido del libro'
+                                        : 'Содержание книги'}
+                                    </Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => this.setState({ listScreen: 'bookmarks' })}>
-                                    <Text style={{ padding: 15, color: this.state.listScreen == 'bookmarks' ? 'tomato' : 'black' }}>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Bookmarks' : 'Закладки'}</Text>
+                                    <Text style={{ padding: 15, color: this.state.listScreen == 'bookmarks' ? 'tomato' : 'black' }}>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Bookmarks' : this.props.main.lang == 'es' ? 'Marcadores' : 'Закладки'}</Text>
                                 </TouchableOpacity>
                             </View>
                             <TouchableOpacity onPress={() => this.setState({ nav_opened: false })}>
@@ -593,8 +627,25 @@ class EpubReader extends Component {
                                                 <View style={{ maxWidth: '85%' }}>
                                                     <TouchableOpacity onPress={() => this.setState({ location: item.location, nav_opened: false })}>
                                                         <View style={{ flex: 1, height: "100%" }}>
-                                                            <Text>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Chapter' : 'Глава'}: {!!item.toc_title ? item.toc_title.trim() : (this.props.main.lang == 'eng' || this.props.main.lang == 'en') ? 'Not specified' : 'Не указано'}</Text>
-                                                            <Text>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Comment' : 'Комментарий'}: {item.comment.trim()}</Text>
+                                                        <Text>
+                                                        {this.props.main.lang == 'eng' || this.props.main.lang == 'en'
+                                                        ? 'Chapter'
+                                                        : this.props.main.lang == 'es'
+                                                        ? 'Cabeza'
+                                                        : 'Глава'} : {!!item.toc_title ? item.toc_title.trim() : 
+                                                        (this.props.main.lang == 'eng' || this.props.main.lang == 'en')
+                                                        ? 'Not specified'
+                                                        : this.props.main.lang == 'es'
+                                                        ? 'No especificado'
+                                                        : 'Не указано'}
+                                                    </Text>
+
+                                                    <Text>
+                                                        {this.props.main.lang == 'eng' || this.props.main.lang == 'en'
+                                                        ? 'Comment'
+                                                        : this.props.main.lang == 'es'
+                                                        ? 'Comentar'
+                                                        : 'Комментарий'} : {item.comment.trim()}</Text>
                                                         </View>
                                                     </TouchableOpacity>
                                                 </View>
@@ -615,27 +666,57 @@ class EpubReader extends Component {
                 {this.state.settingsOpened && (
                     <View style={styles.navigation}>
                         <View style={styles.navigation_header}>
-                            <Text style={{ padding: 15 }}>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Settings' : 'Настройки'}</Text>
+                            <Text style={{ padding: 15 }}>
+                                {this.props.main.lang == 'eng' || this.props.main.lang == 'en'
+                                ? 'Settings'
+                                : this.props.main.lang == 'es'
+                                ? 'Ajustes'
+                                : 'Настройки'}
+                            </Text>
                             <TouchableOpacity onPress={() => this.setState({ settingsOpened: false })}>
                                 <Ionicons style={{ padding: 15 }} name="ios-close-circle-outline" size={25} color="tomato" />
                             </TouchableOpacity>
                         </View>
-                        <Text style={{ padding: 15 }}>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Color theme' : 'Режим чтения'}</Text>
+                        <Text style={{ padding: 15 }}>
+                            {this.props.main.lang == 'eng' || this.props.main.lang == 'en'
+                            ? 'Color theme'
+                            : this.props.main.lang == 'es'
+                            ? 'Modo de lectura'
+                            : 'Режим чтения'}
+                        </Text>
                         <View style={styles.setting_themes}>
                             <TouchableOpacity onPress={() => this.setTheme('light')} style={{ marginRight: 15 }}>
                                 <View style={this.state.theme == 'light' ? styles.active_theme : styles.non_active_theme}>
                                     <Ionicons color="#75644f" name={"ios-sunny"} size={30} />
-                                    <Text>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Day' : 'День'}</Text>
+                                    <Text>
+                                        {this.props.main.lang == 'eng' || this.props.main.lang == 'en'
+                                        ? 'Day'
+                                        : this.props.main.lang == 'es'
+                                        ? 'El dia'
+                                        : 'День'}
+                                    </Text>
                                 </View>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => this.setTheme('dark')} >
                                 <View style={this.state.theme == 'dark' ? styles.active_theme : styles.non_active_theme}>
                                     <Ionicons color="#75644f" name={"ios-moon"} size={30} />
-                                    <Text>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Night' : 'Ночь'}</Text>
+                                    <Text>
+                                        {this.props.main.lang == 'eng' || this.props.main.lang == 'en'
+                                        ? 'Night'
+                                        : this.props.main.lang == 'es'
+                                        ? 'La noche'
+                                        : 'Ночь'}
+                                    </Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
-                        <Text style={{ padding: 15 }}>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Font size' : 'Размер текста'}</Text>
+                        <Text style={{ padding: 15 }}>
+                            {this.props.main.lang == 'eng' || this.props.main.lang == 'en'
+                            ? 'Font size'
+                            : this.props.main.lang == 'es'
+                            ? 'Tamaño de fuente'
+                            : 'Размер текста'}
+                        </Text>
                         <View style={{ paddingLeft: 15, paddingRight: 15 }}>
                             <Slider
                                 step={1}
@@ -645,16 +726,35 @@ class EpubReader extends Component {
                                 onValueChange={val => this.setState({ fontSize: val })}
                             />
                         </View>
-                        <Text style={{ padding: 15, textAlign: 'center', fontSize: this.state.fontSize }}>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Text example' : 'Пример текста'} ({this.state.fontSize} px)</Text>
+                        <Text style={{padding: 15, textAlign: 'center', fontSize: this.state.fontSize}}>
+                            {this.props.main.lang == 'eng' || this.props.main.lang == 'en'
+                            ? 'Text example'
+                            : this.props.main.lang == 'es'
+                            ? 'Texto de muestra'
+                            : 'Пример текста'} {' '}
+                            ({this.state.fontSize} px)
+                        </Text>
                     </View>
                 )}
                 <View>
                     <Dialog.Container visible={this.state.bookmarksDialogVisible}>
-                        <Dialog.Title>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Add bookmark' : 'Добавить закладку'}</Dialog.Title>
-                        <Dialog.Description>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Please enter a comment for the bookmark' : 'Пожалуйста, введите комментарий к закладке'}</Dialog.Description>
+                    <Dialog.Title>
+                        {this.props.main.lang == 'eng' || this.props.main.lang == 'en'
+                        ? 'Add bookmark'
+                        : this.props.main.lang == 'es'
+                        ? 'Añadir marcador'
+                        : 'Добавить закладку'}
+                    </Dialog.Title>
+                    <Dialog.Description>
+                        {this.props.main.lang == 'eng' || this.props.main.lang == 'en'
+                        ? 'Please enter a comment for the bookmark'
+                        : this.props.main.lang == 'es'
+                        ? 'Por favor, introduzca un comentario para el marcador'
+                        : 'Пожалуйста, введите комментарий к закладке'}
+                    </Dialog.Description>
                         <Dialog.Input onChangeText={value => this.setState({ bookmarksDialogComment: value })}></Dialog.Input>
-                        <Dialog.Button onPress={() => this.setState({ bookmarksDialogVisible: false, bookmarksDialogComment: '' })} label={this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Cancel' : 'Отменить'} />
-                        <Dialog.Button onPress={() => this.addBookmark()} label={this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Save' : 'Сохранить'} />
+                        <Dialog.Button onPress={() => this.setState({ bookmarksDialogVisible: false, bookmarksDialogComment: '' })} label={this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Cancel' : this.props.main.lang == 'es' ? 'Cancelar' : 'Отменить'} />
+                        <Dialog.Button onPress={() => this.addBookmark()} label={this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Save' : this.props.main.lang == 'es' ? 'Guardar' : 'Сохранить'} />
                     </Dialog.Container>
                 </View>
             </View>

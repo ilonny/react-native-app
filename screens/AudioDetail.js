@@ -64,9 +64,12 @@ class AudioScreen extends Component {
         const bookName = navigation.getParam('book_name');
         const downloadAll = navigation.getParam('downloadAll');
         const downloading = navigation.getParam('downloading');
+        const lang = navigation.getParam('lang');
         const cancelTask = navigation.getParam('cancelTask');
         const online = navigation.getParam('online');
         console.log('downloading123', downloading);
+        console.log('lang header', lang);
+        console.log('bookName', bookName);
         if (online){
             return {
                 headerTitle: (
@@ -88,7 +91,7 @@ class AudioScreen extends Component {
                     <TouchableOpacity onPress={() => downloadAll()}>
                         <View style={{alignItems: 'center', flex: 1, flexDirection: 'column', marginRight: 10}}>
                                 <Ionicons name={"ios-cloud-download"} size={25} color="tomato" style={{marginTop: 5}}/>
-                                <Text style={{fontSize: 10, marginTop: -7}}>Скачать все</Text>
+                                <Text style={{fontSize: 10, marginTop: -7}}>{lang == 'eng' ? 'Download all' : lang == 'es' ? 'Descargar todo' : 'Скачать все'}</Text>
                         </View>
                     </TouchableOpacity>
                 ),
@@ -155,6 +158,8 @@ class AudioScreen extends Component {
             let AScached_audio_list;
             if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
                 AScached_audio_list = 'cached_audio_list_eng';
+            } else if (this.props.main.lang == 'es'){
+                AScached_audio_list = 'cached_audio_list_es';
             } else {
                 AScached_audio_list = 'cached_audio_list';
             }
@@ -175,6 +180,8 @@ class AudioScreen extends Component {
         let ASdownloaded_audio_;
         if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
             ASdownloaded_audio_ = 'downloaded_audio__eng';
+        } else if (this.props.main.lang == 'es') {
+            ASdownloaded_audio_ = 'downloaded_audio_es';
         } else {
             ASdownloaded_audio_ = 'downloaded_audio_';
         }
@@ -227,6 +234,8 @@ class AudioScreen extends Component {
                     let ASdownloaded_audio_;
                     if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
                         ASdownloaded_audio_ = 'downloaded_audio__eng';
+                    } else if (this.props.main.lang == 'es') {
+                        ASdownloaded_audio_ = 'downloaded_audio_es';
                     } else {
                         ASdownloaded_audio_ = 'downloaded_audio_';
                     }
@@ -244,6 +253,8 @@ class AudioScreen extends Component {
         let ASglobal_downloading;
         if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
             ASglobal_downloading = 'global_downloading_eng';
+        } else if (this.props.main.lang == 'es') {
+            ASglobal_downloading = 'global_downloading_es';
         } else {
             ASglobal_downloading = 'global_downloading';
         }
@@ -293,6 +304,8 @@ class AudioScreen extends Component {
             let ASglobal_downloading;
             if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
                 ASglobal_downloading = 'global_downloading_eng';
+            } else if (this.props.main.lang == 'es') {
+                ASglobal_downloading = 'global_downloading_es';
             } else {
                 ASglobal_downloading = 'global_downloading';
             }
@@ -340,6 +353,8 @@ class AudioScreen extends Component {
                     let ASneed_to_delete_queue;
                     if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
                         ASneed_to_delete_queue = 'need_to_delete_queue_eng';
+                    } else if (this.props.main.lang == 'es') {
+                        ASneed_to_delete_queue = 'need_to_delete_queue_es';
                     } else {
                         ASneed_to_delete_queue = 'need_to_delete_queue';
                     }
@@ -366,6 +381,9 @@ class AudioScreen extends Component {
                             if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
                                 ASdownloaded_audio_ = 'downloaded_audio__eng';
                                 AScancel_task = 'cancel_task_eng';
+                            } else if (this.props.main.lang == 'es') {
+                                ASdownloaded_audio_ = 'downloaded_audio_es';
+                                AScancel_task = 'cancel_task_es';
                             } else {
                                 ASdownloaded_audio_ = 'downloaded_audio_';
                                 AScancel_task = 'cancel_task';
@@ -397,6 +415,8 @@ class AudioScreen extends Component {
             let ASglobal_downloading;
             if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
                 ASglobal_downloading = 'global_downloading_eng';
+            } else if (this.props.main.lang == 'es') {
+                ASglobal_downloading = 'global_downloading_es';
             } else {
                 ASglobal_downloading = 'global_downloading';
             }
@@ -414,6 +434,8 @@ class AudioScreen extends Component {
             let ASglobal_downloading;
             if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
                 ASglobal_downloading = 'global_downloading_eng';
+            } else if (this.props.main.lang == 'es') {
+                ASglobal_downloading = 'global_downloading_es';
             } else {
                 ASglobal_downloading = 'global_downloading';
             }
@@ -458,6 +480,8 @@ class AudioScreen extends Component {
                 let ASneed_to_delete_queue;
                 if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
                     ASneed_to_delete_queue = 'need_to_delete_queue_eng';
+                } else if (this.props.main.lang == 'es') {
+                    ASneed_to_delete_queue = 'need_to_delete_queue_es';
                 } else {
                     ASneed_to_delete_queue = 'need_to_delete_queue';
                 }
@@ -484,6 +508,9 @@ class AudioScreen extends Component {
                         if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
                             ASdownloaded_audio_ = 'downloaded_audio__eng';
                             AScancel_task = 'cancel_task_eng';
+                        } else if (this.props.main.lang == 'es') {
+                            ASdownloaded_audio_ = 'downloaded_audio_es';
+                            AScancel_task = 'cancel_task_es';
                         } else {
                             ASdownloaded_audio_ = 'downloaded_audio_';
                             AScancel_task = 'cancel_task';
@@ -510,6 +537,8 @@ class AudioScreen extends Component {
             let ASglobal_downloading;
             if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
                 ASglobal_downloading = 'global_downloading_eng';
+            } else if (this.props.main.lang == 'es') {
+                ASglobal_downloading = 'global_downloading_es';
             } else {
                 ASglobal_downloading = 'global_downloading';
             }
@@ -525,6 +554,7 @@ class AudioScreen extends Component {
         this.props.navigation.setParams({downloadAll: this.downloadAll})
         this.props.navigation.setParams({downloading: this.state.downloading})
         this.props.navigation.setParams({cancelTask: this.cancelTask})
+        this.props.navigation.setParams({online: this.state.online})
         this.props.navigation.setParams({online: this.state.online})
         MusicControl.on('pause', ()=> {
             // this.props.dispatch(pauseRemoteControl());
@@ -629,6 +659,8 @@ class AudioScreen extends Component {
         let ASdownloaded_audio_;
         if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
             ASdownloaded_audio_ = 'downloaded_audio__eng';
+        } else if (this.props.main.lang == 'es'){
+            ASdownloaded_audio_ = 'downloaded_audio_es';
         } else {
             ASdownloaded_audio_ = 'downloaded_audio_';
         }
@@ -690,6 +722,9 @@ class AudioScreen extends Component {
         if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
             ASglobal_downloading = 'global_downloading_eng';
             ASneed_to_download_ = 'need_to_download__eng';
+        } else if (this.props.main.lang == 'es') {
+            ASglobal_downloading = 'global_downloading_es';
+            ASneed_to_download_ = 'need_to_download_es';
         } else {
             ASglobal_downloading = 'global_downloading';
             ASneed_to_download_ = 'need_to_download_';
@@ -925,6 +960,8 @@ class AudioScreen extends Component {
             let AScached_audio_list;
             if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
                 AScached_audio_list = 'cached_audio_list_eng';
+            } else if (this.props.main.lang == 'es') {
+                AScached_audio_list = 'cached_audio_list_es';
             } else {
                 AScached_audio_list = 'cached_audio_list';
             }
@@ -969,11 +1006,11 @@ class AudioScreen extends Component {
         if (fl){
             audioAction = (
                 <View style={{flex: 0, flexDirection: 'row', alignItems: 'center'}}>
-                    <TouchableOpacity style={{minWidth: 100}}><Text>{this.props.main.lang == 'ru' ? 'Загрузка' : 'Downloading'} {progress}%</Text></TouchableOpacity>
+                    <TouchableOpacity style={{minWidth: 100}}><Text>{this.props.main.lang == 'ru' ? 'Загрузка' : this.props.main.lang == 'es' ? 'Descargando' : 'Downloading'} {progress}%</Text></TouchableOpacity>
                     <TouchableOpacity onPress={() => this.cancelTask(item.id)}>
                         <View style={{alignItems: 'center', flex: 1, flexDirection: 'column', marginRight: 10, marginLeft: 10}}>
                             <Ionicons name={"ios-close-circle-outline"} size={25} color="tomato" style={{marginTop: 5}}/>
-                            <Text style={{fontSize: 10, marginTop: -7}}>{this.props.main.lang == 'ru' ? 'Остановить загрузку' : 'Cancel download'}</Text>
+                            <Text style={{fontSize: 10, marginTop: -7}}>{this.props.main.lang == 'ru' ? 'Остановить загрузку' : this.props.main.lang == 'es' ? 'Cancelar descarga' : 'Cancel download'}</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -997,7 +1034,7 @@ class AudioScreen extends Component {
                                 <View>
                                     <Ionicons name="ios-trash" size={23} color="tomato" style={{margin: 'auto'}} />
                                 </View>
-                                <Text>{this.props.main.lang == 'ru' ? 'Удалить' : 'Delete'}</Text>
+                                <Text>{this.props.main.lang == 'ru' ? 'Удалить' : this.props.main.lang == 'es' ? 'Borrar' : 'Delete'}</Text>
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => this.playAudio(item.id, null, toc_id)}>
@@ -1005,7 +1042,7 @@ class AudioScreen extends Component {
                                 <View>
                                     <Ionicons name="ios-play" size={23} color="tomato" style={{margin: 'auto'}} />
                                 </View>
-                                <Text>{this.props.main.lang == 'ru' ? 'Слушать' : 'Listen'}</Text>
+                                <Text>{this.props.main.lang == 'ru' ? 'Слушать' : this.props.main.lang == 'es' ? 'Escucha' : 'Listen'}</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -1019,7 +1056,7 @@ class AudioScreen extends Component {
                                     <View>
                                         <Ionicons name="ios-cloud-download" size={23} color="tomato" style={{margin: 'auto'}} />
                                     </View>
-                                    <Text>{this.props.main.lang == 'ru' ? 'Скачать' : 'Download'}</Text>
+                                    <Text>{this.props.main.lang == 'ru' ? 'Скачать' : this.props.main.lang == 'es' ? 'Descargar' : 'Download'}</Text>
                                 </View>
                             </TouchableOpacity>
                         ) : (
@@ -1028,7 +1065,7 @@ class AudioScreen extends Component {
                                     <View>
                                         <Ionicons name="ios-cloud-download" size={23} color="#c1ae97" style={{margin: 'auto'}} />
                                     </View>
-                                    <Text>{this.props.main.lang == 'ru' ? 'Скачать' : 'Download'}</Text>
+                                    <Text>{this.props.main.lang == 'ru' ? 'Скачать' : this.props.main.lang == 'es' ? 'Descargar' : 'Download'}</Text>
                                 </View>
                             </TouchableOpacity>
                         )}
@@ -1037,7 +1074,7 @@ class AudioScreen extends Component {
                                 <View>
                                     <Ionicons name="ios-play" size={23} color="tomato" style={{margin: 'auto'}} />
                                 </View>
-                                <Text>{this.props.main.lang == 'ru' ? 'Слушать онлайн' : 'Listen online'}</Text>
+                                <Text>{this.props.main.lang == 'ru' ? 'Слушать онлайн' : this.props.main.lang == 'es' ? 'Escuchar en linea' : 'Listen online'}</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -1058,7 +1095,7 @@ class AudioScreen extends Component {
                                  <View>
                                     <Ionicons name="ios-book" size={23} color="tomato" style={{margin: 'auto'}} />
                                 </View>
-                                <Text>{this.props.main.lang == 'ru' ? 'Читать' : 'To read'}</Text>
+                                <Text>{this.props.main.lang == 'ru' ? 'Читать' : this.props.main.lang == 'es' ? 'Leer' : 'To read'}</Text>
                             </View>
                         </TouchableOpacity>
                     )}
@@ -1122,7 +1159,7 @@ class AudioScreen extends Component {
                                     <TouchableOpacity onPress={() => this.findAndRedirectReader(this.state.playingAudio.id)}>
                                         <View style={{flex: 1, alignItems: 'center', justifyContent: 'flex-end', flexDirection: 'row'}}>
                                             <Ionicons style={{marginTop: 2}} name="ios-list" size={25}/>
-                                            <Text style={{marginLeft: 10,}}>{this.props.main.lang == 'ru' ? 'Читать' : 'To read'}</Text>
+                                            <Text style={{marginLeft: 10,}}>{this.props.main.lang == 'ru' ? 'Читать' : this.props.main.lang == 'es' ? 'Leer': 'To read'}</Text>
                                         </View>
                                     </TouchableOpacity>
                                 ) : (
@@ -1138,7 +1175,7 @@ class AudioScreen extends Component {
                                         this.props.setNowPlaying(false,null, null, null, null)
                                     }}>
                                         <View style={{flex: 1, alignItems: 'center', justifyContent: 'flex-end', flexDirection: 'row'}}>
-                                            <Text>{this.props.main.lang == 'ru' ? 'Остановить и закрыть' : 'Close'}</Text>
+                                            <Text>{this.props.main.lang == 'ru' ? 'Остановить и закрыть' : this.props.main.lang == 'es' ? 'Cerrar' : 'Close'}</Text>
                                             <Ionicons style={{marginLeft: 10, marginTop: 2}} name="ios-close" size={30}/>
                                         </View>
                                     </TouchableOpacity>
@@ -1149,7 +1186,7 @@ class AudioScreen extends Component {
                                 {this.state.prerender ? (
                                     <View style={{flex: 1, flexDirection: 'column', marginTop: -15, marginBottom: 5, justifyContent: 'center', alignItems: 'center'}}>
                                         <ActivityIndicator size="large" color="tomato" />
-                                        <Text>{this.props.main.lang == 'ru' ? 'Загрузка...' : 'Downloading...'}</Text>
+                                        <Text>{this.props.main.lang == 'ru' ? 'Загрузка...' : this.props.main.lang == 'es' ? 'Descargando' : 'Downloading...'}</Text>
                                     </View>
                                 ) : (
                                     <View>
@@ -1179,7 +1216,7 @@ class AudioScreen extends Component {
                                         <View style={{transform: [{rotateY: '180deg'}]}}>
                                             <Ionicons name="ios-refresh" size={30} color="tomato" />
                                         </View>
-                                        <Text style={{fontSize: 10}}>-15 {this.props.main.lang == 'ru' ? 'сек' : 'sec'}.</Text>
+                                        <Text style={{fontSize: 10}}>-15 {this.props.main.lang == 'ru' ? 'сек' : this.props.main.lang == 'es' ? 'seg' : 'sec'}.</Text>
                                     </View>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => this.togglePlaying()}>
@@ -1190,7 +1227,7 @@ class AudioScreen extends Component {
                                 <TouchableOpacity onPress={() => this.plus15()}>
                                     <View style={{flex: 0, alignItems: 'center'}}>
                                         <Ionicons name="ios-refresh" size={30} color="tomato" />
-                                        <Text style={{fontSize: 10}}>+15 {this.props.main.lang == 'ru' ? 'сек' : 'sec'}.</Text>
+                                        <Text style={{fontSize: 10}}>+15 {this.props.main.lang == 'ru' ? 'сек' : this.props.main.lang == 'es' ? 'seg' : 'sec'}.</Text>
                                     </View>
                                 </TouchableOpacity>
                             </View>

@@ -49,6 +49,8 @@ class ReaderScreen extends Component {
     let AStore;
     if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
       AStore = 'cache_reader_list_eng';
+    } else if (this.props.main.lang == 'es') {
+      AStore = 'cache_reader_list_es';
     } else {
       AStore = 'cache_reader_list';
     }
@@ -125,6 +127,8 @@ class ReaderScreen extends Component {
     let ASdownloaded_covers;
     if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
       ASdownloaded_covers = 'downloaded_covers_eng';
+    } else if (this.props.main.lang == 'es') {
+      ASdownloaded_covers = 'downloaded_covers_es';
     } else {
       ASdownloaded_covers = 'downloaded_covers';
     }
@@ -194,6 +198,8 @@ class ReaderScreen extends Component {
             let ASdownloaded_covers;
             if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
               ASdownloaded_covers = 'downloaded_covers_eng';
+            } else if (this.props.main.lang == 'es') {
+              ASdownloaded_covers = 'downloaded_covers_es';
             } else {
               ASdownloaded_covers = 'downloaded_covers';
             }
@@ -260,7 +266,12 @@ class ReaderScreen extends Component {
               ]}
               >
               <TextInput
-                  placeholder={this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? "Search by book name": "Введите название книги"}
+                  placeholder={
+                    this.props.main.lang == 'eng' || this.props.main.lang == 'en'
+                    ? "Search by book name"
+                    : this.props.main.lang == 'es'
+                    ? "Introduce el título del libro."
+                    : "Введите название книги"}
                   onChangeText={text => this.changeSearchText(text)}
               />
             </View>

@@ -62,6 +62,8 @@ class AudioScreen extends Component {
               let cached_audio_list;
               if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
                 cached_audio_list = 'cached_audio_list_eng';
+              } else if (this.props.main.lang == 'es') {
+                cached_audio_list = 'cached_audio_list_es';
               } else {
                 cached_audio_list = 'cached_audio_list';
               }
@@ -102,7 +104,7 @@ class AudioScreen extends Component {
                     style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5}}
                     data={this.state.books}
                     renderItem={({item}) => (
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Audio', {book_id: item.id, book_name: item.name, book_src: item.file_src, online: this.state.online} )}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Audio', {book_id: item.id, book_name: item.name, book_src: item.file_src, online: this.state.online, lang: this.props.main.lang} )}>
                         <View style={listStyles.quoteItem}>
                             <Text style={listStyles.quoteTitle}>{item.name}</Text>
                             <View style={listStyles.quoteBottom}>

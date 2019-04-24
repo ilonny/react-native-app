@@ -185,7 +185,13 @@ class SettingsScreen extends Component {
                 <View style={styles.container}>
                     <ScrollView>
                     <View style={[listStyles.quoteItem, {marginLeft: 10, marginRight: 10, marginTop: 10}]}>
-                        <Text style={{color: "#808080", textAlign: 'center'}}>{this.props.main.lang == 'en' || this.props.main.lang == 'eng' ? 'Select sources of interest to you for receiving daily quotes' : 'Выберите интересные Вам источники для получения ежедневной рассылки цитат.'}</Text>
+                        <Text style={{color: "#808080", textAlign: 'center'}}>
+                            {this.props.main.lang == 'en' || this.props.main.lang == 'eng'
+                            ? 'Select sources of interest to you for receiving daily quotes'
+                            : this.props.main.lang == 'es' 
+                            ? 'Selecciona fuentes de interés para ti para recibir cotizaciones diarias.'
+                            : 'Выберите интересные Вам источники для получения ежедневной рассылки цитат.'}
+                        </Text>
                     </View>
                     <SectionList
                         style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5, flex: 0}}
@@ -205,8 +211,8 @@ class SettingsScreen extends Component {
                             </View>
                         )}
                         sections={[
-                            {title: this.props.main.lang == 'en' || this.props.main.lang == 'eng' ? 'Authors' : 'Авторы', data: this.state.authors},
-                            {title: this.props.main.lang == 'en' || this.props.main.lang == 'eng' ?  'Books' : 'Книги', data: this.state.books},
+                            {title: this.props.main.lang == 'en' || this.props.main.lang == 'eng' ? 'Authors' : this.props.main.lang == 'es' ? 'Los autores' : 'Авторы', data: this.state.authors},
+                            {title: this.props.main.lang == 'en' || this.props.main.lang == 'eng' ?  'Books' : this.props.main.lang == 'es' ? 'Libros' : 'Книги', data: this.state.books},
                         ]}
                         keyExtractor={(item, index) => item + index}
                     />

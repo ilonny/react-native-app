@@ -69,6 +69,8 @@ class ListScreen extends Component {
           })
           if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
             AsyncStorage.setItem('cache_quotes_list_eng', request.responseText);
+          }  else if (this.props.main.lang == 'es') {
+            AsyncStorage.setItem('cache_quotes_list_es', request.responseText);
           } else {
             AsyncStorage.setItem('cache_quotes_list', request.responseText);
           }
@@ -83,6 +85,17 @@ class ListScreen extends Component {
           if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
             AsyncStorage.getItem('cache_quotes_list_eng', (err, value) => {
               console.log('cache_quotes_list', value)
+              if (!!value){
+                this.setState({
+                  quotes: JSON.parse(value),
+                  online: false,
+                })
+              }
+              this.setPagination();
+            });
+          } else if (this.props.main.lang == 'es'){
+            AsyncStorage.getItem('cache_quotes_list_es', (err, value) => {
+              // console.log('cache_quotes_list', value)
               if (!!value){
                 this.setState({
                   quotes: JSON.parse(value),
@@ -157,6 +170,8 @@ class ListScreen extends Component {
     let ASglobal_downloading;
     if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
       ASglobal_downloading = 'global_downloading_eng';
+    } else if (this.props.main.lang == 'es') {
+      ASglobal_downloading = 'global_downloading_es';
     } else {
       ASglobal_downloading = 'global_downloading';
     }
@@ -189,6 +204,8 @@ class ListScreen extends Component {
           })
           if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
             AsyncStorage.setItem('cache_quotes_list_eng', request.responseText);
+          } else if (this.props.main.lang == 'es') {
+            AsyncStorage.setItem('cache_quotes_list_es', request.responseText);
           } else {
             AsyncStorage.setItem('cache_quotes_list', request.responseText);
           }
@@ -203,6 +220,17 @@ class ListScreen extends Component {
           if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
             AsyncStorage.getItem('cache_quotes_list_eng', (err, value) => {
               console.log('cache_quotes_list_eng', value)
+              if (!!value){
+                this.setState({
+                  quotes: JSON.parse(value),
+                  online: false,
+                })
+              }
+              this.setPagination();
+            });
+          } else if (this.props.main.lang == 'es') {
+            AsyncStorage.getItem('cache_quotes_list_es', (err, value) => {
+              console.log('cache_quotes_list', value)
               if (!!value){
                 this.setState({
                   quotes: JSON.parse(value),

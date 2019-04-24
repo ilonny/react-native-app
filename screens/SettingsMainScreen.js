@@ -32,6 +32,9 @@ class SettingsMainScreen extends Component {
         routes: this.props.main.lang == 'en' || this.props.main.lang == 'eng' ? [
             { key: "settings", title: "Daily quotes"},
             { key: "settingsLang", title: "Language"},
+        ] : this.props.main.lang == 'es' ? [
+            { key: "settings", title: "Cotizaciones diarias"},
+            { key: "settingsLang", title: "Idioma"},
         ] : [
             { key: "settings", title: "Ежедневная рассылка цитат"},
             { key: "settingsSite", title: "Разделы сайта harekrisha.ru" },

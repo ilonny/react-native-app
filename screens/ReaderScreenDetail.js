@@ -588,7 +588,7 @@ class EpubReader extends Component {
                                     </Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => this.setState({listScreen: 'bookmarks'})}>
-                                    <Text style={{padding: 15, color: this.state.listScreen == 'bookmarks' ? 'tomato' : 'black'}}>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Bookmarks' : 'Закладки'}</Text>
+                                    <Text style={{padding: 15, color: this.state.listScreen == 'bookmarks' ? 'tomato' : 'black'}}>{this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Bookmarks' : this.props.main.lang == 'es' ? 'Marcadores' : 'Закладки'}</Text>
                                 </TouchableOpacity>
                             </View>
                             <TouchableOpacity onPress={() => this.setState({nav_opened: false})}>

@@ -181,7 +181,7 @@ let TopLevelNavigator = createBottomTabNavigator(
         Harekrishna: {
             screen: SiteStack,
             navigationOptions: {
-                title: "scsmath.com"
+                title: "Sitios"
             }
         },
         Citas: {

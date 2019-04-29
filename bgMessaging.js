@@ -8,7 +8,7 @@ export default async (RemoteMessage) => {
     console.log('handle message!!!', RemoteMessage)
     let messageText = JSON.parse(RemoteMessage.data.body).text;
     let notification = new firebase.notifications.Notification()
-    .android.setPriority(2)
+    .android.setPriority(firebase.notifications.Android.Priority.High)
     .android.setVibrate([1000, 1000])
     .android.setChannelId('123')
     .setSound('default')

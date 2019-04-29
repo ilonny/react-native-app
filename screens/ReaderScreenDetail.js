@@ -652,7 +652,11 @@ class EpubReader extends Component {
                                                 <TouchableOpacity onPress={() => this.deleteBookmark(item.location)}>
                                                     <View style={{ flex: 0, alignItems: 'center', marginTop: -10 }}>
                                                         <Ionicons name={"ios-trash-outline"} size={25} color="tomato" style={{ marginTop: 5 }} />
-                                                        <Text style={{ fontSize: 10, marginTop: -6, }}>Удалить</Text>
+                                                        <Text style={{fontSize: 10, marginTop: -6,}}>{this.props.main.lang == 'eng' || this.props.main.lang == 'en'
+                                                        ? 'Delte'
+                                                        : this.props.main.lang == 'es'
+                                                        ? 'Quitar'
+                                                        : 'Удалить'}</Text>
                                                     </View>
                                                 </TouchableOpacity>
                                             </View>

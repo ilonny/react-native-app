@@ -135,6 +135,8 @@ firebase.notifications().onNotificationOpened((notificationOpen) => {
 
 firebase.notifications().getInitialNotification()
 .then((notificationOpen) => {
+  const channelId = new firebase.notifications.Android.Channel('123', '123', firebase.notifications.Android.Importance.Max);
+  firebase.notifications().android.createChannel(channelId);
   console.log('notif OFFLINE OPENED', notificationOpen);
   if (notificationOpen.notification._data.need_alert == 'true'){
     Alert.alert("", notificationOpen.notification._body);

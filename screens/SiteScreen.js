@@ -18,6 +18,7 @@ import SiteScreenList from "./SiteScreenList";
 import CalendarScreen from "./CalendarScreen";
 
 import ScsmathScreen from "./ScsmathScreen";
+import SiteScreenEs from "./SiteScreenEs";
 
 import { setLang, setLangInside } from "../actions/lang";
 import { connect } from "react-redux";
@@ -133,15 +134,7 @@ class SiteScreen extends Component {
                 );
             } else {
                 return (
-                    <View
-                        style={{
-                            flex: 1,
-                            justifyContent: "center",
-                            alignItems: "center"
-                        }}
-                    >
-                        <Text>Espanol site here</Text>
-                    </View>
+                    <SiteScreenEs/>
                 );
             }
         } else {

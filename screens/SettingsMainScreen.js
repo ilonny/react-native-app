@@ -5,13 +5,13 @@ import {
     Text,
     View,
     AsyncStorage,
-    SafeAreaView,
     ScrollView,
     FlatList,
     TouchableOpacity,
     Dimensions,
     Animated
 } from "react-native";
+import { SafeAreaView } from "react-navigation";
 import { TabView, TabBar, SceneMap } from "react-native-tab-view";
 import SettingsScreen from "./SettingsScreen";
 import SettingsSite from "./SettingsSite";
@@ -76,12 +76,14 @@ class SettingsMainScreen extends Component {
     });
     render() {
         return (
-            <TabView
-                navigationState={this.state}
-                renderScene={this._renderScene}
-                renderTabBar={this._renderTabBar}
-                onIndexChange={this._handleIndexChange}
-            />
+            <SafeAreaView     style={{flex: 1}}>
+                <TabView
+                    navigationState={this.state}
+                    renderScene={this._renderScene}
+                    renderTabBar={this._renderTabBar}
+                    onIndexChange={this._handleIndexChange}
+                />
+            </SafeAreaView>
         );
     }
 }

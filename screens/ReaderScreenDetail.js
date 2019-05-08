@@ -12,9 +12,10 @@ import {
   FlatList,
   Slider,
   Alert,
-  Easing
+  Easing,
+  Dimensions
 } from 'react-native';
-
+import { SafeAreaView } from "react-navigation";
 import { Epub, Streamer } from "epubjs-rn";
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -88,6 +89,7 @@ class EpubReader extends Component {
         const pageHaveBookmark =  navigation.getParam('pageHaveBookmark');
         const showBookmarkPopup =  navigation.getParam('showBookmarkPopup');
         const deleteBookmark =  navigation.getParam('deleteBookmark');
+        const dim = Dimensions.get('window');
         return {
             headerTitle: (
                 <View style={{maxWidth: 197}}>
@@ -122,10 +124,14 @@ class EpubReader extends Component {
             headerTitleStyle: {
                 color: theme == 'light' ? '#000' : '#bebebe',
             },
-            headerStyle: {
+            headerStyle: (dim.height == 812 || dim.width == 812 || dim.height == 896 || dim.width == 896) ? {
+                height: 65,
                 paddingRight: 10,
                 backgroundColor: theme == 'light' ? '#fff' : '#171717',
-            },
+              } : {
+                paddingRight: 10,
+                backgroundColor: theme == 'light' ? '#fff' : '#171717',
+              },
         }
     }
     componentDidMount() {
@@ -480,7 +486,7 @@ class EpubReader extends Component {
     render() {
         console.log("render state", this.state)
         return (
-            <View style={styles.container}>
+            <SafeAreaView   style={styles.container}>
                 <Epub style={styles.reader}
                     ref="epub"
                     src={this.state.src}
@@ -766,7 +772,7 @@ class EpubReader extends Component {
                     <Dialog.Button onPress={() => this.addBookmark()} label={this.props.main.lang == 'eng' || this.props.main.lang == 'en' ? 'Save' : this.props.main.lang == 'es' ? 'Guardar' : 'Сохранить'} />
                 </Dialog.Container>
             </View>
-            </View>
+            </SafeAreaView>
         );
     }
 }

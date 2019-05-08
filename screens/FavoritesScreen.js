@@ -5,11 +5,12 @@ import {
   Text,
   View,
   AsyncStorage,
-  SafeAreaView,
   ScrollView,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  Dimensions
 } from 'react-native';
+import { SafeAreaView } from "react-navigation";
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { connect } from "react-redux";
@@ -29,8 +30,14 @@ class FavoritesScreen extends Component {
       online: true,
     }
   }
-  static navigationOptions = {
-    title: 'Избранные цитаты'
+  static navigationOptions = ({navigation}) => {
+    const dim = Dimensions.get('window');
+    return {
+      title: 'Избранные цитаты',
+      headerStyle: (dim.height == 812 || dim.width == 812 || dim.height == 896 || dim.width == 896) ? {
+        height: 65
+      } : {},
+    }
   }
   willFocusSubscription = this.props.navigation.addListener(
     'willFocus',
@@ -148,7 +155,7 @@ class FavoritesScreen extends Component {
       let comp;
       if (this.state.quotes instanceof Array && this.state.quotes.length){
         comp = (
-          <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF', paddingBottom: 10, paddingTop: 10}}>
+          <SafeAreaView   style={{flex: 1, backgroundColor: '#F5FCFF', paddingBottom: 10, paddingTop: 10}}>
             <FlatList
               data={this.state.quotes}
               renderItem={({item}) => (

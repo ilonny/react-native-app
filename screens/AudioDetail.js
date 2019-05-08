@@ -10,13 +10,14 @@ import {
   AsyncStorage,
   TouchableOpacity,
   FlatList,
-  SafeAreaView,
   Alert,
   TouchableWithoutFeedback,
   Slider,
   ActivityIndicator,
-  Easing
+  Easing,
+  Dimensions
 } from 'react-native';
+import { SafeAreaView } from "react-navigation";
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import RNFetchBlob from 'rn-fetch-blob'
@@ -67,6 +68,7 @@ class AudioScreen extends Component {
         const lang = navigation.getParam('lang');
         const cancelTask = navigation.getParam('cancelTask');
         const online = navigation.getParam('online');
+        const dim = Dimensions.get('window');
         console.log('downloading123', downloading);
         console.log('lang header', lang);
         console.log('bookName', bookName);
@@ -90,12 +92,15 @@ class AudioScreen extends Component {
                 headerRight: (
                     <TouchableOpacity onPress={() => downloadAll()}>
                         <View style={{alignItems: 'center', flex: 1, flexDirection: 'column', marginRight: 10}}>
-                                <Ionicons name={"ios-cloud-download"} size={25} color="tomato" style={{marginTop: 5}}/>
+                                <Ionicons name={"ios-cloud-download"} size={25} color="tomato" style={{marginTop: dim.height == 812 || dim.width == 812 || dim.height == 896 || dim.width == 896 ? 15 : 5,}}/>
                                 <Text style={{fontSize: 10, marginTop: -7}}>{lang == 'eng' ? 'Download all' : lang == 'es' ? 'Descargar todo' : 'Скачать все'}</Text>
                         </View>
                     </TouchableOpacity>
                 ),
                 headerBackTitle: "Back",
+                headerStyle: (dim.height == 812 || dim.width == 812 || dim.height == 896 || dim.width == 896) ? {
+                    height: 65
+                  } : {},
             }
         } else {
             return {
@@ -1108,7 +1113,7 @@ class AudioScreen extends Component {
         // console.log('audio details render props', this.props);
         // console.log('main store string: ', JSON.stringify(this.props.main));
         return (
-            <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF', paddingBottom: 10, paddingTop: 10}}>
+            <SafeAreaView   style={{flex: 1, backgroundColor: '#F5FCFF', paddingBottom: 10, paddingTop: 10}}>
                 <FlatList
                     style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5}}
                     data={this.state.books}

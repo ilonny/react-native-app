@@ -5,7 +5,6 @@ import {
     Text,
     View,
     AsyncStorage,
-    SafeAreaView,
     ScrollView,
     FlatList,
     TouchableOpacity,
@@ -13,6 +12,7 @@ import {
     Animated,
     Modal
 } from "react-native";
+import { SafeAreaView } from "react-navigation";
 import { TabView, TabBar, SceneMap } from "react-native-tab-view";
 import SiteScreenList from "./SiteScreenList";
 import CalendarScreen from "./CalendarScreen";
@@ -114,12 +114,14 @@ class SiteScreen extends Component {
         if (this.state.modalShowed) {
             if (this.props.main.lang == "ru") {
                 return (
-                    <TabView
-                        navigationState={this.state}
-                        renderScene={this._renderScene}
-                        renderTabBar={this._renderTabBar}
-                        onIndexChange={this._handleIndexChange}
-                    />
+                    <SafeAreaView  style={{flex: 1, backgroundColor: '#f7f7f7'}}>
+                        <TabView
+                            navigationState={this.state}
+                            renderScene={this._renderScene}
+                            renderTabBar={this._renderTabBar}
+                            onIndexChange={this._handleIndexChange}
+                            />
+                    </SafeAreaView>
                 );
             } else if (
                 this.props.main.lang == "en" ||
@@ -129,11 +131,15 @@ class SiteScreen extends Component {
                     // <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                     //     <Text>http://www.scsmath.com/</Text>
                     // </View>
-                    <ScsmathScreen />
+                    <SafeAreaView   style={{flex: 1}}>
+                        <ScsmathScreen />
+                    </SafeAreaView>
                 );
             } else {
                 return (
-                    <SiteScreenEs/>
+                    <SafeAreaView style={{flex: 1, backgroundColor: '#f7f7f7'}}>
+                        <SiteScreenEs/>
+                    </SafeAreaView>
                 );
             }
         } else

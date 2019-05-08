@@ -4,7 +4,6 @@ import {
     StyleSheet,
     Text,
     View,
-    SafeAreaView,
     SectionList,
     Switch,
     ScrollView,
@@ -12,13 +11,14 @@ import {
     TouchableOpacity,
     Linking
 } from "react-native";
+import { SafeAreaView } from "react-navigation";
 import { setLang } from "../actions/lang";
 import { connect } from "react-redux";
 import { listStyles } from "../constants/list_styles";
 class SettingsLangScreen extends Component {
     render() {
         return (
-            <SafeAreaView style={{ flex: 1, backgroundColor: "#efefef" }}>
+            <SafeAreaView   style={{ flex: 1, backgroundColor: "#efefef" }}>
                 <View style={styles.container}>
                     <ScrollView>
                         <View

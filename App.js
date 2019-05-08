@@ -6,7 +6,8 @@ import {
     View,
     AsyncStorage,
     PushNotificationIOS,
-    Alert
+    Alert,
+    Dimensions
 } from "react-native";
 import {
     createBottomTabNavigator,
@@ -174,6 +175,7 @@ const SiteStack = createStackNavigator({
     SiteTabScreen: SiteScreen,
     SiteDetail: SiteScreenDetail
 });
+const dim = Dimensions.get('window');
 let TopLevelNavigator = createBottomTabNavigator(
     {
         Harekrishna: {
@@ -226,7 +228,18 @@ let TopLevelNavigator = createBottomTabNavigator(
         }),
         tabBarOptions: {
             activeTintColor: "tomato",
-            inactiveTintColor: "gray"
+            inactiveTintColor: "gray",
+            style: (dim.height == 812 || dim.width == 812 || dim.height == 896 || dim.width == 896) ? {
+                // marginBottom: 30,
+                height: 70,
+                backgroundColor: '#f7f7f7',
+            } : {
+            },
+            tabStyle: (dim.height == 812 || dim.width == 812 || dim.height == 896 || dim.width == 896) ? {
+                marginBottom: 15,
+                height: 50
+            } : {
+            },
             // showLabel: false,
         }
     }

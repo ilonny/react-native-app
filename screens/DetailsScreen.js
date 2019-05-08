@@ -5,13 +5,14 @@ import {
   Text,
   View,
   AsyncStorage,
-  SafeAreaView,
   ScrollView,
   FlatList,
   WebView,
   TouchableOpacity,
+  Dimensions,
   Share
 } from 'react-native';
+import { SafeAreaView } from "react-navigation";
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { listStyles } from '../constants/list_styles';
@@ -33,6 +34,7 @@ class DetailsScreen extends Component {
       }
     }
     static navigationOptions = ({navigation}) => {
+        const dim = Dimensions.get('window');
         const toggleFav = navigation.getParam('toggleFav');
         const consoleState = navigation.getParam('consoleState');
         const shareClick = navigation.getParam('shareClick');
@@ -48,10 +50,12 @@ class DetailsScreen extends Component {
                     </TouchableOpacity>
                 </View>
             ),
-            // title: 'test',
-            headerStyle: {
+            headerStyle: (dim.height == 812 || dim.width == 812 || dim.height == 896 || dim.width == 896) ? {
+                height: 65,
                 paddingRight: 10,
-            },
+              } : {
+                paddingRight: 10,
+              },
         }
     }
     componentWillMount(){
@@ -199,7 +203,7 @@ class DetailsScreen extends Component {
         let comp;
         if (this.state.online){
             comp = (
-                <SafeAreaView style={{flex: 1, backgroundColor: '#efefef', paddingBottom: 10, paddingTop: 10}}>
+                <SafeAreaView     style={{flex: 1, backgroundColor: '#efefef', paddingBottom: 10, paddingTop: 10}}>
                     <WebView
                         source={{uri: API_URL + `/quote?id=${quote_id}&lang=${this.props.main.lang}`}}
                         style={{backgroundColor: '#efefef'}}
@@ -208,7 +212,7 @@ class DetailsScreen extends Component {
             );
         } else {
             comp = (
-                <SafeAreaView style={{flex: 1, backgroundColor: '#efefef', padding: 10}}>
+                <SafeAreaView   style={{flex: 1, backgroundColor: '#efefef', padding: 10}}>
                     {/* <WebView
                         source={{uri: API_URL + `/quote?id=${quote_id}`}}
                         style={{backgroundColor: '#efefef'}}

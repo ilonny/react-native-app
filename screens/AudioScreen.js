@@ -5,16 +5,16 @@ import {
   Text,
   View,
   AsyncStorage,
-  SafeAreaView,
   ScrollView,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  Dimensions
 } from 'react-native';
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { listStyles } from '../constants/list_styles';
 import { connect } from "react-redux";
-
+import { SafeAreaView } from "react-navigation";
 class AudioScreen extends Component {
     constructor(props){
       super(props);
@@ -25,8 +25,14 @@ class AudioScreen extends Component {
         online: true,
       }
     }
-    static navigationOptions = {
-      // title: 'Аудиокниги'
+    static navigationOptions = ({navigation}) => {
+      const dim = Dimensions.get('window');
+      return {
+        headerStyle: (dim.height == 812 || dim.width == 812 || dim.height == 896 || dim.width == 896) ? {
+          height: 65,
+        } : {
+        },
+      }
     }
     willFocusSubscription = this.props.navigation.addListener(
       'willFocus',
@@ -99,7 +105,7 @@ class AudioScreen extends Component {
         let comp;
         if (true) {
           comp = (
-            <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF', paddingBottom: 10, paddingTop: 10}}>
+            <SafeAreaView   style={{flex: 1, backgroundColor: '#F5FCFF', paddingBottom: 10, paddingTop: 10}}>
                 <FlatList
                     style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5}}
                     data={this.state.books}

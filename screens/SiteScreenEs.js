@@ -5,7 +5,6 @@ import {
     Text,
     View,
     AsyncStorage,
-    SafeAreaView,
     ScrollView,
     FlatList,
     TouchableOpacity,
@@ -14,15 +13,18 @@ import {
     Linking,
     Easing
 } from "react-native";
+import { SafeAreaView } from "react-navigation";
 import { TabView, TabBar, SceneMap } from "react-native-tab-view";
 import WKWebView from "react-native-wkwebview-reborn";
 
 const SiteEs1 = () => {
     return (
         <SafeAreaView
+         
             style={{
                 flex: 1,
-                backgroundColor: "#eaecfa",
+                backgroundColor: '#f7f7f7'
+                // backgroundColor: "#eaecfa",
                 // // paddingBottom: 10,
                 // // paddingTop: 20
             }}
@@ -32,7 +34,7 @@ const SiteEs1 = () => {
                     uri: `https://mobile-app.flamesclient.ru/es/`
                 }}
                 style={{
-                    backgroundColor: "#efefef",
+                    backgroundColor: "#f7f7f7",
                     // paddingTop: 20,
                     // marginTop: 20
                 }}
@@ -57,7 +59,8 @@ const SiteEs2 = () => {
         <SafeAreaView
             style={{
                 flex: 1,
-                backgroundColor: "#eaecfa",
+                backgroundColor: '#f7f7f7'
+                // backgroundColor: "#eaecfa",
                 // // paddingBottom: 10,
                 // // paddingTop: 20
             }}
@@ -67,7 +70,7 @@ const SiteEs2 = () => {
                     uri: `https://mobile-app.flamesclient.ru/es/site-2`
                 }}
                 style={{
-                    backgroundColor: "#efefef",
+                    backgroundColor: "#f7f7f7",
                     // paddingTop: 20,
                     // marginTop: 20
                 }}
@@ -122,12 +125,14 @@ class SiteScreenEs extends Component {
     });
     render() {
         return (
-            <TabView
-                navigationState={this.state}
-                renderScene={this._renderScene}
-                renderTabBar={this._renderTabBar}
-                onIndexChange={this._handleIndexChange}
-            />
+            <SafeAreaView  style={{flex: 1, backgroundColor: 'red'}}>
+                <TabView
+                    navigationState={this.state}
+                    renderScene={this._renderScene}
+                    renderTabBar={this._renderTabBar}
+                    onIndexChange={this._handleIndexChange}
+                />
+            </SafeAreaView>
         );
     }
 }

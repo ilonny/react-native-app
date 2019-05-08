@@ -5,11 +5,12 @@ import {
   Text,
   View,
   AsyncStorage,
-  SafeAreaView,
   ScrollView,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  Dimensions
 } from 'react-native';
+import { SafeAreaView } from "react-navigation";
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { listStyles } from '../constants/list_styles';
@@ -33,6 +34,7 @@ class ListScreen extends Component {
     }
   }
   static navigationOptions = ({navigation}) => {
+    const dim = Dimensions.get('window');
     return {
       // headerTitle: "Цитаты",
       headerRight: (
@@ -43,6 +45,9 @@ class ListScreen extends Component {
             </TouchableOpacity>
         </View>
       ),
+      headerStyle: (dim.height == 812 || dim.width == 812 || dim.height == 896 || dim.width == 896) ? {
+        height: 65
+      } : {},
     }
   }
   willFocusSubscription = this.props.navigation.addListener(
@@ -302,7 +307,7 @@ class ListScreen extends Component {
     }
     if (this.state.storage != '[]'){
       comp = (
-        <SafeAreaView style={{flex: 1, backgroundColor: '#efefef', justifyContent:'space-between'}}>
+        <SafeAreaView   style={{flex: 1, backgroundColor: '#efefef', justifyContent:'space-between'}}>
             <FlatList
               style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5, flex: 0}}
               data={quotes_on_page}

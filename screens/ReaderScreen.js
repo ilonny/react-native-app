@@ -5,13 +5,14 @@ import {
   Text,
   View,
   AsyncStorage,
-  SafeAreaView,
   ScrollView,
   FlatList,
   TouchableOpacity,
   Image,
-  TextInput
+  TextInput,
+  Dimensions
 } from 'react-native';
+import { SafeAreaView } from "react-navigation";
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { listStyles } from '../constants/list_styles';
@@ -33,7 +34,13 @@ class ReaderScreen extends Component {
       downloaded_covers: [],
     }
   }
-  static navigationOptions = {
+  static navigationOptions = ({navigation}) => {
+    const dim = Dimensions.get('window');
+    return {
+      headerStyle: (dim.height == 812 || dim.width == 812 || dim.height == 896 || dim.width == 896) ? {
+        height: 65
+      } : {},
+    }
     // title: 'Books'
   }
   willFocusSubscription = this.props.navigation.addListener(
@@ -251,7 +258,7 @@ class ReaderScreen extends Component {
     console.log('render state', this.state);
     if (true) {
       comp = (
-        <SafeAreaView style={{flex: 1, backgroundColor: '#efefef', justifyContent: 'space-between'}}>
+        <SafeAreaView   style={{flex: 1, backgroundColor: '#efefef', justifyContent: 'space-between'}}>
             <View
             style={[
                   listStyles.quoteItem,
@@ -337,32 +344,32 @@ class ReaderScreen extends Component {
             >
             </FlatList>
             {this.state.pages_count && need_pagination ? (
-              <FlatList
-                data={pagination_arr}
-                horizontal={true}
-                keyExtractor={(item) => item.toString()}
-                contentContainerStyle={[styles.pagination]}
-                renderItem = {({item}) => (
-                  <TouchableOpacity key={item} onPress={() => this.setPage(item)}>
-                    <View style={{
-                      padding: 5,
-                      borderRadius: 5,
-                      borderWidth: 1,
-                      borderColor: 'red',
-                      margin: 5,
-                      backgroundColor: this.state.current_page == item ? 'red' : 'white',
-                      flex: 0,
-                      minHeight: 25
-                    }}>
-                      <Text style={{
-                        fontSize: 10,
-                        color: this.state.current_page == item ? 'white' : 'black',
-                      }}>{item}</Text>
-                    </View>
-                  </TouchableOpacity>
-                )}
-              >
-              </FlatList>
+              <View style={{backgroundColor: '#fff'}}>
+                <FlatList
+                  data={pagination_arr}
+                  horizontal={true}
+                  keyExtractor={(item) => item.toString()}
+                  contentContainerStyle={[styles.pagination, {flex: this.state.pages_count > 10 ? 0 : 1}]}
+                  renderItem = {({item}) => (
+                    <TouchableOpacity key={item} onPress={() => this.setPage(item)}>
+                      <View style={{
+                        padding: 5,
+                        borderRadius: 5,
+                        borderWidth: 1,
+                        borderColor: 'red',
+                        margin: 5,
+                        backgroundColor: this.state.current_page == item ? 'red' : 'white',
+                      }}>
+                        <Text style={{
+                          fontSize: 10,
+                          color: this.state.current_page == item ? 'white' : 'black',
+                        }}>{item}</Text>
+                      </View>
+                    </TouchableOpacity>
+                  )}
+                  >
+                </FlatList>
+              </View>
             ): null}
         </SafeAreaView>
       );
@@ -403,13 +410,9 @@ const styles = StyleSheet.create({
     borderBottomColor: '#eaeaea'
   },
   pagination: {
-    flex: 0,
-    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
     backgroundColor: '#fff',
-    maxHeight:40,
-    flexShrink: 0,
   }
 })

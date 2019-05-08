@@ -5,7 +5,6 @@ import {
     Text,
     View,
     AsyncStorage,
-    SafeAreaView,
     ScrollView,
     FlatList,
     TouchableOpacity,
@@ -14,6 +13,7 @@ import {
     Linking,
     Easing
 } from "react-native";
+import { SafeAreaView } from "react-navigation";
 import { SITE_URL } from "../constants/api";
 import TextTicker from "react-native-text-ticker";
 // import { WebView } from "react-native-webview";
@@ -88,11 +88,12 @@ class SiteScreen extends Component {
         console.log('id = ', this.props.navigation.getParam("id"));
         return (
             <SafeAreaView
+                 
                 style={{
                     flex: 1,
                     backgroundColor: "#efefef",
-                    paddingBottom: 10,
-                    paddingTop: 10
+                    // paddingBottom: 10,
+                    // paddingTop: 10
                 }}
             >
                 <WKWebView

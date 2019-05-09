@@ -87,7 +87,7 @@ class ScsmathScreen extends Component {
             >
                 <WKWebView
                     source={{
-                        uri: `https://mobile-app.flamesclient.ru/scs/`
+                        uri: `https://app.harekrishna.ru/scs/`
                     }}
                     style={{ backgroundColor: "#efefef", paddingTop: 20, marginTop: 20 }}
                     // allowsInlineMediaPlayback={true}

@@ -31,7 +31,7 @@ const SiteEs1 = () => {
         >
             <WKWebView
                 source={{
-                    uri: `https://mobile-app.flamesclient.ru/es/`
+                    uri: `https://app.harekrishna.ru/es/`
                 }}
                 style={{
                     backgroundColor: "#f7f7f7",
@@ -67,7 +67,7 @@ const SiteEs2 = () => {
         >
             <WKWebView
                 source={{
-                    uri: `https://mobile-app.flamesclient.ru/es/site-2`
+                    uri: `https://app.harekrishna.ru/es/site-2`
                 }}
                 style={{
                     backgroundColor: "#f7f7f7",

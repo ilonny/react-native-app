@@ -757,7 +757,7 @@ class AudioScreen extends Component {
         let playingAudio = {};
         if (path){
             //проиграть онлайн
-            playingAudio.path = `https://mobile-app.flamesclient.ru/${path}`;
+            playingAudio.path = `https://app.harekrishna.ru/${path}`;
         } else {
             //брать с оффлайна
             this.state.downloaded_books.forEach(el => {
@@ -779,7 +779,7 @@ class AudioScreen extends Component {
                 console.log('нет в пропсах! ищем в стейте', this.state)
                 this.state.books.forEach(el => {
                     if (el.id == id){
-                        playingAudio.path = `https://mobile-app.flamesclient.ru/${el.file_src}`;
+                        playingAudio.path = `https://app.harekrishna.ru/${el.file_src}`;
                     }
                 })
             }

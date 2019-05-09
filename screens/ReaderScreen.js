@@ -174,7 +174,7 @@ class ReaderScreen extends Component {
                     fileCache: true,
                     appendExt: 'jpg',
                 })
-                .fetch('GET', 'https://mobile-app.flamesclient.ru/' + book_to_download.cover_src, {});
+                .fetch('GET', 'https://app.harekrishna.ru/' + book_to_download.cover_src, {});
             this.task
                 .progress((received, total) => {
                     console.log('progress', received / total)
@@ -289,7 +289,7 @@ class ReaderScreen extends Component {
                                 }
                             });
                             if ((!!this.state.online) && (!cover_src)) {
-                                cover_src = 'https://mobile-app.flamesclient.ru/' + item.cover_src;
+                                cover_src = 'https://app.harekrishna.ru/' + item.cover_src;
                                 view = (
                                     <View style={{ marginRight: 10 }}>
                                         <Image

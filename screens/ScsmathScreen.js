@@ -114,7 +114,7 @@ class ScsmathScreen extends Component {
             >
                 <WebView
                     source={{
-                        uri: `http://mobile-app.flamesclient.ru/scs/`
+                        uri: `http://app.harekrishna.ru/scs/`
                     }}
                     style={{ backgroundColor: "#efefef", paddingTop: 20, marginTop: 20 }}
                     // allowsInlineMediaPlayback={true}

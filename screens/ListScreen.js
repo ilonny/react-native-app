@@ -15,7 +15,7 @@ import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { listStyles } from '../constants/list_styles';
 import { connect } from "react-redux";
-import { TabView, TabBar, SceneMap } from "react-native-tab-view";
+
 class ListScreen extends Component {
   constructor(props){
     super(props);
@@ -31,10 +31,6 @@ class ListScreen extends Component {
       online: true,
       pages_count: 0,
       current_page: 1,
-      routes: [
-        { key: "content", title: "Новости" },
-        { key: "look", title: "Смотреть" },
-    ],
     }
   }
   static navigationOptions = ({navigation}) => {
@@ -311,14 +307,8 @@ class ListScreen extends Component {
     }
     if (this.state.storage != '[]'){
       comp = (
-        <SafeAreaView  style={{flex: 1, backgroundColor: '#efefef', justifyContent:'space-between'}}>
-        <TabView
-          navigationState={this.state}
-          renderScene={this._renderScene}
-          renderTabBar={this._renderTabBar}
-          onIndexChange={this._handleIndexChange}
-        />
-            {/* <FlatList
+        <SafeAreaView   style={{flex: 1, backgroundColor: '#efefef', justifyContent:'space-between'}}>
+            <FlatList
               style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5, flex: 0}}
               data={quotes_on_page}
               renderItem={({item}) => (
@@ -343,7 +333,7 @@ class ListScreen extends Component {
               onRefresh={() => this.state.online && this.refresh()}
               refreshing={false}
             >
-            </FlatList> */}
+            </FlatList>
             {this.state.pages_count && (
               <View style={{backgroundColor: '#fff'}}>
                 <FlatList
@@ -352,7 +342,7 @@ class ListScreen extends Component {
                   keyExtractor={(item) => item.toString()}
                   contentContainerStyle={[styles.pagination, {flex: this.state.pages_count > 10 ? 0 : 1}]}
                   renderItem = {({item}) => (
-                    // <TouchableOpacity key={item} onPress={() => this.setPage(item)}>
+                    <TouchableOpacity key={item} onPress={() => this.setPage(item)}>
                       <View style={{
                         padding: 5,
                         borderRadius: 5,
@@ -366,7 +356,7 @@ class ListScreen extends Component {
                           color: this.state.current_page == item ? 'white' : 'black',
                         }}>{item}</Text>
                       </View>
-                    // </TouchableOpacity>
+                    </TouchableOpacity>
                   )}
                 >
                 </FlatList>

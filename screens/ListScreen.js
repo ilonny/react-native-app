@@ -15,7 +15,7 @@ import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { listStyles } from '../constants/list_styles';
 import { connect } from "react-redux";
-
+import Pagination,{Icon,Dot} from 'react-native-pagination';//{Icon,Dot} also available
 class ListScreen extends Component {
   constructor(props){
     super(props);
@@ -89,7 +89,7 @@ class ListScreen extends Component {
           })
           if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
             AsyncStorage.getItem('cache_quotes_list_eng', (err, value) => {
-              console.log('cache_quotes_list', value)
+              // console.log('cache_quotes_list', value)
               if (!!value){
                 this.setState({
                   quotes: JSON.parse(value),
@@ -171,7 +171,7 @@ class ListScreen extends Component {
   }
   componentDidMount(){
     // AsyncStorage.clear();
-    console.log('remove global after app start downloading');
+    // console.log('remove global after app start downloading');
     let ASglobal_downloading;
     if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
       ASglobal_downloading = 'global_downloading_eng';
@@ -183,7 +183,7 @@ class ListScreen extends Component {
     AsyncStorage.removeItem(ASglobal_downloading);
 
   }
-  _keyExtractor = (item) => item.text_short + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+  _keyExtractor = (item) => item.id.toString();
   refresh(){
     console.log('refresh')
     this.setState(state => {
@@ -292,25 +292,33 @@ class ListScreen extends Component {
     });
   }
   //
+  onViewableItemsChanged = ({ viewableItems, changed }) =>{
+    console.log('onViewableItemsChanged', viewableItems)
+    this.setState({viewableItems})
+  }
   render() {
     let comp;    
-    let quotes = this.state.quotes;
-    console.log('render state', this.state)
-    console.log('render props', this.props)
-    quotes = [...new Set(quotes)];
-    let pagination_arr = [];
-    quotes_on_page = quotes.splice((this.state.current_page-1)*20, 20);
-    if (this.state.pages_count){
-      for (let i = 1; i <= this.state.pages_count; i++){
-        pagination_arr.push(i);
-      }
-    }
+    // let quotes = this.state.quotes;
+    // console.log('render state', this.state)
+    // console.log('render props', this.props)
+    // quotes = [...new Set(quotes)];
+    // let pagination_arr = [];
+    // quotes_on_page = quotes.splice((this.state.current_page-1)*20, 20);
+    // if (this.state.pages_count){
+    //   for (let i = 1; i <= this.state.pages_count; i++){
+    //     pagination_arr.push(i);
+    //   }
+    // }
     if (this.state.storage != '[]'){
+      if (this.state.quotes) {
       comp = (
         <SafeAreaView   style={{flex: 1, backgroundColor: '#efefef', justifyContent:'space-between'}}>
             <FlatList
               style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5, flex: 0}}
-              data={quotes_on_page}
+              // data={quotes_on_page}
+              data={this.state.quotes}
+              ref={r=>this.refs=r}//create refrence point to enable scrolling
+              onViewableItemsChanged={this.onViewableItemsChanged}//need this
               renderItem={({item}) => (
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Details', {quote_id: item.id, text_short: item.text_short, title: item.title, text: item.text, online: this.state.online, author_name: item.author_name} )}>
                   <View style={listStyles.quoteItem}>
@@ -334,7 +342,17 @@ class ListScreen extends Component {
               refreshing={false}
             >
             </FlatList>
-            {this.state.pages_count && (
+            <Pagination
+              // dotThemeLight //<--use with backgroundColor:"grey"
+              listRef={this.refs}//to allow React Native Pagination to scroll to item when clicked  (so add "ref={r=>this.refs=r}" to your list)
+              paginationVisibleItems={this.state.viewableItems}//needs to track what the user sees
+              paginationItems={this.state.quotes}//pass the same list as data
+              paginationItemPadSize={3} //num of items to pad above and below your visable items
+              // pagingEnabled={true}
+              paginationStyle={{width: 10, alignItems:"center", justifyContent: 'space-between', position:"absolute", margin:0, bottom:0, right:15, padding:0, top: 0, flex:1,}}
+              dotIconSizeActive={10}
+            />
+            {/* {this.state.pages_count && (
               <View style={{backgroundColor: '#fff'}}>
                 <FlatList
                   data={pagination_arr}
@@ -361,9 +379,16 @@ class ListScreen extends Component {
                 >
                 </FlatList>
               </View>
-            )}
+            )} */}
         </SafeAreaView>
       );
+      } else {
+        comp =(
+          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <Text>Загрузка...</Text>
+          </View>
+        )
+    }
     } else {
       comp = (
         <View style={styles.container}>

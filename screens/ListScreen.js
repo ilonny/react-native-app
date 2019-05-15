@@ -22,7 +22,9 @@ class ListScreen extends Component {
     this.state = {
       items: [],
       storage: [],
+      authors: [],
       quotes: "",
+      quotes_all: [],
       test: '',
       k: 0,
       test2: '',
@@ -31,12 +33,22 @@ class ListScreen extends Component {
       online: true,
       pages_count: 0,
       current_page: 1,
+      modalIsOpen: false,
     }
   }
   static navigationOptions = ({navigation}) => {
     const dim = Dimensions.get('window');
+    const toggleSettings = navigation.getParam('toggleSettings');
     return {
       // headerTitle: "Цитаты",
+      headerLeft: (
+        // <TouchableOpacity onPress={navigation.getParam('consoleState')}>
+        <View style={{alignItems: 'center', flex: 1, flexDirection: 'row'}}>
+            <TouchableOpacity onPress={() => toggleSettings()}>
+                <Ionicons name={"ios-more"} size={30} color={'tomato'} style={{marginTop: 5, marginLeft: 15}}/>
+            </TouchableOpacity>
+        </View>
+      ),
       headerRight: (
         // <TouchableOpacity onPress={navigation.getParam('consoleState')}>
         <View style={{alignItems: 'center', flex: 1, flexDirection: 'row'}}>
@@ -68,6 +80,8 @@ class ListScreen extends Component {
             return {
               ...state,
               quotes: request.responseText ? JSON.parse(request.responseText) : 'error network',
+              quotes_all: request.responseText ? JSON.parse(request.responseText) : 'error network',
+              authors: ["Все"].concat(Array.from(new Set(Array.from(JSON.parse(request.responseText), quote => quote.author_name)))),
               online: true
               // quotes: 'error network 200'
             }
@@ -169,6 +183,11 @@ class ListScreen extends Component {
     this.getSettings();
     this.initialStart();
   }
+  toggleSettings = () => {
+    this.setState({
+        modalIsOpen: !this.state.modalIsOpen
+    })
+  }
   componentDidMount(){
     // AsyncStorage.clear();
     // console.log('remove global after app start downloading');
@@ -181,7 +200,7 @@ class ListScreen extends Component {
       ASglobal_downloading = 'global_downloading';
     }
     AsyncStorage.removeItem(ASglobal_downloading);
-
+    this.props.navigation.setParams({toggleSettings: this.toggleSettings})
   }
   _keyExtractor = (item) => item.id.toString();
   refresh(){
@@ -296,10 +315,26 @@ class ListScreen extends Component {
     console.log('onViewableItemsChanged', viewableItems)
     this.setState({viewableItems})
   }
+  filterQuotes(author_name){
+    console.log('filter quotes', author_name)
+    if (author_name == 'Все') {
+      this.setState({
+        quotes: this.state.quotes_all,
+        modalIsOpen: false
+      })
+    } else {
+      let q = [].concat(this.state.quotes_all);
+      q = q.filter(item => item.author_name == author_name)
+      this.setState({
+        quotes: q,
+        modalIsOpen: false
+      })
+    }
+  }
   render() {
     let comp;    
     // let quotes = this.state.quotes;
-    // console.log('render state', this.state)
+    console.log('render state', this.state)
     // console.log('render props', this.props)
     // quotes = [...new Set(quotes)];
     // let pagination_arr = [];
@@ -352,6 +387,37 @@ class ListScreen extends Component {
               paginationStyle={{width: 10, alignItems:"center", justifyContent: 'space-between', position:"absolute", margin:0, bottom:0, right:15, padding:0, top: 0, flex:1,}}
               dotIconSizeActive={10}
             />
+            {this.state.modalIsOpen && (
+              <View style={styles.navigation}>
+                <View style={styles.navigation_header}>
+                  <Text>
+                    {this.props.main.lang == 'eng' || this.props.main.lang == 'en'
+                      ? 'Filters'
+                      : this.props.main.lang == 'es'
+                      ? 'Filtros'
+                      : 'Цитаты по авторам'}
+                    </Text>
+                </View>
+                <View style={styles.navigation_list}>
+                <FlatList
+                  data={this.state.authors}
+                  keyExtractor={item => item}
+                  renderItem={({item}) => (
+                      <View style={styles.navigation_list_row}>
+                          <View style={{maxWidth: '100%'}}>
+                            <TouchableOpacity onPress={() => this.filterQuotes(item)}>
+                                <View style={{flex: 1, height: "100%"}}>
+                                    <Text>{item}</Text>
+                                </View>
+                            </TouchableOpacity>
+                          </View>
+                      </View>
+                  )}
+              >
+              </FlatList>
+                </View>
+              </View>
+            )}
             {/* {this.state.pages_count && (
               <View style={{backgroundColor: '#fff'}}>
                 <FlatList
@@ -438,5 +504,36 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     backgroundColor: '#fff',
-  }
+  },
+  navigation: {
+      position: "absolute",
+      left: 0,
+      top: 0,
+      right: 0,
+      flex: 1,
+      backgroundColor: "#fff",
+      height: "100%"
+  },
+  navigation_header: {
+      // flex: 1,
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      borderBottomWidth: 1,
+      borderBottomColor: "#eaeaea",
+      padding: 15,
+  },
+  navigation_list: {
+      paddingBottom: 58
+  },
+  navigation_list_row: {
+      padding: 10,
+      paddingLeft: 15,
+      borderBottomWidth: 1,
+      borderBottomColor: "#eaeaea",
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center'
+  },
 })

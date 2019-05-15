@@ -15,6 +15,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { listStyles } from '../constants/list_styles';
 import { connect } from "react-redux";
 import { SafeAreaView } from "react-navigation";
+import Pagination,{Icon,Dot} from 'react-native-pagination';//{Icon,Dot} also available
 class AudioScreen extends Component {
     constructor(props){
       super(props);
@@ -34,13 +35,13 @@ class AudioScreen extends Component {
         },
       }
     }
-    willFocusSubscription = this.props.navigation.addListener(
-      'willFocus',
-      payload => {
-          this.getBooks();
-      }
-    );
-    _keyExtractor = (item) => item.text_short + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    // willFocusSubscription = this.props.navigation.addListener(
+    //   'willFocus',
+    //   payload => {
+    //       this.getBooks();
+    //   }
+    // );
+    _keyExtractor = (item) => item.id.toString();
     getBooks(){
         console.log('getBooks starts')
         let request = new XMLHttpRequest();
@@ -51,20 +52,21 @@ class AudioScreen extends Component {
                     let parsedText;
                     try {
                       parsedText = JSON.parse(request.responseText);
-                    } catch (e){
-                    //   console.log('catched parse json', request)
-                      parsedText = [];
-                    }
-                    return {
+                      return {
                         ...state,
                         books: parsedText,
                         online: true
+                      }
+                    } catch (e){
+                      console.log('catched parse json', request)
+                      parsedText = [];
                     }
+
                 }
                 })
                 AsyncStorage.setItem('cached_audio_list', request.responseText);
             } else {
-              console.log('error req', API_URL + `/get-audio-books?lang=${this.props.main.lang}`)
+              console.log('error req', API_URL + `/get-audio-books?lang=${this.props.main.lang}`, request)
               let cached_audio_list;
               if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
                 cached_audio_list = 'cached_audio_list_eng';
@@ -91,7 +93,7 @@ class AudioScreen extends Component {
         request.open('GET', API_URL + `/get-audio-books?lang=${this.props.main.lang}`);
         request.send();
     }
-    componentWillMount(){
+    componentDidMount(){
         this.getBooks();
     }
     shouldComponentUpdate(nextProps, nextState){
@@ -100,15 +102,21 @@ class AudioScreen extends Component {
         }
         return true;
     }
+    onViewableItemsChanged = ({ viewableItems, changed }) =>{
+      // console.log('onViewableItemsChanged', viewableItems)
+      this.setState({viewableItems})
+    }
     render() {
         console.log('render', this.state)
         let comp;
-        if (true) {
+        if (this.state.books.length) {
           comp = (
-            <SafeAreaView   style={{flex: 1, backgroundColor: '#F5FCFF', paddingBottom: 10, paddingTop: 10}}>
+            <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF'}}>
                 <FlatList
                     style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5}}
                     data={this.state.books}
+                    ref={r=>this.refs=r}//create refrence point to enable scrolling
+                    onViewableItemsChanged={this.onViewableItemsChanged}//need this
                     renderItem={({item}) => (
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Audio', {book_id: item.id, book_name: item.name, book_src: item.file_src, online: this.state.online, lang: this.props.main.lang} )}>
                         <View style={listStyles.quoteItem}>
@@ -132,8 +140,24 @@ class AudioScreen extends Component {
                   refreshing={false}
                 >
                 </FlatList>
+                {/* <Pagination
+                  // dotThemeLight //<--use with backgroundColor:"grey"
+                  listRef={this.refs}//to allow React Native Pagination to scroll to item when clicked  (so add "ref={r=>this.refs=r}" to your list)
+                  paginationVisibleItems={this.state.viewableItems}//needs to track what the user sees
+                  paginationItems={this.state.books}//pass the same list as data
+                  paginationItemPadSize={3} //num of items to pad above and below your visable items
+                  // pagingEnabled={true}
+                  paginationStyle={{width: 10, alignItems:"center", justifyContent: 'space-between', position:"absolute", margin:0, bottom:0, right:15, padding:0, top: 0, flex:1,}}
+                  dotIconSizeActive={10}
+                /> */}
             </SafeAreaView>
           );
+        } else {
+          comp = (
+            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+              <Text>Загрузка...</Text>
+            </View>
+          )
         }
         return comp;
     }

@@ -18,7 +18,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { listStyles } from '../constants/list_styles';
 import RNFetchBlob from 'rn-fetch-blob'
 import { connect } from "react-redux";
-
+import Pagination,{Icon,Dot} from 'react-native-pagination';//{Icon,Dot} also available
 class ReaderScreen extends Component {
   constructor(props){
     super(props);
@@ -49,7 +49,7 @@ class ReaderScreen extends Component {
         this.getBooks(this.state.current_page);
     }
   );
-  _keyExtractor = (item) => item.text_short + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+  _keyExtractor = (item) => item.id.toString();
   _keyExtractor2 = (item) => item;
   getBooks(offset = 0){
     console.log('getBooks starts', offset)
@@ -233,27 +233,31 @@ class ReaderScreen extends Component {
       searched_books: new_books,
     })
   }
+  onViewableItemsChanged = ({ viewableItems, changed }) =>{
+    console.log('onViewableItemsChanged', viewableItems)
+    this.setState({viewableItems})
+  }
   render() {
     // console.log('render', this.state)
     let comp;
-    let pagination_arr = [];
-    let books = this.state.books;
-    let searched_books = this.state.searched_books;
-    let need_pagination;
-    if (searched_books.length == 0 || searched_books.length == books.length) {
-      books = [...new Set(books)];
-      need_pagination = true;
-      books_on_page = books.splice((this.state.current_page-1)*5, 5);
-      if (this.state.pages_count){
-        for (let i = 1; i <= this.state.pages_count; i++){
-          pagination_arr.push(i);
-        }
-      }
-    } else {
-      books = [...new Set(searched_books)];
-      need_pagination = false;
-      books_on_page = books;
-    }
+    // let pagination_arr = [];
+    // let books = this.state.books;
+    // let searched_books = this.state.searched_books;
+    // let need_pagination;
+    // if (searched_books.length == 0 || searched_books.length == books.length) {
+    //   books = [...new Set(books)];
+    //   need_pagination = true;
+    //   books_on_page = books.splice((this.state.current_page-1)*5, 5);
+    //   if (this.state.pages_count){
+    //     for (let i = 1; i <= this.state.pages_count; i++){
+    //       pagination_arr.push(i);
+    //     }
+    //   }
+    // } else {
+    //   books = [...new Set(searched_books)];
+    //   need_pagination = false;
+    //   books_on_page = books;
+    // }
     // console.log(pagination_arr);
     console.log('render state', this.state);
     if (true) {
@@ -284,7 +288,9 @@ class ReaderScreen extends Component {
             </View>
             <FlatList
               style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5, flex: 0, height: '100%'}}
-              data={books_on_page}
+              data={this.state.books}
+              ref={r=>this.refs=r}//create refrence point to enable scrolling
+              onViewableItemsChanged={this.onViewableItemsChanged}//need this
               renderItem={({item}) => {
                 // console.log('render item )')
                 let cover_src = null;
@@ -343,7 +349,17 @@ class ReaderScreen extends Component {
               refreshing={false}
             >
             </FlatList>
-            {this.state.pages_count && need_pagination ? (
+            <Pagination
+              // dotThemeLight //<--use with backgroundColor:"grey"
+              listRef={this.refs}//to allow React Native Pagination to scroll to item when clicked  (so add "ref={r=>this.refs=r}" to your list)
+              paginationVisibleItems={this.state.viewableItems}//needs to track what the user sees
+              paginationItems={this.state.books}//pass the same list as data
+              paginationItemPadSize={3} //num of items to pad above and below your visable items
+              // pagingEnabled={true}
+              paginationStyle={{width: 10, alignItems:"center", justifyContent: 'space-between', position:"absolute", margin:0, bottom:0, right:15, padding:0, top: 0, flex:1,}}
+              dotIconSizeActive={10}
+            />
+            {/* {this.state.pages_count && need_pagination ? (
               <View style={{backgroundColor: '#fff'}}>
                 <FlatList
                   data={pagination_arr}
@@ -370,7 +386,7 @@ class ReaderScreen extends Component {
                   >
                 </FlatList>
               </View>
-            ): null}
+            ): null} */}
         </SafeAreaView>
       );
     }

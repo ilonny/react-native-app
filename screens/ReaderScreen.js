@@ -71,7 +71,10 @@ class ReaderScreen extends Component {
                   parsedText = JSON.parse(request.responseText);
                 } catch (e){
                   // console.log('catched parse json', request)
-                  parsedText = [];
+                  parsedText = {
+                      books: [],
+                      pages_count: 0,
+                  };
                 }
                 return {
                     ...state,

@@ -288,7 +288,7 @@ class ReaderScreen extends Component {
             </View>
             <FlatList
               style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5, flex: 0, height: '100%'}}
-              data={this.state.books}
+              data={(this.state.searched_books.length == 0 || this.state.searched_books.length == this.state.books.length) ? this.state.books : this.state.searched_books}
               ref={r=>this.refs=r}//create refrence point to enable scrolling
               onViewableItemsChanged={this.onViewableItemsChanged}//need this
               renderItem={({item}) => {

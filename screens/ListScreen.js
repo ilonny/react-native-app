@@ -33,7 +33,7 @@ class ListScreen extends Component {
       online: true,
       pages_count: 0,
       current_page: 1,
-      modalIsOpen: false,
+      modalIsOpen: true,
     }
   }
   static navigationOptions = ({navigation}) => {

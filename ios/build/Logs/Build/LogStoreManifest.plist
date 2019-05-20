@@ -35,6 +35,35 @@
 			<key>uniqueIdentifier</key>
 			<string>0F2D0354-46C9-44EF-809C-6B121BDBF1E7</string>
 		</dict>
+		<key>BA245F1F-0566-4648-B1C0-C745DAD824CF</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>BA245F1F-0566-4648-B1C0-C745DAD824CF.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>W</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>GuruOnline project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>GuruOnline</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project GuruOnline with scheme GuruOnline and configuration Debug</string>
+			<key>timeStartedRecording</key>
+			<real>580051779.07250202</real>
+			<key>timeStoppedRecording</key>
+			<real>580051784.59899497</real>
+			<key>title</key>
+			<string>Building project GuruOnline with scheme GuruOnline and configuration Debug</string>
+			<key>uniqueIdentifier</key>
+			<string>BA245F1F-0566-4648-B1C0-C745DAD824CF</string>
+		</dict>
 	</dict>
 </dict>
 </plist>

@@ -8,7 +8,8 @@ import {
   SafeAreaView,
   ScrollView,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from 'react-native';
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -23,6 +24,7 @@ class AudioScreen extends Component {
         date: Date.now(),
         refreshnig: false,
         online: true,
+        loading: false,
       }
     }
     static navigationOptions = {
@@ -38,6 +40,9 @@ class AudioScreen extends Component {
     getBooks(){
         console.log('getBooks starts')
         let request = new XMLHttpRequest();
+        this.setState({
+          loading: true
+        })
         request.onreadystatechange = (e) => {
             if (request.status === 200) {
                 this.setState(state => {
@@ -52,7 +57,8 @@ class AudioScreen extends Component {
                     return {
                         ...state,
                         books: parsedText,
-                        online: true
+                        online: true,
+                        loading: false,
                     }
                 }
                 })
@@ -74,6 +80,7 @@ class AudioScreen extends Component {
                         this.setState({
                             books: JSON.parse(value),
                             online: false,
+                            loading: false,
                         })
                     } catch (e){
                         console.log('crash!', e)

@@ -8,7 +8,8 @@ import {
   ScrollView,
   FlatList,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  ActivityIndicator
 } from 'react-native';
 import { SafeAreaView } from "react-navigation";
 import { API_URL } from '../constants/api';
@@ -76,12 +77,19 @@ class ListScreen extends Component {
           return;
         }
         if (request.status === 200) {
+        let all_item = ["Все"];
+        if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+            all_item = ["All"];
+        }
+        if (this.props.main.lang == 'es'){
+            all_item = ["Todos"];
+        }
           this.setState(state => {
             return {
               ...state,
               quotes: request.responseText ? JSON.parse(request.responseText) : 'error network',
               quotes_all: request.responseText ? JSON.parse(request.responseText) : 'error network',
-              authors: ["Все"].concat(Array.from(new Set(Array.from(JSON.parse(request.responseText), quote => quote.author_name)))),
+              authors: all_item.concat(Array.from(new Set(Array.from(JSON.parse(request.responseText), quote => quote.author_name)))),
               online: true
               // quotes: 'error network 200'
             }
@@ -317,7 +325,7 @@ class ListScreen extends Component {
   }
   filterQuotes(author_name){
     console.log('filter quotes', author_name)
-    if (author_name == 'Все') {
+    if (author_name == 'Все' || author_name == 'All' || author_name == 'Todos') {
       this.setState({
         quotes: this.state.quotes_all,
         modalIsOpen: false
@@ -451,7 +459,7 @@ class ListScreen extends Component {
       } else {
         comp =(
           <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text>Загрузка...</Text>
+            <ActivityIndicator />
           </View>
         )
     }

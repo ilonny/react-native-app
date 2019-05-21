@@ -8,7 +8,8 @@ import {
   ScrollView,
   FlatList,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  ActivityIndicator
 } from 'react-native';
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -24,6 +25,7 @@ class AudioScreen extends Component {
         date: Date.now(),
         refreshnig: false,
         online: true,
+        loading: false,
       }
     }
     static navigationOptions = ({navigation}) => {
@@ -45,6 +47,9 @@ class AudioScreen extends Component {
     getBooks(){
         console.log('getBooks starts')
         let request = new XMLHttpRequest();
+        this.setState({
+          loading: true
+        })
         request.onreadystatechange = (e) => {
             if (request.status === 200) {
                 this.setState(state => {
@@ -55,13 +60,13 @@ class AudioScreen extends Component {
                       return {
                         ...state,
                         books: parsedText,
-                        online: true
+                        online: true,
+                        loading: false,
                       }
                     } catch (e){
                       console.log('catched parse json', request)
                       parsedText = [];
                     }
-
                 }
                 })
                 AsyncStorage.setItem('cached_audio_list', request.responseText);
@@ -82,6 +87,7 @@ class AudioScreen extends Component {
                         this.setState({
                             books: JSON.parse(value),
                             online: false,
+                            loading: false
                         })
                     } catch (e){
                         console.log('crash!', e)
@@ -152,10 +158,22 @@ class AudioScreen extends Component {
                 /> */}
             </SafeAreaView>
           );
+        } else if (!!this.state.loading){
+          comp = (
+            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+              <ActivityIndicator />
+            </View>
+          )
         } else {
           comp = (
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-              <Text>Загрузка...</Text>
+              <Text>
+                {this.props.main.lang == 'eng' || this.props.main.lang == 'en'
+                  ? 'No data available'
+                  : this.props.main.lang == 'es'
+                  ? 'No hay datos disponibles'
+                  : 'Данные отсутствуют'}
+              </Text>
             </View>
           )
         }

@@ -7,7 +7,7 @@ export const setLang = lang => {
     setTimeout(() => {
         console.log('restart app')
         RNRestart.Restart(); 
-    }, 1000);
+    }, 2000);
 
 };
 

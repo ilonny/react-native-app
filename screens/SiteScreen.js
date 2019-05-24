@@ -355,7 +355,13 @@ class SiteScreen extends Component {
                                 </Text>
                             )}
                             <TouchableOpacity
-                                onPress={() => setLang(this.state.langChosen)}
+                                onPress={() => {
+                                    this.setState({
+                                        modalShowed: true,
+                                        modalStep: 1,
+                                    })
+                                    setLang(this.state.langChosen)
+                                }}
                                 style={{
                                     margin: 10,
                                     padding: 10,

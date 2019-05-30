@@ -24,6 +24,7 @@ import AudioDetail from "./screens/AudioDetail";
 import SiteScreen from "./screens/SiteScreen";
 import SiteScreenDetail from "./screens/SiteScreenDetail";
 import SettingsMainScreen from "./screens/SettingsMainScreen";
+import AudioScreenRouter from "./screens/AudioScreenRouter"
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { API_URL } from "./constants/api";
 import NavigationService from "./NavigationService";
@@ -162,6 +163,12 @@ const ReaderStack = createStackNavigator({
     Reader: ReaderScreenDetail
 });
 const AudioStack = createStackNavigator({
+    AudioScreenRouter: {
+        screen: AudioScreenRouter,
+        navigationOptions: {
+            title: "Аудио"
+        }
+    },
     Аудиокниги: {
         screen: AudioScreen,
         navigationOptions: {
@@ -171,6 +178,15 @@ const AudioStack = createStackNavigator({
     },
     Audio: AudioDetail
 });
+const ArchiveStack = createStackNavigator({
+    Архив: {
+        screen: AudioScreen,
+        navigationOptions: {
+            title: "Аудиокниги",
+            headerBackTitle: " ",
+        }
+    }
+})
 const SiteStack = createStackNavigator({
     SiteTabScreen: SiteScreen,
     SiteDetail: SiteScreenDetail
@@ -192,7 +208,7 @@ let TopLevelNavigator = createBottomTabNavigator(
         },
         // Избранное: FavoritesStack,
         Книги: ReaderStack,
-        Аудиокниги: AudioStack,
+        Аудио: AudioStack,
         Настройки: SettingsMainScreen
         // Настройки: SettingsStack,
     },
@@ -209,7 +225,7 @@ let TopLevelNavigator = createBottomTabNavigator(
                     iconName = `ios-star${focused ? "" : "-outline"}`;
                 } else if (routeName === "Книги") {
                     iconName = `ios-book${focused ? "" : "-outline"}`;
-                } else if (routeName === "Аудиокниги") {
+                } else if (routeName === "Аудио" || routeName === "Аудиоархив") {
                     iconName = `ios-headset${focused ? "" : "-outline"}`;
                 } else if (routeName === "Harekrishna") {
                     iconName = `ios-globe${focused ? "" : "-outline"}`;
@@ -219,7 +235,7 @@ let TopLevelNavigator = createBottomTabNavigator(
                 return (
                     <Ionicons
                         name={iconName}
-                        size={routeName === "Цитаты" ? 35 : 25}
+                        size={routeName === "Цитаты" ? 33 : 23}
                         color={tintColor}
                     />
                 );

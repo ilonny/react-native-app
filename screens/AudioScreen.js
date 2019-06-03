@@ -119,7 +119,7 @@ class AudioScreen extends Component {
           comp = (
             <SafeAreaView style={{flex: 1, backgroundColor: '#F5FCFF'}}>
                 <FlatList
-                    style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5}}
+                    style={{paddingLeft: 10, paddingRight: 10}}
                     data={this.state.books}
                     ref={r=>this.refs=r}//create refrence point to enable scrolling
                     onViewableItemsChanged={this.onViewableItemsChanged}//need this

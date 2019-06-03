@@ -24,7 +24,7 @@ class ListScreen extends Component {
       items: [],
       storage: [],
       authors: [],
-      quotes: "",
+      quotes: [],
       quotes_all: [],
       test: '',
       k: 0,
@@ -103,18 +103,27 @@ class ListScreen extends Component {
           }
         } else {
           console.log('error req')
-          this.setState(state => {
-            return {
-              ...state,
-              quotes: API_URL + `/quotes?items=[${this.state.items}]`
-            }
-          })
+          let all_item = ["Все"];
+          if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
+              all_item = ["All"];
+          }
+          if (this.props.main.lang == 'es'){
+              all_item = ["Todos"];
+          }
+          // this.setState(state => {
+          //   return {
+          //     ...state,
+          //     quotes: API_URL + `/quotes?items=[${this.state.items}]`
+          //   }
+          // })
           if (this.props.main.lang == 'eng' || this.props.main.lang == 'en'){
             AsyncStorage.getItem('cache_quotes_list_eng', (err, value) => {
               // console.log('cache_quotes_list', value)
               if (!!value){
                 this.setState({
                   quotes: JSON.parse(value),
+                  quotes_all: JSON.parse(value),
+                  authors: all_item.concat(Array.from(new Set(Array.from(JSON.parse(request.responseText), quote => quote.author_name)))),
                   online: false,
                 })
               }
@@ -126,6 +135,8 @@ class ListScreen extends Component {
               if (!!value){
                 this.setState({
                   quotes: JSON.parse(value),
+                  quotes_all: JSON.parse(value),
+                  authors: all_item.concat(Array.from(new Set(Array.from(JSON.parse(request.responseText), quote => quote.author_name)))),
                   online: false,
                 })
               }
@@ -137,6 +148,8 @@ class ListScreen extends Component {
               if (!!value){
                 this.setState({
                   quotes: JSON.parse(value),
+                  quotes_all: JSON.parse(value),
+                  authors: all_item.concat(Array.from(new Set(Array.from(JSON.parse(value), quote => quote.author_name)))),
                   online: false,
                 })
               }
@@ -210,7 +223,7 @@ class ListScreen extends Component {
     AsyncStorage.removeItem(ASglobal_downloading);
     this.props.navigation.setParams({toggleSettings: this.toggleSettings})
   }
-  _keyExtractor = (item) => item.id.toString();
+  _keyExtractor = (item) => item.id ? item.id.toString() : '';
   refresh(){
     console.log('refresh')
     this.setState(state => {
@@ -385,16 +398,18 @@ class ListScreen extends Component {
               refreshing={false}
             >
             </FlatList>
-            <Pagination
-              // dotThemeLight //<--use with backgroundColor:"grey"
-              listRef={this.refs}//to allow React Native Pagination to scroll to item when clicked  (so add "ref={r=>this.refs=r}" to your list)
-              paginationVisibleItems={this.state.viewableItems}//needs to track what the user sees
-              paginationItems={this.state.quotes}//pass the same list as data
-              paginationItemPadSize={3} //num of items to pad above and below your visable items
-              // pagingEnabled={true}
-              paginationStyle={{width: 10, alignItems:"center", justifyContent: 'space-between', position:"absolute", margin:0, bottom:0, right:15, padding:0, top: 0, flex:1,}}
-              dotIconSizeActive={10}
-            />
+            {this.state.quotes.length > 1 && (
+              <Pagination
+                // dotThemeLight //<--use with backgroundColor:"grey"
+                listRef={this.refs}//to allow React Native Pagination to scroll to item when clicked  (so add "ref={r=>this.refs=r}" to your list)
+                paginationVisibleItems={this.state.viewableItems ? this.state.viewableItems : []}//needs to track what the user sees
+                paginationItems={this.state.quotes ? this.state.quotes : []}//pass the same list as data
+                paginationItemPadSize={3} //num of items to pad above and below your visable items
+                // pagingEnabled={true}
+                paginationStyle={{width: 10, alignItems:"center", justifyContent: 'space-between', position:"absolute", margin:0, bottom:0, right:15, padding:0, top: 0, flex:1,}}
+                dotIconSizeActive={10}
+              />
+            )}
             {this.state.modalIsOpen && (
               <View style={styles.navigation}>
                 <View style={styles.navigation_header}>

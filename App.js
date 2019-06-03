@@ -25,6 +25,9 @@ import SiteScreen from "./screens/SiteScreen";
 import SiteScreenDetail from "./screens/SiteScreenDetail";
 import SettingsMainScreen from "./screens/SettingsMainScreen";
 import AudioScreenRouter from "./screens/AudioScreenRouter"
+import ArchiveAuthorsListScreen from "./screens/ArchiveAuthorsListScreen"
+import AudioArchiveYearsScreen from "./screens/AudioArchiveYearsScreen"
+import AudioArchiveAudioScreen from "./screens/AudioArchiveAudioScreen"
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { API_URL } from "./constants/api";
 import NavigationService from "./NavigationService";
@@ -176,17 +179,35 @@ const AudioStack = createStackNavigator({
             headerBackTitle: " ",
         }
     },
-    Audio: AudioDetail
-});
-const ArchiveStack = createStackNavigator({
-    Архив: {
-        screen: AudioScreen,
+    Audio: AudioDetail,
+    AudioArchiveAuthors: {
+        screen: ArchiveAuthorsListScreen,
         navigationOptions: {
-            title: "Аудиокниги",
-            headerBackTitle: " ",
+            title: "Архив аудио"
         }
-    }
-})
+    },
+    AudioArchiveYears: {
+        screen: AudioArchiveYearsScreen,
+        navigationOptions: {
+            title: "Архив аудио"
+        }
+    },
+    AudioArchiveAudio: {
+        screen: AudioArchiveAudioScreen,
+        navigationOptions: {
+            title: "Архив аудио"
+        }
+    },
+});
+// const ArchiveStack = createStackNavigator({
+//     Архив: {
+//         screen: AudioScreen,
+//         navigationOptions: {
+//             title: "Аудиокниги",
+//             headerBackTitle: " ",
+//         }
+//     }
+// })
 const SiteStack = createStackNavigator({
     SiteTabScreen: SiteScreen,
     SiteDetail: SiteScreenDetail

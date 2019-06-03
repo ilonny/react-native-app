@@ -60,7 +60,7 @@ export default class AudioScreenRouter extends Component {
                         </View>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => {console.log('navigate here'); this.props.navigation.navigate("AudioArchiveAuthors")}}>
                     <View style={[listStyles.quoteItem, {flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}]}>
                         <View style={{flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
                             <Ionicons

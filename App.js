@@ -38,6 +38,7 @@ var PushNotification = require("react-native-push-notification");
 PushNotification.configure({
     // (optional) Called when Token is generated (iOS and Android)
     onRegister: function(token) {
+        console.log('token registered', token)
         let device_settings;
         let device_settings_site;
         AsyncStorage.getItem("Settings", (err, value) => {
@@ -73,14 +74,14 @@ PushNotification.configure({
                     API_URL +
                         `/set-token?token=${JSON.stringify(
                             token
-                        )}&settings=${device_settings}&news_settings=${device_settings_site}&version=2&lang=ru`
+                        )}&settings=${device_settings}&news_settings=${device_settings_site}&version=3&lang=ru`
                 );
                 request.send();
                 console.log(
                     API_URL +
                         `/set-token?token=${JSON.stringify(
                             token
-                        )}&settings=${device_settings}&news_settings=${device_settings_site}&version=2&lang=ru`
+                        )}&settings=${device_settings}&news_settings=${device_settings_site}&version=3&lang=ru`
                 );
             });
         });

@@ -21,6 +21,8 @@ import WKWebView from "react-native-wkwebview-reborn";
 import NavigationService from "../NavigationService";
 import { connect } from "react-redux";
 import { setTag } from "../actions/site";
+import {ecadashCityList} from '../constants/ecadash'
+import {API_URL} from '../constants/api'
 const injectScript = `
 // var originalPostMessage = window.postMessage;
 
@@ -74,6 +76,32 @@ class ScsmathScreen extends Component {
         };
     };
     state = {};
+    componentDidMount(){
+        AsyncStorage.getItem("ecadash_city_chosen", (err, city) => {
+            console.log('ecadash city is', city);
+            if (!city) {
+                city = "moscow";
+            }
+            AsyncStorage.getItem('Token', (err, token) =>{
+                if (token) {
+                    let request = new XMLHttpRequest();
+                    request.onreadystatechange = (e) => {
+                        if (request.readyState !== 4) {
+                            return;
+                        }
+                        if (request.status === 200) {
+                            
+                        }
+                    };
+                    request.open('GET', API_URL + `/set-ecadash-city?token=${token}&city=${city}`);
+                    request.send();
+                    console.log('sent request to', API_URL + `/set-ecadash-city?token=${token}&city=${city}`)
+                } else {
+                    console.log('lolll')
+                }
+            })
+        })
+    }
     render() {
         // console.log('id = ', this.props.navigation.getParam("id"));
         return (

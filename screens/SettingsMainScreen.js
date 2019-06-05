@@ -16,12 +16,14 @@ import { TabView, TabBar, SceneMap } from "react-native-tab-view";
 import SettingsScreen from "./SettingsScreen";
 import SettingsSite from "./SettingsSite";
 import SettingsLangScreen from "./SettingsLangScreen";
+import SettingsCityScreen from "./SettingsCityScreen";
 
 import { connect } from "react-redux";
 
 const SettingsRoute = () => <SettingsScreen />;
 const SettingsSiteRoute = () => <SettingsSite />;
 const SettingsLangRoute = () => <SettingsLangScreen />;
+const SettingsCityRoute = () => <SettingsCityScreen />;
 
 class SettingsMainScreen extends Component {
     static navigationOptions = {
@@ -32,6 +34,7 @@ class SettingsMainScreen extends Component {
         routes: this.props.main.lang == 'en' || this.props.main.lang == 'eng' ? [
             { key: "settings", title: "Daily quotes"},
             { key: "settingsLang", title: "Language"},
+            { key: "settingsCity", title: "City"},
         ] : this.props.main.lang == 'es' ? [
             { key: "settings", title: "Cotizaciones diarias"},
             { key: "settingsLang", title: "Idioma"},
@@ -39,6 +42,7 @@ class SettingsMainScreen extends Component {
             { key: "settings", title: "Ежедневная рассылка цитат"},
             { key: "settingsSite", title: "Разделы сайта harekrisha.ru" },
             { key: "settingsLang", title: "Язык приложения"},
+            { key: "settingsCity", title: "Город"},
         ]
     };
     _handleIndexChange = index => this.setState({ index });
@@ -72,7 +76,8 @@ class SettingsMainScreen extends Component {
     _renderScene = SceneMap({
         settings: SettingsRoute,
         settingsSite: SettingsSiteRoute,
-        settingsLang: SettingsLangRoute
+        settingsLang: SettingsLangRoute,
+        settingsCity: SettingsCityRoute,
     });
     render() {
         return (

@@ -6,7 +6,7 @@
 	<integer>9</integer>
 	<key>logs</key>
 	<dict>
-		<key>54974D4C-201F-4833-BC50-B5D9BB7483FE</key>
+		<key>ED3C65A9-D2C1-4A0C-BB51-DC2E73BC814B</key>
 		<dict>
 			<key>className</key>
 			<string>IDECommandLineBuildLog</string>
@@ -15,9 +15,9 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
 			<key>fileName</key>
-			<string>54974D4C-201F-4833-BC50-B5D9BB7483FE.xcactivitylog</string>
+			<string>ED3C65A9-D2C1-4A0C-BB51-DC2E73BC814B.xcactivitylog</string>
 			<key>highLevelStatus</key>
-			<string>E</string>
+			<string>W</string>
 			<key>schemeIdentifier-containerName</key>
 			<string>GuruOnline project</string>
 			<key>schemeIdentifier-schemeName</key>
@@ -27,13 +27,13 @@
 			<key>signature</key>
 			<string>Building project GuruOnline with scheme GuruOnline and configuration Debug</string>
 			<key>timeStartedRecording</key>
-			<real>580924127.07528198</real>
+			<real>581529976.58866799</real>
 			<key>timeStoppedRecording</key>
-			<real>580924132.12068605</real>
+			<real>581529981.92080796</real>
 			<key>title</key>
 			<string>Building project GuruOnline with scheme GuruOnline and configuration Debug</string>
 			<key>uniqueIdentifier</key>
-			<string>54974D4C-201F-4833-BC50-B5D9BB7483FE</string>
+			<string>ED3C65A9-D2C1-4A0C-BB51-DC2E73BC814B</string>
 		</dict>
 	</dict>
 </dict>

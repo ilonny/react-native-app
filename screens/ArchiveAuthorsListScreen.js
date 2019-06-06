@@ -65,7 +65,7 @@ export default class ArchiveAuthorsListScreen extends Component {
                 AsyncStorage.getItem("arhive_audio_data", (err, value) => {
                     try {
                         this.setState({
-                            authors: JSON.parse(value),
+                            authors: JSON.parse(value) ? JSON.parse(value) : [],
                             online: false
                         });
                     } catch (e) {
@@ -73,11 +73,15 @@ export default class ArchiveAuthorsListScreen extends Component {
                     }
                 });
             }
-            if (!this.state.covers_fired) {
-                this.downloadCovers();
-                this.setState({
-                    covers_fired: true
-                });
+            if (!this.state.covers_fired && (this.state.authors.length != this.state.downloaded_covers.length)) {
+                try {
+                    this.downloadCovers();
+                    this.setState({
+                        covers_fired: true
+                    });    
+                } catch (error) {
+                    console.log('line 83 crashed')
+                }
             }
         };
         request.open(
@@ -89,6 +93,7 @@ export default class ArchiveAuthorsListScreen extends Component {
     componentDidMount() {
         // AsyncStorage.clear();
         this.getAuthorsData();
+        this.need_to_download_covers = [];
     }
     downloaded_covers = [];
     downloadCovers() {
@@ -145,6 +150,7 @@ export default class ArchiveAuthorsListScreen extends Component {
         });
     }
     downloadCoverQueue() {
+        // return true;
         if (this.need_to_download_covers.length) {
             console.log(
                 "this.need_to_download_covers",
@@ -192,128 +198,132 @@ export default class ArchiveAuthorsListScreen extends Component {
         console.log("render state", this.state);
         const { authors } = this.state;
         let comp = <ActivityIndicator />;
-        if (authors.length) {
-            comp = (
-                <SafeAreaView>
-                    <FlatList
-                        style={{
-                            paddingLeft: 10,
-                            paddingRight: 10,
-                            paddingBottom: 5,
-                            paddingTop: 5,
-                            flex: 0
-                        }}
-                        data={authors}
-                        ref={r => (this.refs = r)}
-                        onViewableItemsChanged={this.onViewableItemsChanged} //need this
-                        keyExtractor={this._keyExtractor}
-                        onRefresh={() => this.getAuthorsData()}
-                        refreshing={false}
-                        renderItem={({ item }) => {
-                            let img_src = null;
-                            let view;
-                            this.state.downloaded_covers.forEach(cover => {
-                                if (item.id == cover.id) {
-                                    img_src = cover.file_path;
-                                    // console.log('render item 1')
+        try {
+            if (authors && authors.length) {
+                comp = (
+                    <SafeAreaView>
+                        <FlatList
+                            style={{
+                                paddingLeft: 10,
+                                paddingRight: 10,
+                                paddingBottom: 5,
+                                paddingTop: 5,
+                                flex: 0
+                            }}
+                            data={authors}
+                            ref={r => (this.refs = r)}
+                            onViewableItemsChanged={this.onViewableItemsChanged} //need this
+                            keyExtractor={this._keyExtractor}
+                            onRefresh={() => this.getAuthorsData()}
+                            refreshing={false}
+                            renderItem={({ item }) => {
+                                let img_src = null;
+                                let view;
+                                this.state.downloaded_covers.forEach(cover => {
+                                    if (item.id == cover.id) {
+                                        img_src = cover.file_path;
+                                        // console.log('render item 1')
+                                        view = (
+                                            <View style={{ marginRight: 10 }}>
+                                                <Image
+                                                    source={{ uri: img_src }}
+                                                    style={{
+                                                        width: 80,
+                                                        height: 120
+                                                    }}
+                                                />
+                                            </View>
+                                        );
+                                    }
+                                });
+                                if (this.state.online && !img_src) {
+                                    img_src =
+                                        "https://app.harekrishna.ru/" +
+                                        item.img_src;
                                     view = (
                                         <View style={{ marginRight: 10 }}>
                                             <Image
                                                 source={{ uri: img_src }}
-                                                style={{
-                                                    width: 80,
-                                                    height: 120
-                                                }}
+                                                style={{ width: 80, height: 120 }}
                                             />
                                         </View>
                                     );
                                 }
-                            });
-                            if (this.state.online && !img_src) {
-                                img_src =
-                                    "https://app.harekrishna.ru/" +
-                                    item.img_src;
-                                view = (
-                                    <View style={{ marginRight: 10 }}>
-                                        <Image
-                                            source={{ uri: img_src }}
-                                            style={{ width: 80, height: 120 }}
-                                        />
-                                    </View>
-                                );
-                            }
-                            if (!this.state.online && !img_src) {
-                                view = null;
-                                // console.log('render item 2')
-                            }
-                            return (
-                                <TouchableOpacity
-                                    onPress={() =>
-                                        this.props.navigation.navigate(
-                                            "AudioArchiveYears",
-                                            { years: item.years, online: this.state.online }
-                                        )
-                                    }
-                                >
-                                    <View style={listStyles.quoteItem}>
-                                        <View>
-                                            <View style={listStyles.bookTop}>
-                                                {view}
-                                                <View
-                                                    style={{
-                                                        flexWrap: "wrap",
-                                                        flex: 1
-                                                    }}
-                                                >
-                                                    <Text
-                                                        style={
-                                                            listStyles.quoteTitle
-                                                        }
+                                if (!this.state.online && !img_src) {
+                                    view = null;
+                                    // console.log('render item 2')
+                                }
+                                return (
+                                    <TouchableOpacity
+                                        onPress={() =>
+                                            this.props.navigation.navigate(
+                                                "AudioArchiveYears",
+                                                { years: item.years, online: this.state.online }
+                                            )
+                                        }
+                                    >
+                                        <View style={listStyles.quoteItem}>
+                                            <View>
+                                                <View style={listStyles.bookTop}>
+                                                    {view}
+                                                    <View
+                                                        style={{
+                                                            flexWrap: "wrap",
+                                                            flex: 1
+                                                        }}
                                                     >
-                                                        {item.name}
+                                                        <Text
+                                                            style={
+                                                                listStyles.quoteTitle
+                                                            }
+                                                        >
+                                                            {item.name}
+                                                        </Text>
+                                                    </View>
+                                                </View>
+                                                <View>
+                                                    <Text
+                                                        style={{
+                                                            marginTop: 10,
+                                                            color: "#c5c5c5",
+                                                            fontStyle: "italic"
+                                                        }}
+                                                    >
+                                                        {item.preview_text}
                                                     </Text>
                                                 </View>
                                             </View>
-                                            <View>
-                                                <Text
-                                                    style={{
-                                                        marginTop: 10,
-                                                        color: "#c5c5c5",
-                                                        fontStyle: "italic"
-                                                    }}
-                                                >
-                                                    {item.preview_text}
-                                                </Text>
-                                            </View>
                                         </View>
-                                    </View>
-                                </TouchableOpacity>
-                            );
-                        }}
-                    />
-                    <Pagination
-                        // dotThemeLight //<--use with backgroundColor:"grey"
-                        listRef={this.refs} //to allow React Native Pagination to scroll to item when clicked  (so add "ref={r=>this.refs=r}" to your list)
-                        paginationVisibleItems={this.state.viewableItems} //needs to track what the user sees
-                        paginationItems={this.state.authors} //pass the same list as data
-                        paginationItemPadSize={3} //num of items to pad above and below your visable items
-                        // pagingEnabled={true}
-                        paginationStyle={{
-                            width: 10,
-                            alignItems: "center",
-                            justifyContent: "space-between",
-                            position: "absolute",
-                            margin: 0,
-                            bottom: 0,
-                            right: 15,
-                            padding: 0,
-                            top: 0,
-                            flex: 1
-                        }}
-                        dotIconSizeActive={10}
-                    />
-                </SafeAreaView>
-            );
+                                    </TouchableOpacity>
+                                );
+                            }}
+                        />
+                        <Pagination
+                            // dotThemeLight //<--use with backgroundColor:"grey"
+                            listRef={this.refs} //to allow React Native Pagination to scroll to item when clicked  (so add "ref={r=>this.refs=r}" to your list)
+                            paginationVisibleItems={this.state.viewableItems} //needs to track what the user sees
+                            paginationItems={this.state.authors} //pass the same list as data
+                            paginationItemPadSize={3} //num of items to pad above and below your visable items
+                            // pagingEnabled={true}
+                            paginationStyle={{
+                                width: 10,
+                                alignItems: "center",
+                                justifyContent: "space-between",
+                                position: "absolute",
+                                margin: 0,
+                                bottom: 0,
+                                right: 15,
+                                padding: 0,
+                                top: 0,
+                                flex: 1
+                            }}
+                            dotIconSizeActive={10}
+                        />
+                    </SafeAreaView>
+                );
+            }
+        } catch (e) {
+            console.log('crash', e)
         }
         return comp;
     }

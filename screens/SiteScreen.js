@@ -11,7 +11,8 @@ import {
     TouchableOpacity,
     Dimensions,
     Animated,
-    Modal
+    Modal,
+    Picker
 } from "react-native";
 import { TabView, TabBar, SceneMap } from "react-native-tab-view";
 import SiteScreenList from "./SiteScreenList";
@@ -30,6 +31,8 @@ const ReadRoute = () => <SiteScreenList type="read" />;
 const ImportantRoute = () => <SiteScreenList type="important" />;
 const CalendarRoute = () => <CalendarScreen />;
 import NavigationService from "../NavigationService";
+import {ecadashCityList} from '../constants/ecadash'
+import {API_URL} from '../constants/api'
 class SiteScreen extends Component {
     static navigationOptions = {
         header: null
@@ -46,7 +49,9 @@ class SiteScreen extends Component {
         ],
         modalShowed: true,
         modalStep: 1,
-        langChosen: false
+        langChosen: false,
+        ecadashCityList: ecadashCityList,
+        ecadashCityChosen: 'moscow',
     };
     _handleIndexChange = index => this.setState({ index });
 
@@ -96,6 +101,30 @@ class SiteScreen extends Component {
                 AsyncStorage.setItem("initial_modal", "true");
             }
         });
+        AsyncStorage.getItem("ecadash_city_chosen", (err, city) => {
+            console.log('ecadash city is', city);
+            if (!city) {
+                city = "moscow";
+            }
+            AsyncStorage.getItem('Token', (err, token) =>{
+                if (token) {
+                    let request = new XMLHttpRequest();
+                    request.onreadystatechange = (e) => {
+                        if (request.readyState !== 4) {
+                            return;
+                        }
+                        if (request.status === 200) {
+
+                        }
+                    };
+                    request.open('GET', API_URL + `/set-ecadash-city?token=${token}&city=${city}`);
+                    request.send();
+                    console.log('sent request to', API_URL + `/set-ecadash-city?token=${token}&city=${city}`)
+                } else {
+                    console.log('lolll')
+                }
+            })
+        })
         AsyncStorage.getItem("lang", (err, value) => {
             console.log("lang is ", value);
             if (!value || value == "ru") {
@@ -110,17 +139,19 @@ class SiteScreen extends Component {
         });
     }
     render() {
-        console.log("root render state", this.state);
-        console.log("root render props", this.props);
+        // console.log("root render state", this.state);
+        // console.log("root render props", this.props);
         if (this.state.modalShowed) {
             if (this.props.main.lang == "ru") {
                 return (
-                    <TabView
-                        navigationState={this.state}
-                        renderScene={this._renderScene}
-                        renderTabBar={this._renderTabBar}
-                        onIndexChange={this._handleIndexChange}
-                    />
+                    <SafeAreaView  style={{flex: 1, backgroundColor: '#f7f7f7'}}>
+                        <TabView
+                            navigationState={this.state}
+                            renderScene={this._renderScene}
+                            renderTabBar={this._renderTabBar}
+                            onIndexChange={this._handleIndexChange}
+                            />
+                    </SafeAreaView>
                 );
             } else if (
                 this.props.main.lang == "en" ||
@@ -130,14 +161,18 @@ class SiteScreen extends Component {
                     // <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                     //     <Text>http://www.scsmath.com/</Text>
                     // </View>
-                    <ScsmathScreen />
+                    <SafeAreaView   style={{flex: 1}}>
+                        <ScsmathScreen />
+                    </SafeAreaView>
                 );
             } else {
                 return (
-                    <SiteScreenEs/>
+                    <SafeAreaView style={{flex: 1, backgroundColor: '#f7f7f7'}}>
+                        <SiteScreenEs/>
+                    </SafeAreaView>
                 );
             }
-        } else {
+        } else
             return (
                 <Modal
                     animationType="slide"
@@ -179,7 +214,7 @@ class SiteScreen extends Component {
                                     onPress={() =>
                                         this.setState({
                                             langChosen: "ru",
-                                            modalStep: 2
+                                            modalStep: 2,
                                         })
                                     }
                                     style={{
@@ -205,7 +240,17 @@ class SiteScreen extends Component {
                                     onPress={() =>
                                         this.setState({
                                             langChosen: "en",
-                                            modalStep: 2
+                                            modalStep: 2,
+                                            ecadashCityList: this.state.ecadashCityList.sort((prev, next) => {
+                                                if (prev.name_eng > next.name_eng) {
+                                                    return 1;
+                                                }
+                                                if (prev.name_eng < next.name_eng) {
+                                                    return -1;
+                                                }
+                                                // a должно быть равным b
+                                                return 0;
+                                            })
                                         })
                                     }
                                     style={{
@@ -312,16 +357,10 @@ class SiteScreen extends Component {
                                         «Guru Online»
                                     </Text>
                                     {"\n"}It allows you to:
-                                    {"\n"}- Listen and read lectures of modern
-                                    gurus;
-                                    {"\n"}- Explore the heritage of gurus
-                                    through electronic/audio books;
-                                    {"\n"}- Receive a daily newsteller -
-                                    quotations of gurus of the past and present
-                                    with an option of sorting them by author.
-                                    {"\n"}We hope our app will enable you to
-                                    live in a world of high ideals, beauty,
-                                    harmony and love at any place and any time.
+                                    {"\n"}- Listen and read lectures of modern gurus;
+                                    {"\n"}- Explore the heritage of gurus through electronic/audio books;
+                                    {"\n"}- Receive a daily newsteller - quotations of gurus of the past and present with an option of sorting them by author.
+                                    {"\n"}We hope our app will enable you to live in a world of high ideals, beauty, harmony and love at any place and any time.
                                 </Text>
                             )}
                             {this.state.langChosen == "es" && (
@@ -334,34 +373,82 @@ class SiteScreen extends Component {
                                     }}
                                 >
                                     ¡Queridos amigos!
-                                    {"\n"}Estamos encantados de presentar
-                                    nuestra aplicación
+                                    {"\n"}Estamos encantados de presentar nuestra aplicación
                                     {"\n"}
                                     <Text style={{ fontWeight: "bold" }}>
                                         «Guru Online»
                                     </Text>
                                     {"\n"}Te permite:
-                                    {"\n"}- Escuchar y leer conferencias de
-                                    gurús modernos.
-                                    {"\n"}- Explorar el patrimonio de los gurús
-                                    a través de libros de audio / electrónicos.
-                                    {"\n"}- Recibir un vendedor nuevo diario:
-                                    citas de gurús del pasado y del presente con
-                                    la opción de clasificarlos por autor.
-                                    {"\n"}Esperamos que nuestra aplicación te
-                                    permita vivir en un mundo de altos ideales,
-                                    belleza, armonía y amor en cualquier lugar y
-                                    en cualquier momento.
+                                    {"\n"}- Escuchar y leer conferencias de gurús modernos.
+                                    {"\n"}- Explorar el patrimonio de los gurús a través de libros de audio / electrónicos.
+                                    {"\n"}- Recibir un vendedor nuevo diario: citas de gurús del pasado y del presente con la opción de clasificarlos por autor.
+                                    {"\n"}Esperamos que nuestra aplicación te permita vivir en un mundo de altos ideales, belleza, armonía y amor en cualquier lugar y en cualquier momento.
                                 </Text>
                             )}
                             <TouchableOpacity
                                 onPress={() => {
-                                    this.setState({
-                                        modalShowed: true,
-                                        modalStep: 1,
-                                    })
+                                    this.props.main.lang == 'es' ?
                                     setLang(this.state.langChosen)
+                                    : this.setState({modalStep: 3})
                                 }}
+                                style={{
+                                    margin: 10,
+                                    padding: 10,
+                                    borderRadius: 10,
+                                    borderWidth: 0.5,
+                                    borderColor: "#75644f",
+                                    width: 100
+                                }}
+                            >
+                                <Text
+                                    style={{
+                                        textAlign: "center",
+                                        color: "#75644f",
+                                        fontSize: 16
+                                    }}
+                                >
+                                    Ок
+                                </Text>
+                            </TouchableOpacity>
+                        </ScrollView>
+                    )}
+                    {this.state.modalStep == 3 && (
+                        <ScrollView
+                            contentContainerStyle={{
+                                flex: 1,
+                                justifyContent: "center",
+                                alignItems: "center",
+                                padding: 20
+                            }}
+                        >
+                            <Text
+                            style={{
+                                color: "#75644f",
+                                fontSize: 16,
+                                textAlign: "center",
+                                lineHeight: 20
+                            }}>
+                                {this.state.langChosen == 'ru' ? 'Пожалуйста, выберите свой город для получения уведомлений об экадаши и праздниках:' : 'Please select your city to receive notifications about Ekadashi and holidays:'}
+                            </Text>
+                            <Picker
+                                selectedValue={this.state.ecadashCityChosen}
+                                style={{height: 250, width: 250}}
+                                onValueChange={itemValue => {
+                                    this.setState({ecadashCityChosen: itemValue});
+                                    AsyncStorage.setItem('ecadash_city_chosen', itemValue);
+                                }}
+                            >
+                                {this.state.ecadashCityList.map(city => (
+                                    <Picker.Item key={city.name_link} label={this.state.langChosen == 'ru' ? city.name : city.name_eng} value={city.name_link} />
+                                ))}
+                            </Picker>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    setLang(this.state.langChosen)}
+                                    // AsyncStorage.getItem('ecadash_city_chosen', (err, value) => {
+                                    //     console.log('ecadash_city_chosen', value)
+                                    // })
+                                }
                                 style={{
                                     margin: 10,
                                     padding: 10,
@@ -385,7 +472,6 @@ class SiteScreen extends Component {
                     )}
                 </Modal>
             );
-        }
     }
 }
 // const styles = StyleSheet.create({

@@ -1,15 +1,15 @@
 [
     {
-        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_ic_ab_back_mtrl_am_alpha.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_ic_ab_back_mtrl_am_alpha.png"
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_ic_star_black_16dp.png",
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_ic_star_black_16dp.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_btn_switch_to_on_mtrl_00012.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_list_selector_disabled_holo_light.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_list_selector_disabled_holo_light.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_list_selector_disabled_holo_light.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/pause.png",
@@ -17,31 +17,39 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_menu_hardkey_panel_mtrl_mult.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_ic_star_black_36dp.png",
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_ic_star_black_36dp.png"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_text_select_handle_right_mtrl_dark.png",
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_text_select_handle_right_mtrl_dark.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_popup_background_mtrl_mult.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_popup_background_mtrl_mult.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_popup_background_mtrl_mult.9.png"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_text_select_handle_middle_mtrl_dark.png",
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_text_select_handle_middle_mtrl_dark.png"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_ic_star_half_black_48dp.png",
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_ic_star_half_black_48dp.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/stop.png",
         "source": "/Users/dmitry/projects/react-native-app/node_modules/react-native-music-control/android/build/intermediates/packaged_res/release/drawable-hdpi-v4/stop.png"
     },
     {
-        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_ic_clear_mtrl_alpha.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_ic_clear_mtrl_alpha.png"
-    },
-    {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_btn_check_to_on_mtrl_015.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_btn_check_to_on_mtrl_015.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_btn_check_to_on_mtrl_015.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_list_selector_disabled_holo_dark.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_list_selector_disabled_holo_dark.9.png"
-    },
-    {
-        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_btn_rating_star_off_mtrl_alpha.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_btn_rating_star_off_mtrl_alpha.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_list_selector_disabled_holo_dark.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/skip_forward_10.png",
@@ -49,11 +57,11 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/notification_bg_normal_pressed.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-compat-27.0.2.aar/f6cc2924b1cead633d21fca554c84c58/res/drawable-hdpi-v4/notification_bg_normal_pressed.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.0.aar/4f53def2fd4f661ab00e9e4705e099e7/res/drawable-hdpi-v4/notification_bg_normal_pressed.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_btn_radio_to_on_mtrl_000.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_btn_radio_to_on_mtrl_000.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_btn_radio_to_on_mtrl_000.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/skip_backward_10.png",
@@ -61,15 +69,15 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/notification_bg_low_normal.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-compat-27.0.2.aar/f6cc2924b1cead633d21fca554c84c58/res/drawable-hdpi-v4/notification_bg_low_normal.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.0.aar/4f53def2fd4f661ab00e9e4705e099e7/res/drawable-hdpi-v4/notification_bg_low_normal.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_scrubber_track_mtrl_alpha.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_scrubber_track_mtrl_alpha.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_scrubber_track_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_switch_track_mtrl_alpha.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_switch_track_mtrl_alpha.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_switch_track_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png",
@@ -77,19 +85,19 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_ic_menu_selectall_mtrl_alpha.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_ic_menu_selectall_mtrl_alpha.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_ic_menu_selectall_mtrl_alpha.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_btn_radio_to_on_mtrl_015.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_btn_radio_to_on_mtrl_015.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_btn_radio_to_on_mtrl_015.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_cab_background_top_mtrl_alpha.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_cab_background_top_mtrl_alpha.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_cab_background_top_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/notification_bg_low_pressed.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-compat-27.0.2.aar/f6cc2924b1cead633d21fca554c84c58/res/drawable-hdpi-v4/notification_bg_low_pressed.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.0.aar/4f53def2fd4f661ab00e9e4705e099e7/res/drawable-hdpi-v4/notification_bg_low_pressed.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/googleg_standard_color_18.png",
@@ -97,27 +105,27 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_textfield_activated_mtrl_alpha.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_textfield_activated_mtrl_alpha.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_textfield_activated_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_ic_menu_paste_mtrl_am_alpha.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_ic_menu_paste_mtrl_am_alpha.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_list_pressed_holo_light.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_list_pressed_holo_light.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_list_pressed_holo_light.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_ic_menu_copy_mtrl_am_alpha.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_ic_menu_copy_mtrl_am_alpha.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_ab_share_pack_mtrl_alpha.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_ic_menu_share_mtrl_alpha.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_ic_menu_share_mtrl_alpha.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_ic_menu_share_mtrl_alpha.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/common_google_signin_btn_text_light_normal_background.9.png",
@@ -125,7 +133,7 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/notify_panel_notification_icon_bg.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-compat-27.0.2.aar/f6cc2924b1cead633d21fca554c84c58/res/drawable-hdpi-v4/notify_panel_notification_icon_bg.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.0.aar/4f53def2fd4f661ab00e9e4705e099e7/res/drawable-hdpi-v4/notify_panel_notification_icon_bg.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/common_google_signin_btn_icon_dark_normal_background.9.png",
@@ -141,39 +149,39 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_list_pressed_holo_dark.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_list_pressed_holo_dark.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_list_pressed_holo_dark.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_tab_indicator_mtrl_alpha.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_tab_indicator_mtrl_alpha.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_tab_indicator_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_scrubber_control_to_pressed_mtrl_005.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_list_longpressed_holo.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_list_longpressed_holo.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_list_longpressed_holo.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_textfield_search_activated_mtrl_alpha.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_btn_switch_to_on_mtrl_00001.9.png"
-    },
-    {
-        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_ic_menu_moreoverflow_mtrl_alpha.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_ic_menu_moreoverflow_mtrl_alpha.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_list_focused_holo.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_list_focused_holo.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_list_focused_holo.9.png"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_text_select_handle_left_mtrl_light.png",
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_text_select_handle_left_mtrl_light.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_spinner_mtrl_am_alpha.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_spinner_mtrl_am_alpha.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_spinner_mtrl_am_alpha.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/skip_forward_30.png",
@@ -181,19 +189,19 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_ic_menu_cut_mtrl_alpha.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_ic_menu_cut_mtrl_alpha.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/skip_backward_30.png",
         "source": "/Users/dmitry/projects/react-native-app/node_modules/react-native-music-control/android/build/intermediates/packaged_res/release/drawable-hdpi-v4/skip_backward_30.png"
     },
     {
-        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_btn_rating_star_on_mtrl_alpha.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_btn_rating_star_on_mtrl_alpha.png"
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_ic_star_black_48dp.png",
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_ic_star_black_48dp.png"
     },
     {
-        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_ic_search_api_mtrl_alpha.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_ic_search_api_mtrl_alpha.png"
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_ic_star_half_black_36dp.png",
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_ic_star_half_black_36dp.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/skip_backward_5.png",
@@ -201,19 +209,27 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/notification_bg_normal.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-compat-27.0.2.aar/f6cc2924b1cead633d21fca554c84c58/res/drawable-hdpi-v4/notification_bg_normal.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.0.aar/4f53def2fd4f661ab00e9e4705e099e7/res/drawable-hdpi-v4/notification_bg_normal.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_scrubber_control_to_pressed_mtrl_000.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png",
         "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/39f62d119345f3237ad56fcdf18eedc6/res/drawable-hdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png"
     },
     {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_ic_star_half_black_16dp.png",
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_ic_star_half_black_16dp.png"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_text_select_handle_left_mtrl_dark.png",
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_text_select_handle_left_mtrl_dark.png"
+    },
+    {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_btn_check_to_on_mtrl_000.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_btn_check_to_on_mtrl_000.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_btn_check_to_on_mtrl_000.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/common_full_open_on_phone.png",
@@ -229,38 +245,38 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_scrubber_primary_mtrl_alpha.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_ic_commit_search_api_mtrl_alpha.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_textfield_default_mtrl_alpha.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_textfield_default_mtrl_alpha.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_textfield_default_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_text_select_handle_middle_mtrl_light.png",
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_text_select_handle_middle_mtrl_light.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_textfield_search_default_mtrl_alpha.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_list_divider_mtrl_alpha.9.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_list_divider_mtrl_alpha.9.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_list_divider_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_scrubber_control_off_mtrl_alpha.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_scrubber_control_off_mtrl_alpha.png"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_scrubber_control_off_mtrl_alpha.png"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_text_select_handle_right_mtrl_light.png",
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/drawable-hdpi-v4/abc_text_select_handle_right_mtrl_light.png"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/next.png",
         "source": "/Users/dmitry/projects/react-native-app/node_modules/react-native-music-control/android/build/intermediates/packaged_res/release/drawable-hdpi-v4/next.png"
-    },
-    {
-        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_ic_go_search_api_mtrl_alpha.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_ic_go_search_api_mtrl_alpha.png"
-    },
-    {
-        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/drawable-hdpi-v4/abc_ic_voice_search_api_mtrl_alpha.png",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/drawable-hdpi/abc_ic_voice_search_api_mtrl_alpha.png"
     }
 ]

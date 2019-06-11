@@ -1,23 +1,23 @@
 [
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/notification_media_action.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/notification_media_action.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.0.2.aar/c518f0e5dafeaf2014951e1fcd19d17d/res/layout/notification_media_action.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_action_mode_bar.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_action_mode_bar.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_action_mode_bar.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_action_menu_item_layout.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_action_menu_item_layout.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_action_menu_item_layout.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_activity_chooser_view.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_activity_chooser_view.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_activity_chooser_view.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_list_menu_item_layout.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_list_menu_item_layout.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_list_menu_item_layout.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/notification_template_big_media_custom.xml",
@@ -29,31 +29,31 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_list_menu_item_icon.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_list_menu_item_icon.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_list_menu_item_icon.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_dialog_title_material.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_dialog_title_material.xml"
-    },
-    {
-        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_action_bar_view_list_nav_layout.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_action_bar_view_list_nav_layout.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_dialog_title_material.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/select_dialog_singlechoice_material.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/select_dialog_singlechoice_material.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/select_dialog_singlechoice_material.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_list_menu_item_radio.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_list_menu_item_radio.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_popup_menu_header_item_layout.xml",
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_popup_menu_header_item_layout.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/notification_action.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-compat-27.0.2.aar/f6cc2924b1cead633d21fca554c84c58/res/layout/notification_action.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.0.aar/4f53def2fd4f661ab00e9e4705e099e7/res/layout/notification_action.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_expanded_menu_layout.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_expanded_menu_layout.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_expanded_menu_layout.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/notification_template_media_custom.xml",
@@ -61,31 +61,35 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_screen_simple_overlay_action_mode.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_screen_simple_overlay_action_mode.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_screen_simple_overlay_action_mode.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/notification_action_tombstone.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-compat-27.0.2.aar/f6cc2924b1cead633d21fca554c84c58/res/layout/notification_action_tombstone.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.0.aar/4f53def2fd4f661ab00e9e4705e099e7/res/layout/notification_action_tombstone.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_action_bar_title_item.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_action_bar_title_item.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_alert_dialog_title_material.xml",
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_alert_dialog_title_material.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/select_dialog_multichoice_material.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/select_dialog_multichoice_material.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/select_dialog_multichoice_material.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_screen_toolbar.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_screen_toolbar.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_screen_toolbar.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_alert_dialog_material.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_alert_dialog_material.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_alert_dialog_material.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/notification_template_part_time.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/notification_template_part_time.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.0.aar/4f53def2fd4f661ab00e9e4705e099e7/res/layout/notification_template_part_time.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/notification_template_lines_media.xml",
@@ -93,15 +97,15 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_action_mode_close_item_material.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_action_mode_close_item_material.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_action_mode_close_item_material.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_screen_simple.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_screen_simple.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_screen_simple.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_screen_content_include.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_screen_content_include.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_screen_content_include.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/fps_view.xml",
@@ -109,7 +113,7 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_search_dropdown_item_icons_2line.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_search_dropdown_item_icons_2line.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_search_dropdown_item_icons_2line.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/notification_template_big_media_narrow_custom.xml",
@@ -117,27 +121,27 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_select_dialog_material.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_select_dialog_material.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_select_dialog_material.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_alert_dialog_button_bar_material.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_alert_dialog_button_bar_material.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_alert_dialog_button_bar_material.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_action_bar_up_container.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_action_bar_up_container.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_action_bar_up_container.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/notification_template_part_chronometer.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/notification_template_part_chronometer.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.0.aar/4f53def2fd4f661ab00e9e4705e099e7/res/layout/notification_template_part_chronometer.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/support_simple_spinner_dropdown_item.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/support_simple_spinner_dropdown_item.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/support_simple_spinner_dropdown_item.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_popup_menu_item_layout.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_popup_menu_item_layout.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_popup_menu_item_layout.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/redbox_item_frame.xml",
@@ -145,11 +149,11 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/notification_template_big_media.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/notification_template_big_media.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.0.2.aar/c518f0e5dafeaf2014951e1fcd19d17d/res/layout/notification_template_big_media.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/notification_template_icon_group.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-compat-27.0.2.aar/f6cc2924b1cead633d21fca554c84c58/res/layout/notification_template_icon_group.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.0.aar/4f53def2fd4f661ab00e9e4705e099e7/res/layout/notification_template_icon_group.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/redbox_item_title.xml",
@@ -157,42 +161,42 @@
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_action_menu_layout.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_action_menu_layout.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_action_menu_layout.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/notification_template_big_media_narrow.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/notification_template_big_media_narrow.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.0.2.aar/c518f0e5dafeaf2014951e1fcd19d17d/res/layout/notification_template_big_media_narrow.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_search_view.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_search_view.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_search_view.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/notification_template_media.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/notification_template_media.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.0.2.aar/c518f0e5dafeaf2014951e1fcd19d17d/res/layout/notification_template_media.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/select_dialog_item_material.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/select_dialog_item_material.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/select_dialog_item_material.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/notification_media_cancel_action.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/notification_media_cancel_action.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.0.2.aar/c518f0e5dafeaf2014951e1fcd19d17d/res/layout/notification_media_cancel_action.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/redbox_view.xml",
         "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/react-native-0.55.4.aar/96620dd658df25bb41c33dc999cacaed/res/layout/redbox_view.xml"
     },
     {
-        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_list_menu_item_checkbox.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_list_menu_item_checkbox.xml"
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_tooltip.xml",
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_tooltip.xml"
     },
     {
-        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/notification_template_lines.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/notification_template_lines.xml"
+        "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_list_menu_item_checkbox.xml",
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_list_menu_item_checkbox.xml"
     },
     {
         "merged": "/Users/dmitry/projects/react-native-app/android/app/build/intermediates/res/merged/release/layout/abc_activity_chooser_view_list_item.xml",
-        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.1.1.aar/3a463985a335f29505770a19f0b84cd8/res/layout/abc_activity_chooser_view_list_item.xml"
+        "source": "/Users/dmitry/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/d0ac486a8ef890a89a9d7a53a8c813fc/res/layout/abc_activity_chooser_view_list_item.xml"
     }
 ]

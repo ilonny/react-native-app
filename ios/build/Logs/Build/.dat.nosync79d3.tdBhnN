@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>9</integer>
+	<key>logs</key>
+	<dict>
+		<key>DEDFCE85-6C98-4CDE-83C2-CB5835895EF4</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>DEDFCE85-6C98-4CDE-83C2-CB5835895EF4.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>W</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>GuruOnline project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>GuruOnline</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project GuruOnline with scheme GuruOnline and configuration Debug</string>
+			<key>timeStartedRecording</key>
+			<real>582017059.65521204</real>
+			<key>timeStoppedRecording</key>
+			<real>582017070.42219603</real>
+			<key>title</key>
+			<string>Building project GuruOnline with scheme GuruOnline and configuration Debug</string>
+			<key>uniqueIdentifier</key>
+			<string>DEDFCE85-6C98-4CDE-83C2-CB5835895EF4</string>
+		</dict>
+		<key>ED3C65A9-D2C1-4A0C-BB51-DC2E73BC814B</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>ED3C65A9-D2C1-4A0C-BB51-DC2E73BC814B.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>W</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>GuruOnline project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>GuruOnline</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project GuruOnline with scheme GuruOnline and configuration Debug</string>
+			<key>timeStartedRecording</key>
+			<real>581529976.58866799</real>
+			<key>timeStoppedRecording</key>
+			<real>581529981.92080796</real>
+			<key>title</key>
+			<string>Building project GuruOnline with scheme GuruOnline and configuration Debug</string>
+			<key>uniqueIdentifier</key>
+			<string>ED3C65A9-D2C1-4A0C-BB51-DC2E73BC814B</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

@@ -107,6 +107,14 @@ PushNotification.configure({
                 console.log('REDIRECT TIMEOUT')
                 NavigationService.navigate("SiteDetail", { id: n_id, title: n_t });
             }, 2000);
+        } else if (notification.data.c_date) {
+            let c_date = notification.data.c_date;
+            console.log('DATENOTIFICATION ES')
+            setTimeout(() => {
+                console.log('REDIRECT TIMEOUT')
+                AsyncStorage.setItem('c_date', c_date)
+                NavigationService.navigate("SiteTabScreen", { c_date: c_date});
+            }, 150);
         }
     },
 

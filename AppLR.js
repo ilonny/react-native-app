@@ -15,14 +15,14 @@ export default class AppLR extends Component {
         AsyncStorage.getItem("lang", (err, value) => {
             // console.log('lang is ', value)
             if (!value || value == "ru") {
-                // console.log('return App comp')
+                console.log('return App comp')
                 // comp = App;
                 this.setState({
                     comp: <App lang='ru'/>
                 })
             }
             if (value == 'eng' || value == 'en') {
-                // console.log('return AppEng comp')
+                console.log('return AppEng comp')
                 this.setState({
                     comp: <AppEng lang='eng'/>
                 })

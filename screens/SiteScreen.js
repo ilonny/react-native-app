@@ -11,7 +11,8 @@ import {
     Dimensions,
     Animated,
     Modal,
-    Picker
+    Picker,
+    ActivityIndicator
 } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { TabView, TabBar, SceneMap } from "react-native-tab-view";
@@ -24,12 +25,13 @@ import SiteScreenEs from "./SiteScreenEs";
 import { setLang, setLangInside } from "../actions/lang";
 import { connect } from "react-redux";
 
-const ContentRoute = () => <SiteScreenList type="content" />;
-const LookRoute = () => <SiteScreenList type="look" />;
-const ListenRoute = () => <SiteScreenList type="listen" />;
-const ReadRoute = () => <SiteScreenList type="read" />;
-const ImportantRoute = () => <SiteScreenList type="important" />;
-const CalendarRoute = () => <CalendarScreen />;
+const ContentRoute = (sceneProps) => <SiteScreenList type="content" sceneProps={sceneProps} />;
+const LookRoute = (sceneProps) => <SiteScreenList type="look" sceneProps={sceneProps} />;
+const ListenRoute = (sceneProps) => <SiteScreenList type="listen" sceneProps={sceneProps} />;
+const ReadRoute = (sceneProps) => <SiteScreenList type="read" sceneProps={sceneProps} />;
+const ImportantRoute = (sceneProps) => <SiteScreenList type="important" sceneProps={sceneProps}/>;
+const CalendarRoute = (sceneProps) => <CalendarScreen sceneProps={sceneProps} />;
+const ScsRoute = (sceneProps) => <ScsmathScreen sceneProps={sceneProps} />;
 import {ecadashCityList} from '../constants/ecadash'
 import {API_URL} from '../constants/api'
 
@@ -39,19 +41,14 @@ class SiteScreen extends Component {
     };
     state = {
         index: 0,
-        routes: [
-            { key: "content", title: "Новости" },
-            { key: "look", title: "Смотреть" },
-            { key: "listen", title: "Слушать" },
-            { key: "read", title: "Читать" },
-            { key: "important", title: "Это важно" },
-            { key: "calendar", title: "Вайшнавский календарь" }
-        ],
+        redirectCount: 0,
+        routes: [],
         modalShowed: true,
         modalStep: 1,
         langChosen: false,
         ecadashCityList: ecadashCityList,
         ecadashCityChosen: 'moscow',
+        needRedirectCalendar: this.props.navigation.getParam('c_date', '') ? true : false,
     };
     _handleIndexChange = index => this.setState({ index });
 
@@ -61,7 +58,7 @@ class SiteScreen extends Component {
             scrollEnabled
             indicatorStyle={styles.indicator}
             style={styles.tabbar}
-            tabStyle={styles.tab}
+            tabStyle={this.props.main.lang == 'ru' ? styles.tab : {width: 200}}
             labelStyle={styles.label}
             renderLabel={this._renderLabel}
         />
@@ -86,8 +83,34 @@ class SiteScreen extends Component {
         listen: ListenRoute,
         read: ReadRoute,
         important: ImportantRoute,
-        calendar: CalendarRoute
+        scs: ScsRoute,
+        calendar: CalendarRoute,
     });
+    componentDidUpdate(prevProps) {
+        console.log('componentDidUpdate')
+        AsyncStorage.getItem('c_date', (err, c_date) => {
+            if (c_date && c_date != ''){
+                this.setState({
+                    index: this.props.main.lang == 'ru' ? 5 : 1
+                })
+                AsyncStorage.setItem('c_date', '');        
+            }
+        });
+    }
+    willFocusSubscription = this.props.navigation.addListener(
+        'willFocus',
+        payload => {
+            console.log('will focus state', this.state)
+            AsyncStorage.getItem('c_date', (err, c_date) => {
+                if (c_date && c_date != ''){
+                    this.setState({
+                        index: this.props.main.lang == 'ru' ? 5 : 1
+                    })
+                    AsyncStorage.setItem('c_date', '');        
+                }
+            });
+        }
+    );
     componentDidMount() {
         // console.log("component did moung props", this.props);
         // AsyncStorage.clear();
@@ -113,7 +136,7 @@ class SiteScreen extends Component {
                             return;
                         }
                         if (request.status === 200) {
-                            
+
                         }
                     };
                     request.open('GET', API_URL + `/set-ecadash-city?token=${token}&city=${city}`);
@@ -135,15 +158,36 @@ class SiteScreen extends Component {
             if (value == "es") {
                 this.props.setLangInside("es");
             }
+            console.log("CDM LANG?", value)
+                if (value == 'ru') {
+                    this.setState({
+                        routes: [
+                            { key: "content", title: "Новости", lang: 'ru' },
+                            { key: "look", title: "Смотреть", lang: 'ru' },
+                            { key: "listen", title: "Слушать", lang: 'ru' },
+                            { key: "read", title: "Читать", lang: 'ru' },
+                            { key: "important", title: "Это важно", lang: 'ru' },
+                            { key: "calendar", title: "Вайшнавский календарь", lang: 'ru', needRedirectCalendar: this.state.needRedirectCalendar },
+                        ]
+                    })
+                } else {
+                    this.setState({
+                        routes: [
+                            { key: "scs", title: "scsmath.com", lang: 'en' },
+                            { key: "calendar", title: "Vaishnava calendar", lang: 'en', needRedirectCalendar: this.state.needRedirectCalendar },
+                        ]
+                    })
+                }
         });
     }
     render() {
-        // console.log("root render state", this.state);
-        // console.log("root render props", this.props);
+        console.log("root render state", this.state);
+        console.log("root render props", this.props);
         if (this.state.modalShowed) {
-            if (this.props.main.lang == "ru") {
-                return (
-                    <SafeAreaView  style={{flex: 1, backgroundColor: '#f7f7f7'}}>
+            if (this.props.main.lang == "ru" || this.props.main.lang == "en" || this.props.main.lang == "eng") {
+                if (this.state.routes.length){
+                    return (
+                        <SafeAreaView  style={{flex: 1, backgroundColor: '#f7f7f7'}}>
                         <TabView
                             navigationState={this.state}
                             renderScene={this._renderScene}
@@ -152,18 +196,13 @@ class SiteScreen extends Component {
                             />
                     </SafeAreaView>
                 );
-            } else if (
-                this.props.main.lang == "en" ||
-                this.props.main.lang == "eng"
-            ) {
-                return (
-                    // <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                    //     <Text>http://www.scsmath.com/</Text>
-                    // </View>
-                    <SafeAreaView   style={{flex: 1}}>
-                        <ScsmathScreen />
-                    </SafeAreaView>
-                );
+                } else {
+                    return (
+                        <SafeAreaView  style={{flex: 1, backgroundColor: '#f7f7f7', alignItems: 'center', justifyContent: 'center'}}>
+                            <ActivityIndicator/>
+                        </SafeAreaView>
+                    )
+                }
             } else {
                 return (
                     <SafeAreaView style={{flex: 1, backgroundColor: '#f7f7f7'}}>

@@ -841,7 +841,7 @@ class AudioArchiveAudioScreen extends Component {
                     </TouchableWithoutFeedback> */}
                     {this.state.isOpenModal && (
                         <View style={{
-                            height: 200,
+                            height: 250,
                             backgroundColor: '#fafafa',
                             flex: 0,
                             width: '100%',

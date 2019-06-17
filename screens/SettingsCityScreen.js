@@ -82,7 +82,7 @@ class SettingsCityScreen extends Component {
                             >
                                 <Picker
                                     selectedValue={this.state.ecadashCityChosen}
-                                    style={{height: 250, width: 250}}
+                                    style={{height: 50, width: 250}}
                                     onValueChange={itemValue => {
                                         this.setState({ecadashCityChosen: itemValue});
                                         AsyncStorage.setItem('ecadash_city_chosen', itemValue);

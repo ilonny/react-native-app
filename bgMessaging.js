@@ -20,6 +20,7 @@ export default async (RemoteMessage) => {
             need_alert: JSON.parse(RemoteMessage.data.body).need_alert ? 'true' : 'false',
             news_id: JSON.parse(RemoteMessage.data.body).news_id ? JSON.parse(RemoteMessage.data.body).news_id : 'false',
             news_title: JSON.parse(RemoteMessage.data.body).news_title ? JSON.parse(RemoteMessage.data.body).news_title : 'false',
+            c_date: JSON.parse(RemoteMessage.data.body).c_date ? JSON.parse(RemoteMessage.data.body).c_date : 'false',
     })
     .android
         .setBigText(messageText, RemoteMessage.data.title);
@@ -29,7 +30,8 @@ export default async (RemoteMessage) => {
             screen: 'SiteDetail',
             data: {
                 id: JSON.parse(RemoteMessage.data.body).news_id,
-                title: JSON.parse(RemoteMessage.data.body).news_title
+                title: JSON.parse(RemoteMessage.data.body).news_title,
+                c_date: JSON.parse(RemoteMessage.data.body).c_date,
             }
         }));
     }

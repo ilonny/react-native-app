@@ -130,7 +130,14 @@ firebase.notifications().onNotificationOpened((notificationOpen) => {
       screen: 'SiteDetail',
       data: {id: n_id, title: n_t}
     }));
-  }
+  } else if (notificationOpen.notification._data.c_date != 'false'){
+    let c_date = notificationOpen.notification._data.c_date;
+    setTimeout(() => {
+      console.log('REDIRECT TIMEOUT')
+      AsyncStorage.setItem('c_date', c_date)
+      NavigationService.navigate("SiteTabScreen", { c_date: c_date});
+    }, 150);
+    }
 });
 
 firebase.notifications().getInitialNotification()
@@ -155,7 +162,14 @@ firebase.notifications().getInitialNotification()
       screen: 'SiteDetail',
       data: {id: n_id, title: n_t}
     }));
-  }
+  } else if (notificationOpen.notification._data.c_date != 'false'){
+    let c_date = notificationOpen.notification._data.c_date;
+    setTimeout(() => {
+      console.log('REDIRECT TIMEOUT')
+      AsyncStorage.setItem('c_date', c_date)
+      NavigationService.navigate("SiteTabScreen", { c_date: c_date});
+    }, 150);
+    }
 });
 // setTimeout(() => {
 //     console.log('showed??');

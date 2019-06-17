@@ -144,7 +144,7 @@ class ScsmathScreen extends Component {
                     source={{
                         uri: `http://app.harekrishna.ru/scs/`
                     }}
-                    style={{ backgroundColor: "#efefef", paddingTop: 20, marginTop: 20 }}
+                    style={{ backgroundColor: "#efefef"}}
                     // allowsInlineMediaPlayback={true}
                     // mediaPlaybackRequiresUserAction={true}
                     allowsInlineMediaPlayback={true}

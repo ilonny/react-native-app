@@ -145,31 +145,33 @@ firebase.notifications().getInitialNotification()
   const channelId = new firebase.notifications.Android.Channel('123', '123', firebase.notifications.Android.Importance.Max);
   firebase.notifications().android.createChannel(channelId);
   console.log('notif OFFLINE OPENED', notificationOpen);
-  if (notificationOpen.notification._data.need_alert == 'true'){
-    Alert.alert("", notificationOpen.notification._body);
-  } else if (notificationOpen.notification._data.q_id != 'false'){
-    let q_id = notificationOpen.notification._data.q_id;
-    setTimeout(() => {
-      NavigationService.navigate('Details', {quote_id: q_id});
-    }, 2000);
-  } else if (notificationOpen.notification._data.news_id != 'false'){
-    let n_id = notificationOpen.notification._data.news_id;
-    let n_t = notificationOpen.notification._data.news_title;
-    setTimeout(() => {
-      NavigationService.navigate('SiteDetail', {id: n_id, title: n_t,});
-    }, 2000);
-    AsyncStorage.setItem('redirect', JSON.stringify({
-      screen: 'SiteDetail',
-      data: {id: n_id, title: n_t}
-    }));
-  } else if (notificationOpen.notification._data.c_date != 'false'){
-    let c_date = notificationOpen.notification._data.c_date;
-    setTimeout(() => {
-      console.log('REDIRECT TIMEOUT')
-      AsyncStorage.setItem('c_date', c_date)
-      NavigationService.navigate("SiteTabScreen", { c_date: c_date});
-    }, 150);
-    }
+  if (notificationOpen) {
+    if (notificationOpen.notification._data.need_alert == 'true'){
+      Alert.alert("", notificationOpen.notification._body);
+    } else if (notificationOpen.notification._data.q_id != 'false'){
+      let q_id = notificationOpen.notification._data.q_id;
+      setTimeout(() => {
+        NavigationService.navigate('Details', {quote_id: q_id});
+      }, 2000);
+    } else if (notificationOpen.notification._data.news_id != 'false'){
+      let n_id = notificationOpen.notification._data.news_id;
+      let n_t = notificationOpen.notification._data.news_title;
+      setTimeout(() => {
+        NavigationService.navigate('SiteDetail', {id: n_id, title: n_t,});
+      }, 2000);
+      AsyncStorage.setItem('redirect', JSON.stringify({
+        screen: 'SiteDetail',
+        data: {id: n_id, title: n_t}
+      }));
+    } else if (notificationOpen.notification._data.c_date != 'false'){
+      let c_date = notificationOpen.notification._data.c_date;
+      setTimeout(() => {
+        console.log('REDIRECT TIMEOUT')
+        AsyncStorage.setItem('c_date', c_date)
+        NavigationService.navigate("SiteTabScreen", { c_date: c_date});
+      }, 150);
+      }
+  }
 });
 // setTimeout(() => {
 //     console.log('showed??');

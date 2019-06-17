@@ -493,8 +493,10 @@ class SiteScreen extends Component {
                                     this.setState({
                                         modalShowed: true,
                                     });
-                                    setLang(this.state.langChosen)}
-                                    // AsyncStorage.getItem('ecadash_city_chosen', (err, value) => {
+                                    if (this.state.langChosen != 'ru') {
+                                        setLang(this.state.langChosen)}
+                                    }
+                                        // AsyncStorage.getItem('ecadash_city_chosen', (err, value) => {
                                     //     console.log('ecadash_city_chosen', value)
                                     // })
                                 }

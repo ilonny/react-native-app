@@ -10,7 +10,7 @@ import {
     AsyncStorage,
     TouchableOpacity,
     Linking,
-    Picker
+    Picker,
 } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { setLang } from "../actions/lang";
@@ -24,6 +24,7 @@ class SettingsCityScreen extends Component {
         ecadashCityChosen: '',
         ecadashCityList: ecadashCityList,
         token: '',
+        ecadashCategory: [],
     }
     componentDidMount(){
         AsyncStorage.getItem('ecadash_city_chosen', (err, value) => {
@@ -42,9 +43,62 @@ class SettingsCityScreen extends Component {
             } else {
                 console.log('lolll')
             }
+        });
+        AsyncStorage.getItem('ecadash_category', (err, value) => {
+            if (!value) {
+                value = '["holy", "ecadash"]';
+            }
+            try {
+                this.setState({
+                    ecadashCategory: JSON.parse(value),
+                })
+            } catch (e) {
+                console.log('crash', e)
+            }
         })
     }
+    switchToggle(name){
+        if (this.state.ecadashCategory.includes(name)) {
+            let arr = [...this.state.ecadashCategory];
+            let index = arr.indexOf(name);
+            arr.splice(index, 1);
+            this.setState({
+                ecadashCategory: arr
+            });
+        } else {
+            this.setState({
+                ecadashCategory: this.state.ecadashCategory.concat(name)
+            });
+        }
+        console.log('swittch', name)
+        setTimeout(() => {
+            this.updateTokenSetting();
+            AsyncStorage.setItem('ecadash_category', JSON.stringify(this.state.ecadashCategory));
+        }, 150);
+    }
+    updateTokenSetting() {
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = e => {
+            if (request.readyState !== 4) {
+                return;
+            }
+            if (request.status === 200) {
+            }
+        };
+        request.open(
+            "GET",
+            API_URL +
+                `/set-token?token=${this.state.token}&settings=old&news_settings=old&version=3&ecadash=old&ecadash=${JSON.stringify(this.state.ecadashCategory)}`
+        );
+        request.send();
+        console.log(
+            "updateTokenCity",
+            API_URL +
+                `/set-token?token=${this.state.token}&settings=old&news_settings=old&version=3&ecadash=old&ecadash=${JSON.stringify(this.state.ecadashCategory)}`
+        );
+    }
     render() {
+        console.log('settings city state', this.state);
         return (
             <SafeAreaView   style={{ flex: 1, backgroundColor: "#efefef" }}>
                 <View style={styles.container}>
@@ -67,10 +121,10 @@ class SettingsCityScreen extends Component {
                             >
                                 {this.props.main.lang == "en" ||
                                 this.props.main.lang == "eng"
-                                    ? "Please select your city to receive notifications about Ekadashi and holidays:"
+                                    ? "Please select your city and category to receive notifications about Ekadashi and holidays:"
                                     : this.props.main.lang == "es"
-                                    ? "Please select your city to receive notifications about Ekadashi and holidays:"
-                                    : "Пожалуйста, выберите свой город для получения уведомлений об экадаши и праздниках:"}
+                                    ? "Please select your city and category to receive notifications about Ekadashi and holidays:"
+                                    : "Пожалуйста, выберите свой город и категории для получения уведомлений об экадаши и праздниках:"}
                             </Text>
                             <View
                                 style={{
@@ -106,6 +160,18 @@ class SettingsCityScreen extends Component {
                                     ))}
                                 </Picker>
                             </View>
+                                <View style={[listStyles.quoteItem, {marginTop: -5, borderRadius: 0, shadowRadius: 0, flex: 1, flexDirection: 'row', justifyContent: 'space-between'}]}>
+                                    <View style={{maxWidth: '80%'}}>
+                                        <Text style={{fontWeight: 'bold'}}>Праздники</Text>
+                                    </View>
+                                    <Switch value={this.state.ecadashCategory.includes('holy') ? true : false}  onValueChange={() => this.switchToggle('holy')} />
+                                </View>
+                                <View style={[listStyles.quoteItem, {marginTop: -5, borderRadius: 0, shadowRadius: 0, flex: 1, flexDirection: 'row', justifyContent: 'space-between'}]}>
+                                    <View style={{maxWidth: '80%'}}>
+                                        <Text style={{fontWeight: 'bold'}}>Экадаши</Text>
+                                    </View>
+                                    <Switch value={this.state.ecadashCategory.includes('ecadash') ? true : false}  onValueChange={() => this.switchToggle('ecadash')} />
+                                </View>
                         </View>
                         <View
                             style={[

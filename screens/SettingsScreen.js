@@ -173,9 +173,9 @@ class SettingsScreen extends Component {
                 
             }
         };
-        request.open('GET', API_URL + `/set-token?token=${this.state.token}&settings=${JSON.stringify(this.state.selectedItems)}&news_settings=old&version=3&lang=${this.props.main.lang}`);
+        request.open('GET', API_URL + `/set-token?token=${this.state.token}&settings=${JSON.stringify(this.state.selectedItems)}&news_settings=old&version=3&lang=${this.props.main.lang}&ecadash=old`);
         request.send();
-        console.log('updateTokenSetting', API_URL + `/set-token?token=${this.state.token}&settings=${JSON.stringify(this.state.selectedItems)}&news_settings=old&version=3&lang=${this.props.main.lang}`);
+        console.log('updateTokenSetting', API_URL + `/set-token?token=${this.state.token}&settings=${JSON.stringify(this.state.selectedItems)}&news_settings=old&version=3&lang=${this.props.main.lang}&ecadash=old`);
     }
     render() {
         // console.log('settings render', this.state);

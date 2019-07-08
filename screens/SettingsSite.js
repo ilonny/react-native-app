@@ -119,7 +119,7 @@ export default class SettingsScreen extends Component {
         request.open(
             "GET",
             API_URL +
-                `/set-token?token=${this.state.token}&settings=old&news_settings=${JSON.stringify(this.state.selectedItems)}&version=3`
+                `/set-token?token=${this.state.token}&settings=old&news_settings=${JSON.stringify(this.state.selectedItems)}&version=3&ecadash=old`
         );
         request.send();
         console.log(
@@ -128,7 +128,8 @@ export default class SettingsScreen extends Component {
                 `/set-token?token=${this.state.token}
                 &settings=old
                 &news_settings=${JSON.stringify(this.state.selectedItems)}
-                &version=3`
+                &version=3
+                &ecadash=old`
         );
     }
     componentDidMount() {

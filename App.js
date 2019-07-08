@@ -74,14 +74,14 @@ PushNotification.configure({
                     API_URL +
                         `/set-token?token=${JSON.stringify(
                             token
-                        )}&settings=${device_settings}&news_settings=${device_settings_site}&version=3&lang=ru`
+                        )}&settings=${device_settings}&news_settings=${device_settings_site}&version=3&lang=ru&ecadash=old`
                 );
                 request.send();
                 console.log(
                     API_URL +
                         `/set-token?token=${JSON.stringify(
                             token
-                        )}&settings=${device_settings}&news_settings=${device_settings_site}&version=3&lang=ru`
+                        )}&settings=${device_settings}&news_settings=${device_settings_site}&version=3&lang=ru&ecadash=old`
                 );
             });
         });

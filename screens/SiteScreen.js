@@ -12,7 +12,8 @@ import {
     Animated,
     Modal,
     Picker,
-    ActivityIndicator
+    ActivityIndicator,
+    Switch
 } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { TabView, TabBar, SceneMap } from "react-native-tab-view";
@@ -24,7 +25,7 @@ import SiteScreenEs from "./SiteScreenEs";
 
 import { setLang, setLangInside } from "../actions/lang";
 import { connect } from "react-redux";
-
+import { listStyles } from "../constants/list_styles";
 const ContentRoute = (sceneProps) => <SiteScreenList type="content" sceneProps={sceneProps} />;
 const LookRoute = (sceneProps) => <SiteScreenList type="look" sceneProps={sceneProps} />;
 const ListenRoute = (sceneProps) => <SiteScreenList type="listen" sceneProps={sceneProps} />;
@@ -49,6 +50,7 @@ class SiteScreen extends Component {
         ecadashCityList: ecadashCityList,
         ecadashCityChosen: 'moscow',
         needRedirectCalendar: this.props.navigation.getParam('c_date', '') ? true : false,
+        ecadashCategory: [],
     };
     _handleIndexChange = index => this.setState({ index });
 
@@ -159,7 +161,7 @@ class SiteScreen extends Component {
                 this.props.setLangInside("es");
             }
             console.log("CDM LANG?", value)
-                if (value == 'ru') {
+                if (value == 'ru' || value == null || value == undefined) {
                     this.setState({
                         routes: [
                             { key: "content", title: "Новости", lang: 'ru' },
@@ -179,6 +181,58 @@ class SiteScreen extends Component {
                     })
                 }
         });
+        AsyncStorage.getItem('ecadash_category', (err, value) => {
+            if (!value) {
+                value = '["holy", "ecadash"]';
+            }
+            try {
+                this.setState({
+                    ecadashCategory: JSON.parse(value),
+                })
+            } catch (e) {
+                console.log('crash', e)
+            }
+        })
+    }
+    switchToggle(name){
+        if (this.state.ecadashCategory.includes(name)) {
+            let arr = [...this.state.ecadashCategory];
+            let index = arr.indexOf(name);
+            arr.splice(index, 1);
+            this.setState({
+                ecadashCategory: arr
+            });
+        } else {
+            this.setState({
+                ecadashCategory: this.state.ecadashCategory.concat(name)
+            });
+        }
+        console.log('swittch', name)
+        setTimeout(() => {
+            this.updateTokenSetting();
+            AsyncStorage.setItem('ecadash_category', JSON.stringify(this.state.ecadashCategory));
+        }, 150);
+    }
+    updateTokenSetting() {
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = e => {
+            if (request.readyState !== 4) {
+                return;
+            }
+            if (request.status === 200) {
+            }
+        };
+        request.open(
+            "GET",
+            API_URL +
+                `/set-token?token=${this.state.token}&settings=old&news_settings=old&version=3&ecadash=old&ecadash=${JSON.stringify(this.state.ecadashCategory)}`
+        );
+        request.send();
+        console.log(
+            "updateTokenCity",
+            API_URL +
+                `/set-token?token=${this.state.token}&settings=old&news_settings=old&version=3&ecadash=old&ecadash=${JSON.stringify(this.state.ecadashCategory)}`
+        );
     }
     render() {
         console.log("root render state", this.state);
@@ -468,18 +522,30 @@ class SiteScreen extends Component {
                             }}>
                                 {this.state.langChosen == 'ru' ? 'Пожалуйста, выберите свой город для получения уведомлений об экадаши и праздниках:' : 'Please select your city to receive notifications about Ekadashi and holidays:'}
                             </Text>
-                            <Picker
-                                selectedValue={this.state.ecadashCityChosen}
-                                style={{height: 250, width: 250}}
-                                onValueChange={itemValue => {
-                                    this.setState({ecadashCityChosen: itemValue});
-                                    AsyncStorage.setItem('ecadash_city_chosen', itemValue);
-                                }}
-                            >
-                                {this.state.ecadashCityList.map(city => (
-                                    <Picker.Item key={city.name_link} label={this.state.langChosen == 'ru' ? city.name : city.name_eng} value={city.name_link} />
-                                ))}
-                            </Picker>
+                                <Picker
+                                    selectedValue={this.state.ecadashCityChosen}
+                                    style={{height: 250, width: 250}}
+                                    onValueChange={itemValue => {
+                                        this.setState({ecadashCityChosen: itemValue});
+                                        AsyncStorage.setItem('ecadash_city_chosen', itemValue);
+                                    }}
+                                    >
+                                    {this.state.ecadashCityList.map(city => (
+                                        <Picker.Item key={city.name_link} label={this.state.langChosen == 'ru' ? city.name : city.name_eng} value={city.name_link} />
+                                        ))}
+                                </Picker>
+                                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', maxHeight: 20, width: 200}}>
+                                    <View style={{maxWidth: '80%'}}>
+                                        <Text style={{fontWeight: 'bold'}}>Праздники</Text>
+                                    </View>
+                                    <Switch value={this.state.ecadashCategory.includes('holy') ? true : false}  onValueChange={() => this.switchToggle('holy')} />
+                                </View>
+                                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', maxHeight: 20, width: 200, marginTop: 20, marginBottom: 20}}>
+                                    <View style={{maxWidth: '80%'}}>
+                                        <Text style={{fontWeight: 'bold'}}>Экадаши</Text>
+                                    </View>
+                                    <Switch value={this.state.ecadashCategory.includes('ecadash') ? true : false}  onValueChange={() => this.switchToggle('ecadash')} />
+                                </View>
                             <TouchableOpacity
                                 onPress={() => {
                                     setLang(this.state.langChosen)}

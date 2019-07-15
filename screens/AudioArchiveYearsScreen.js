@@ -96,7 +96,7 @@ export default class ArchiveAuthorsYearsScreen extends Component {
     };
     _keyExtractor = item => item.year.toString();
     render() {
-        console.log("render state", this.state);
+        // console.log("render state", this.state);
         const { years } = this.state;
         let comp = <ActivityIndicator />;
         if (years.length) {

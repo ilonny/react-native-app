@@ -26,7 +26,8 @@ export default class ArchiveAuthorsListScreen extends Component {
         this.state = {
             authors: [],
             downloaded_covers: [],
-            covers_fired: false
+            covers_fired: false,
+            get_data_fired: false,
         };
     }
     static navigationOptions = ({ navigation }) => {
@@ -44,34 +45,44 @@ export default class ArchiveAuthorsListScreen extends Component {
                     : {}
         };
     };
+    counter = 0;
     getAuthorsData() {
         let request = new XMLHttpRequest();
+        
+        if (this.state.get_data_fired) {
+            console.log('return false');
+            return false;
+        }
+        // return false;
         request.onreadystatechange = e => {
             if (request.status === 200) {
+                console.log('getAuthorsData()', this.counter);
+                this.counter++;
                 try {
-                    this.setState({
-                        authors: JSON.parse(request.responseText)
-                            ? JSON.parse(request.responseText)
-                            : [],
-                        online: true
-                    });
+                        this.setState({
+                            get_data_fired: true,
+                            authors: JSON.parse(request.responseText)
+                                ? JSON.parse(request.responseText)
+                                : [],
+                            online: true
+                        });
+                        AsyncStorage.setItem("arhive_audio_data", request.responseText);
+                    console.log("success", request);
                 } catch (e) {
                     console.log("parse crashed", e);
                 }
-                AsyncStorage.setItem("arhive_audio_data", request.responseText);
-                console.log("success", request);
             } else {
                 console.log("error AS", request);
-                AsyncStorage.getItem("arhive_audio_data", (err, value) => {
-                    try {
-                        this.setState({
-                            authors: JSON.parse(value) ? JSON.parse(value) : [],
-                            online: false
-                        });
-                    } catch (e) {
-                        console.log("parse offline crased");
-                    }
-                });
+                // AsyncStorage.getItem("arhive_audio_data", (err, value) => {
+                //     try {
+                //         this.setState({
+                //             authors: JSON.parse(value) ? JSON.parse(value) : [],
+                //             online: false
+                //         });
+                //     } catch (e) {
+                //         console.log("parse offline crased");
+                //     }
+                // });
             }
             if (!this.state.covers_fired && (this.state.authors.length != this.state.downloaded_covers.length)) {
                 try {
@@ -84,11 +95,16 @@ export default class ArchiveAuthorsListScreen extends Component {
                 }
             }
         };
-        request.open(
-            "GET",
-            `https://harekrishna.ru/mobile-api/archive-main-list.php`
-        );
-        request.send();
+        this.setState({
+            get_data_fired: true,
+        })
+        if (!this.state.get_data_fired){
+            request.open(
+                "GET",
+                `https://harekrishna.ru/mobile-api/archive-main-list.php`
+                );
+                request.send();
+        }
     }
     componentDidMount() {
         // AsyncStorage.clear();
@@ -97,6 +113,7 @@ export default class ArchiveAuthorsListScreen extends Component {
     }
     downloaded_covers = [];
     downloadCovers() {
+        // return false;
         console.log("downloadCovers() fired");
         let ASdownloaded_covers;
         ASdownloaded_covers = "downloaded_covers_archive";
@@ -298,7 +315,7 @@ export default class ArchiveAuthorsListScreen extends Component {
                                 );
                             }}
                         />
-                        <Pagination
+                        {/* <Pagination
                             // dotThemeLight //<--use with backgroundColor:"grey"
                             listRef={this.refs} //to allow React Native Pagination to scroll to item when clicked  (so add "ref={r=>this.refs=r}" to your list)
                             paginationVisibleItems={this.state.viewableItems} //needs to track what the user sees
@@ -318,7 +335,7 @@ export default class ArchiveAuthorsListScreen extends Component {
                                 flex: 1
                             }}
                             dotIconSizeActive={10}
-                        />
+                        /> */}
                     </SafeAreaView>
                 );
             }

@@ -18,6 +18,7 @@ import {
   Dimensions,
   WebView
 } from 'react-native';
+import { SITE_URL } from "../constants/api";
 import { SafeAreaView } from "react-navigation";
 import { API_URL } from '../constants/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -49,6 +50,8 @@ class AudioArchiveAudioScreen extends Component {
       super(props);
       this.state = {
         books: [],
+        page: 1,
+        loading: false,
         date: Date.now(),
         refreshnig: false,
         book_id: this.props.navigation.getParam("book_id"),
@@ -85,7 +88,40 @@ class AudioArchiveAudioScreen extends Component {
                 }
     }
     whoosh = {};
-    _keyExtractor = (item) => item.id
+    addPage() {
+        this.setState({
+            page: this.state.page + 1,
+            loading: true
+        }, () => {
+            let request = new XMLHttpRequest();
+            request.onreadystatechange = e => {
+                if (request.status === 200) {
+                    try {
+                        console.log('set state ???')
+                        this.setState({
+                            books: JSON.parse(request.responseText).concat({id: Date.now().toString(), type: 'end'}),
+                            loading: false,
+                        })
+                    } catch (e) {console.log('crashed', e)}
+                }
+            }
+            request.open(
+                "GET",
+                SITE_URL + `/get-audio-archive-pagination.php?section_id=${this.state.books[0].section_id}&page=${this.state.page}`
+            );
+            request.send();
+        });
+    }
+    // shouldComponentUpdate(nextProps, nextState){
+    //     if (nextState.books.length != this.state.books.length){
+    //         return true;
+    //     }
+    //     if (nextState.books.length != this.state.books.length){
+    //         return true;
+    //     }
+    //     return false;
+    // }
+    _keyExtractor = (item) => item.id.toString();
     downloadBook(file_id, need_play = false){
         console.log('start downloading', file_id)
         this.props.setNeedToDownload([].concat(file_id));
@@ -261,7 +297,7 @@ class AudioArchiveAudioScreen extends Component {
     }
     componentDidMount(){
         this.setState({
-            books: this.props.navigation.getParam('audio'),
+            books: this.props.navigation.getParam('audio').concat({id: Date.now().toString(), type: 'end'}),
             book_id: this.props.navigation.getParam('author_id'),
             online: this.props.navigation.getParam('online'),
         })
@@ -778,27 +814,54 @@ class AudioArchiveAudioScreen extends Component {
                 )
             }
         }
-        return (
-            <View style={listStyles.quoteItem}>
-                <View style={{flex: 1}}>
-                    <Text style={[listStyles.quoteTitle, {textAlign: 'center'}]}>{item.name}</Text>
-                    {!!item.description && <Text style={{marginTop: 10, textAlign: 'center'}}>{item.description}</Text>}
-                </View>
-                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 5}}>
-                    {audioAction}
-                    {item.toc_id && (
-                        <TouchableOpacity onPress={() => this.redirectToReader(item.reader_book_id, item.reader_book_name, item.reader_book_src, item.toc_href)}>
-                            <View style={{flex: 0, justifyContent: "center", flexDirection: 'column', alignItems: 'center', marginLeft: 10}}>
-                                 <View>
-                                    <Ionicons name="ios-book" size={23} color="tomato" style={{margin: 'auto'}} />
+        if (item.type != "end") {
+            return (
+                <View style={listStyles.quoteItem}>
+                    <View style={{flex: 1}}>
+                        <Text style={[listStyles.quoteTitle, {textAlign: 'center'}]}>{item.name}</Text>
+                        {!!item.description && <Text style={{marginTop: 10, textAlign: 'center'}}>{item.description}</Text>}
+                    </View>
+                    <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 5}}>
+                        {audioAction}
+                        {item.toc_id && (
+                            <TouchableOpacity onPress={() => this.redirectToReader(item.reader_book_id, item.reader_book_name, item.reader_book_src, item.toc_href)}>
+                                <View style={{flex: 0, justifyContent: "center", flexDirection: 'column', alignItems: 'center', marginLeft: 10}}>
+                                    <View>
+                                        <Ionicons name="ios-book" size={23} color="tomato" style={{margin: 'auto'}} />
+                                    </View>
+                                    <Text>{this.props.main.lang == 'ru' ? 'Читать' : this.props.main.lang == 'es' ? 'Leer' : 'To read'}</Text>
                                 </View>
-                                <Text>{this.props.main.lang == 'ru' ? 'Читать' : this.props.main.lang == 'es' ? 'Leer' : 'To read'}</Text>
-                            </View>
-                        </TouchableOpacity>
-                    )}
+                            </TouchableOpacity>
+                        )}
+                    </View>
                 </View>
-            </View>
-        )
+            )
+        } else {
+            if (!this.state.loading) {
+                return (
+                    <TouchableOpacity
+                        style={[listStyles.quoteItem, {}]}
+                        onPress={() => this.addPage()}
+                    >
+                        <Text
+                            style={{
+                                color: "#c5c5c5",
+                                fontStyle: "italic",
+                                textAlign: "center"
+                            }}
+                            >
+                        Загрузить еще
+                    </Text>
+                </TouchableOpacity>
+                )
+            } else {
+                return (
+                    <View style={[listStyles.quoteItem, {}]}>
+                        <ActivityIndicator/>
+                    </View>
+                )
+            }
+        }
     }
     render(){
         console.log('audio details render state', this.state);
@@ -809,6 +872,7 @@ class AudioArchiveAudioScreen extends Component {
                 <FlatList
                     style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5}}
                     data={this.state.books}
+                    extraData={this.state}
                     renderItem={this._renderItem}
                     keyExtractor={this._keyExtractor}
                     // onRefresh={() => this.getBooks()}

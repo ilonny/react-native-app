@@ -83,13 +83,13 @@ class CalendarScreen extends Component {
                     mm = "0" + mm;
                 }
                 today = yyyy + "-" + mm + "-" + dd;
-                console.log("today", today);
+                // console.log("today", today);
                 this.state.items.forEach((item, index) => {
                     if (item.date.toString() < today.toString()) {
                         todayIndex = index;
                     }
                 });
-                console.log("todayIndex", todayIndex);
+                // console.log("todayIndex", todayIndex);
                 try {
                     if (todayIndex) {
                         this.refs.scrollToIndex({
@@ -180,8 +180,8 @@ class CalendarScreen extends Component {
         index
     });
     render() {
-        console.log("calendar props", this.props);
-        console.log("calendar state", this.state);
+        // console.log("calendar props", this.props);
+        // console.log("calendar state", this.state);
         if (this.state.loading) {
             return (
                 <SafeAreaView style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>

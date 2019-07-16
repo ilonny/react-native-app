@@ -51,6 +51,7 @@ class SiteScreen extends Component {
         ecadashCityChosen: 'moscow',
         needRedirectCalendar: this.props.navigation.getParam('c_date', '') ? true : false,
         ecadashCategory: [],
+        token: '',
     };
     _handleIndexChange = index => this.setState({ index });
 
@@ -132,6 +133,7 @@ class SiteScreen extends Component {
             }
             AsyncStorage.getItem('Token', (err, token) =>{
                 if (token) {
+                    this.setState({token})
                     let request = new XMLHttpRequest();
                     request.onreadystatechange = (e) => {
                         if (request.readyState !== 4) {
@@ -214,25 +216,31 @@ class SiteScreen extends Component {
         }, 150);
     }
     updateTokenSetting() {
-        let request = new XMLHttpRequest();
-        request.onreadystatechange = e => {
-            if (request.readyState !== 4) {
-                return;
+        console.log('start get token');
+        AsyncStorage.getItem('Token', (err, token) =>{
+            console.log('end get token', token)
+            if (token) {
+                let request = new XMLHttpRequest();
+                request.onreadystatechange = e => {
+                    if (request.readyState !== 4) {
+                        return;
+                    }
+                    if (request.status === 200) {
+                    }
+                };
+                request.open(
+                    "GET",
+                    API_URL +
+                        `/set-token?token=${token}&settings=old&news_settings=old&version=3&ecadash=old&ecadash=${JSON.stringify(this.state.ecadashCategory)}`
+                );
+                request.send();
+                console.log(
+                    "updateTokenCity",
+                    API_URL +
+                        `/set-token?token=${token}&settings=old&news_settings=old&version=3&ecadash=old&ecadash=${JSON.stringify(this.state.ecadashCategory)}`
+                );
             }
-            if (request.status === 200) {
-            }
-        };
-        request.open(
-            "GET",
-            API_URL +
-                `/set-token?token=${this.state.token}&settings=old&news_settings=old&version=3&ecadash=old&ecadash=${JSON.stringify(this.state.ecadashCategory)}`
-        );
-        request.send();
-        console.log(
-            "updateTokenCity",
-            API_URL +
-                `/set-token?token=${this.state.token}&settings=old&news_settings=old&version=3&ecadash=old&ecadash=${JSON.stringify(this.state.ecadashCategory)}`
-        );
+        })
     }
     render() {
         console.log("root render state", this.state);

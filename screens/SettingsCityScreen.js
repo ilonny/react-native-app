@@ -162,13 +162,13 @@ class SettingsCityScreen extends Component {
                             </View>
                                 <View style={[listStyles.quoteItem, {marginTop: -5, borderRadius: 0, shadowRadius: 0, flex: 1, flexDirection: 'row', justifyContent: 'space-between'}]}>
                                     <View style={{maxWidth: '80%'}}>
-                                        <Text style={{fontWeight: 'bold'}}>Праздники</Text>
+                                        <Text style={{fontWeight: 'bold'}}>{this.props.main.lang == 'ru' ? 'Праздники' : 'Holydays'}</Text>
                                     </View>
                                     <Switch value={this.state.ecadashCategory.includes('holy') ? true : false}  onValueChange={() => this.switchToggle('holy')} />
                                 </View>
                                 <View style={[listStyles.quoteItem, {marginTop: -5, borderRadius: 0, shadowRadius: 0, flex: 1, flexDirection: 'row', justifyContent: 'space-between'}]}>
                                     <View style={{maxWidth: '80%'}}>
-                                        <Text style={{fontWeight: 'bold'}}>Экадаши</Text>
+                                        <Text style={{fontWeight: 'bold'}}>{this.props.main.lang == 'ru' ? 'Экадаши' : 'Ecadashi'}</Text>
                                     </View>
                                     <Switch value={this.state.ecadashCategory.includes('ecadash') ? true : false}  onValueChange={() => this.switchToggle('ecadash')} />
                                 </View>

@@ -16,7 +16,8 @@ import {
 import { SafeAreaView } from "react-navigation";
 import { TabView, TabBar, SceneMap } from "react-native-tab-view";
 import WKWebView from "react-native-wkwebview-reborn";
-
+import CalendarScreen from "./CalendarScreen";
+const CalendarRoute = (sceneProps) => <CalendarScreen sceneProps={sceneProps} />;
 const SiteEs1 = () => {
     return (
         <SafeAreaView
@@ -93,11 +94,14 @@ const SiteEs2 = () => {
 
 class SiteScreenEs extends Component {
     state = {
+        needRedirectCalendar: this.props.navigation.getParam('c_date', '') ? true : false,
+        // needRedirectCalendar: false,
         index: 0,
         routes: [
             { key: "site1", title: "sadhusangamexico.wordpress.com" },
-            { key: "site2", title: "paramakaruna.org.ve" }
-        ]
+            { key: "calendar", title: "Vaishnava calendar", lang: 'en', needRedirectCalendar: this.props.navigation.getParam('c_date', '') ? true : false },
+            { key: "site2", title: "paramakaruna.org.ve" },
+        ],
     };
     _handleIndexChange = index => this.setState({ index });
     _renderTabBar = props => (
@@ -121,11 +125,15 @@ class SiteScreenEs extends Component {
     };
     _renderScene = SceneMap({
         site1: SiteEs1,
-        site2: SiteEs2
+        site2: SiteEs2,
+        calendar: CalendarRoute,
     });
+    componentDidMount(){
+        console.log('es props', this.props)
+    }
     render() {
         return (
-            <SafeAreaView  style={{flex: 1, backgroundColor: 'red'}}>
+            <SafeAreaView  style={{flex: 1}}>
                 <TabView
                     navigationState={this.state}
                     renderScene={this._renderScene}

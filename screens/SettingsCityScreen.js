@@ -123,7 +123,7 @@ class SettingsCityScreen extends Component {
                                 this.props.main.lang == "eng"
                                     ? "Please select your city and category to receive notifications about Ekadashi and holidays:"
                                     : this.props.main.lang == "es"
-                                    ? "Please select your city and category to receive notifications about Ekadashi and holidays:"
+                                    ? "Seleccione su ciudad para recibir notificaciones sobre Ekadashi y días festivos:"
                                     : "Пожалуйста, выберите свой город и категории для получения уведомлений об экадаши и праздниках:"}
                             </Text>
                             <View
@@ -162,13 +162,13 @@ class SettingsCityScreen extends Component {
                             </View>
                                 <View style={[listStyles.quoteItem, {marginTop: -5, borderRadius: 0, shadowRadius: 0, flex: 1, flexDirection: 'row', justifyContent: 'space-between'}]}>
                                     <View style={{maxWidth: '80%'}}>
-                                        <Text style={{fontWeight: 'bold'}}>{this.props.main.lang == 'ru' ? 'Праздники' : 'Holydays'}</Text>
+                                        <Text style={{fontWeight: 'bold'}}>{this.props.main.lang == 'ru' ? 'Праздники' : this.props.main.lang == 'en' ? 'Holydays' : 'Vacaciones'}</Text>
                                     </View>
                                     <Switch value={this.state.ecadashCategory.includes('holy') ? true : false}  onValueChange={() => this.switchToggle('holy')} />
                                 </View>
                                 <View style={[listStyles.quoteItem, {marginTop: -5, borderRadius: 0, shadowRadius: 0, flex: 1, flexDirection: 'row', justifyContent: 'space-between'}]}>
                                     <View style={{maxWidth: '80%'}}>
-                                        <Text style={{fontWeight: 'bold'}}>{this.props.main.lang == 'ru' ? 'Экадаши' : 'Ecadashi'}</Text>
+                                        <Text style={{fontWeight: 'bold'}}>{this.props.main.lang == 'ru' ? 'Экадаши' : this.props.main.lang == 'en' ? 'Ecadashi' : 'Ekadashi'}</Text>
                                     </View>
                                     <Switch value={this.state.ecadashCategory.includes('ecadash') ? true : false}  onValueChange={() => this.switchToggle('ecadash')} />
                                 </View>

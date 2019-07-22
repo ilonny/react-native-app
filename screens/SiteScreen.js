@@ -268,7 +268,7 @@ class SiteScreen extends Component {
             } else {
                 return (
                     <SafeAreaView style={{flex: 1, backgroundColor: '#f7f7f7'}}>
-                        <SiteScreenEs/>
+                        <SiteScreenEs navigation={this.props.navigation}/>
                     </SafeAreaView>
                 );
             }
@@ -487,9 +487,10 @@ class SiteScreen extends Component {
                             )}
                             <TouchableOpacity
                                 onPress={() => {
-                                    this.props.main.lang == 'es' ?
-                                    setLang(this.state.langChosen)
-                                    : this.setState({modalStep: 3})
+                                    // this.props.main.lang == 'es' ?
+                                    // setLang(this.state.langChosen)
+                                    // : 
+                                    this.setState({modalStep: 3})
                                 }}
                                 style={{
                                     margin: 10,
@@ -528,7 +529,7 @@ class SiteScreen extends Component {
                                 textAlign: "center",
                                 lineHeight: 20
                             }}>
-                                {this.state.langChosen == 'ru' ? 'Пожалуйста, выберите свой город для получения уведомлений об экадаши и праздниках:' : 'Please select your city to receive notifications about Ekadashi and holidays:'}
+                                {this.state.langChosen == 'ru' ? 'Пожалуйста, выберите свой город для получения уведомлений об экадаши и праздниках:' : this.state.langChosen == 'en' ? 'Please select your city to receive notifications about Ekadashi and Holidays:' : 'Seleccione su ciudad para recibir notificaciones sobre Ekadashi y días festivos:'}
                             </Text>
                                 <Picker
                                     selectedValue={this.state.ecadashCityChosen}
@@ -544,13 +545,13 @@ class SiteScreen extends Component {
                                 </Picker>
                                 <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', maxHeight: 20, width: 200}}>
                                     <View style={{maxWidth: '80%'}}>
-                                        <Text style={{fontWeight: 'bold'}}>Праздники</Text>
+                                        <Text style={{fontWeight: 'bold'}}>{this.state.langChosen == 'ru' ? 'Праздники' : this.state.langChosen == 'en' ? 'Holydays' : 'Vacaciones'}</Text>
                                     </View>
                                     <Switch value={this.state.ecadashCategory.includes('holy') ? true : false}  onValueChange={() => this.switchToggle('holy')} />
                                 </View>
                                 <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', maxHeight: 20, width: 200, marginTop: 20, marginBottom: 20}}>
                                     <View style={{maxWidth: '80%'}}>
-                                        <Text style={{fontWeight: 'bold'}}>Экадаши</Text>
+                                        <Text style={{fontWeight: 'bold'}}>{this.state.langChosen == 'ru' ? 'Экадаши' : this.state.langChosen == 'en' ? 'Ecadashi' : 'Ekadashi'}</Text>
                                     </View>
                                     <Switch value={this.state.ecadashCategory.includes('ecadash') ? true : false}  onValueChange={() => this.switchToggle('ecadash')} />
                                 </View>

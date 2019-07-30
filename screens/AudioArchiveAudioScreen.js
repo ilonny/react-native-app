@@ -845,7 +845,7 @@ class AudioArchiveAudioScreen extends Component {
                     >
                         <Text
                             style={{
-                                color: "#c5c5c5",
+                                color: 'tomato',
                                 fontStyle: "italic",
                                 textAlign: "center"
                             }}

@@ -116,7 +116,7 @@ class SiteScreen extends Component {
     );
     componentDidMount() {
         // console.log("component did moung props", this.props);
-        AsyncStorage.clear();
+        // AsyncStorage.clear();
         AsyncStorage.getItem("initial_modal", (err, value) => {
             // console.log("initial_modal", value);
             if (!value) {

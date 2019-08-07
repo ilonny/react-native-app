@@ -116,7 +116,7 @@ class SiteScreen extends Component {
     );
     componentDidMount() {
         // console.log("component did moung props", this.props);
-        // AsyncStorage.clear();
+        AsyncStorage.clear();
         AsyncStorage.getItem("initial_modal", (err, value) => {
             // console.log("initial_modal", value);
             if (!value) {
@@ -419,26 +419,15 @@ class SiteScreen extends Component {
                                         lineHeight: 20
                                     }}
                                 >
-                                    Дорогие друзья! Мы рады предложить вашему
-                                    вниманию приложение
-                                    {"\n"}
-                                    <Text style={{ fontWeight: "bold" }}>
-                                        «Guru Online»
-                                    </Text>
+                                    Дорогие друзья!{"\n"}
+                                    Мы рады предложить вашему вниманию приложение <Text style={{ fontWeight: "bold" }}>«Guru Online»</Text>
                                     {"\n"}Оно позволяет:
-                                    {"\n"}- Слушать и смотреть лекции
-                                    современных духовных учителей;
-                                    {"\n"}- Изучать наследие святых прошлого из
-                                    книг – как в текстовом формате, так и в
-                                    формате аудиокниги;
-                                    {"\n"}- Ежедневно получать в виде рассылки
-                                    жемчужины духовных откровений – цитаты
-                                    мудрецов древности и современности, с
-                                    возможностью настраивать их по авторам.
-                                    {"\n"}Мы искренне надеемся, что наше
-                                    приложение позволит вам в любом месте и в
-                                    любое время жить в мире высоких идеалов,
-                                    красоты, гармонии и любви.
+                                    {"\n"}• Слушать и смотреть лекции духовных учителей
+                                    {"\n"}• Изучать наследие индийских святых и подвижников из книг — как в текстовом формате, так и в формате аудиокниги
+                                    {"\n"}• Ежедневно получать в виде рассылки жемчужины духовных откровений — цитаты мудрецов древности и современности, с возможностью настраивать их по авторам
+                                    {"\n"}• Знакомиться с новостями Миссии "Шри Чайтанья Сарасват Матх"
+                                    {"\n"}• Получать рассылку о вайшнавских праздниках, а также о днях Экадаши
+                                    {"\n"}Мы искренне надеемся, что наше приложение позволит вам в любом месте и в любое время жить в мире высоких идеалов, красоты, гармонии и любви.                                    
                                 </Text>
                             )}
                             {this.state.langChosen == "en" && (
@@ -451,16 +440,14 @@ class SiteScreen extends Component {
                                     }}
                                 >
                                     Dear Friends!
-                                    {"\n"}We are happy to present our app
-                                    {"\n"}
-                                    <Text style={{ fontWeight: "bold" }}>
-                                        «Guru Online»
-                                    </Text>
-                                    {"\n"}It allows you to:
-                                    {"\n"}- Listen and read lectures of modern gurus;
-                                    {"\n"}- Explore the heritage of gurus through electronic/audio books;
-                                    {"\n"}- Receive a daily newsteller - quotations of gurus of the past and present with an option of sorting them by author.
-                                    {"\n"}We hope our app will enable you to live in a world of high ideals, beauty, harmony and love at any place and any time.
+                                    {"\n"}We are pleased to offer you the application <Text style={{ fontWeight: "bold" }}>«Guru Online»</Text>
+                                    {"\n"}It allows:
+                                    {"\n"}• Listen and watch the lectures of spiritual masters.
+                                    {"\n"}• Explore the heritage of Indian saints and ascetics from books — both in text and audiobook format.
+                                    {"\n"}• Receive daily broadcast pearls of spiritual revelations, quotes of the sages of ancient and modern times, with the ability to configure themaccording to the authors.
+                                    {"\n"}• Get acquainted with the news of the Mission Sri Chaitanya Saraswat Math.
+                                    {"\n"}• To receive emails about Vaishnava holidays and on the days of Ekadashi.
+                                    {"\n"}We sincerely hope that our application will allow you anywhere and at any time live in a world of high ideals, beauty, harmony and love.
                                 </Text>
                             )}
                             {this.state.langChosen == "es" && (
@@ -473,16 +460,14 @@ class SiteScreen extends Component {
                                     }}
                                 >
                                     ¡Queridos amigos!
-                                    {"\n"}Estamos encantados de presentar nuestra aplicación
-                                    {"\n"}
-                                    <Text style={{ fontWeight: "bold" }}>
-                                        «Guru Online»
-                                    </Text>
-                                    {"\n"}Te permite:
-                                    {"\n"}- Escuchar y leer conferencias de gurús modernos.
-                                    {"\n"}- Explorar el patrimonio de los gurús a través de libros de audio / electrónicos.
-                                    {"\n"}- Recibir un vendedor nuevo diario: citas de gurús del pasado y del presente con la opción de clasificarlos por autor.
-                                    {"\n"}Esperamos que nuestra aplicación te permita vivir en un mundo de altos ideales, belleza, armonía y amor en cualquier lugar y en cualquier momento.
+                                    {"\n"}Nos complace ofreceros la aplicación {"\n"}<Text style={{ fontWeight: "bold" }}>«Guru Online»</Text>
+                                    {"\n"}Os permite:
+                                    {"\n"}• Escuchar y mirar las conferencias de los maestros espirituales
+                                    {"\n"}• Explorar la herencia de los santos y ascetas indios de los libros, tanto en formato de texto como de audiolibro.
+                                    {"\n"}• Recibir a diario la difusión de perlas de las revelaciones espirituales, citas de los sabios de los tiempos antiguos y modernos, con la capacidad de configurar en el acorde a los autores.
+                                    {"\n"}• Conocer las noticias de la Misión Sri Chaitanya Saraswat Math.
+                                    {"\n"}• Recibir correos electrónicos sobre las vacaciones de Vaishnava y los días de Ekadasi.
+                                    {"\n"}Esperamos sinceramente que nuestra aplicación os permitirá vivir en cualquier lugar y en cualquier momento en un mundo de altos ideales, belleza, armonía y amor.
                                 </Text>
                             )}
                             <TouchableOpacity

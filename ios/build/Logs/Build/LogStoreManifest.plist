@@ -6,6 +6,35 @@
 	<integer>9</integer>
 	<key>logs</key>
 	<dict>
+		<key>18546E9D-399C-432C-B2C7-D6F73B3780BE</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>18546E9D-399C-432C-B2C7-D6F73B3780BE.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>W</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>GuruOnline project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>GuruOnline</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project GuruOnline with scheme GuruOnline and configuration Debug</string>
+			<key>timeStartedRecording</key>
+			<real>586883826.54299998</real>
+			<key>timeStoppedRecording</key>
+			<real>586883834.03363705</real>
+			<key>title</key>
+			<string>Building project GuruOnline with scheme GuruOnline and configuration Debug</string>
+			<key>uniqueIdentifier</key>
+			<string>18546E9D-399C-432C-B2C7-D6F73B3780BE</string>
+		</dict>
 		<key>56121E95-A4FF-43B8-984F-839CBEF51615</key>
 		<dict>
 			<key>className</key>
@@ -34,35 +63,6 @@
 			<string>Building project GuruOnline with scheme GuruOnline and configuration Debug</string>
 			<key>uniqueIdentifier</key>
 			<string>56121E95-A4FF-43B8-984F-839CBEF51615</string>
-		</dict>
-		<key>9F1ECDD1-8BA4-4162-85BD-87277F27FB22</key>
-		<dict>
-			<key>className</key>
-			<string>IDECommandLineBuildLog</string>
-			<key>documentTypeString</key>
-			<string>&lt;nil&gt;</string>
-			<key>domainType</key>
-			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
-			<key>fileName</key>
-			<string>9F1ECDD1-8BA4-4162-85BD-87277F27FB22.xcactivitylog</string>
-			<key>highLevelStatus</key>
-			<string>W</string>
-			<key>schemeIdentifier-containerName</key>
-			<string>GuruOnline project</string>
-			<key>schemeIdentifier-schemeName</key>
-			<string>GuruOnline</string>
-			<key>schemeIdentifier-sharedScheme</key>
-			<integer>1</integer>
-			<key>signature</key>
-			<string>Building project GuruOnline with scheme GuruOnline and configuration Debug</string>
-			<key>timeStartedRecording</key>
-			<real>585500641.49514997</real>
-			<key>timeStoppedRecording</key>
-			<real>585500650.49324298</real>
-			<key>title</key>
-			<string>Building project GuruOnline with scheme GuruOnline and configuration Debug</string>
-			<key>uniqueIdentifier</key>
-			<string>9F1ECDD1-8BA4-4162-85BD-87277F27FB22</string>
 		</dict>
 	</dict>
 </dict>

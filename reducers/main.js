@@ -21,7 +21,8 @@ const initialState = {
         toc_id: null,
         whoosh: {}
     },
-    lang: "ru"
+    lang: "ru",
+    filteredBy: '',
 };
 
 const mainReducer = function(state = initialState, action) {
@@ -85,6 +86,11 @@ const mainReducer = function(state = initialState, action) {
                 ...state,
                 lang: action.lang
             };
+        case "SET_FILTERED_BY":
+                return {
+                    ...state,
+                    filteredBy: action.author_name
+                };
         default:
             return state;
     }

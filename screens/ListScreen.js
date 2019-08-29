@@ -158,6 +158,10 @@ class ListScreen extends Component {
           }
         }
         this.setPagination();
+        if (this.props.main.filteredBy) {
+          console.log('CDM NEED FILTER BY', this.props.main.filteredBy)
+          this.filterQuotes(this.props.main.filteredBy)
+        }
     };
     request.open('GET', API_URL + `/quotes?items=[${this.state.items}]&lang=${this.props.main.lang}`);
     request.send();
@@ -222,6 +226,10 @@ class ListScreen extends Component {
     }
     AsyncStorage.removeItem(ASglobal_downloading);
     this.props.navigation.setParams({toggleSettings: this.toggleSettings})
+    if (this.props.main.filteredBy) {
+      console.log('CDM NEED FILTER BY', this.props.main.filteredBy)
+      this.filterQuotes(this.props.main.filteredBy)
+    }
   }
   _keyExtractor = (item) => item.id ? item.id.toString() : '';
   refresh(){
@@ -341,22 +349,23 @@ class ListScreen extends Component {
     if (author_name == 'Все' || author_name == 'All' || author_name == 'Todos') {
       this.setState({
         quotes: this.state.quotes_all,
-        modalIsOpen: false
+        modalIsOpen: false,
       })
     } else {
       let q = [].concat(this.state.quotes_all);
       q = q.filter(item => item.author_name == author_name)
       this.setState({
         quotes: q,
-        modalIsOpen: false
+        modalIsOpen: false,
       })
     }
+    this.props.setFilteredBy(author_name);
   }
   render() {
     let comp;    
     // let quotes = this.state.quotes;
     console.log('render state', this.state)
-    // console.log('render props', this.props)
+    console.log('render props', this.props)
     // quotes = [...new Set(quotes)];
     // let pagination_arr = [];
     // quotes_on_page = quotes.splice((this.state.current_page-1)*20, 20);
@@ -497,6 +506,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
       // setLangInside: lang => dispatch(setLangInside(lang))
+      setFilteredBy: author_name => dispatch({
+        type: "SET_FILTERED_BY",
+        author_name
+      })
   };
 };
 

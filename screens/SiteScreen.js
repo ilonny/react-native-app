@@ -52,6 +52,8 @@ class SiteScreen extends Component {
         needRedirectCalendar: this.props.navigation.getParam('c_date', '') ? true : false,
         ecadashCategory: [],
         token: '',
+        city_can_push: 1,
+        cityPushAgreement: 1
     };
     _handleIndexChange = index => this.setState({ index });
 
@@ -124,6 +126,7 @@ class SiteScreen extends Component {
                     modalShowed: false
                 });
                 AsyncStorage.setItem("initial_modal", "true");
+                AsyncStorage.setItem("agreement_city_push", "1");
             }
         });
         AsyncStorage.getItem("ecadash_city_chosen", (err, city) => {
@@ -146,11 +149,28 @@ class SiteScreen extends Component {
                     request.open('GET', API_URL + `/set-ecadash-city?token=${token}&city=${city}`);
                     request.send();
                     console.log('sent request to', API_URL + `/set-ecadash-city?token=${token}&city=${city}`)
+                    AsyncStorage.getItem('agreement_city_push', (err, val) => {
+                        let request = new XMLHttpRequest();
+                        request.onreadystatechange = e => {
+                            if (request.readyState !== 4) {
+                                return;
+                            }
+                            if (request.status === 200) {
+                            }
+                        };
+                        request.open(
+                            "GET",
+                            API_URL +
+                                `/set-city-push?token=${token}&agreement=${val}`
+                        );
+                        request.send();
+                        console.log(API_URL +`/set-city-push?token=${token}&agreement=${val}`)
+                    })
                 } else {
                     console.log('lolll')
                 }
             })
-        })
+        });
         AsyncStorage.getItem("lang", (err, value) => {
             // console.log("lang is ", value);
             if (!value || value == "ru") {
@@ -194,6 +214,32 @@ class SiteScreen extends Component {
             } catch (e) {
                 console.log('crash', e)
             }
+        })
+    }
+    switchCityPush = (val) => {
+        val = val ? '1' : '0';
+        console.log('switchCityPush', val)
+        this.setState({
+            cityPushAgreement: val,
+        }, () => {
+            AsyncStorage.setItem('agreement_city_push', val);
+            AsyncStorage.getItem('token', (err, token) => {
+                let request = new XMLHttpRequest();
+                request.onreadystatechange = e => {
+                    if (request.readyState !== 4) {
+                        return;
+                    }
+                    if (request.status === 200) {
+                    }
+                };
+                request.open(
+                    "GET",
+                    API_URL +
+                        `/set-city-push?token=${token}&agreement=${val}`
+                );
+                request.send();
+                console.log(API_URL +`/set-city-push?token=${token}&agreement=${val}`)
+            })
         })
     }
     switchToggle(name){
@@ -520,7 +566,11 @@ class SiteScreen extends Component {
                                     selectedValue={this.state.ecadashCityChosen}
                                     style={{height: 250, width: 250}}
                                     onValueChange={itemValue => {
-                                        this.setState({ecadashCityChosen: itemValue});
+                                        this.setState({ecadashCityChosen: itemValue}, () => {
+                                            var currentCity = this.state.ecadashCityList.find(el => el.name_link == this.state.ecadashCityChosen);
+                                            console.log('city finded', currentCity)
+                                            this.setState({city_can_push: currentCity.can_push ? 1 : 0})
+                                        });
                                         AsyncStorage.setItem('ecadash_city_chosen', itemValue);
                                     }}
                                     >
@@ -540,6 +590,14 @@ class SiteScreen extends Component {
                                     </View>
                                     <Switch value={this.state.ecadashCategory.includes('ecadash') ? true : false}  onValueChange={() => this.switchToggle('ecadash')} />
                                 </View>
+                                {this.state.city_can_push == '1' ? (
+                                    <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', maxHeight: 20, width: 290, marginTop: 20, marginBottom: 20}}>
+                                        <View style={{maxWidth: '80%'}}>
+                                            <Text style={{fontWeight: 'bold'}}>{this.state.langChosen == 'ru' ? 'Подписаться на события города' : this.state.langChosen == 'en' ? 'Subscribe to city events' : 'Suscríbase a eventos de la ciudad'}</Text>
+                                        </View>
+                                        <Switch value={parseInt(this.state.cityPushAgreement) ? true : false}  onValueChange={this.switchCityPush} />
+                                    </View>
+                                ) : null}
                             <TouchableOpacity
                                 onPress={() => {
                                     setLang(this.state.langChosen)}

@@ -25,6 +25,8 @@ class SettingsCityScreen extends Component {
         ecadashCityList: ecadashCityList,
         token: '',
         ecadashCategory: [],
+        city_can_push: 1,
+        cityPushAgreement: 1
     }
     componentDidMount(){
         AsyncStorage.getItem('ecadash_city_chosen', (err, value) => {
@@ -33,6 +35,11 @@ class SettingsCityScreen extends Component {
             }
             this.setState({
                 ecadashCityChosen: value
+            });
+        })
+        AsyncStorage.getItem('agreement_city_push', (err, value) => {
+            this.setState({
+                cityPushAgreement: value ? value : 0
             });
         })
         AsyncStorage.getItem('Token', (err, token) =>{
@@ -55,6 +62,32 @@ class SettingsCityScreen extends Component {
             } catch (e) {
                 console.log('crash', e)
             }
+        })
+    }
+    switchCityPush = (val) => {
+        val = val ? '1' : '0';
+        console.log('switchCityPush', val)
+        this.setState({
+            cityPushAgreement: val,
+        }, () => {
+            AsyncStorage.setItem('agreement_city_push', val);
+            AsyncStorage.getItem('Token', (err, token) => {
+                let request = new XMLHttpRequest();
+                request.onreadystatechange = e => {
+                    if (request.readyState !== 4) {
+                        return;
+                    }
+                    if (request.status === 200) {
+                    }
+                };
+                request.open(
+                    "GET",
+                    API_URL +
+                        `/set-city-push?token=${token}&agreement=${val}`
+                );
+                request.send();
+                console.log(API_URL +`/set-city-push?token=${token}&agreement=${val}`)
+            })
         })
     }
     switchToggle(name){
@@ -138,7 +171,11 @@ class SettingsCityScreen extends Component {
                                     selectedValue={this.state.ecadashCityChosen}
                                     style={{height: 250, width: 250}}
                                     onValueChange={itemValue => {
-                                        this.setState({ecadashCityChosen: itemValue});
+                                        this.setState({ecadashCityChosen: itemValue}, () => {
+                                            var currentCity = this.state.ecadashCityList.find(el => el.name_link == this.state.ecadashCityChosen);
+                                            console.log('city finded', currentCity)
+                                            this.setState({city_can_push: currentCity.can_push ? 1 : 0})
+                                        });
                                         AsyncStorage.setItem('ecadash_city_chosen', itemValue);
                                         let request = new XMLHttpRequest();
                                         request.onreadystatechange = (e) => {
@@ -172,6 +209,14 @@ class SettingsCityScreen extends Component {
                                     </View>
                                     <Switch value={this.state.ecadashCategory.includes('ecadash') ? true : false}  onValueChange={() => this.switchToggle('ecadash')} />
                                 </View>
+                                {this.state.city_can_push == '1' ? (
+                                    <View style={[listStyles.quoteItem, {marginTop: -5, borderRadius: 0, shadowRadius: 0, flex: 1, flexDirection: 'row', justifyContent: 'space-between'}]}>
+                                        <View style={{maxWidth: '80%'}}>
+                                            <Text style={{fontWeight: 'bold'}}>{this.props.main.lang == 'ru' ? 'Подписаться на события города' : this.props.main.lang == 'en' ? 'Subscribe to city events' : 'Suscríbase a eventos de la ciudad'}</Text>
+                                        </View>
+                                        <Switch value={parseInt(this.state.cityPushAgreement) ? true : false}  onValueChange={this.switchCityPush} />
+                                    </View>
+                                ) : null}
                         </View>
                         <View
                             style={[

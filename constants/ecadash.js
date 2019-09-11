@@ -42,7 +42,8 @@ export const ecadashCityList = [
     {
         name: "Великий Новгород",
         name_eng: "Novgorod The Great",
-        name_link: "novgorod_the_great"
+        name_link: "novgorod_the_great",
+        can_push: "1",
     },
     {
         name: "Веракруз",
@@ -105,6 +106,12 @@ export const ecadashCityList = [
         name_link: "zaporizhia"
     },
     {
+        name: "Ижевск",
+        name_eng: "Izhevsk",
+        name_link: "izhevsk",
+        can_push: "1",
+    },
+    {
         name: "Йоханнесбург",
         name_eng: "Johanesburg",
         name_link: "johanesburg"
@@ -127,7 +134,8 @@ export const ecadashCityList = [
     {
         name: "Киев",
         name_eng: "Kyiv",
-        name_link: "kyiv"
+        name_link: "kyiv",
+        can_push: "1",
     },
     {
         name: "Кито",
@@ -222,7 +230,8 @@ export const ecadashCityList = [
     {
         name: "Москва",
         name_eng: "Moscow",
-        name_link: "moscow"
+        name_link: "moscow",
+        can_push: "1",
     },
     {
         name: "Навадвип",
@@ -232,7 +241,8 @@ export const ecadashCityList = [
     {
         name: "Нижний Новгород",
         name_eng: "Nizhny Novgorod",
-        name_link: "nizhny_novgorod"
+        name_link: "nizhny_novgorod",
+        can_push: "1",
     },
     {
         name: "Новосибирск",
@@ -258,6 +268,12 @@ export const ecadashCityList = [
         name: "Оренбург",
         name_eng: "Orenburg",
         name_link: "orenburg"
+    },
+    {
+        name: "Орск",
+        name_eng: "Orsk",
+        name_link: "orsk",
+        can_push: "1",
     },
     {
         name: "Пермь",
@@ -307,7 +323,8 @@ export const ecadashCityList = [
     {
         name: "Санкт-Петербург",
         name_eng: "Saint Petersburg",
-        name_link: "saint_petersburg"
+        name_link: "saint_petersburg",
+        can_push: "1",
     },
     {
         name: "Симферополь",
@@ -332,7 +349,8 @@ export const ecadashCityList = [
     {
         name: "Сочи",
         name_eng: "Sochi",
-        name_link: "sochi"
+        name_link: "sochi",
+        can_push: "1",
     },
     {
         name: "Сургут",
@@ -342,7 +360,8 @@ export const ecadashCityList = [
     {
         name: "Сухум",
         name_eng: "Sukhum",
-        name_link: "sukhum"
+        name_link: "sukhum",
+        can_push: "1",
     },
     {
         name: "Тимминс",
@@ -362,7 +381,8 @@ export const ecadashCityList = [
     {
         name: "Томск",
         name_eng: "Tomsk",
-        name_link: "tomsk"
+        name_link: "tomsk",
+        can_push: "1",
     },
     {
         name: "Уки",
@@ -377,7 +397,8 @@ export const ecadashCityList = [
     {
         name: "Хабаровск",
         name_eng: "Khabarovsk",
-        name_link: "khabarovsk"
+        name_link: "khabarovsk",
+        can_push: "1",
     },
     {
         name: "Хайфа",
@@ -392,12 +413,19 @@ export const ecadashCityList = [
     {
         name: "Харьков",
         name_eng: "Kharkiv",
-        name_link: "kharkiv"
+        name_link: "kharkiv",
+        can_push: "1",
     },
     {
         name: "Херсон",
         name_eng: "Herson",
         name_link: "herson"
+    },
+    {
+        name: "Хохловка",
+        name_eng: "Khokhlovka",
+        name_link: "khokhlovka",
+        can_push: "1",
     },
     {
         name: "Челябинск",

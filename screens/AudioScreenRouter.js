@@ -14,8 +14,8 @@ import {
 } from "react-native";
 import { listStyles } from "../constants/list_styles";
 import { SafeAreaView } from "react-navigation";
-
-export default class AudioScreenRouter extends Component {
+import { connect } from "react-redux";
+class AudioScreenRouter extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -51,7 +51,7 @@ export default class AudioScreenRouter extends Component {
                                 size={30}
                                 color="#75644f"
                                 />
-                            <Text style={listStyles.quoteTitle}>Аудиокниги</Text>
+                            <Text style={listStyles.quoteTitle}>{this.props.main.lang == 'ru' ? 'Аудиокниги' : 'Audiobooks'}</Text>
                         </View>
                         <View style={listStyles.arrowCircle}>
                             <View style={listStyles.arrowCircleInside}>
@@ -68,7 +68,7 @@ export default class AudioScreenRouter extends Component {
                                 size={30}
                                 color="#75644f"
                                 />
-                            <Text style={listStyles.quoteTitle}>Архив аудио</Text>
+                            <Text style={listStyles.quoteTitle}>{this.props.main.lang == 'ru' ? 'Архив аудио' : 'Audio archive'}</Text>
                         </View>
                         <View style={listStyles.arrowCircle}>
                             <View style={listStyles.arrowCircleInside}>
@@ -86,3 +86,19 @@ const styles = StyleSheet.create({
     row: {
     }
 })
+
+const mapStateToProps = state => {
+    return {
+        main: state.mainReducer,
+    };
+  };
+  const mapDispatchToProps = dispatch => {
+    return {
+        // setLangInside: lang => dispatch(setLangInside(lang))
+    };
+  };
+  
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(AudioScreenRouter);

@@ -20,6 +20,10 @@ import DetailsScreen from "./screens/DetailsScreen";
 import ReaderScreen from "./screens/ReaderScreen";
 import ReaderScreenDetail from "./screens/ReaderScreenDetail";
 import AudioScreen from "./screens/AudioScreen";
+import AudioScreenRouter from "./screens/AudioScreenRouter"
+import ArchiveAuthorsListScreen from "./screens/ArchiveAuthorsListScreen"
+import AudioArchiveYearsScreen from "./screens/AudioArchiveYearsScreen"
+import AudioArchiveAudioScreen from "./screens/AudioArchiveAudioScreen"
 import AudioDetail from "./screens/AudioDetail";
 import SiteScreen from "./screens/SiteScreen";
 import SiteScreenDetail from "./screens/SiteScreenDetail";
@@ -171,6 +175,12 @@ const ReaderStack = createStackNavigator({
     Reader: ReaderScreenDetail
 });
 const AudioStack = createStackNavigator({
+    AudioScreenRouter: {
+        screen: AudioScreenRouter,
+        navigationOptions: {
+            title: "Audio"
+        }
+    },
     Аудиокниги: {
         screen: AudioScreen,
         navigationOptions: {
@@ -178,7 +188,25 @@ const AudioStack = createStackNavigator({
             headerBackTitle: " ",
         }
     },
-    Audio: AudioDetail
+    Audio: AudioDetail,
+    AudioArchiveAuthors: {
+        screen: ArchiveAuthorsListScreen,
+        navigationOptions: {
+            title: "Audio archive"
+        }
+    },
+    AudioArchiveYears: {
+        screen: AudioArchiveYearsScreen,
+        navigationOptions: {
+            title: "Audio archive"
+        }
+    },
+    AudioArchiveAudio: {
+        screen: AudioArchiveAudioScreen,
+        navigationOptions: {
+            title: "Audio archive"
+        }
+    },
 });
 const SiteStack = createStackNavigator({
     SiteTabScreen: SiteScreen,
@@ -206,7 +234,7 @@ let TopLevelNavigator = createBottomTabNavigator(
             }
         },
         Books: ReaderStack,
-        Audiobooks: AudioStack,
+        Audio: AudioStack,
         Settings: SettingsMainScreen
         // Настройки: SettingsStack,
     },
@@ -223,7 +251,7 @@ let TopLevelNavigator = createBottomTabNavigator(
                     iconName = `ios-star${focused ? "" : "-outline"}`;
                 } else if (routeName === "Books") {
                     iconName = `ios-book${focused ? "" : "-outline"}`;
-                } else if (routeName === "Audiobooks") {
+                } else if (routeName === "Audio") {
                     iconName = `ios-headset${focused ? "" : "-outline"}`;
                 } else if (routeName === "Harekrishna") {
                     iconName = `ios-globe${focused ? "" : "-outline"}`;

@@ -20,7 +20,7 @@ import RNFetchBlob from "rn-fetch-blob";
 import { connect } from "react-redux";
 import Pagination, { Icon, Dot } from "react-native-pagination"; //{Icon,Dot} also available
 
-export default class ArchiveAuthorsListScreen extends Component {
+class ArchiveAuthorsListScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -294,7 +294,7 @@ export default class ArchiveAuthorsListScreen extends Component {
                                                                 listStyles.quoteTitle
                                                             }
                                                         >
-                                                            {item.name}
+                                                            {this.props.main.lang == 'ru' ? item.name : item.name_eng}
                                                         </Text>
                                                     </View>
                                                 </View>
@@ -302,11 +302,11 @@ export default class ArchiveAuthorsListScreen extends Component {
                                                     <Text
                                                         style={{
                                                             marginTop: 10,
-                                                            color: "#c5c5c5",
+                                                            color: "#969595",
                                                             fontStyle: "italic"
                                                         }}
                                                     >
-                                                        {item.preview_text}
+                                                        {this.props.main.lang == 'ru' ? item.preview_text : item.preview_text_eng}
                                                     </Text>
                                                 </View>
                                             </View>
@@ -315,7 +315,7 @@ export default class ArchiveAuthorsListScreen extends Component {
                                 );
                             }}
                         />
-                        {/* <Pagination
+                        <Pagination
                             // dotThemeLight //<--use with backgroundColor:"grey"
                             listRef={this.refs} //to allow React Native Pagination to scroll to item when clicked  (so add "ref={r=>this.refs=r}" to your list)
                             paginationVisibleItems={this.state.viewableItems} //needs to track what the user sees
@@ -335,7 +335,7 @@ export default class ArchiveAuthorsListScreen extends Component {
                                 flex: 1
                             }}
                             dotIconSizeActive={10}
-                        /> */}
+                        /> 
                     </SafeAreaView>
                 );
             }
@@ -346,18 +346,18 @@ export default class ArchiveAuthorsListScreen extends Component {
     }
 }
 
-// const mapStateToProps = state => {
-//     return {
-//         main: state.mainReducer
-//     };
-// };
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         // setLangInside: lang => dispatch(setLangInside(lang))
-//     };
-// };
+const mapStateToProps = state => {
+    return {
+        main: state.mainReducer
+    };
+};
+const mapDispatchToProps = dispatch => {
+    return {
+        // setLangInside: lang => dispatch(setLangInside(lang))
+    };
+};
 
-// export default connect(
-//     mapStateToProps,
-//     mapDispatchToProps
-// )(ArchiveAuthorsListScreen);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ArchiveAuthorsListScreen);

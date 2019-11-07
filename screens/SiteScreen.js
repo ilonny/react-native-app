@@ -560,7 +560,7 @@ class SiteScreen extends Component {
                                 textAlign: "center",
                                 lineHeight: 20
                             }}>
-                                {this.state.langChosen == 'ru' ? 'Пожалуйста, выберите свой город для получения уведомлений об экадаши и праздниках:' : this.state.langChosen == 'en' ? 'Please select your city to receive notifications about Ekadashi and Holidays:' : 'Seleccione su ciudad para recibir notificaciones sobre Ekadashi y días festivos:'}
+                                {this.state.langChosen == 'ru' ? 'Пожалуйста, выберите свой город для получения уведомлений об экадаши, праздниках и событиях в ваших центрах:' : this.state.langChosen == 'en' ? 'Please select your city to receive notifications about Ekadashi and Holidays:' : 'Seleccione su ciudad para recibir notificaciones sobre Ekadashi y días festivos:'}
                             </Text>
                                 <Picker
                                     selectedValue={this.state.ecadashCityChosen}

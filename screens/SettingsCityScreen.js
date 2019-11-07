@@ -157,7 +157,7 @@ class SettingsCityScreen extends Component {
                                     ? "Please select your city and category to receive notifications about Ekadashi and holidays:"
                                     : this.props.main.lang == "es"
                                     ? "Seleccione su ciudad para recibir notificaciones sobre Ekadashi y días festivos:"
-                                    : "Пожалуйста, выберите свой город и категории для получения уведомлений об экадаши и праздниках:"}
+                                    : "Пожалуйста, выберите свой город и категории для получения уведомлений об экадаши, праздниках и событиях в ваших центрах:"}
                             </Text>
                             <View
                                 style={{

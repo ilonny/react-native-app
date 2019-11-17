@@ -11,6 +11,9 @@ import {
     TouchableOpacity,
     Linking,
     Picker,
+    ActivityIndicator,
+    Modal,
+    FlatList
 } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { setLang } from "../actions/lang";
@@ -18,6 +21,8 @@ import { connect } from "react-redux";
 import { listStyles } from "../constants/list_styles";
 import {ecadashCityList} from '../constants/ecadash'
 import {API_URL} from '../constants/api'
+import Ionicons from "react-native-vector-icons/Ionicons";
+import Hyperlink from 'react-native-hyperlink'
 
 class SettingsCityScreen extends Component {
     state = {
@@ -26,7 +31,10 @@ class SettingsCityScreen extends Component {
         token: '',
         ecadashCategory: [],
         city_can_push: 1,
-        cityPushAgreement: 1
+        cityPushAgreement: 1,
+        notifications: [],
+        notificationsLoading: false,
+        isModal: false,
     }
     componentDidMount(){
         AsyncStorage.getItem('ecadash_city_chosen', (err, value) => {
@@ -35,7 +43,7 @@ class SettingsCityScreen extends Component {
             }
             this.setState({
                 ecadashCityChosen: value
-            });
+            }, this.getCityNotifications);
         })
         AsyncStorage.getItem('agreement_city_push', (err, value) => {
             this.setState({
@@ -62,7 +70,7 @@ class SettingsCityScreen extends Component {
             } catch (e) {
                 console.log('crash', e)
             }
-        })
+        });
     }
     switchCityPush = (val) => {
         val = val ? '1' : '0';
@@ -130,6 +138,41 @@ class SettingsCityScreen extends Component {
                 `/set-token?token=${this.state.token}&settings=old&news_settings=old&version=3&ecadash=old&ecadash=${JSON.stringify(this.state.ecadashCategory)}`
         );
     }
+    getCityNotifications() {
+        this.setState({
+            notificationsLoading: true,
+            notifications: [],
+        })
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = e => {
+            if (request.readyState !== 4) {
+                return;
+            }
+            if (request.status === 200) {
+                try {
+                    let res = JSON.parse(request.responseText);
+                    console.log('res', res);
+                    this.setState({
+                        notifications: res,
+                        notificationsLoading: false,
+                    });
+                } catch (e) {
+                    console.log('getCityNotifications crash', e)
+                }
+            }
+        };
+        request.open(
+            "GET",
+            API_URL +
+                `/get-city-notifications?city=${this.state.ecadashCityChosen}&lang=${this.props.main.lang}`
+        );
+        request.send();
+        console.log(
+            "getCityNotifications",
+            API_URL +
+            `/get-city-notifications?city=${this.state.ecadashCityChosen}&lang=${this.props.main.lang}`
+        );
+    }
     render() {
         console.log('settings city state', this.state);
         return (
@@ -175,6 +218,7 @@ class SettingsCityScreen extends Component {
                                             var currentCity = this.state.ecadashCityList.find(el => el.name_link == this.state.ecadashCityChosen);
                                             console.log('city finded', currentCity)
                                             this.setState({city_can_push: currentCity.can_push ? 1 : 0})
+                                            this.getCityNotifications();
                                         });
                                         AsyncStorage.setItem('ecadash_city_chosen', itemValue);
                                         let request = new XMLHttpRequest();
@@ -196,6 +240,25 @@ class SettingsCityScreen extends Component {
                                         <Picker.Item key={city.name_link} label={this.props.main.lang == 'ru' ? city.name : city.name_eng} value={city.name_link} />
                                     ))}
                                 </Picker>
+                                {this.state.notificationsLoading && (
+                                    <ActivityIndicator style={{flex: 1, marginBottom: 20}}/>
+                                )}
+                                {this.state.notifications.length && (
+                                    <TouchableOpacity style={{flex: 1, marginBottom: 20}} onPress={() => this.setState({isModal: true})}>
+                                        <View style={{padding: 10, flex: 1, flexDirection:'row', alignItems: 'center'}}>
+                                            <Ionicons
+                                                name="ios-notifications-outline"
+                                                size={33}
+                                                color="tomato"
+                                                style={{marginRight: 10}}
+                                                />
+                                            <Text style={{marginTop: -3}}>
+                                                {this.props.main.lang == 'ru' ? 'Уведомления о событиях' : this.props.main.lang == 'es' ? 'Notificaciones de eventos' : 'City notifications'}
+                                                {" "}({this.state.notifications.length})
+                                            </Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                )}
                             </View>
                                 <View style={[listStyles.quoteItem, {marginTop: -5, borderRadius: 0, shadowRadius: 0, flex: 1, flexDirection: 'row', justifyContent: 'space-between'}]}>
                                     <View style={{maxWidth: '80%'}}>
@@ -249,6 +312,35 @@ class SettingsCityScreen extends Component {
                         </View>
                     </ScrollView>
                 </View>
+                <Modal
+                    animationType="slide"
+                    transparent={false}
+                    visible={this.state.isModal}
+                    onRequestClose={() => this.setState({ isModal: false })}
+                >
+                    <SafeAreaView>
+                        <View style={{flex: 0, flexDirection: 'row', justifyContent: 'flex-end', paddingRight: 15}}>
+                            <TouchableOpacity onPress={() => this.setState({isModal: false})}>
+                                <Ionicons name="ios-close" size={33} color="tomato"/>
+                            </TouchableOpacity>
+                        </View>
+                        <FlatList
+                            style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5, flex: 0}}
+                            data={this.state.notifications}
+                            renderItem={({item}) => (
+                                <View style={listStyles.quoteItem}>
+                                    {item.date && <Text style={{color: '#c5c5c5', fontStyle: 'italic'}}>{item.date}</Text>}
+                                    <View>
+                                        <Hyperlink linkDefault={ true }>
+                                            <Text style={{color: "#75644f"}}>{this.props.main.lang == 'ru' ? item.payload : this.props.main.lang == 'es' ? item.payload_es : item.payload_eng}</Text>
+                                        </Hyperlink>
+                                    </View>
+                                </View>
+                            )}
+                            keyExtractor={item => item.id.toString()}
+                        />
+                    </SafeAreaView>
+                </Modal>
             </SafeAreaView>
         );
     }

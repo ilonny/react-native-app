@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     tabbar: {
-        paddingTop: 23,
+        paddingTop: 0,
         backgroundColor: "#f7f7f7"
     },
     tab: {

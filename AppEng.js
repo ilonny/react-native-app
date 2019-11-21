@@ -28,6 +28,7 @@ import AudioDetail from "./screens/AudioDetail";
 import SiteScreen from "./screens/SiteScreen";
 import SiteScreenDetail from "./screens/SiteScreenDetail";
 import SettingsMainScreen from "./screens/SettingsMainScreen";
+import NotificationScreen from "./screens/NotificationScreen"
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { API_URL } from "./constants/api";
 import NavigationService from "./NavigationService";
@@ -96,7 +97,7 @@ PushNotification.configure({
         notification.finish(PushNotificationIOS.FetchResult.NoData);
         if (notification.data.need_alert) {
             setTimeout(() => {
-                Alert.alert(notification.message);
+                NavigationService.navigate('NotificationScreen', {text: notification.message});
             }, 500);
         } else if (notification.data.quote_id) {
             let q_id = notification.data.quote_id;
@@ -210,7 +211,8 @@ const AudioStack = createStackNavigator({
 });
 const SiteStack = createStackNavigator({
     SiteTabScreen: SiteScreen,
-    SiteDetail: SiteScreenDetail
+    SiteDetail: SiteScreenDetail,
+    NotificationScreen: NotificationScreen
 });
 const dim = Dimensions.get('window');
 let TopLevelNavigator = createBottomTabNavigator(

@@ -325,13 +325,13 @@ class SettingsCityScreen extends Component {
                             </TouchableOpacity>
                         </View>
                         <FlatList
-                            style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5, flex: 0}}
+                            style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5, flex: 0, marginBottom: 50}}
                             data={this.state.notifications}
                             renderItem={({item}) => (
                                 <View style={listStyles.quoteItem}>
                                     {item.date && <Text style={{color: '#c5c5c5', fontStyle: 'italic'}}>{item.date}</Text>}
                                     <View>
-                                        <Hyperlink linkDefault={ true }>
+                                        <Hyperlink linkDefault={ true } linkStyle={{fontWeight: 'bold', color: 'tomato'}}>
                                             <Text style={{color: "#75644f"}}>{this.props.main.lang == 'ru' ? item.payload : this.props.main.lang == 'es' ? item.payload_es : item.payload_eng}</Text>
                                         </Hyperlink>
                                     </View>

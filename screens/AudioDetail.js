@@ -15,7 +15,8 @@ import {
   Slider,
   ActivityIndicator,
   Easing,
-  Dimensions
+  Dimensions,
+  WebView
 } from 'react-native';
 import { SafeAreaView } from "react-navigation";
 import { API_URL } from '../constants/api';
@@ -34,6 +35,7 @@ import {
     setGlobalDownloading,
     setNowPlaying
 } from '../actions/index'
+import Pagination,{Icon,Dot} from 'react-native-pagination';//{Icon,Dot} also available
 // let dirs = RNFetchBlob.fs.dirs
 var Sound = require('react-native-sound');
 import MusicControl from 'react-native-music-control';
@@ -208,7 +210,7 @@ class AudioScreen extends Component {
     //     }
     //     return true;
     // }
-    _keyExtractor = (item) => item.name + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    _keyExtractor = (item) => item.id.toString();
     downloadBook(file_id, need_play = false){
         console.log('start downloading', file_id)
         this.props.setNeedToDownload([].concat(file_id));
@@ -554,6 +556,8 @@ class AudioScreen extends Component {
     }
     componentDidMount(){
         console.log('did mount')
+        console.log('props', this.props);
+        console.log('state', this.state);
         // AsyncStorage.clear();
         // this.downloadBook(2)
         this.props.navigation.setParams({downloadAll: this.downloadAll})
@@ -797,60 +801,71 @@ class AudioScreen extends Component {
             isOpenModal: true,
             playing: true,
             playingAudio: playingAudio,
-        });
-        setTimeout(() => {
+        }, () => {
             console.log ('path', this.state.playingAudio.path);
-            this.whoosh = new Sound(this.state.playingAudio.path, '', (error) => {
-                if (error) {
-                    console.log('failed to load the sound', error);
-                    return;
-                } else {
-                    if (this.state.playing){
-                        console.log('Playing sound starts here');
-                        this.whoosh.play(() => {
-                            this.whoosh.release();
-                        });
-                        // loaded successfully
-                        console.log('duration in seconds: ' + this.whoosh.getDuration() + 'number of channels: ' + this.whoosh.getNumberOfChannels());
-                        this.setState({
-                            prerender: false
-                        })
-                        this.setState({
-                            whoosh: this.whoosh,
-                            duration: parseInt(this.whoosh.getDuration())
-                        })
-                        this.timerID = setInterval(
-                            () => this.tick(),
-                            1000
-                        );
-                        MusicControl.setNowPlaying({
-                            title: this.state.playingAudio.name,
-                            duration: this.state.duration, // (Seconds)
-                        });
-                        MusicControl.enableControl('play', false)
-                        MusicControl.enableControl('pause', true)
-                        MusicControl.enableControl('changePlaybackPosition', true)
-                        console.log('music control enabled?')
-                        console.log(this.whoosh)
-                        this.props.setNowPlaying(
-                            true,
-                            this.state.playingAudio.id,
-                            this.state.playingAudio.name,
-                            this.state.duration,
-                            this.state.playingAudio.toc_id,
-                            this.whoosh
-                        )
-                    } else {
-                        console.log('it not to should playing');
-                        this.whoosh.release();
+            if (path) {
+                //new code with html player.
+                console.log('fire here html ?))')
+                this.setState({
+                    playingAudio: {
+                        ...this.state.playingAudio,
+                        isWebView: true,
                     }
-                }
-            });
-            // whoosh.setVolume(0.5);
-            console.log('volume: ' + this.whoosh.getVolume());
-            console.log('pan: ' + this.whoosh.getPan());
-            console.log('loops: ' + this.whoosh.getNumberOfLoops());
-        }, 300);
+                })
+            } else {
+                //old code with Sound player.
+                this.whoosh = new Sound(this.state.playingAudio.path, '', (error) => {
+                    if (error) {
+                        console.log('failed to load the sound', error);
+                        return;
+                    } else {
+                        if (this.state.playing){
+                            console.log('Playing sound starts here');
+                            this.whoosh.play(() => {
+                                this.whoosh.release();
+                            });
+                            // loaded successfully
+                            console.log('duration in seconds: ' + this.whoosh.getDuration() + 'number of channels: ' + this.whoosh.getNumberOfChannels());
+                            this.setState({
+                                prerender: false
+                            })
+                            this.setState({
+                                whoosh: this.whoosh,
+                                duration: parseInt(this.whoosh.getDuration())
+                            })
+                            this.timerID = setInterval(
+                                () => this.tick(),
+                                1000
+                            );
+                            MusicControl.setNowPlaying({
+                                title: this.state.playingAudio.name,
+                                duration: this.state.duration, // (Seconds)
+                            });
+                            MusicControl.enableControl('play', false)
+                            MusicControl.enableControl('pause', true)
+                            MusicControl.enableControl('changePlaybackPosition', true)
+                            console.log('music control enabled?')
+                            console.log(this.whoosh)
+                            this.props.setNowPlaying(
+                                true,
+                                this.state.playingAudio.id,
+                                this.state.playingAudio.name,
+                                this.state.duration,
+                                this.state.playingAudio.toc_id,
+                                this.whoosh
+                            )
+                        } else {
+                            console.log('it not to should playing');
+                            this.whoosh.release();
+                        }
+                    }
+                });
+                // whoosh.setVolume(0.5);
+                console.log('volume: ' + this.whoosh.getVolume());
+                console.log('pan: ' + this.whoosh.getPan());
+                console.log('loops: ' + this.whoosh.getNumberOfLoops());
+            }
+        });
         // Play the sound with an onEnd callback
         //if offline
         if (!path){
@@ -917,6 +932,9 @@ class AudioScreen extends Component {
         // this.whoosh.reset();
         let {playing, track_id, track_name, track_duration, toc_id, whoosh} = this.props.now_playing;
         setNowPlaying(!playing, track_id, track_name, track_duration, toc_id, whoosh)
+        this.setState({
+            playingAudio: {}
+        })
         try {
             whoosh.pause();
         } catch (e) {
@@ -1108,9 +1126,14 @@ class AudioScreen extends Component {
             </View>
         )
     }
+    onViewableItemsChanged = ({ viewableItems, changed }) =>{
+        console.log('onViewableItemsChanged', viewableItems)
+        this.setState({viewableItems})
+    }
     render(){
-        // console.log('audio details render state', this.state);
-        // console.log('audio details render props', this.props);
+        console.log('audio details render state', this.state);
+        console.log('audio details render props', this.props);
+        console.log(`${API_URL}/web-view-player?id=${this.state.playingAudio.id}`)
         // console.log('main store string: ', JSON.stringify(this.props.main));
         return (
             <SafeAreaView   style={{flex: 1, backgroundColor: '#F5FCFF', paddingBottom: 10, paddingTop: 10}}>
@@ -1121,8 +1144,20 @@ class AudioScreen extends Component {
                     keyExtractor={this._keyExtractor}
                     onRefresh={() => this.getBooks()}
                     refreshing={false}
+                    ref={r=>this.refs=r}//create refrence point to enable scrolling
+                    onViewableItemsChanged={this.onViewableItemsChanged}//need this
                 >
                 </FlatList>
+                <Pagination
+                    // dotThemeLight //<--use with backgroundColor:"grey"
+                    listRef={this.refs}//to allow React Native Pagination to scroll to item when clicked  (so add "ref={r=>this.refs=r}" to your list)
+                    paginationVisibleItems={this.state.viewableItems}//needs to track what the user sees
+                    paginationItems={this.state.books}//pass the same list as data
+                    paginationItemPadSize={3} //num of items to pad above and below your visable items
+                    // pagingEnabled={true}
+                    paginationStyle={{width: 10, alignItems:"center", justifyContent: 'space-between', position:"absolute", margin:0, bottom:0, right:15, padding:0, top: 0, flex:1,}}
+                    dotIconSizeActive={10}
+                />
                 {/* <Modal
                     animationType="fade"
                     transparent={true}
@@ -1188,54 +1223,71 @@ class AudioScreen extends Component {
                             </View>
                             <Text style={{textAlign: 'center'}}>{this.state.playingAudio.name}</Text>
                             <Text style={{textAlign: 'center'}}>{this.state.playingAudio.description}</Text>
-                                {this.state.prerender ? (
-                                    <View style={{flex: 1, flexDirection: 'column', marginTop: -15, marginBottom: 5, justifyContent: 'center', alignItems: 'center'}}>
-                                        <ActivityIndicator size="large" color="tomato" />
-                                        <Text>{this.props.main.lang == 'ru' ? 'Загрузка...' : this.props.main.lang == 'es' ? 'Descargando' : 'Downloading...'}</Text>
+                                {this.state.playingAudio.isWebView ? (
+                                    
+                                    <View style={{
+                                        flex: 1,
+                                        backgroundColor: "#F5FCFF",
+                                    }}>
+                                        <WebView
+                                            source={{
+                                                uri: `${API_URL}/web-view-player?id=${this.state.playingAudio.id}`
+                                            }}
+                                            // style={{a}}
+                                        />
                                     </View>
                                 ) : (
                                     <View>
-                                        <Slider
-                                        style={{
-                                            marginTop: -10,
-                                            marginBottom: 5,
-                                        }}
-                                        minimumValue={0}
-                                        maximumValue={this.state.duration}
-                                        onValueChange={val => this.changePlyingPos(val)}
-                                        value={this.state.currentTime}
-                                        />
-                                        <View style={{flex: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-                                            <View>
-                                                <Text>{this.toMMSS(this.state.currentTime)}</Text>
+                                        {this.state.prerender ? (
+                                            <View style={{flex: 1, flexDirection: 'column', marginTop: -15, marginBottom: 5, justifyContent: 'center', alignItems: 'center'}}>
+                                                <ActivityIndicator size="large" color="tomato" />
+                                                <Text>{this.props.main.lang == 'ru' ? 'Загрузка...' : this.props.main.lang == 'es' ? 'Descargando' : 'Downloading...'}</Text>
                                             </View>
+                                        ) : (
                                             <View>
-                                                <Text>{this.toMMSS(this.state.duration)}</Text>
+                                                <Slider
+                                                style={{
+                                                    marginTop: -10,
+                                                    marginBottom: 5,
+                                                }}
+                                                minimumValue={0}
+                                                maximumValue={this.state.duration}
+                                                onValueChange={val => this.changePlyingPos(val)}
+                                                value={this.state.currentTime}
+                                                />
+                                                <View style={{flex: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                                                    <View>
+                                                        <Text>{this.toMMSS(this.state.currentTime)}</Text>
+                                                    </View>
+                                                    <View>
+                                                        <Text>{this.toMMSS(this.state.duration)}</Text>
+                                                    </View>
+                                                </View>
+                                                <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center', alignItems:'center'}}>
+                                                    <TouchableOpacity onPress={() => this.minus15()}>
+                                                        <View style={{flex: 0, alignItems: 'center'}}>
+                                                            <View style={{transform: [{rotateY: '180deg'}]}}>
+                                                                <Ionicons name="ios-refresh" size={30} color="tomato" />
+                                                            </View>
+                                                            <Text style={{fontSize: 10}}>-15 {this.props.main.lang == 'ru' ? 'сек' : this.props.main.lang == 'es' ? 'seg' : 'sec'}.</Text>
+                                                        </View>
+                                                    </TouchableOpacity>
+                                                    <TouchableOpacity onPress={() => this.togglePlaying()}>
+                                                        <View style={{marginRight: 20, marginLeft: 20}}>
+                                                            {this.state.playing ? <Ionicons name="ios-pause" size={35} color="tomato" /> : <Ionicons name="ios-play" size={35} color="tomato" />}
+                                                        </View>
+                                                    </TouchableOpacity>
+                                                    <TouchableOpacity onPress={() => this.plus15()}>
+                                                        <View style={{flex: 0, alignItems: 'center'}}>
+                                                            <Ionicons name="ios-refresh" size={30} color="tomato" />
+                                                            <Text style={{fontSize: 10}}>+15 {this.props.main.lang == 'ru' ? 'сек' : this.props.main.lang == 'es' ? 'seg' : 'sec'}.</Text>
+                                                        </View>
+                                                    </TouchableOpacity>
+                                                </View>
                                             </View>
-                                        </View>
+                                        )}
                                     </View>
                                 )}
-                            <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center', alignItems:'center'}}>
-                                <TouchableOpacity onPress={() => this.minus15()}>
-                                    <View style={{flex: 0, alignItems: 'center'}}>
-                                        <View style={{transform: [{rotateY: '180deg'}]}}>
-                                            <Ionicons name="ios-refresh" size={30} color="tomato" />
-                                        </View>
-                                        <Text style={{fontSize: 10}}>-15 {this.props.main.lang == 'ru' ? 'сек' : this.props.main.lang == 'es' ? 'seg' : 'sec'}.</Text>
-                                    </View>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.togglePlaying()}>
-                                    <View style={{marginRight: 20, marginLeft: 20}}>
-                                        {this.state.playing ? <Ionicons name="ios-pause" size={35} color="tomato" /> : <Ionicons name="ios-play" size={35} color="tomato" />}
-                                    </View>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.plus15()}>
-                                    <View style={{flex: 0, alignItems: 'center'}}>
-                                        <Ionicons name="ios-refresh" size={30} color="tomato" />
-                                        <Text style={{fontSize: 10}}>+15 {this.props.main.lang == 'ru' ? 'сек' : this.props.main.lang == 'es' ? 'seg' : 'sec'}.</Text>
-                                    </View>
-                                </TouchableOpacity>
-                            </View>
                         </View>
                     )}
                 {/* </Modal> */}

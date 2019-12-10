@@ -139,39 +139,59 @@ class SettingsCityScreen extends Component {
         );
     }
     getCityNotifications() {
-        this.setState({
-            notificationsLoading: true,
-            notifications: [],
+        AsyncStorage.getItem('deleted_notification', (err, deleted_notification = []) => {
+            try {
+                console.log(deleted_notification);
+                let deleted_notification_arr = JSON.parse(deleted_notification) || [];
+                console.log('deleted_notification', deleted_notification_arr)
+                this.setState({
+                    notificationsLoading: true,
+                    notifications: [],
+                })
+                let request = new XMLHttpRequest();
+                request.onreadystatechange = e => {
+                    if (request.readyState !== 4) {
+                        return;
+                    }
+                    if (request.status === 200) {
+                        try {
+                            let res = JSON.parse(request.responseText);
+                            console.log('res', res);
+                            this.setState({
+                                notifications: res.filter(el => deleted_notification_arr.indexOf(el.id) == -1),
+                                notificationsLoading: false,
+                                deletedNotification: deleted_notification_arr,
+                            });
+                        } catch (e) {
+                            console.log('getCityNotifications crash', e)
+                        }
+                    }
+                };
+                request.open(
+                    "GET",
+                    API_URL +
+                        `/get-city-notifications?city=${this.state.ecadashCityChosen}&lang=${this.props.main.lang}`
+                );
+                request.send();
+                console.log(
+                    "getCityNotifications",
+                    API_URL +
+                    `/get-city-notifications?city=${this.state.ecadashCityChosen}&lang=${this.props.main.lang}`
+                );
+            } catch (e) {
+                console.log('crash', e)
+            }
         })
-        let request = new XMLHttpRequest();
-        request.onreadystatechange = e => {
-            if (request.readyState !== 4) {
-                return;
-            }
-            if (request.status === 200) {
-                try {
-                    let res = JSON.parse(request.responseText);
-                    console.log('res', res);
-                    this.setState({
-                        notifications: res,
-                        notificationsLoading: false,
-                    });
-                } catch (e) {
-                    console.log('getCityNotifications crash', e)
-                }
-            }
-        };
-        request.open(
-            "GET",
-            API_URL +
-                `/get-city-notifications?city=${this.state.ecadashCityChosen}&lang=${this.props.main.lang}`
-        );
-        request.send();
-        console.log(
-            "getCityNotifications",
-            API_URL +
-            `/get-city-notifications?city=${this.state.ecadashCityChosen}&lang=${this.props.main.lang}`
-        );
+    }
+    deleteNotification(id) {
+        let {deletedNotification, notifications} = this.state
+        let deleteNotificationAdded = [...deletedNotification, id];
+        this.setState({
+            deletedNotification: deleteNotificationAdded,
+            notifications: notifications.filter(el => deleteNotificationAdded.indexOf(el.id) == -1),
+        }, () => {
+            AsyncStorage.setItem('deleted_notification', JSON.stringify(deleteNotificationAdded));
+        })
     }
     render() {
         console.log('settings city state', this.state);
@@ -329,7 +349,12 @@ class SettingsCityScreen extends Component {
                             data={this.state.notifications}
                             renderItem={({item}) => (
                                 <View style={listStyles.quoteItem}>
-                                    {item.date && <Text style={{color: '#c5c5c5', fontStyle: 'italic'}}>{item.date}</Text>}
+                                    <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                                        <Text style={{color: '#c5c5c5', fontStyle: 'italic'}}>{item.date && item.date}</Text>
+                                        <TouchableOpacity onPress={() => this.deleteNotification(item.id)}>
+                                            <Text style={{color: 'tomato', fontSize: 12}}>Удалить</Text>
+                                        </TouchableOpacity>
+                                    </View>
                                     <View>
                                         <Hyperlink linkDefault={ true } linkStyle={{fontWeight: 'bold', color: 'tomato'}}>
                                             <Text style={{color: "#75644f"}}>{this.props.main.lang == 'ru' ? item.payload : this.props.main.lang == 'es' ? item.payload_es : item.payload_eng}</Text>

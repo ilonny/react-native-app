@@ -73,7 +73,7 @@ export const getItems = (type, page = 1, q_str = "", action_type, tag) => {
             "GET",
             SITE_URL + `/get-list.php?type=${type}&page=${page}&q=${q_str}&tag_id=${tag}`
         );
-        // console.log('get-items-url', SITE_URL + `/get-list.php?type=${type}&page=${page}&q=${q_str}&tag_id=${tag}`);
+        console.log('get-items-url', SITE_URL + `/get-list.php?type=${type}&page=${page}&q=${q_str}&tag_id=${tag}`);
         request.send();
     };
 };

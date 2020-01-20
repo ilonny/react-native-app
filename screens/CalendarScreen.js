@@ -94,7 +94,7 @@ class CalendarScreen extends Component {
                     if (todayIndex) {
                         this.refs.scrollToIndex({
                             animated: true,
-                            index: todayIndex
+                            index: todayIndex+2
                         });
                     }    
                 } catch (error) {}
